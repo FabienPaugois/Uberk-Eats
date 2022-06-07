@@ -3,19 +3,19 @@
 INSERT INTO ROLES VALUES ('Admin'),
 					     ('User'),
 						 ('RestaurantOwner'),
-						 ('DevileryMan'),
+						 ('DeliveryMan'),
 						 ('Dev'),
 						 ('CommercialService'),
 						 ('TechnicalService')
 GO
 
-INSERT INTO USERS VALUES ('Alexandre','Temperville','at@gmail.com','0622758465'),
-                         ('Thibault','Perquis','tp@gmail.com','0622758465'),
-						 ('Romain','Brunelot','rb@gmail.com','0622758465'),
-						 ('Alix','Pouchain','ap@gmail.com','0622758465'),
-						 ('Sonia','Ikken','si@gmail.com','0622758465'),
-						 ('Anne-Sophie','Dufour','asd@gmail.com','0622758465'),
-						 ('Jean-Francois','Hoquet','jfh@gmail.com','0622758465')
+INSERT INTO USERS VALUES ('Alexandre','Temperville','at@gmail.com','0622758465', 'mdpat'),
+                         ('Thibault','Perquis','tp@gmail.com','0622758465', 'mdptp'),
+						 ('Romain','Brunelot','rb@gmail.com','0622758465', 'mdprb'),
+						 ('Alix','Pouchain','ap@gmail.com','0622758465', 'mdpap'),
+						 ('Sonia','Ikken','si@gmail.com','0622758465', 'mdpsi'),
+						 ('Anne-Sophie','Dufour','asd@gmail.com','0622758465', 'mdpasd'),
+						 ('Jean-Francois','Hoquet','jfh@gmail.com','0622758465', 'mdpjfh')
 GO
 
 INSERT INTO USERROLES VALUES (1,1),
