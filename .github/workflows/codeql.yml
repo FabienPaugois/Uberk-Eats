@@ -25,9 +25,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: ['lts/*']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Install Dependencies
+      run: npm install
+    - run: npm run lint
   analyze:
     name: Analyze
     runs-on: windows-latest
+    needs: [ lint ]
     permissions:
       actions: read
       contents: read
