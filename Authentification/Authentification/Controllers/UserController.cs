@@ -22,20 +22,20 @@ namespace Authentification.Controllers
         {
             db = new UberkEatsContext();
         }
-
+        
         [HttpGet]
         public string Get()
         {
             return "API is working";
         }
 
-
+        #region Authenticate
         [HttpPost]
         [Route("/Authenticate")]
         public User Authenticate(User user)
         {
             User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
-            if(authenticated != null)
+            if (authenticated != null)
             {
                 return authenticated;
             }
@@ -44,7 +44,9 @@ namespace Authentification.Controllers
                 return user;
             }
         }
+        #endregion
 
+        #region Delete
         [HttpPost]
         [Route("/Delete")]
         public string Delete(User user)
@@ -61,7 +63,9 @@ namespace Authentification.Controllers
                 return "Password or mail error";
             }
         }
+        #endregion
 
+        #region Update
         [HttpPost]
         [Route("/Update")]
         public string Update(User user)
@@ -79,7 +83,9 @@ namespace Authentification.Controllers
                 return "Password or mail error";
             }
         }
+        #endregion
 
+        #region Create
         [HttpPost]
         [Route("/Create")]
         public string Create(User user)
@@ -97,5 +103,6 @@ namespace Authentification.Controllers
                 return "Account Created";
             }
         }
+        #endregion
     }
 }
