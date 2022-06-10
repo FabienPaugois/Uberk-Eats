@@ -82,27 +82,34 @@ namespace Authentification.Models
                     .HasColumnName("SURNAME")
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Useraffiliate).HasColumnName("USERAFFILIATE");
+
+                entity.HasOne(d => d.UseraffiliateNavigation)
+                    .WithMany(p => p.InverseUseraffiliateNavigation)
+                    .HasForeignKey(d => d.Useraffiliate)
+                    .HasConstraintName("FK__USER__USERAFFILI__14270015");
             });
 
             modelBuilder.Entity<Userrole>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("USERROLE");
+
+                entity.Property(e => e.Userroleid).HasColumnName("USERROLEID");
 
                 entity.Property(e => e.Roleid).HasColumnName("ROLEID");
 
                 entity.Property(e => e.Userid).HasColumnName("USERID");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany()
+                    .WithMany(p => p.Userrole)
                     .HasForeignKey(d => d.Roleid)
-                    .HasConstraintName("FK__USERROLE__ROLEID__5EBF139D");
+                    .HasConstraintName("FK__USERROLE__ROLEID__17F790F9");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.Userrole)
                     .HasForeignKey(d => d.Userid)
-                    .HasConstraintName("FK__USERROLE__USERID__5DCAEF64");
+                    .HasConstraintName("FK__USERROLE__USERID__17036CC0");
             });
 
             OnModelCreatingPartial(modelBuilder);

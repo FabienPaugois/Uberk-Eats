@@ -9,12 +9,22 @@ namespace Authentification.Models
 {
     public partial class User
     {
+        public User()
+        {
+            InverseUseraffiliateNavigation = new HashSet<User>();
+            Userrole = new HashSet<Userrole>();
+        }
+
         public long Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Mail { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
-        public List<Role> Roles { get; set; }
+        public long? Useraffiliate { get; set; }
+
+        public virtual User UseraffiliateNavigation { get; set; }
+        public virtual ICollection<User> InverseUseraffiliateNavigation { get; set; }
+        public virtual ICollection<Userrole> Userrole { get; set; }
     }
 }

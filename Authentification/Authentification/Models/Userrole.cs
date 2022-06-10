@@ -9,6 +9,7 @@ namespace Authentification.Models
 {
     public partial class Userrole
     {
+        public long Userroleid { get; set; }
         public long Userid { get; set; }
         public long Roleid { get; set; }
 
