@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using Authentification.Models;
 using Microsoft.Data.SqlClient;
 using System.Data.Common;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Authentification.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        
-
         private readonly UberkEatsContext db;
 
         public UserController()

@@ -122,3 +122,5 @@ C:\Users\timot\source\repos\Uberk-Eats\Authentification\Authentification\obj\Deb
 C:\Users\timot\source\repos\Uberk-Eats\Authentification\Authentification\obj\Debug\netcoreapp3.1\Authentification.dll
 C:\Users\timot\source\repos\Uberk-Eats\Authentification\Authentification\obj\Debug\netcoreapp3.1\Authentification.pdb
 C:\Users\timot\source\repos\Uberk-Eats\Authentification\Authentification\obj\Debug\netcoreapp3.1\Authentification.genruntimeconfig.cache
+C:\Users\timot\source\repos\Uberk-Eats\Authentification\Authentification\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\timot\source\repos\Uberk-Eats\Authentification\Authentification\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
