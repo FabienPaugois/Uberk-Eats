@@ -10,9 +10,10 @@
 			],
 			"parserOptions": {
 				"project": [
-					"tsconfig.json",
+					"UberkEatsClients/tsconfig.json",
 					"e2e/tsconfig.json"
 				],
+				"sourceType": "module",			
 				"createDefaultProgram": true
 			},
 			"extends": [
