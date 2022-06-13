@@ -1,4 +1,4 @@
-import { Articles } from "./articles";
+import { Articles } from './articles';
 
 export interface Menus {
   id: string;
