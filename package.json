@@ -12,7 +12,8 @@
 		"@typescript-eslint/parser": "^5.27.1",
 		"eslint": "^8.17.0",
 		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-jsdoc": "^39.3.2"
+		"eslint-plugin-jsdoc": "^39.3.2",
+		"eslint-plugin-prefer-arrow": "^1.2.3"
 	},
 	"dependencies": {
 		"@angular-eslint/eslint-plugin": "^13.5.0"
