@@ -58,9 +58,7 @@ export class ClientsApiService {
 			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
 		}
 		window.alert(errorMessage);
-		return throwError(() => {
-			return errorMessage;
-		});
+		return throwError(() => errorMessage);
 	}
 }
 
