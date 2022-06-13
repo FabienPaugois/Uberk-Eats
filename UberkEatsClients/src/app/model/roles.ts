@@ -1,7 +1,7 @@
 export enum Roles {
-  Client = 'CLIENTS',
-  RestaurantOwner = 'RESTAURANT OWNER',
-  DeliveryMan = 'DELIVERY MAN',
-  TechnicalService = 'TECHNICAL SERVICE',
-  CommercialService = 'COMMERCIAL SERVICE'
+  client = 'CLIENTS',
+  restaurantOwner = 'RESTAURANT OWNER',
+  deliveryMan = 'DELIVERY MAN',
+  technicalService = 'TECHNICAL SERVICE',
+  commercialService = 'COMMERCIAL SERVICE'
 }

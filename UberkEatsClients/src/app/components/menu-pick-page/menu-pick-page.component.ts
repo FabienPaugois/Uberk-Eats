@@ -8,9 +8,6 @@ import { Menus } from '../../model/menus';
 	styleUrls: ['./menu-pick-page.component.scss']
 })
 export class MenuPickPageComponent implements OnInit {
-
-	constructor() { }
-
 	articles: Articles[] = [
 		{
 			id: '1',
@@ -83,7 +80,9 @@ export class MenuPickPageComponent implements OnInit {
 			articles: [2, 7, 9]
 		},
 	];
+
+	constructor() { }
+
 	ngOnInit(): void {
 	}
-
 }
