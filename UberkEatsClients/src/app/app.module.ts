@@ -12,6 +12,7 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 import { MenuPickPageComponent } from './components/menu-pick-page/menu-pick-page.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
 
 @NgModule({
 	declarations: [
@@ -20,7 +21,8 @@ import { MenuPickPageComponent } from './components/menu-pick-page/menu-pick-pag
 		RegisterPageComponent,
 		ProfilePageComponent,
 		RestaurantListComponent,
-		MenuPickPageComponent
+		MenuPickPageComponent,
+    ProductPageComponent
 	],
 	imports: [
 		BrowserModule,
