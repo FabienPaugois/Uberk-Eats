@@ -13,7 +13,7 @@
 					"UberkEatsClients/tsconfig.json",
 					"e2e/tsconfig.json"
 				],
-				"sourceType": "module",			
+				"sourceType": "module",
 				"createDefaultProgram": true
 			},
 			"extends": [
@@ -36,6 +36,20 @@
 						"type": "attribute",
 						"prefix": "app",
 						"style": "camelCase"
+					}
+				],
+				"@typescript-eslint/naming-convention": [
+					"error",
+					{
+						"selector": "property",
+						"format": [
+							"camelCase"
+						],
+						"filter": {
+							// you can expand this regex to add more allowed names
+							"regex": "^(Content-Type)$",
+							"match": false
+						}
 					}
 				],
 				"indent": [
