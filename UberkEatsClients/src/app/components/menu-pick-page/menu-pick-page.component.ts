@@ -83,7 +83,7 @@ export class MenuPickPageComponent implements OnInit {
 		},
 	];
 
-	constructor() { }
+  constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
 	ngOnInit(): void {
 	}
