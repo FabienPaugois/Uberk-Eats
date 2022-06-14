@@ -1,6 +1,6 @@
 -- Data Manipulation Uberk-eats
 
-INSERT INTO ROLES VALUES ('Admin'),
+INSERT INTO [ROLE] VALUES ('Admin'),
 					     ('User'),
 						 ('RestaurantOwner'),
 						 ('DeliveryMan'),
@@ -9,7 +9,7 @@ INSERT INTO ROLES VALUES ('Admin'),
 						 ('TechnicalService')
 GO
 
-INSERT INTO USERS VALUES ('Alexandre','Temperville','at@gmail.com','0622758465', 'mdpat'),
+INSERT INTO [USER] VALUES ('Alexandre','Temperville','at@gmail.com','0622758465', 'mdpat'),
                          ('Thibault','Perquis','tp@gmail.com','0622758465', 'mdptp'),
 						 ('Romain','Brunelot','rb@gmail.com','0622758465', 'mdprb'),
 						 ('Alix','Pouchain','ap@gmail.com','0622758465', 'mdpap'),
@@ -18,7 +18,7 @@ INSERT INTO USERS VALUES ('Alexandre','Temperville','at@gmail.com','0622758465',
 						 ('Jean-Francois','Hoquet','jfh@gmail.com','0622758465', 'mdpjfh')
 GO
 
-INSERT INTO USERROLES VALUES (1,1),
+INSERT INTO [USERROLE] VALUES (1,1),
 						     (1,2),
 	                         (2,2),
 							 (2,3),
