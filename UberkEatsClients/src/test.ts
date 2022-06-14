@@ -8,17 +8,17 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 
 declare const require: {
-  context(path: string, deep?: boolean, filter?: RegExp): {
-    keys(): string[];
-    <T>(id: string): T;
-  };
+	context(path: string, deep?: boolean, filter?: RegExp): {
+		<T>(id: string): T;
+		keys(): string[];
+	};
 };
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
 	BrowserDynamicTestingModule,
 	platformBrowserDynamicTesting(),
-	{ teardown: { destroyAfterEach: true }},
+	{ teardown: { destroyAfterEach: true } },
 );
 
 // Then we find all the tests.
