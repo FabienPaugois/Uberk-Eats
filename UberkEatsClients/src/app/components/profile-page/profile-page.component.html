@@ -1,0 +1,31 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Profile information</mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput value={{userInfo.name}} placeholder="Name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput value={{userInfo.surname}} placeholder="Surname">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput value={{userInfo.mail}} placeholder="Mail">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput value={{userInfo.password}} placeholder="Password">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput value={{userInfo.phone}} placeholder="Phone">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput value={{userInfo.role}} placeholder="Role">
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-raised-button color="primary" class="btn-block">Back</button>
+      <button mat-raised-button color="warn" class="btn-block">Delete</button>
+    </form>
+  </mat-card>
+</div>
