@@ -22,7 +22,7 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 		ProfilePageComponent,
 		RestaurantListComponent,
 		MenuPickPageComponent,
-    ProductPageComponent
+		ProductPageComponent
 	],
 	imports: [
 		BrowserModule,

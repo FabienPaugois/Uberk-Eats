@@ -49,21 +49,21 @@ export class ClientsApiService {
 			this.apiNoSQLURL + '/restaurants',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
-  }
+	}
 
-  FetchArticleData(id: number): Observable<Articles> {
-    return this.http.get<Articles>(
-      this.apiNoSQLURL + '/article/' + id,
-      this.httpOptions
-    ).pipe(retry(1), catchError(this.handleError));
-  }
+	FetchArticleData(id: number): Observable<Articles> {
+		return this.http.get<Articles>(
+			this.apiNoSQLURL + '/article/' + id,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
-  FetchMenuData(id : number): Observable<Menus> {
-    return this.http.get<Menus>(
-      this.apiNoSQLURL + '/menus/' + id,
-      this.httpOptions
-    ).pipe(retry(1), catchError(this.handleError));
-  }
+	FetchMenuData(id : number): Observable<Menus> {
+		return this.http.get<Menus>(
+			this.apiNoSQLURL + '/menus/' + id,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
 	// Error handling
 	handleError(error: any) {

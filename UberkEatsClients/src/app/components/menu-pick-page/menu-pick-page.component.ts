@@ -11,7 +11,7 @@ import { ClientsApiService } from '../../services/clients-api.service';
 })
 export class MenuPickPageComponent implements OnInit {
 
-  constructor(public clientsApi: ClientsApiService, public router: Router) { }
+	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
 	articles: Articles[] = [
 		{
@@ -89,11 +89,11 @@ export class MenuPickPageComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-  btnClickMenu(menu: Menus) {
-    this.router.navigate(['/product-page', menu]);
-  }
+	btnClickMenu(menu: Menus) {
+		this.router.navigate(['/product-page', menu]);
+	}
 
-  btnClickArticle(article: Articles) {
-    this.router.navigate(['/product-page', article]);
-  }
+	btnClickArticle(article: Articles) {
+		this.router.navigate(['/product-page', article]);
+	}
 }

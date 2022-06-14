@@ -12,8 +12,8 @@ const routes: Routes = [
 	{ path: 'register-page', component: RegisterPageComponent },
 	{ path: 'profile-page', component: ProfilePageComponent },
 	{ path: 'restaurant-list', component: RestaurantListComponent },
-  { path: 'menu-pick-page', component: MenuPickPageComponent },
-  { path: 'product-page', component: ProductPageComponent },
+	{ path: 'menu-pick-page', component: MenuPickPageComponent },
+	{ path: 'product-page', component: ProductPageComponent },
 ];
 
 @NgModule({
