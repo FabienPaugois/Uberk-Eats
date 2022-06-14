@@ -1,0 +1,80 @@
+{
+	"root": true,
+	"ignorePatterns": [
+		"projects/**/*"
+	],
+	"overrides": [
+		{
+			"files": [
+				"*.ts"
+			],
+			"parserOptions": {
+				"project": [
+					"UberkEatsClients/tsconfig.json",
+					"e2e/tsconfig.json"
+				],
+				"sourceType": "module",
+				"createDefaultProgram": true
+			},
+			"extends": [
+				"plugin:@angular-eslint/ng-cli-compat",
+				"plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+				"plugin:@angular-eslint/template/process-inline-templates"
+			],
+			"rules": {
+				"@angular-eslint/component-selector": [
+					"error",
+					{
+						"type": "element",
+						"prefix": "app",
+						"style": "kebab-case"
+					}
+				],
+				"@angular-eslint/directive-selector": [
+					"error",
+					{
+						"type": "attribute",
+						"prefix": "app",
+						"style": "camelCase"
+					}
+				],
+				"@typescript-eslint/naming-convention": [
+					"error",
+					{
+						"selector": "property",
+						"format": [
+							"camelCase"
+						],
+						"filter": {
+							// you can expand this regex to add more allowed names
+							"regex": "^(Content-Type)$",
+							"match": false
+						}
+					}
+				],
+				"indent": [
+					"error",
+					"tab"
+				],
+				"quotes": [
+					"error",
+					"single"
+				],
+				"semi": [
+					"error",
+					"always"
+				],
+				"@angular-eslint/no-empty-lifecycle-method": "off"
+			}
+		},
+		{
+			"files": [
+				"*.html"
+			],
+			"extends": [
+				"plugin:@angular-eslint/template/recommended"
+			],
+			"rules": {}
+		}
+	]
+}

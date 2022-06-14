@@ -1,0 +1,16 @@
+<mat-accordion multi="true">
+  <mat-card *ngFor="let restaurant of restaurants">
+    <mat-card-header>
+      <mat-card-title> {{ restaurant.name }}</mat-card-title>
+      <mat-card-subtitle *ngFor="let type of restaurant.types"> {{ type }}</mat-card-subtitle>
+      <mat-card-subtitle> {{ restaurant.address }}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <p>{{ restaurant.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="button" (click)="btnClick();">Voir les articles</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-accordion>
