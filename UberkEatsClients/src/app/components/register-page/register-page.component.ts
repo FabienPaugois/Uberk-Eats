@@ -9,16 +9,18 @@ import { Roles } from '../../model/roles';
 	styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
-	@Input() registerInfo = { mail: '', password: '', phone: '', name: '', surname: '' };
-	constructor(public clientsApi: ClientsApiService, public router: Router) {
-	}
-	roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
-	ngOnInit(): void {
-	}
+  @Input() registerInfo = { mail: '', password: '', phone: '', name: '', surname: '' };
+  roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
 
-	register(dataclient: any) {
-		this.clientsApi.Register(this.registerInfo).subscribe((data: {}) => {
-			this.router.navigate(['/']);
-		});
-	}
+  constructor(public clientsApi: ClientsApiService, public router: Router) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  register(dataclient: any) {
+  	this.clientsApi.register(this.registerInfo).subscribe((data: unknown) => {
+  		this.router.navigate(['/']);
+  	});
+  }
 }

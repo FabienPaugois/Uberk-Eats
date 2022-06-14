@@ -9,7 +9,6 @@ import { Roles } from '../../model/roles';
 })
 export class ProfilePageComponent implements OnInit {
 	public roles = Roles;
-	constructor() { }
 	userInfo: Clients = {
 		id: '1',
 		phone: '0675994028',
@@ -17,8 +16,10 @@ export class ProfilePageComponent implements OnInit {
 		surname: 'Duleu',
 		mail: 'lucas.duleu@hotmail.fr',
 		password: '***',
-		role: this.roles.TechnicalService
+		role: this.roles.technicalService
 	};
+
+	constructor() { }
 
 	ngOnInit(): void {
 	}

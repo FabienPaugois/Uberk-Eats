@@ -13,10 +13,6 @@ export class ClientsApiService {
 	// Define API
 	apiURL = 'http://localhost:3000';
 	apiNoSQLURL = '';
-	constructor(private http: HttpClient) { }
-	/*========================================
-    CRUD Methods for consuming RESTful API
-  =========================================*/
 	// Http Options
 	httpOptions = {
 		headers: new HttpHeaders({
@@ -24,8 +20,14 @@ export class ClientsApiService {
 		}),
 	};
 
+	constructor(private http: HttpClient) { }
+	/*========================================
+    CRUD Methods for consuming RESTful API
+  =========================================*/
+
+
 	// HttpClient API post() method => Authenticate
-	Authenticate(employee: any): Observable<Clients> {
+	authenticate(employee: any): Observable<Clients> {
 		return this.http.post<Clients>(
 			this.apiURL + '/login',
 			JSON.stringify(employee),
@@ -34,7 +36,7 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	Register(employee: any): Observable<Clients> {
+	register(employee: any): Observable<Clients> {
 		return this.http.post<Clients>(
 			this.apiURL + '/register',
 			JSON.stringify(employee),
@@ -42,7 +44,7 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	GetRestaurants(): Observable<Restaurants> {
+	getRestaurants(): Observable<Restaurants> {
 		return this.http.get<Restaurants>(
 			this.apiNoSQLURL + '/restaurants',
 			this.httpOptions
@@ -74,9 +76,7 @@ export class ClientsApiService {
 			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
 		}
 		window.alert(errorMessage);
-		return throwError(() => {
-			return errorMessage;
-		});
+		return throwError(() => errorMessage);
 	}
 }
 

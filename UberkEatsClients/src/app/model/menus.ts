@@ -5,5 +5,5 @@ export interface Menus {
   name: string;
   price: string;
   description: string;
-  articles: number[]
+  articles: number[];
 }

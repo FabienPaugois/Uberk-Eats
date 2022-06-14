@@ -12,7 +12,7 @@ export class LoginPageComponent implements OnInit {
 
 	ngOnInit(): void { }
 	authenticate(dataclient: any) {
-		this.clientsApi.Authenticate(this.loginInfo).subscribe((data: {}) => {
+		this.clientsApi.authenticate(this.loginInfo).subscribe((data: unknown) => {
 			//this.router.navigate(['./']);
 		});
 	}

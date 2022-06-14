@@ -9,8 +9,6 @@ import { ClientsApiService } from '../../services/clients-api.service';
 	styleUrls: ['./restaurant-list.component.scss']
 })
 export class RestaurantListComponent implements OnInit {
-
-	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 	restaurants: Restaurants[] = [
 		{
 			id: '1',
@@ -78,6 +76,8 @@ export class RestaurantListComponent implements OnInit {
 		}
 	];
 
+	constructor(public clientsApi: ClientsApiService, public router: Router) { }
+
 	ngOnInit(): void {
 	}
 
@@ -86,7 +86,7 @@ export class RestaurantListComponent implements OnInit {
 	}
 
 	getRestaurants() {
-		this.clientsApi.GetRestaurants().subscribe((data: {}) => {
+		this.clientsApi.getRestaurants().subscribe((data: unknown) => {
 
 		});
 	}

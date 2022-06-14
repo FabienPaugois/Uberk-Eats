@@ -27,7 +27,7 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: ['lts/*']
@@ -37,13 +37,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - name: Install Dependencies
       run: npm install
     - run: npm run lint
   analyze:
     name: Analyze
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: [ lint ]
     permissions:
       actions: read

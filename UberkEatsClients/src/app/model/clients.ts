@@ -7,5 +7,5 @@ export interface Clients {
   surname: string;
   mail: string;
   password: string;
-  role : Roles
+  role: Roles;
 }

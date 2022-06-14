@@ -4,5 +4,5 @@ export interface Restaurants {
   address: string;
   phone: string;
   description: string;
-  types: string[]
+  types: string[];
 }
