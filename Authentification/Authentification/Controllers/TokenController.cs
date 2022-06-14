@@ -24,8 +24,9 @@ namespace Authentification.Controllers
         [HttpGet]
         public string GetRandomToken()
         {
-            var jwt = new JwtService(_config);
-            var token = jwt.GenerateSecurityToken(new User() { Name="Tim", Mail="tv@gmail.com", Phone="5089961256" }, new List<Role>() { new Role() { Name = "Chef" } });
+            // Token creation
+            JwtService jwt = new JwtService(_config);
+            string token = jwt.GenerateSecurityToken(new User() { Name="Tim", Mail="tv@gmail.com", Phone="5089961256" }, new List<Role>() { new Role() { Name = "Chef" } });
             return token;
         }
 

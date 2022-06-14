@@ -10,9 +10,9 @@ namespace Authentification.Middleware
     {
         public static IServiceCollection AddTokenAuthentication(this IServiceCollection services, IConfiguration config)
         {
-            var secret = config.GetSection("JwtConfig").GetSection("secret").Value;
+            string secret = config.GetSection("JwtConfig").GetSection("secret").Value;
 
-            var key = Encoding.ASCII.GetBytes(secret);
+            byte[] key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

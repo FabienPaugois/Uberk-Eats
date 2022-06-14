@@ -22,9 +22,10 @@ namespace Authentification.Services
 
         public string GenerateSecurityToken(User user, List<Role> Roles)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_secret);
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes(_secret);
 
+            // Create the token payload
             ClaimsIdentity Subject = new ClaimsIdentity(new[]
             {
                     new Claim(ClaimTypes.Email, user.Mail),
@@ -33,13 +34,14 @@ namespace Authentification.Services
                 });
             Roles.ForEach(delegate (Role role) { Subject.AddClaim( new Claim(ClaimTypes.Role, role.Name)); });
 
-            var tokenDescriptor = new SecurityTokenDescriptor
+            // Token header
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Expires = DateTime.UtcNow.AddMinutes(double.Parse(_expDate)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
 
