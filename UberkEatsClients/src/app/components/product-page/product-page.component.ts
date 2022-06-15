@@ -25,30 +25,30 @@ export class ProductPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.routeSub = this.ActivatedRoute.params.subscribe((params: Params) => {
-			if (params['articles'] != null) {
+			if (params.articles != null) {
 				this.menu = {
-					id: params['id'],
-					description: params['description'],
-					name: params['name'],
-					price: params['price'],
-					articles: params['articles']
+					id: params.id,
+					description: params.description,
+					name: params.name,
+					price: params.price,
+					articles: params.articles
 				};
 			}
 			else {
 				this.article = {
-					id: params['id'],
-					description: params['description'],
-					name: params['name'],
-					price: params['price'],
+					id: params.id,
+					description: params.description,
+					name: params.name,
+					price: params.price,
 				};
 			}
 		});
 	}
 
 	updateCount(increment: boolean): void {
-		if (this.count == 1 && increment) {
+		if (this.count === 1 && increment) {
 			this.count++;
-		} else if (this.count != 1) {
+		} else if (this.count !== 1) {
 			increment ? this.count++ : this.count--;
 		}
 	}

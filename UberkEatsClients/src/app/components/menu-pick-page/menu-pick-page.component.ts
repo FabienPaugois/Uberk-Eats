@@ -11,8 +11,6 @@ import { ClientsApiService } from '../../services/clients-api.service';
 })
 export class MenuPickPageComponent implements OnInit {
 
-	constructor(public clientsApi: ClientsApiService, public router: Router) { }
-
 	articles: Articles[] = [
 		{
 			id: '1',
@@ -85,6 +83,8 @@ export class MenuPickPageComponent implements OnInit {
 			articles: [2, 7, 9]
 		},
 	];
+
+	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
 	ngOnInit(): void {
 	}
