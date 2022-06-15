@@ -1,5 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Basket } from '../../model/basket';
 import { Restaurants } from '../../model/restaurants';
 import { ClientsApiService } from '../../services/clients-api.service';
 
@@ -9,6 +10,7 @@ import { ClientsApiService } from '../../services/clients-api.service';
 	styleUrls: ['./restaurant-list.component.scss']
 })
 export class RestaurantListComponent implements OnInit {
+  basket: Basket = { menus: [], articles: []};
 	restaurants: Restaurants[] = [
 		{
 			id: '1',
@@ -81,7 +83,9 @@ export class RestaurantListComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	btnClick() {
+  btnClick() {
+    localStorage.clear();
+    localStorage.setItem("basket", JSON.stringify(this.basket))
 		this.router.navigateByUrl('/menu-pick-page');
 	}
 

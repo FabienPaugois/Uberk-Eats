@@ -58,7 +58,7 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	FetchMenuData(id : number): Observable<Menus> {
+	FetchMenuData(id: number): Observable<Menus> {
 		return this.http.get<Menus>(
 			this.apiNoSQLURL + '/menus/' + id,
 			this.httpOptions
