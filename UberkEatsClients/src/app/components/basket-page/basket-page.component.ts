@@ -96,14 +96,14 @@ export class BasketPageComponent implements OnInit {
       const temp = this.menus.find(menuEntry => menuEntry.id === menu.id)
       if (temp) {
         this.displayedMenus.push(temp);
-        this.basketTotalPrice += temp.price;
+        this.basketTotalPrice += (temp.price * menu.qty);
       }
     })
     this.basket.articles.forEach((article) => {
       const temp = this.articles.find(articleEntry => articleEntry.id === article.id)
       if (temp) {
         this.displayedArticles.push(temp);
-        this.basketTotalPrice += temp.price;
+        this.basketTotalPrice += (temp.price * article.qty);
       }
     })
   }
