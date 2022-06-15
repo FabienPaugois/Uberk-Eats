@@ -1,11 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subject, Subscription, takeUntil } from 'rxjs';
-import { Articles } from '../../model/articles';
-import { Basket, BasketObjects, BasketObjestType } from '../../model/basket';
-import { Menus } from '../../model/menus';
-import { ClientsApiService } from '../../services/clients-api.service';
-import { BasketStore } from '../../store/articleStore/article-store';
+import { Subscription } from 'rxjs';
+import { Articles } from '../../../model/articles';
+import { Menus } from '../../../model/menus';
+import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
 	selector: 'app-product-page',
@@ -13,51 +11,23 @@ import { BasketStore } from '../../store/articleStore/article-store';
 	styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit {
-	@Input() registerInfo: Basket = {
-		menus: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjestType.menu }],
-		articles: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjestType.article }]
-	};
 	count = 1;
 	articleId: string;
 	menuId: string;
 	article: Articles;
 	menu: Menus;
-	basketContent: Basket;
-	basketEntry: BasketObjects | undefined;
 	routeSub: Subscription;
 	articleSub: Subscription;
 	menuSub: Subscription;
-	basket: unknown;
 
-	ngUnsubscribe = new Subject();
+	constructor(public clientsApi: ClientsApiService, public router: Router, private ActivatedRoute: ActivatedRoute) { }
 
-
-	constructor(
-		public clientsApi: ClientsApiService,
-		public router: Router,
-		private activatedRoute: ActivatedRoute,
-		public store: BasketStore
-	) { }
-
-	// for cleaning up subscriptions
-	OnDestroy(): void {
-		this.ngUnsubscribe.next(true);
-		this.ngUnsubscribe.complete();
-	}
 
 	ngOnInit(): void {
-		// subscription to the store
-		this.store.state$
-			.pipe(
-				takeUntil(this.ngUnsubscribe))
-			.subscribe(data => {
-				this.basketContent = data;
-			});
-
-		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+		this.routeSub = this.ActivatedRoute.params.subscribe((params: Params) => {
 			if (params.articles != null) {
 				this.menu = {
-					id: parseInt(params.id, 10),
+					id: params.id,
 					description: params.description,
 					name: params.name,
 					price: params.price,
@@ -66,10 +36,11 @@ export class ProductPageComponent implements OnInit {
 			}
 			else {
 				this.article = {
-					id: parseInt(params.id, 10),
+					id: params.id,
 					description: params.description,
 					name: params.name,
-					price: params.price,
+          price: params.price,
+          image_url: params.image_url,
 				};
 			}
 		});
@@ -80,24 +51,6 @@ export class ProductPageComponent implements OnInit {
 			this.count++;
 		} else if (this.count !== 1) {
 			increment ? this.count++ : this.count--;
-		}
-	}
-
-	addToBasket() {
-		if (this.store.state[this.article ? BasketObjestType.article : BasketObjestType.menu].find(
-			entry => entry.id === (this.article ? this.article.id : this.menu.id)
-		)) {
-			this.store.editbasketQty({
-				id: this.article ? this.article.id : this.menu.id,
-				qty: this.count,
-				type: this.article ? BasketObjestType.article : BasketObjestType.menu
-			});
-		} else {
-			this.store.addBasketObject({
-				id: this.article ? this.article.id : this.menu.id,
-				qty: this.count,
-				type: this.article ? BasketObjestType.article : BasketObjestType.menu
-			});
 		}
 	}
 }
