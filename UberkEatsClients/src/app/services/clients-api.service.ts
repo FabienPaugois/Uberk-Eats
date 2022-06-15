@@ -9,7 +9,7 @@ import { Restaurants } from '../model/restaurants';
 })
 export class ClientsApiService {
 	// Define API
-	apiURL = 'http://localhost:3000';
+  apiURL = 'https://localhost:44310';
 	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {
@@ -27,16 +27,17 @@ export class ClientsApiService {
 	// HttpClient API post() method => Authenticate
 	authenticate(employee: any): Observable<Clients> {
 		return this.http.post<Clients>(
-			this.apiURL + '/login',
+			this.apiURL + '/authenticate',
 			JSON.stringify(employee),
 			this.httpOptions
 		)
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any): Observable<Clients> {
+  register(employee: any): Observable<Clients> {
+    console.log(employee)
 		return this.http.post<Clients>(
-			this.apiURL + '/register',
+			this.apiURL + '/create',
 			JSON.stringify(employee),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
@@ -50,7 +51,7 @@ export class ClientsApiService {
 	}
 
 	// Error handling
-	handleError(error: any) {
+  handleError(error: any) {
 		let errorMessage = '';
 		if (error.error instanceof ErrorEvent) {
 			// Get client-side error
