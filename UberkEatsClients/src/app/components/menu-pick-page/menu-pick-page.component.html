@@ -10,7 +10,7 @@
       <p>{{ menu.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button>Choisir ce menu</button>
+      <button type="button" (click)="btnClickMenu(menu);">Choisir ce menu</button>
     </mat-card-actions>
   </mat-card>
 
@@ -25,7 +25,7 @@
       <p>{{ article.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button>Choisir cet article</button>
+      <button type="button" (click)="btnClickArticle(article);">Choisir cet article</button>
     </mat-card-actions>
   </mat-card>
 </mat-accordion>

@@ -108,10 +108,5 @@ dist
 /.vs/ProjectSettings.json
 /.vs/slnx.sqlite
 /.vs/Uberk-Eats/v16/.suo
-/.vs/VSWorkspaceState.json
-/Authentification/Authentification/obj/Release/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs
-/Authentification/Authentification/obj/Release/netcoreapp3.1/Authentification.AssemblyInfo.cs
-/Authentification/Authentification/obj/Release/netcoreapp3.1/Authentification.AssemblyInfoInputs.cache
-/Authentification/Authentification/obj/Release/netcoreapp3.1/Authentification.assets.cache
-/Authentification/Authentification/obj/Release/netcoreapp3.1/Authentification.GeneratedMSBuildEditorConfig.editorconfig
-/Authentification/Authentification/obj/Debug/netcoreapp3.1
+
+.angular

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Articles } from '../../model/articles';
 import { Menus } from '../../model/menus';
+import { ClientsApiService } from '../../services/clients-api.service';
 
 @Component({
 	selector: 'app-menu-pick-page',
@@ -8,6 +10,7 @@ import { Menus } from '../../model/menus';
 	styleUrls: ['./menu-pick-page.component.scss']
 })
 export class MenuPickPageComponent implements OnInit {
+
 	articles: Articles[] = [
 		{
 			id: '1',
@@ -81,8 +84,16 @@ export class MenuPickPageComponent implements OnInit {
 		},
 	];
 
-	constructor() { }
+	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
 	ngOnInit(): void {
+	}
+
+	btnClickMenu(menu: Menus) {
+		this.router.navigate(['/product-page', menu]);
+	}
+
+	btnClickArticle(article: Articles) {
+		this.router.navigate(['/product-page', article]);
 	}
 }
