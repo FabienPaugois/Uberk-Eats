@@ -9,11 +9,11 @@ using Microsoft.Data.SqlClient;
 using System.Data.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Newtonsoft.Json;
 
 namespace Authentification.Controllers
 {
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
@@ -49,27 +49,39 @@ namespace Authentification.Controllers
 
         #region Delete
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("/Delete")]
-        public string Delete(User user)
+        public ContentResult Delete(User user)
         {
             User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
             if (authenticated != null)
             {
                 db.User.Remove(authenticated);
                 db.SaveChanges();
-                return "Deleted";
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Account created"),
+                    ContentType = "application/json",
+                    StatusCode = 201
+                };
             }
             else
             {
-                return "Password or mail error";
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Password or mail error"),
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
             }
         }
         #endregion
 
         #region Update
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("/Update")]
-        public string Update(User user)
+        public ContentResult Update(User user)
         {
             User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
             if (authenticated != null)
@@ -77,11 +89,21 @@ namespace Authentification.Controllers
                 user.Id = authenticated.Id;
                 db.Entry(authenticated).CurrentValues.SetValues(user);
                 db.SaveChanges();
-                return "Updated";
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Account created"),
+                    ContentType = "application/json",
+                    StatusCode = 201
+                };
             }
             else
             {
-                return "Password or mail error";
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Password or mail error"),
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
             }
         }
         #endregion
@@ -89,19 +111,29 @@ namespace Authentification.Controllers
         #region Create
         [HttpPost]
         [Route("/Create")]
-        public string Create(User user)
+        public ContentResult Create(User user)
         {
             User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail);
             if (authenticated != null)
             {
-                return "Mail address already used";
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Mail already used"),
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
             }
             else
             {
                 user.Id = 0;
                 db.User.Add(user);
                 db.SaveChanges();
-                return "Account Created";
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Account created"),
+                    ContentType = "application/json",
+                    StatusCode = 201
+                };
             }
         }
         #endregion
