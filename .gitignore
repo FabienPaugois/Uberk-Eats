@@ -108,3 +108,5 @@ dist
 /.vs/ProjectSettings.json
 /.vs/slnx.sqlite
 /.vs/Uberk-Eats/v16/.suo
+
+.angular
