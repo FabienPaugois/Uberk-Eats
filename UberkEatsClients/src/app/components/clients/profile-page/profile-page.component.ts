@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Clients } from '../../model/clients';
-import { Roles } from '../../model/roles';
+import { Clients } from '../../../model/clients';
+import { Roles } from '../../../model/roles';
 
 @Component({
 	selector: 'app-profile-page',
