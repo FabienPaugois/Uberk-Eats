@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Articles } from '../../model/articles';
-import { Menus } from '../../model/menus';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { Articles } from '../../../model/articles';
+import { Menus } from '../../../model/menus';
+import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
 	selector: 'app-product-page',
@@ -39,7 +39,8 @@ export class ProductPageComponent implements OnInit {
 					id: params.id,
 					description: params.description,
 					name: params.name,
-					price: params.price,
+          price: params.price,
+          image_url: params.image_url,
 				};
 			}
 		});

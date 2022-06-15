@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { ClientsApiService } from '../../../services/clients-api.service';
 @Component({
 	selector: 'app-login-page',
 	templateUrl: './login-page.component.html',
