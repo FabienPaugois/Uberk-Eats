@@ -3,33 +3,33 @@
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
-    <form class="example-form">
+    <form class="example-form" [formGroup]="registerForm">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name">
+          <input matInput placeholder="Name" formControlName="Name">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Surname">
+          <input matInput placeholder="Surname" formControlName="Surname">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail">
+          <input matInput placeholder="Mail" formControlName="Mail">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password">
+          <input matInput placeholder="Password" formControlName="Password">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Phone">
+          <input matInput placeholder="Phone" formControlName="Phone">
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Choose a role...</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let role of roles" [value]="role">
+          <mat-select formControlName="Role">
+            <mat-option *ngFor="let role of roles" [value]="role" >
               {{role}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card-content>
-      <button mat-stroked-button color="primary" class="btn-block mat-raised-button">Register</button>
+      <button mat-stroked-button (click)="register(registerInfo)" color="primary" class="btn-block mat-raised-button">Register</button>
     </form>
   </mat-card>
 </div>
