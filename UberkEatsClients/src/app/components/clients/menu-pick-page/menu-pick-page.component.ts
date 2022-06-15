@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Articles } from '../../model/articles';
-import { Menus } from '../../model/menus';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { Articles } from '../../../model/articles';
+import { Menus } from '../../../model/menus';
+import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
 	selector: 'app-menu-pick-page',
@@ -16,55 +16,64 @@ export class MenuPickPageComponent implements OnInit {
 			id: 1,
 			name: 'Whooper',
 			description: 'Lorem ipsum',
-			price: 4
+      price: 4,
+      image_url: '',
 		},
 		{
 			id: 2,
 			name: 'Triple Cheese',
 			description: 'Lorem ipsum',
-			price: 5
+      price: 5,
+      image_url: '',
 		},
 		{
 			id: 3,
 			name: 'Double Steakhouse',
 			description: 'Lorem ipsum',
-			price: 4
+      price: 4,
+      image_url: '',
 		},
 		{
 			id: 4,
 			name: 'Chicken Alabama',
 			description: 'Lorem ipsum',
-			price: 6
+      price: 6,
+      image_url: '',
 		},
 		{
 			id: 5,
 			name: 'Double Cheese Bacon Vegan',
 			description: 'Lorem ipsum',
-			price: 10
+      price: 10,
+      image_url: '',
 		},
 		{
 			id: 6,
 			name: 'Potatoes',
 			description: 'Lorem ipsum',
-			price: 2
+      price: 2,
+      image_url: '',
 		},
 		{
 			id: 7,
 			name: 'Fries',
 			description: 'Lorem ipsum',
-			price: 2
+      price: 2,
+      image_url: '',
 		},
 		{
 			id: 8,
 			name: 'Coke',
 			description: 'Lorem ipsum',
-			price: 2.5
+      price: 2.5,
+      image_url: '',
 		},
 		{
 			id: 9,
 			name: 'Pepsi',
 			description: 'Lorem ipsum',
-			price: 2.5
+      price: 2.5,
+      image_url: '',
 		},
 	];
 	menus: Menus[] = [

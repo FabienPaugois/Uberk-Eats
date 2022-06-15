@@ -66,7 +66,7 @@ export class ProductPageComponent implements OnInit {
 
   	if (this.menu) {
   		this.basketEntry = this.basketContent.menus.find(menu => menu.id === this.menu.id);
-  		if (this.basketEntry) { //L'objet existe donc il faut incrémenter
+  		if (this.basketEntry) { //L'objet existe donc il faut incr�menter
   			this.basketEntry.qty += this.count;
   		}
   		else { //L'objet n'existe pas dans le panier
