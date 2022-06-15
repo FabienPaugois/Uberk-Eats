@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BasketPageComponent } from './components/basket-page/basket-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MenuPickPageComponent } from './components/menu-pick-page/menu-pick-page.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
 	{ path: 'profile-page', component: ProfilePageComponent },
 	{ path: 'restaurant-list', component: RestaurantListComponent },
 	{ path: 'menu-pick-page', component: MenuPickPageComponent },
-	{ path: 'product-page', component: ProductPageComponent },
+  { path: 'product-page', component: ProductPageComponent },
+  { path: 'basket-page', component: BasketPageComponent },
 ];
 
 @NgModule({
