@@ -14,6 +14,7 @@ import { RestaurantListComponent } from './components/clients/restaurant-list/re
 import { MenuPickPageComponent } from './components/clients/menu-pick-page/menu-pick-page.component';
 import { ProductPageComponent } from './components/clients/product-page/product-page.component';
 import { CreateArticleComponent } from './components/restaurants/create-article/create-article.component';
+import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { CreateArticleComponent } from './components/restaurants/create-article/
 		RestaurantListComponent,
 		MenuPickPageComponent,
 		ProductPageComponent,
-    CreateArticleComponent
+    CreateArticleComponent,
+    CreateMenuComponent
 	],
 	imports: [
 		BrowserModule,

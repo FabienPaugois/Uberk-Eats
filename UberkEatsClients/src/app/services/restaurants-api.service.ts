@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { retry, catchError,throwError } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Articles } from '../model/articles';
+import { Menus } from '../model/menus';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,15 @@ export class RestaurantsApiService {
     return this.http.post<Articles>(
       this.apiURL + '/articles',
       JSON.stringify(article),
+      this.httpOptions
+    ).pipe(retry(1), catchError(this.handleError));
+  }
+
+  // HttpClient API post() method => createMenu
+  createMenu(menu: Menus): Observable<Menus> {
+    return this.http.post<Menus>(
+      this.apiURL + '/menus',
+      JSON.stringify(menu),
       this.httpOptions
     ).pipe(retry(1), catchError(this.handleError));
   }
