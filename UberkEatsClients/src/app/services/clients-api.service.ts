@@ -36,11 +36,11 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any): Observable<Clients> {
+	register(employee: any, roleName: any): Observable<Clients> {
 		console.log(employee);
 		return this.http.post<Clients>(
 			this.apiURL + '/create',
-			JSON.stringify(employee),
+      JSON.stringify({ "User": employee, "RoleName": roleName }),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}

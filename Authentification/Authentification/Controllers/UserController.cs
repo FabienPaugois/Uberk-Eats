@@ -135,9 +135,10 @@ namespace Authentification.Controllers
         #region Create
         [HttpPost]
         [Route("/Create")]
-        public ContentResult Create(User user)
+        public ContentResult Create(RegisterForm registerForm)
         {
-            User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail);
+            User authenticated = db.User.FirstOrDefault(a => a.Mail == registerForm.User.Name);
+            Role roleToAssign = db.Role.FirstOrDefault(b => b.Name == registerForm.RoleName);
             if (authenticated != null)
             {
                 return new ContentResult()
@@ -149,8 +150,10 @@ namespace Authentification.Controllers
             }
             else
             {
-                user.Id = 0;
-                db.User.Add(user);
+                db.User.Add(registerForm.User);
+                db.SaveChanges();
+                User userCreated = db.User.Where(c => c.Mail == registerForm.User.Mail).FirstOrDefault();
+                db.UserRole.Add(new UserRole() { UserId = userCreated.Id, RoleId = roleToAssign.Id });
                 db.SaveChanges();
                 return new ContentResult()
                 {

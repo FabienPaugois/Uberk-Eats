@@ -18,13 +18,14 @@ export class RegisterPageComponent implements OnInit {
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
   	// Form element defined below
-  	this.registerForm = this.fb.group({
+
+    this.registerForm = this.fb.group({
   		name: '',
   		surname: '',
   		phone: '',
   		password: '',
-  		mail: '',
-  		role: ''
+      mail: '',
+      role: ''
   	});
   }
 
@@ -36,9 +37,8 @@ export class RegisterPageComponent implements OnInit {
   	this.registerInfo.surname = this.registerForm.get('surname')?.value;
   	this.registerInfo.phone = this.registerForm.get('phone')?.value;
   	this.registerInfo.password = Md5.hashStr(this.registerForm.get('password')?.value);
-  	this.registerInfo.mail = this.registerForm.get('mail')?.value;
-  	this.registerInfo.role = this.registerForm.get('role')?.value;
-  	this.clientsApi.register(this.registerInfo).subscribe((data: unknown) => {
+    this.registerInfo.mail = this.registerForm.get('mail')?.value;
+    this.clientsApi.register(this.registerInfo, this.registerForm.get('role')?.value).subscribe((data: unknown) => {
   		this.router.navigate(['/']);
   	});
   }
