@@ -11,8 +11,8 @@ namespace Authentification.Models
     {
         public User()
         {
-            InverseUseraffiliateNavigation = new HashSet<User>();
-            Userrole = new HashSet<Userrole>();
+            InverseUserAffiliateNavigation = new HashSet<User>();
+            UserRole = new HashSet<UserRole>();
         }
 
         public long Id { get; set; }
@@ -21,10 +21,9 @@ namespace Authentification.Models
         public string Mail { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
-        public long? Useraffiliate { get; set; }
-
-        public virtual User UseraffiliateNavigation { get; set; }
-        public virtual ICollection<User> InverseUseraffiliateNavigation { get; set; }
-        public virtual ICollection<Userrole> Userrole { get; set; }
+        public long? UserAffiliate { get; set; }
+        public virtual User UserAffiliateNavigation { get; set; }
+        public virtual ICollection<User> InverseUserAffiliateNavigation { get; set; }
+        public virtual ICollection<UserRole> UserRole { get; set; }
     }
 }

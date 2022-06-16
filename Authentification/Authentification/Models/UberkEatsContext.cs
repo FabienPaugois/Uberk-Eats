@@ -21,12 +21,13 @@ namespace Authentification.Models
 
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Userrole> Userrole { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-TOD8MOS;Database=Uberk-Eats;Trusted_Connection=True;");
             }
         }
@@ -35,80 +36,56 @@ namespace Authentification.Models
         {
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.ToTable("ROLE");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("NAME")
                     .HasMaxLength(200)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("USER");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.Mail)
                     .IsRequired()
-                    .HasColumnName("MAIL")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("NAME")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasColumnName("PASSWORD")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Phone)
                     .IsRequired()
-                    .HasColumnName("PHONE")
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Surname)
                     .IsRequired()
-                    .HasColumnName("SURNAME")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Useraffiliate).HasColumnName("USERAFFILIATE");
-
-                entity.HasOne(d => d.UseraffiliateNavigation)
-                    .WithMany(p => p.InverseUseraffiliateNavigation)
-                    .HasForeignKey(d => d.Useraffiliate)
-                    .HasConstraintName("FK__USER__USERAFFILI__14270015");
+                entity.HasOne(d => d.UserAffiliateNavigation)
+                    .WithMany(p => p.InverseUserAffiliateNavigation)
+                    .HasForeignKey(d => d.UserAffiliate)
+                    .HasConstraintName("FK__User__UserAffili__3E1D39E1");
             });
 
-            modelBuilder.Entity<Userrole>(entity =>
+            modelBuilder.Entity<UserRole>(entity =>
             {
-                entity.ToTable("USERROLE");
-
-                entity.Property(e => e.Userroleid).HasColumnName("USERROLEID");
-
-                entity.Property(e => e.Roleid).HasColumnName("ROLEID");
-
-                entity.Property(e => e.Userid).HasColumnName("USERID");
-
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Userrole)
-                    .HasForeignKey(d => d.Roleid)
-                    .HasConstraintName("FK__USERROLE__ROLEID__17F790F9");
+                    .WithMany(p => p.UserRole)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK__UserRole__RoleId__41EDCAC5");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Userrole)
-                    .HasForeignKey(d => d.Userid)
-                    .HasConstraintName("FK__USERROLE__USERID__17036CC0");
+                    .WithMany(p => p.UserRole)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__UserRole__UserId__40F9A68C");
             });
 
             OnModelCreatingPartial(modelBuilder);
