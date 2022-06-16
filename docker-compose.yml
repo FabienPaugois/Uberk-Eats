@@ -1,0 +1,7 @@
+version: "1.0"
+services:
+  auth:
+    build: .\Authentification
+    ports:
+      - "8080:80"
+      - "8443:443"
