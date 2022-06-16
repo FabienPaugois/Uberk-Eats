@@ -12,20 +12,20 @@ import { Md5 } from 'ts-md5/dist/md5';
 export class LoginPageComponent implements OnInit {
 	@Input() loginInfo = { mail: '', password: '' };
 
-  public loginForm: FormGroup; // variable of type FormGroup is created
-  constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
-    // Form element defined below
-    this.loginForm = this.fb.group({
-      Mail: '',
-      Password: ''
-    });
-  }
+	public loginForm: FormGroup; // variable of type FormGroup is created
+	constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
+		// Form element defined below
+		this.loginForm = this.fb.group({
+			Mail: '',
+			Password: ''
+		});
+	}
 	ngOnInit(): void { }
-  authenticate(dataclient: any) {
-    this.loginInfo.mail = this.loginForm.get('Mail')?.value;
-    this.loginInfo.password = Md5.hashStr(this.loginForm.get('Password')?.value);
-    this.clientsApi.authenticate(this.loginInfo).subscribe((data: string) => { // Send the login request
-      localStorage.setItem("JWT", data); // Store the returned token into the localStorage
+	authenticate(dataclient: any) {
+		this.loginInfo.mail = this.loginForm.get('Mail')?.value;
+		this.loginInfo.password = Md5.hashStr(this.loginForm.get('Password')?.value);
+		this.clientsApi.authenticate(this.loginInfo).subscribe((data: string) => { // Send the login request
+			localStorage.setItem('JWT', data); // Store the returned token into the localStorage
 		});
 	}
 

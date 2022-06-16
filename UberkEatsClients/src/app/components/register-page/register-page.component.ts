@@ -32,7 +32,6 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register(dataclient: any) {
-    
   	this.registerInfo.name = this.registerForm.get('Name')?.value;
   	this.registerInfo.surname = this.registerForm.get('Surname')?.value;
   	this.registerInfo.phone = this.registerForm.get('Phone')?.value;
