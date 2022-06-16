@@ -11,12 +11,12 @@ namespace Authentification.Models
     {
         public Role()
         {
-            Userrole = new HashSet<Userrole>();
+            UserRole = new HashSet<UserRole>();
         }
 
         public long Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Userrole> Userrole { get; set; }
+        public virtual ICollection<UserRole> UserRole { get; set; }
     }
 }

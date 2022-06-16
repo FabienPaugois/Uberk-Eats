@@ -10,6 +10,9 @@ using System.Data.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
+using Authentification.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace Authentification.Controllers
 {
@@ -18,10 +21,13 @@ namespace Authentification.Controllers
     public class UserController : ControllerBase
     {
         private readonly UberkEatsContext db;
+        private IConfiguration _config;
 
-        public UserController()
+
+        public UserController(IConfiguration config)
         {
             db = new UberkEatsContext();
+            _config = config;
         }
         
         [HttpGet]
@@ -33,16 +39,34 @@ namespace Authentification.Controllers
         #region Authenticate
         [HttpPost]
         [Route("/Authenticate")]
-        public User Authenticate(User user)
+        public ContentResult Authenticate(User user)
         {
-            User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
-            if (authenticated != null)
+            User userAuth = db.User.Include(a=> a.UserRole).ThenInclude(b=> b.Role).Where(a => a.Mail == user.Mail && a.Password == user.Password).FirstOrDefault();
+            if (userAuth != null)
             {
-                return authenticated;
+                List<Role> roles = new List<Role>();
+                foreach (UserRole userRole in userAuth.UserRole)
+                {
+                    roles.Add(userRole.Role);
+                }
+                JwtService jwt = new JwtService(_config);
+                string token = jwt.GenerateSecurityToken(new User() { Name = userAuth.Name, Surname = userAuth.Surname, Mail = userAuth.Mail, Phone = userAuth.Phone }, roles);
+
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject(token),
+                    ContentType = "application/json",
+                    StatusCode = 201
+                };
             }
             else
             {
-                return user;
+                return new ContentResult()
+                {
+                    Content = JsonConvert.SerializeObject("Password or mail error"),
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
             }
         }
         #endregion
