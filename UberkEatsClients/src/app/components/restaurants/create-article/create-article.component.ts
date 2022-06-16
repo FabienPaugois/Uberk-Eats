@@ -6,9 +6,9 @@ import { Articles } from '../../..//model/articles';
 import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
-  selector: 'app-create-article',
-  templateUrl: './create-article.component.html',
-  styleUrls: ['./create-article.component.scss']
+	selector: 'app-create-article',
+	templateUrl: './create-article.component.html',
+	styleUrls: ['./create-article.component.scss']
 })
 export class CreateArticleComponent implements OnInit {
   @Input() articleInfo: Articles = { id: NaN, name:'', description: '', price: 0, imageUrl:''};
@@ -16,13 +16,13 @@ export class CreateArticleComponent implements OnInit {
 
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
-    // Form element defined below
-    this.registerForm = this.fb.group({
-      name: '',
-      description: '',
+  	// Form element defined below
+  	this.registerForm = this.fb.group({
+  		name: '',
+  		description: '',
   		price: '',
   		imageUrl: '',
-    });
+  	});
   }
   ngOnInit(): void {
   }
@@ -33,8 +33,8 @@ export class CreateArticleComponent implements OnInit {
   	this.articleInfo.price = this.registerForm.get('price')?.value;
   	this.articleInfo.imageUrl = this.registerForm.get('imageUrl')?.value;
   	this.clientsApi.register(this.articleInfo).subscribe((data: unknown) => {
-      this.router.navigate(['/']);
-    });
+  		this.router.navigate(['/']);
+  	});
   }
 
 }

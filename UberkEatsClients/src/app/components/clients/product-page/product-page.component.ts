@@ -39,8 +39,8 @@ export class ProductPageComponent implements OnInit {
 					id: params.id,
 					description: params.description,
 					name: params.name,
-          price: params.price,
-          image_url: params.image_url,
+					price: params.price,
+					imageUrl: params.imageUrl,
 				};
 			}
 		});
