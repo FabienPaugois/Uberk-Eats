@@ -19,12 +19,12 @@ export class RegisterPageComponent implements OnInit {
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
   	// Form element defined below
   	this.registerForm = this.fb.group({
-  		Name: '',
-  		Surname: '',
-  		Phone: '',
-  		Password: '',
-  		Mail: '',
-  		Role: ''
+  		name: '',
+  		surname: '',
+  		phone: '',
+  		password: '',
+  		mail: '',
+  		role: ''
   	});
   }
 
@@ -32,12 +32,12 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register(dataclient: any) {
-  	this.registerInfo.name = this.registerForm.get('Name')?.value;
-  	this.registerInfo.surname = this.registerForm.get('Surname')?.value;
-  	this.registerInfo.phone = this.registerForm.get('Phone')?.value;
-  	this.registerInfo.password = Md5.hashStr(this.registerForm.get('Password')?.value);
-  	this.registerInfo.mail = this.registerForm.get('Mail')?.value;
-  	this.registerInfo.role = this.registerForm.get('Role')?.value;
+  	this.registerInfo.name = this.registerForm.get('name')?.value;
+  	this.registerInfo.surname = this.registerForm.get('surname')?.value;
+  	this.registerInfo.phone = this.registerForm.get('phone')?.value;
+  	this.registerInfo.password = Md5.hashStr(this.registerForm.get('password')?.value);
+  	this.registerInfo.mail = this.registerForm.get('mail')?.value;
+  	this.registerInfo.role = this.registerForm.get('role')?.value;
   	this.clientsApi.register(this.registerInfo).subscribe((data: unknown) => {
   		this.router.navigate(['/']);
   	});

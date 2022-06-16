@@ -16,14 +16,14 @@ export class LoginPageComponent implements OnInit {
 	constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
 		// Form element defined below
 		this.loginForm = this.fb.group({
-			Mail: '',
-			Password: ''
+			mail: '',
+			password: ''
 		});
 	}
 	ngOnInit(): void { }
 	authenticate(dataclient: any) {
-		this.loginInfo.mail = this.loginForm.get('Mail')?.value;
-		this.loginInfo.password = Md5.hashStr(this.loginForm.get('Password')?.value);
+		this.loginInfo.mail = this.loginForm.get('mail')?.value;
+		this.loginInfo.password = Md5.hashStr(this.loginForm.get('password')?.value);
 		this.clientsApi.authenticate(this.loginInfo).subscribe((data: string) => { // Send the login request
 			localStorage.setItem('JWT', data); // Store the returned token into the localStorage
 		});
