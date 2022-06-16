@@ -24,7 +24,7 @@ import { CreateArticleComponent } from './components/restaurants/create-article/
 		RestaurantListComponent,
 		MenuPickPageComponent,
 		ProductPageComponent,
-    CreateArticleComponent
+		CreateArticleComponent
 	],
 	imports: [
 		BrowserModule,
