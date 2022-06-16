@@ -6,16 +6,16 @@
     <form class="example-form" [formGroup]="registerForm">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" formControlName="Name">
+          <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Description" formControlName="Description">
+          <input matInput placeholder="Description" formControlName="description">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Prix" formControlName="Price">
+          <input matInput placeholder="Prix" formControlName="price">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Url de l'image" formControlName="Image_url">
+          <input matInput placeholder="Url de l'image" formControlName="imageUrl">
         </mat-form-field>
       </mat-card-content>
       <button mat-stroked-button (click)="addArticle()" color="primary" class="btn-block mat-raised-button">Créer l'article</button>
