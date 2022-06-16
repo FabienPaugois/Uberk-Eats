@@ -1,9 +1,9 @@
 export interface Basket {
-  menus: BasketObjects[]
+  menus: BasketObjects[];
   articles: BasketObjects[];
 }
 
 export interface BasketObjects {
-  id: number,
-  qty: number
+  id: number;
+  qty: number;
 }

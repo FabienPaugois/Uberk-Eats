@@ -24,7 +24,7 @@ import { BasketPageComponent } from './components/basket-page/basket-page.compon
 		RestaurantListComponent,
 		MenuPickPageComponent,
 		ProductPageComponent,
-    BasketPageComponent
+		BasketPageComponent
 	],
 	imports: [
 		BrowserModule,
