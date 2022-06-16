@@ -27,8 +27,8 @@ export class ClientsApiService {
 
 
 	// HttpClient API post() method => Authenticate
-	authenticate(employee: any): Observable<Clients> {
-		return this.http.post<Clients>(
+	authenticate(employee: any): Observable<string> {
+		return this.http.post<string>(
 			this.apiURL + '/authenticate',
 			JSON.stringify(employee),
 			this.httpOptions

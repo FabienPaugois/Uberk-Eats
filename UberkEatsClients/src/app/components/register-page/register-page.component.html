@@ -6,23 +6,23 @@
     <form class="example-form" [formGroup]="registerForm">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" formControlName="Name">
+          <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Surname" formControlName="Surname">
+          <input matInput placeholder="Surname" formControlName="surname">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail" formControlName="Mail">
+          <input matInput placeholder="Mail" formControlName="mail">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" formControlName="Password">
+          <input matInput placeholder="Password" formControlName="password" type="password">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Phone" formControlName="Phone">
+          <input matInput placeholder="Phone" formControlName="phone">
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Choose a role...</mat-label>
-          <mat-select formControlName="Role">
+          <mat-select formControlName="role">
             <mat-option *ngFor="let role of roles" [value]="role" >
               {{role}}
             </mat-option>
