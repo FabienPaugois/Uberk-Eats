@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Authentification.Models
 {
-    public partial class Userrole
+    public partial class UserRole
     {
-        public long Userroleid { get; set; }
-        public long Userid { get; set; }
-        public long Roleid { get; set; }
+        public long Id { get; set; }
+        public long UserId { get; set; }
+        public long RoleId { get; set; }
 
         public virtual Role Role { get; set; }
         public virtual User User { get; set; }
