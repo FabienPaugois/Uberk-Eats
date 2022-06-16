@@ -20,7 +20,7 @@ namespace Authentification.Services
             _expDate = config.GetSection("JwtConfig").GetSection("expirationInMinutes").Value;
         }
 
-        public string GenerateSecurityToken(User User, List<Role> Roles)
+        public string GenerateSecurityToken(string userMail, List<Role> Roles)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.ASCII.GetBytes(_secret);
@@ -28,9 +28,7 @@ namespace Authentification.Services
             // Create the token payload
             ClaimsIdentity Subject = new ClaimsIdentity(new[]
             {
-                    new Claim(ClaimTypes.Email, User.Mail),
-                    new Claim(ClaimTypes.Name, User.Name),
-                    new Claim(ClaimTypes.MobilePhone, User.Phone),
+                    new Claim(ClaimTypes.Email, userMail),
                 });
             Roles.ForEach(delegate (Role Role) { Subject.AddClaim( new Claim(ClaimTypes.Role, Role.Name)); });
 

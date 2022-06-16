@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { Restaurants } from '../model/restaurants';
 import { Articles } from '../model/articles';
 import { Menus } from '../model/menus';
+import { AuthToken } from '../model/authToken';
 @Injectable({
 	providedIn: 'root',
 })
@@ -27,8 +28,8 @@ export class ClientsApiService {
 
 
 	// HttpClient API post() method => Authenticate
-	authenticate(employee: any): Observable<string> {
-		return this.http.post<string>(
+	authenticate(employee: any): Observable<AuthToken> {
+		return this.http.post<AuthToken>(
 			this.apiURL + '/authenticate',
 			JSON.stringify(employee),
 			this.httpOptions
@@ -36,11 +37,10 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any, roleName: any): Observable<Clients> {
-		console.log(employee);
-		return this.http.post<Clients>(
+	register(employee: any, roleName: any): Observable<AuthToken> {
+		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
-      JSON.stringify({ "User": employee, "RoleName": roleName }),
+			JSON.stringify({ user: employee, roleName }),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
