@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Articles } from '../../model/articles';
+import { Basket } from '../../model/basket';
 import { Menus } from '../../model/menus';
-import { ClientsApiService } from '../../services/clients-api.service';
 
 @Component({
-	selector: 'app-menu-pick-page',
-	templateUrl: './menu-pick-page.component.html',
-	styleUrls: ['./menu-pick-page.component.scss']
+	selector: 'app-basket-page',
+	templateUrl: './basket-page.component.html',
+	styleUrls: ['./basket-page.component.scss']
 })
-export class MenuPickPageComponent implements OnInit {
-
+export class BasketPageComponent implements OnInit {
+	basket: Basket;
+	totalBasketPrice: number;
+	displayedArticles: Articles[] = [];
+	displayedMenus: Menus[] = [];
 	articles: Articles[] = [
 		{
 			id: 1,
@@ -83,17 +85,26 @@ export class MenuPickPageComponent implements OnInit {
 			articles: [2, 7, 9]
 		},
 	];
+	basketTotalPrice = 0;
 
-	constructor(public clientsApi: ClientsApiService, public router: Router) { }
+	constructor() { }
 
 	ngOnInit(): void {
-	}
-
-	btnClickMenu(menu: Menus) {
-		this.router.navigate(['/product-page', menu]);
-	}
-
-	btnClickArticle(article: Articles) {
-		this.router.navigate(['/product-page', article]);
+		const basketJson = localStorage.getItem('basket');
+		this.basket = basketJson !== null ? JSON.parse(basketJson) : null;
+		this.basket.menus.forEach( (menu) => {
+			const temp = this.menus.find(menuEntry => menuEntry.id === menu.id);
+			if (temp) {
+				this.displayedMenus.push(temp);
+				this.basketTotalPrice += (temp.price * menu.qty);
+			}
+		});
+		this.basket.articles.forEach((article) => {
+			const temp = this.articles.find(articleEntry => articleEntry.id === article.id);
+			if (temp) {
+				this.displayedArticles.push(temp);
+				this.basketTotalPrice += (temp.price * article.qty);
+			}
+		});
 	}
 }

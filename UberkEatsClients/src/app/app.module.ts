@@ -13,6 +13,7 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 import { MenuPickPageComponent } from './components/menu-pick-page/menu-pick-page.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
+import { BasketPageComponent } from './components/basket-page/basket-page.component';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 		ProfilePageComponent,
 		RestaurantListComponent,
 		MenuPickPageComponent,
-		ProductPageComponent
+		ProductPageComponent,
+		BasketPageComponent
 	],
 	imports: [
 		BrowserModule,
