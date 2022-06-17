@@ -17,10 +17,6 @@
 		"eslint-plugin-prefer-arrow": "^1.2.3"
 	},
 	"dependencies": {
-		"@angular-eslint/eslint-plugin": "^13.5.0",
-		"@angular/core": "^14.0.1",
-		"@angular/platform-browser": "^14.0.1",
-		"@angular/platform-browser-dynamic": "^14.0.1",
-		"@angular/router": "^14.0.1"
+		"@angular-eslint/eslint-plugin": "^13.5.0"
 	}
 }
