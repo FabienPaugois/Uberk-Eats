@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Articles } from '../../model/articles';
-import { Basket, BasketObjects } from '../../model/basket';
-import { Menus } from '../../model/menus';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { Articles } from '../../../model/articles';
+import { Basket, BasketObjects } from '../../../model/basket';
+import { Menus } from '../../../model/menus';
+import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
 	selector: 'app-product-page',
@@ -46,7 +46,8 @@ export class ProductPageComponent implements OnInit {
   				id: parseInt(params.id, 10),
   				description: params.description,
   				name: params.name,
-  				price: params.price,
+          price: params.price,
+          imageUrl: params.imageUrl
   			};
   		}
   	});

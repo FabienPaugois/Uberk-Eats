@@ -1,8 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Basket } from '../../model/basket';
-import { Restaurants } from '../../model/restaurants';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { Basket } from '../../../model/basket';
+import { Restaurants } from '../../../model/restaurants';
+import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
 	selector: 'app-restaurant-list',
