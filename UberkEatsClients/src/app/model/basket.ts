@@ -4,7 +4,7 @@ export interface Basket {
 }
 
 export interface BasketObjects {
-  type: BasketObjestType
+  type: BasketObjestType;
   id: number;
   qty: number;
 }

@@ -5,7 +5,7 @@ import { Articles } from '../../model/articles';
 import { Basket, BasketObjects, BasketObjestType } from '../../model/basket';
 import { Menus } from '../../model/menus';
 import { ClientsApiService } from '../../services/clients-api.service';
-import { BasketStore } from '../../store/articleStore/article-store'
+import { BasketStore } from '../../store/articleStore/article-store';
 
 @Component({
 	selector: 'app-product-page',
@@ -32,10 +32,15 @@ export class ProductPageComponent implements OnInit {
 	ngUnsubscribe = new Subject();
 
 
-	constructor(public clientsApi: ClientsApiService, public router: Router, private activatedRoute: ActivatedRoute, public store: BasketStore) { }
+	constructor(
+		public clientsApi: ClientsApiService,
+		public router: Router,
+		private activatedRoute: ActivatedRoute,
+		public store: BasketStore
+	) { }
 
 	// for cleaning up subscriptions
-	ngOnDestroy() {
+	OnDestroy(): void {
 		this.ngUnsubscribe.next(true);
 		this.ngUnsubscribe.complete();
 	}
@@ -47,7 +52,7 @@ export class ProductPageComponent implements OnInit {
 				takeUntil(this.ngUnsubscribe))
 			.subscribe(data => {
 				this.basketContent = data;
-			})
+			});
 
 		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
 			if (params.articles != null) {
@@ -78,11 +83,21 @@ export class ProductPageComponent implements OnInit {
 		}
 	}
 
-  addToBasket() {
-    if (this.store.state[this.article ? BasketObjestType.article : BasketObjestType.menu].find(entry => entry.id === (this.article ? this.article.id : this.menu.id))) {
-      this.store.editbasketQty({ id: this.article ? this.article.id : this.menu.id, qty: this.count, type: this.article ? BasketObjestType.article : BasketObjestType.menu })
-    } else {
-      this.store.addBasketObject({ id: this.article ? this.article.id : this.menu.id, qty: this.count, type: this.article ? BasketObjestType.article : BasketObjestType.menu })
-    }
+	addToBasket() {
+		if (this.store.state[this.article ? BasketObjestType.article : BasketObjestType.menu].find(
+			entry => entry.id === (this.article ? this.article.id : this.menu.id)
+		)) {
+			this.store.editbasketQty({
+				id: this.article ? this.article.id : this.menu.id,
+				qty: this.count,
+				type: this.article ? BasketObjestType.article : BasketObjestType.menu
+			});
+		} else {
+			this.store.addBasketObject({
+				id: this.article ? this.article.id : this.menu.id,
+				qty: this.count,
+				type: this.article ? BasketObjestType.article : BasketObjestType.menu
+			});
+		}
 	}
 }

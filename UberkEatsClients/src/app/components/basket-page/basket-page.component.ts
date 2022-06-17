@@ -99,7 +99,7 @@ export class BasketPageComponent implements OnInit {
 				this.displayedMenus.push(temp);
 				this.basketTotalPrice += (temp.price * menu.qty);
 				this.menuQtyArr[menu.id] = menu.qty;
-				console.log(this.menuQtyArr)
+				console.log(this.menuQtyArr);
 			}
 		});
 		this.store.state.articles.forEach((article) => {
