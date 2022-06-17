@@ -1,12 +1,12 @@
 -- Data Manipulation Uberk-eats
 
 INSERT INTO [ROLE] VALUES ('Admin'),
-					     ('User'),
-						 ('RestaurantOwner'),
-						 ('DeliveryMan'),
+					     ('Client'),
+						 ('Restaurant Owner'),
+						 ('Deliveryman'),
 						 ('Dev'),
-						 ('CommercialService'),
-						 ('TechnicalService')
+						 ('Commercial Service'),
+						 ('Technical Service')
 GO
 
 INSERT INTO [USER] VALUES ('Alexandre','Temperville','at@gmail.com','0622758465', 'mdpat'),

@@ -41,6 +41,8 @@ namespace Authentification.Controllers
         [Route("/Authenticate")]
         public ContentResult Authenticate(User user)
         {
+
+            // Check if a user with this mail&password exists & get his roles
             User userAuth = db.User.Include(a=> a.UserRole).ThenInclude(b=> b.Role).Where(a => a.Mail == user.Mail && a.Password == user.Password).FirstOrDefault();
             if (userAuth != null)
             {
@@ -49,12 +51,14 @@ namespace Authentification.Controllers
                 {
                     roles.Add(userRole.Role);
                 }
-                JwtService jwt = new JwtService(_config);
-                string token = jwt.GenerateSecurityToken(new User() { Name = userAuth.Name, Surname = userAuth.Surname, Mail = userAuth.Mail, Phone = userAuth.Phone }, roles);
 
+                // Token generation
+                JwtService jwt = new JwtService(_config);
+                string token = jwt.GenerateSecurityToken(userAuth.Mail, roles);
+                userAuth.UserRole = null;
                 return new ContentResult()
                 {
-                    Content = JsonConvert.SerializeObject(token),
+                    Content = JsonConvert.SerializeObject(new AuthentifiedUser() { user = userAuth, jwtoken = token }),
                     ContentType = "application/json",
                     StatusCode = 201
                 };
@@ -135,9 +139,10 @@ namespace Authentification.Controllers
         #region Create
         [HttpPost]
         [Route("/Create")]
-        public ContentResult Create(User user)
+        public ContentResult Create(RegisterForm registerForm)
         {
-            User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail);
+            User authenticated = db.User.FirstOrDefault(a => a.Mail == registerForm.User.Name);
+            Role roleToAssign = db.Role.FirstOrDefault(b => b.Name == registerForm.RoleName);
             if (authenticated != null)
             {
                 return new ContentResult()
@@ -149,12 +154,19 @@ namespace Authentification.Controllers
             }
             else
             {
-                user.Id = 0;
-                db.User.Add(user);
+                db.User.Add(registerForm.User);
                 db.SaveChanges();
+                db.UserRole.Add(new UserRole() { UserId = registerForm.User.Id, RoleId = roleToAssign.Id });
+                db.SaveChanges();
+
+                // Token generation
+                JwtService jwt = new JwtService(_config);
+                string token = jwt.GenerateSecurityToken(registerForm.User.Mail, new List<Role>() { roleToAssign });
+                registerForm.User.UserRole = null;
+
                 return new ContentResult()
                 {
-                    Content = JsonConvert.SerializeObject("Account created"),
+                    Content = JsonConvert.SerializeObject(new AuthentifiedUser() { user = registerForm.User, jwtoken = token }),
                     ContentType = "application/json",
                     StatusCode = 201
                 };

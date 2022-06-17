@@ -4,6 +4,7 @@ import { ClientsApiService } from '../../services/clients-api.service';
 import { Roles } from '../../model/roles';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Md5 } from 'ts-md5/dist/md5';
+import { AuthToken } from '../../model/authToken';
 
 @Component({
 	selector: 'app-register-page',
@@ -18,6 +19,7 @@ export class RegisterPageComponent implements OnInit {
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
   	// Form element defined below
+
   	this.registerForm = this.fb.group({
   		name: '',
   		surname: '',
@@ -37,8 +39,10 @@ export class RegisterPageComponent implements OnInit {
   	this.registerInfo.phone = this.registerForm.get('phone')?.value;
   	this.registerInfo.password = Md5.hashStr(this.registerForm.get('password')?.value);
   	this.registerInfo.mail = this.registerForm.get('mail')?.value;
-  	this.registerInfo.role = this.registerForm.get('role')?.value;
-  	this.clientsApi.register(this.registerInfo).subscribe((data: unknown) => {
+  	this.clientsApi.register(this.registerInfo, this.registerForm.get('role')?.value).subscribe((data: AuthToken) => {
+  		// Send the login request
+  		localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
+  		localStorage.setItem('User', JSON.stringify(data.user));
   		this.router.navigate(['/']);
   	});
   }
