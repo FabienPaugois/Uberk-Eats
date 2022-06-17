@@ -78,7 +78,11 @@ export class ProductPageComponent implements OnInit {
 		}
 	}
 
-	addToBasket() {
-		this.store.addBasketObject({ id: this.article ? this.article.id : this.menu.id, qty: this.count, type: this.article ? BasketObjestType.article : BasketObjestType.menu })
+  addToBasket() {
+    if (this.store.state[this.article ? BasketObjestType.article : BasketObjestType.menu].find(entry => entry.id === (this.article ? this.article.id : this.menu.id))) {
+      this.store.editbasketQty({ id: this.article ? this.article.id : this.menu.id, qty: this.count, type: this.article ? BasketObjestType.article : BasketObjestType.menu })
+    } else {
+      this.store.addBasketObject({ id: this.article ? this.article.id : this.menu.id, qty: this.count, type: this.article ? BasketObjestType.article : BasketObjestType.menu })
+    }
 	}
 }
