@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BasketStore } from 'app/store/articleStore/article-store';
 import { Articles } from '../../model/articles';
 import { Basket } from '../../model/basket';
 import { Menus } from '../../model/menus';
@@ -11,6 +12,8 @@ import { Menus } from '../../model/menus';
 export class BasketPageComponent implements OnInit {
 	basket: Basket;
 	totalBasketPrice: number;
+	menuQtyArr: number[] = [];
+	articleQtyArr: number[] = [];
 	displayedArticles: Articles[] = [];
 	displayedMenus: Menus[] = [];
 	articles: Articles[] = [
@@ -87,19 +90,19 @@ export class BasketPageComponent implements OnInit {
 	];
 	basketTotalPrice = 0;
 
-	constructor() { }
+	constructor(public store: BasketStore) { }
 
 	ngOnInit(): void {
-		const basketJson = localStorage.getItem('basket');
-		this.basket = basketJson !== null ? JSON.parse(basketJson) : null;
-		this.basket.menus.forEach( (menu) => {
+		this.store.state.menus.forEach( (menu) => {
 			const temp = this.menus.find(menuEntry => menuEntry.id === menu.id);
 			if (temp) {
 				this.displayedMenus.push(temp);
 				this.basketTotalPrice += (temp.price * menu.qty);
+				this.menuQtyArr[menu.id] = menu.qty;
+				console.log(this.menuQtyArr)
 			}
 		});
-		this.basket.articles.forEach((article) => {
+		this.store.state.articles.forEach((article) => {
 			const temp = this.articles.find(articleEntry => articleEntry.id === article.id);
 			if (temp) {
 				this.displayedArticles.push(temp);
