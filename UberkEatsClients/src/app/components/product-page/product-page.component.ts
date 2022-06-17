@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Articles } from '../../model/articles';
-import { Basket, BasketObjects } from '../../model/basket';
+import { Basket, BasketObjects, BasketObjestType } from '../../model/basket';
 import { Menus } from '../../model/menus';
 import { ClientsApiService } from '../../services/clients-api.service';
+import { BasketStore } from '../../store/articleStore/article-store';
 
 @Component({
 	selector: 'app-product-page',
@@ -12,78 +13,91 @@ import { ClientsApiService } from '../../services/clients-api.service';
 	styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit {
-  @Input() registerInfo: Basket = {
-  	menus: [{ id: Number.NaN, qty: Number.NaN }],
-  	articles: [{ id: Number.NaN, qty: Number.NaN}]
-  };
-  count = 1;
-  articleId: string;
-  menuId: string;
-  article: Articles;
-  menu: Menus;
-  basketContent: Basket;
-  basketEntry: BasketObjects | undefined;
-  routeSub: Subscription;
-  articleSub: Subscription;
-  menuSub: Subscription;
+	@Input() registerInfo: Basket = {
+		menus: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjestType.menu }],
+		articles: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjestType.article }]
+	};
+	count = 1;
+	articleId: string;
+	menuId: string;
+	article: Articles;
+	menu: Menus;
+	basketContent: Basket;
+	basketEntry: BasketObjects | undefined;
+	routeSub: Subscription;
+	articleSub: Subscription;
+	menuSub: Subscription;
+	basket: unknown;
 
-  constructor(public clientsApi: ClientsApiService, public router: Router, private activatedRoute: ActivatedRoute) { }
+	ngUnsubscribe = new Subject();
 
 
-  ngOnInit(): void {
-  	this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-  		if (params.articles != null) {
-  			this.menu = {
-  				id: parseInt(params.id, 10),
-  				description: params.description,
-  				name: params.name,
-  				price: params.price,
-  				articles: params.articles
-  			};
-  		}
-  		else {
-  			this.article = {
-  				id: parseInt(params.id, 10),
-  				description: params.description,
-  				name: params.name,
-  				price: params.price,
-  			};
-  		}
-  	});
-  }
+	constructor(
+		public clientsApi: ClientsApiService,
+		public router: Router,
+		private activatedRoute: ActivatedRoute,
+		public store: BasketStore
+	) { }
 
-  updateCount(increment: boolean): void {
-  	if (this.count === 1 && increment) {
-  		this.count++;
-  	} else if (this.count !== 1) {
-  		increment ? this.count++ : this.count--;
-  	}
-  }
+	// for cleaning up subscriptions
+	OnDestroy(): void {
+		this.ngUnsubscribe.next(true);
+		this.ngUnsubscribe.complete();
+	}
 
-  addToBasket() {
-  	const basketJson = localStorage.getItem('basket');
-  	this.basketContent = basketJson !== null ? JSON.parse(basketJson) : null;
+	ngOnInit(): void {
+		// subscription to the store
+		this.store.state$
+			.pipe(
+				takeUntil(this.ngUnsubscribe))
+			.subscribe(data => {
+				this.basketContent = data;
+			});
 
-  	if (this.menu) {
-  		this.basketEntry = this.basketContent.menus.find(menu => menu.id === this.menu.id);
-  		if (this.basketEntry) { //L'objet existe donc il faut incrémenter
-  			this.basketEntry.qty += this.count;
-  		}
-  		else { //L'objet n'existe pas dans le panier
-  			this.basketEntry = { id: this.menu.id, qty: this.count };
-  			this.basketContent.menus.push(this.basketEntry);
-  		}
-  	}
-  	else if (this.article){
-  		this.basketEntry = this.basketContent.articles.find(article => article.id === this.article.id);
-  		if (this.basketEntry) {
-  			this.basketEntry.qty += this.count;
-  		}
-  		else {
-  			this.basketEntry = { id: this.article.id, qty: this.count };
-  			this.basketContent.articles.push(this.basketEntry);
-  		}
-  	}
-  	localStorage.setItem('basket', JSON.stringify(this.basketContent));
-  }
+		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+			if (params.articles != null) {
+				this.menu = {
+					id: parseInt(params.id, 10),
+					description: params.description,
+					name: params.name,
+					price: params.price,
+					articles: params.articles
+				};
+			}
+			else {
+				this.article = {
+					id: parseInt(params.id, 10),
+					description: params.description,
+					name: params.name,
+					price: params.price,
+				};
+			}
+		});
+	}
+
+	updateCount(increment: boolean): void {
+		if (this.count === 1 && increment) {
+			this.count++;
+		} else if (this.count !== 1) {
+			increment ? this.count++ : this.count--;
+		}
+	}
+
+	addToBasket() {
+		if (this.store.state[this.article ? BasketObjestType.article : BasketObjestType.menu].find(
+			entry => entry.id === (this.article ? this.article.id : this.menu.id)
+		)) {
+			this.store.editbasketQty({
+				id: this.article ? this.article.id : this.menu.id,
+				qty: this.count,
+				type: this.article ? BasketObjestType.article : BasketObjestType.menu
+			});
+		} else {
+			this.store.addBasketObject({
+				id: this.article ? this.article.id : this.menu.id,
+				qty: this.count,
+				type: this.article ? BasketObjestType.article : BasketObjestType.menu
+			});
+		}
+	}
 }

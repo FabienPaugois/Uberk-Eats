@@ -4,6 +4,12 @@ export interface Basket {
 }
 
 export interface BasketObjects {
+  type: BasketObjestType;
   id: number;
   qty: number;
+}
+
+export enum BasketObjestType {
+  article = 'articles',
+  menu = 'menus'
 }
