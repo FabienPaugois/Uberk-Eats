@@ -15,7 +15,6 @@ namespace Authentification.Models
         public long RoleId { get; set; }
 
         public virtual Role Role { get; set; }
-        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

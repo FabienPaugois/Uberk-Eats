@@ -55,7 +55,9 @@ namespace Authentification.Controllers
                 // Token generation
                 JwtService jwt = new JwtService(_config);
                 string token = jwt.GenerateSecurityToken(userAuth.Mail, roles);
+                // Remove userRole to avoid json looping & remove password from the returned object
                 userAuth.UserRole = null;
+                userAuth.Password = null;
                 return new ContentResult()
                 {
                     Content = JsonConvert.SerializeObject(new AuthentifiedUser() { user = userAuth, jwtoken = token }),
@@ -81,6 +83,7 @@ namespace Authentification.Controllers
         [Route("/Delete")]
         public ContentResult Delete(User user)
         {
+            // Authenticate the user before authorizing him to delete his account
             User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
             if (authenticated != null)
             {
@@ -88,7 +91,7 @@ namespace Authentification.Controllers
                 db.SaveChanges();
                 return new ContentResult()
                 {
-                    Content = JsonConvert.SerializeObject("Account created"),
+                    Content = JsonConvert.SerializeObject("Account deleted"),
                     ContentType = "application/json",
                     StatusCode = 201
                 };
@@ -162,7 +165,10 @@ namespace Authentification.Controllers
                 // Token generation
                 JwtService jwt = new JwtService(_config);
                 string token = jwt.GenerateSecurityToken(registerForm.User.Mail, new List<Role>() { roleToAssign });
+
+                // Remove userRole to avoid json looping & remove password from the returned object
                 registerForm.User.UserRole = null;
+                registerForm.User.Password = null;
 
                 return new ContentResult()
                 {
