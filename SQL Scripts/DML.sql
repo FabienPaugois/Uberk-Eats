@@ -9,13 +9,13 @@ INSERT INTO [ROLE] VALUES ('Admin'),
 						 ('Technical Service')
 GO
 
-INSERT INTO [USER] VALUES ('Alexandre','Temperville','at@gmail.com','0622758465', 'mdpat'),
-                         ('Thibault','Perquis','tp@gmail.com','0622758465', 'mdptp'),
-						 ('Romain','Brunelot','rb@gmail.com','0622758465', 'mdprb'),
-						 ('Alix','Pouchain','ap@gmail.com','0622758465', 'mdpap'),
-						 ('Sonia','Ikken','si@gmail.com','0622758465', 'mdpsi'),
-						 ('Anne-Sophie','Dufour','asd@gmail.com','0622758465', 'mdpasd'),
-						 ('Jean-Francois','Hoquet','jfh@gmail.com','0622758465', 'mdpjfh')
+INSERT INTO [USER] VALUES ('Alexandre','Temperville','at@gmail.com','0622758465', 'mdpat', NULL),
+                         ('Thibault','Perquis','tp@gmail.com','0622758465', 'mdptp', NULL),
+						 ('Romain','Brunelot','rb@gmail.com','0622758465', 'mdprb', NULL),
+						 ('Alix','Pouchain','ap@gmail.com','0622758465', 'mdpap', NULL),
+						 ('Sonia','Ikken','si@gmail.com','0622758465', 'mdpsi', NULL),
+						 ('Anne-Sophie','Dufour','asd@gmail.com','0622758465', 'mdpasd', NULL),
+						 ('Jean-Francois','Hoquet','jfh@gmail.com','0622758465', 'mdpjfh', NULL)
 GO
 
 INSERT INTO [USERROLE] VALUES (1,1),
