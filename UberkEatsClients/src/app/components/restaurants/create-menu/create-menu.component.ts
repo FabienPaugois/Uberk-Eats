@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Roles } from '../../../model/roles';
 import { Articles } from '../../..//model/articles';
 import { ClientsApiService } from '../../../services/clients-api.service';
 import { Menus } from '../../../model/menus';
+import { Products } from '../../../model/products';
+import { Subject, takeUntil } from 'rxjs';
+import { ProductsStore } from '../../../store/restaurantStore/products-store';
+import { BasketObjectsType } from '../../../model/basket';
 
 @Component({
 	selector: 'app-create-menu',
@@ -14,7 +17,6 @@ import { Menus } from '../../../model/menus';
 export class CreateMenuComponent implements OnInit {
   @Input() menuInfo: Menus = {id: NaN, name:'', description:'', price:0, imageUrl: '', articles: []};
   public menuForm: FormGroup; // variable of type FormGroup is created
-
   articles: Articles[] = [
   	{
   		id: 1,
@@ -80,8 +82,15 @@ export class CreateMenuComponent implements OnInit {
   		imageUrl: '',
   	},
   ];
+  productsContent: Products;
+  ngUnsubscribe = new Subject();
 
-  constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
+  constructor(
+    public clientsApi: ClientsApiService,
+    public router: Router,
+    private fb: FormBuilder,
+    private store: ProductsStore
+  ) {
   	// Form element defined below
   	this.menuForm = this.fb.group({
   		name: '',
@@ -91,7 +100,21 @@ export class CreateMenuComponent implements OnInit {
   		articles: []
   	});
   }
+
+  // for cleaning up subscriptions
+  OnDestroy(): void {
+  	this.ngUnsubscribe.next(true);
+  	this.ngUnsubscribe.complete();
+  }
+
   ngOnInit(): void {
+  	// subscription to the store
+  	this.store.state$
+  		.pipe(
+  			takeUntil(this.ngUnsubscribe))
+  		.subscribe(data => {
+  			this.productsContent = data;
+  		});
   }
 
   addMenu() {
@@ -100,9 +123,11 @@ export class CreateMenuComponent implements OnInit {
   	this.menuInfo.price = this.menuForm.get('price')?.value;
   	this.menuInfo.imageUrl = this.menuForm.get('imageUrl')?.value;
   	this.menuInfo.articles = this.menuForm.get('articles')?.value;
-  	this.clientsApi.register(this.menuInfo).subscribe((data: unknown) => {
-  		this.router.navigate(['/']);
+  	this.store.addMenusObject({
+  		type: BasketObjectsType.menu,
+  		id: this.store.state.articles.length + 1,
+  		product: { ...this.menuInfo }
   	});
+  	console.log(this.productsContent);
   }
-
 }

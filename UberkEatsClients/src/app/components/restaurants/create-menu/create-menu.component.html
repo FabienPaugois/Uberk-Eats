@@ -1,7 +1,7 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
-      <mat-card-title>Créer un article</mat-card-title>
+      <mat-card-title>Créer un <menu></menu></mat-card-title>
     </mat-card-header>
     <form class="example-form" [formGroup]="menuForm">
       <mat-card-content>
@@ -29,4 +29,10 @@
       <button mat-stroked-button (click)="addMenu()" color="primary" class="btn-block mat-raised-button">Créer l'article</button>
     </form>
   </mat-card>
+  <mat-list>
+    <h1>Menus</h1>
+    <mat-list-item *ngFor="let menu of productsContent.menus">
+      <h3 matLine> {{menu.name}} </h3>
+    </mat-list-item>
+  </mat-list>
 </div>
