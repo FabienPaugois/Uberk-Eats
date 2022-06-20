@@ -62,9 +62,8 @@ export class CreateArticleComponent implements OnInit {
     this.store.addProductsObject({
       type: BasketObjectsType.article,
       id: this.store.state.articles.length + 1,
-      product: this.articleInfo
+      product: { ...this.articleInfo }
     });
     console.log(this.productsContent);
   }
-
 }
