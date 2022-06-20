@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './components/clients/profile-page/profile-
 import { RegisterPageComponent } from './components/clients/register-page/register-page.component';
 import { RestaurantListComponent } from './components/clients/restaurant-list/restaurant-list.component';
 import { BasketPageComponent } from './components/basket-page/basket-page.component';
+import { OrderPreviewComponent } from './components/restaurants/order-preview/order-preview.component';
 import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
 	{ path: 'create-menu', component: CreateMenuComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
+	{ path: 'order-preview', component: OrderPreviewComponent },
 ];
 
 @NgModule({
