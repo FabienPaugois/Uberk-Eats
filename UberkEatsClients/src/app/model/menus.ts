@@ -5,6 +5,7 @@ export interface Menus {
   name: string;
   price: number;
   description: string;
+  image_url: string;
   articles: number[];
   imageUrl: string;
 }
