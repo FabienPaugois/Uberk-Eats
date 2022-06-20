@@ -9,5 +9,6 @@ namespace Authentification.Models
     {
         public User User { get; set; }
         public string RoleName { get; set; }
+        public string AffiliateMail { get; set; }
     }
 }
