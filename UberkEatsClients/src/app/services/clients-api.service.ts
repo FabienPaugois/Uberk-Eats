@@ -37,10 +37,10 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any, roleName: any): Observable<AuthToken> {
+	register(employee: any, roleName: any, affiliate: any): Observable<AuthToken> {
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
-			JSON.stringify({ user: employee, roleName }),
+			JSON.stringify({ user: employee, roleName, affiliate }),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
