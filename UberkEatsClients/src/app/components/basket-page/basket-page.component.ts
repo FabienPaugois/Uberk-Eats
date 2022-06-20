@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketStore } from 'app/store/articleStore/article-store';
+import { BasketStore } from 'app/store/articleStore/basket-store';
 import { Articles } from '../../model/articles';
 import { Basket } from '../../model/basket';
 import { Menus } from '../../model/menus';

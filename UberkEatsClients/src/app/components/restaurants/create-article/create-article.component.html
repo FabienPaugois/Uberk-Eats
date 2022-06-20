@@ -21,4 +21,11 @@
       <button mat-stroked-button (click)="addArticle()" color="primary" class="btn-block mat-raised-button">Créer l'article</button>
     </form>
   </mat-card>
+
+  <mat-list>
+    <h1>Articles</h1>
+    <mat-list-item *ngFor="let article of productsContent.articles">
+      <h3 matLine> {{article.name}} </h3>
+    </mat-list-item>
+  </mat-list>
 </div>

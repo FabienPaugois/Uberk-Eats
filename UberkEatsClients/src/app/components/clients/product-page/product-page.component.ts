@@ -1,20 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Articles } from '../../../model/articles';
-import { Basket, BasketObjects } from '../../../model/basket';
+import { Basket, BasketObjects, BasketObjectsType } from '../../../model/basket';
 import { Menus } from '../../../model/menus';
 import { ClientsApiService } from '../../../services/clients-api.service';
+import { BasketStore } from '../../../store/articleStore/basket-store';
 
 @Component({
-	selector: 'app-product-page',
-	templateUrl: './product-page.component.html',
-	styleUrls: ['./product-page.component.scss']
+  selector: 'app-product-page',
+  templateUrl: './product-page.component.html',
+  styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit {
   @Input() registerInfo: Basket = {
-  	menus: [{ id: Number.NaN, qty: Number.NaN }],
-  	articles: [{ id: Number.NaN, qty: Number.NaN}]
+    menus: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjectsType.menu }],
+    articles: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjectsType.article }]
   };
   count = 1;
   articleId: string;
@@ -26,65 +27,78 @@ export class ProductPageComponent implements OnInit {
   routeSub: Subscription;
   articleSub: Subscription;
   menuSub: Subscription;
+  basket: unknown;
 
-  constructor(public clientsApi: ClientsApiService, public router: Router, private activatedRoute: ActivatedRoute) { }
+  ngUnsubscribe = new Subject();
 
+
+  constructor(
+    public clientsApi: ClientsApiService,
+    public router: Router,
+    private activatedRoute: ActivatedRoute,
+    public store: BasketStore
+  ) { }
+
+  // for cleaning up subscriptions
+  OnDestroy(): void {
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
+  }
 
   ngOnInit(): void {
-  	this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-  		if (params.articles != null) {
-  			this.menu = {
-  				id: parseInt(params.id, 10),
-  				description: params.description,
-  				name: params.name,
-  				price: params.price,
-  				articles: params.articles
-  			};
-  		}
-  		else {
-  			this.article = {
-  				id: parseInt(params.id, 10),
-  				description: params.description,
-  				name: params.name,
+    // subscription to the store
+    this.store.state$
+      .pipe(
+        takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.basketContent = data;
+      });
+
+    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+      if (params.articles != null) {
+        this.menu = {
+          id: parseInt(params.id, 10),
+          description: params.description,
+          name: params.name,
+          price: params.price,
+          articles: params.articles
+        };
+      }
+      else {
+        this.article = {
+          id: parseInt(params.id, 10),
+          description: params.description,
+          name: params.name,
           price: params.price,
           imageUrl: params.imageUrl
-  			};
-  		}
-  	});
+        };
+      }
+    });
   }
 
   updateCount(increment: boolean): void {
-  	if (this.count === 1 && increment) {
-  		this.count++;
-  	} else if (this.count !== 1) {
-  		increment ? this.count++ : this.count--;
-  	}
+    if (this.count === 1 && increment) {
+      this.count++;
+    } else if (this.count !== 1) {
+      increment ? this.count++ : this.count--;
+    }
   }
 
   addToBasket() {
-  	const basketJson = localStorage.getItem('basket');
-  	this.basketContent = basketJson !== null ? JSON.parse(basketJson) : null;
-
-  	if (this.menu) {
-  		this.basketEntry = this.basketContent.menus.find(menu => menu.id === this.menu.id);
-  		if (this.basketEntry) { //L'objet existe donc il faut incr�menter
-  			this.basketEntry.qty += this.count;
-  		}
-  		else { //L'objet n'existe pas dans le panier
-  			this.basketEntry = { id: this.menu.id, qty: this.count };
-  			this.basketContent.menus.push(this.basketEntry);
-  		}
-  	}
-  	else if (this.article){
-  		this.basketEntry = this.basketContent.articles.find(article => article.id === this.article.id);
-  		if (this.basketEntry) {
-  			this.basketEntry.qty += this.count;
-  		}
-  		else {
-  			this.basketEntry = { id: this.article.id, qty: this.count };
-  			this.basketContent.articles.push(this.basketEntry);
-  		}
-  	}
-  	localStorage.setItem('basket', JSON.stringify(this.basketContent));
+    if (this.store.state[this.article ? BasketObjectsType.article : BasketObjectsType.menu].find(
+      entry => entry.id === (this.article ? this.article.id : this.menu.id)
+    )) {
+      this.store.editbasketQty({
+        id: this.article ? this.article.id : this.menu.id,
+        qty: this.count,
+        type: this.article ? BasketObjectsType.article : BasketObjectsType.menu
+      });
+    } else {
+      this.store.addBasketObject({
+        id: this.article ? this.article.id : this.menu.id,
+        qty: this.count,
+        type: this.article ? BasketObjectsType.article : BasketObjectsType.menu
+      });
+    }
   }
 }
