@@ -12,8 +12,8 @@ import { AuthToken } from '../model/authToken';
 })
 export class ClientsApiService {
 	// Define API
-  apiURL = 'http://localhost:8080';
-  //apiURL = 'https://localhost:44310';
+	apiURL = 'http://localhost:8080';
+	//apiURL = 'https://localhost:44310';
 	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {
@@ -38,8 +38,8 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-  register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
-    console.log(affiliateMail);
+	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
+		console.log(affiliateMail);
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
 			JSON.stringify({ user: employee, roleName, affiliateMail }),
@@ -69,8 +69,8 @@ export class ClientsApiService {
 	}
 
 	// Error handling
-  handleError(error: any) {
-    console.log(error);
+	handleError(error: any) {
+		console.log(error);
 		let errorMessage = '';
 		if (error.error instanceof ErrorEvent) {
 			// Get client-side error
