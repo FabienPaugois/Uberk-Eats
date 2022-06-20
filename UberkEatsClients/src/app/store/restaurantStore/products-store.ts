@@ -14,11 +14,11 @@ export class ProductsStore extends Store<ProductsState> {
 
 	addProductsObject(product: ProductsObjects): void {
 		if (product.type === BasketObjectsType.article) {
-      this.setState({
-        // Spread state object
-        ...this.state, 
-        // Add to product.type property (articles or menus) the product
-				[product.type]: [...this.state[product.type].concat(product.product as Articles)] 
+			this.setState({
+				// Spread state object
+				...this.state,
+				// Add to product.type property (articles or menus) the product
+				[product.type]: [...this.state[product.type].concat(product.product as Articles)]
 			});
 		}
 	}
