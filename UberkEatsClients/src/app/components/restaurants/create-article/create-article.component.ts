@@ -54,7 +54,6 @@ export class CreateArticleComponent implements OnInit {
   }
 
   addArticle() {
-  	this.articleInfo.id = this.store.state.articles.length + 1;
   	this.articleInfo.name = this.registerForm.get('name')?.value;
   	this.articleInfo.description = this.registerForm.get('description')?.value;
   	this.articleInfo.price = this.registerForm.get('price')?.value;
