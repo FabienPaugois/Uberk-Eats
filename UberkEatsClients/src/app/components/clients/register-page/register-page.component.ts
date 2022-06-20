@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClientsApiService } from '../../services/clients-api.service';
-import { Roles } from '../../model/roles';
+import { ClientsApiService } from '../../../services/clients-api.service';
+import { Roles } from '../../../model/roles';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Md5 } from 'ts-md5/dist/md5';
-import { AuthToken } from '../../model/authToken';
+import { AuthToken } from '../../../model/authToken';
 
 @Component({
 	selector: 'app-register-page',

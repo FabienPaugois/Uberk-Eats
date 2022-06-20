@@ -1,0 +1,31 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Créer un article</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" [formGroup]="registerForm">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Description" formControlName="description">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Prix" formControlName="price">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Url de l'image" formControlName="imageUrl">
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button (click)="addArticle()" color="primary" class="btn-block mat-raised-button">Créer l'article</button>
+    </form>
+  </mat-card>
+
+  <mat-list>
+    <h1>Articles</h1>
+    <mat-list-item *ngFor="let article of productsContent.articles">
+      <h3 matLine> {{article.name}} </h3>
+    </mat-list-item>
+  </mat-list>
+</div>

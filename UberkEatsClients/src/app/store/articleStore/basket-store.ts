@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BasketObjects } from 'app/model/basket';
 import { Store } from 'rxjs-observable-store';
 
-import { BasketState } from './article-state';
+import { BasketState } from './basket-state';
 
 @Injectable({ providedIn: 'root' })
 export class BasketStore extends Store<BasketState> {
@@ -15,6 +15,7 @@ export class BasketStore extends Store<BasketState> {
 			...this.state, // Spread state object
 			[product.type]: [...this.state[product.type].concat(product)] // Add to product.type property (articles or menus) the product
 		});
+		console.log(this.state);
 	}
 
 	editbasketQty(product: BasketObjects) {

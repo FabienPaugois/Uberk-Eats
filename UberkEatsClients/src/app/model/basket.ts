@@ -4,12 +4,12 @@ export interface Basket {
 }
 
 export interface BasketObjects {
-  type: BasketObjestType;
+  type: BasketObjectsType;
   id: number;
   qty: number;
 }
 
-export enum BasketObjestType {
+export enum BasketObjectsType {
   article = 'articles',
   menu = 'menus'
 }
