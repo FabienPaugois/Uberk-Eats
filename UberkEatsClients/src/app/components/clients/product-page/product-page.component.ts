@@ -61,7 +61,8 @@ export class ProductPageComponent implements OnInit {
   				description: params.description,
   				name: params.name,
   				price: params.price,
-  				articles: params.articles
+  				articles: params.articles,
+  				imageUrl: params.imageUrl
   			};
   		}
   		else {

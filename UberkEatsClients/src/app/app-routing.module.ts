@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './components/clients/profile-page/profile-
 import { RegisterPageComponent } from './components/clients/register-page/register-page.component';
 import { RestaurantListComponent } from './components/clients/restaurant-list/restaurant-list.component';
 import { BasketPageComponent } from './components/basket-page/basket-page.component';
+import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 
 const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
 	{ path: 'menu-pick-page', component: MenuPickPageComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'create-article', component: CreateArticleComponent },
+	{ path: 'create-menu', component: CreateMenuComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
 ];

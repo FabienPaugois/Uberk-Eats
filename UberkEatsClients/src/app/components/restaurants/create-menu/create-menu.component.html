@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Créer un menu</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" [formGroup]="menuForm">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Description" formControlName="description">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Prix" formControlName="price">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Url de l'image" formControlName="imageUrl">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Choisir un article...</mat-label>
+          <mat-select formControlName="articles" multiple>
+            <mat-option *ngFor="let article of articles" [value]="article.name">
+              {{article.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button (click)="addMenu()" color="primary" class="btn-block mat-raised-button">Créer le menu</button>
+    </form>
+  </mat-card>
+  <mat-list>
+    <h1>Menus</h1>
+    <mat-list-item *ngFor="let menu of productsContent.menus">
+      <h3 matLine> {{menu.name}} </h3>
+    </mat-list-item>
+  </mat-list>
+</div>
