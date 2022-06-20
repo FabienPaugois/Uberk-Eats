@@ -12,7 +12,7 @@ import { AuthToken } from '../model/authToken';
 })
 export class ClientsApiService {
 	// Define API
-	apiURL = 'https://localhost:44310';
+	apiURL = 'http://localhost:8080';
 	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {

@@ -44,8 +44,6 @@ namespace Authentification
             .AllowAnyMethod()
             .AllowAnyHeader());
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
