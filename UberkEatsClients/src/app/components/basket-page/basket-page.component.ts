@@ -21,64 +21,64 @@ export class BasketPageComponent implements OnInit {
 			id: 1,
 			name: 'Whooper',
 			description: 'Lorem ipsum',
-      price: 4,
-      imageUrl:''
+			price: 4,
+			imageUrl:''
 		},
 		{
 			id: 2,
 			name: 'Triple Cheese',
 			description: 'Lorem ipsum',
-      price: 5,
-      imageUrl: ''
+			price: 5,
+			imageUrl: ''
 		},
 		{
 			id: 3,
 			name: 'Double Steakhouse',
 			description: 'Lorem ipsum',
-      price: 4,
-      imageUrl: ''
+			price: 4,
+			imageUrl: ''
 		},
 		{
 			id: 4,
 			name: 'Chicken Alabama',
 			description: 'Lorem ipsum',
-      price: 6,
-      imageUrl: ''
+			price: 6,
+			imageUrl: ''
 		},
 		{
 			id: 5,
 			name: 'Double Cheese Bacon Vegan',
 			description: 'Lorem ipsum',
-      price: 10,
-      imageUrl: ''
+			price: 10,
+			imageUrl: ''
 		},
 		{
 			id: 6,
 			name: 'Potatoes',
 			description: 'Lorem ipsum',
-      price: 2,
-      imageUrl: ''
+			price: 2,
+			imageUrl: ''
 		},
 		{
 			id: 7,
 			name: 'Fries',
 			description: 'Lorem ipsum',
-      price: 2,
-      imageUrl: ''
+			price: 2,
+			imageUrl: ''
 		},
 		{
 			id: 8,
 			name: 'Coke',
 			description: 'Lorem ipsum',
-      price: 2.5,
-      imageUrl: ''
+			price: 2.5,
+			imageUrl: ''
 		},
 		{
 			id: 9,
 			name: 'Pepsi',
 			description: 'Lorem ipsum',
-      price: 2.5,
-      imageUrl: ''
+			price: 2.5,
+			imageUrl: ''
 		},
 	];
 	menus: Menus[] = [

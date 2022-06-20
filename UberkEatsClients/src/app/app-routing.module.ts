@@ -15,8 +15,8 @@ const routes: Routes = [
 	{ path: 'profile-page', component: ProfilePageComponent },
 	{ path: 'restaurant-list', component: RestaurantListComponent },
 	{ path: 'menu-pick-page', component: MenuPickPageComponent },
-  { path: 'product-page', component: ProductPageComponent },
-  { path: 'create-article', component: CreateArticleComponent },
+	{ path: 'product-page', component: ProductPageComponent },
+	{ path: 'create-article', component: CreateArticleComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
 ];

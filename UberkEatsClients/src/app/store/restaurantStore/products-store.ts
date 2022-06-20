@@ -9,15 +9,17 @@ import { ProductsState } from './products-state';
 @Injectable({ providedIn: 'root' })
 export class ProductsStore extends Store<ProductsState> {
 	constructor() {
-    super(new ProductsState());
+		super(new ProductsState());
 	}
 
-  addProductsObject(product: ProductsObjects): void {
-    if (product.type === BasketObjectsType.article) {
-    this.setState({
-      ...this.state, // Spread state object
-      [product.type]: [...this.state[product.type].concat(product.product as Articles)] // Add to product.type property (articles or menus) the product
-    });
-    }
+	addProductsObject(product: ProductsObjects): void {
+		if (product.type === BasketObjectsType.article) {
+      this.setState({
+        // Spread state object
+        ...this.state, 
+        // Add to product.type property (articles or menus) the product
+				[product.type]: [...this.state[product.type].concat(product.product as Articles)] 
+			});
+		}
 	}
 }

@@ -14,8 +14,8 @@ export class BasketStore extends Store<BasketState> {
 		this.setState({
 			...this.state, // Spread state object
 			[product.type]: [...this.state[product.type].concat(product)] // Add to product.type property (articles or menus) the product
-    });
-    console.log(this.state);
+		});
+		console.log(this.state);
 	}
 
 	editbasketQty(product: BasketObjects) {

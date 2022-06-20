@@ -39,31 +39,31 @@ export class CreateArticleComponent implements OnInit {
 
   // for cleaning up subscriptions
   OnDestroy(): void {
-    this.ngUnsubscribe.next(true);
-    this.ngUnsubscribe.complete();
+  	this.ngUnsubscribe.next(true);
+  	this.ngUnsubscribe.complete();
   }
 
   ngOnInit(): void {
-    // subscription to the store
-    this.store.state$
-      .pipe(
-        takeUntil(this.ngUnsubscribe))
-      .subscribe(data => {
-        this.productsContent = data;
-      });
+  	// subscription to the store
+  	this.store.state$
+  		.pipe(
+  			takeUntil(this.ngUnsubscribe))
+  		.subscribe(data => {
+  			this.productsContent = data;
+  		});
   }
 
   addArticle() {
-    this.articleInfo.id = this.store.state.articles.length + 1;
+  	this.articleInfo.id = this.store.state.articles.length + 1;
   	this.articleInfo.name = this.registerForm.get('name')?.value;
   	this.articleInfo.description = this.registerForm.get('description')?.value;
   	this.articleInfo.price = this.registerForm.get('price')?.value;
   	this.articleInfo.imageUrl = this.registerForm.get('imageUrl')?.value;
-    this.store.addProductsObject({
-      type: BasketObjectsType.article,
-      id: this.store.state.articles.length + 1,
-      product: { ...this.articleInfo }
-    });
-    console.log(this.productsContent);
+  	this.store.addProductsObject({
+  		type: BasketObjectsType.article,
+  		id: this.store.state.articles.length + 1,
+  		product: { ...this.articleInfo }
+  	});
+  	console.log(this.productsContent);
   }
 }
