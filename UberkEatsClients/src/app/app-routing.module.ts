@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './components/clients/profile-page/profile-
 import { RegisterPageComponent } from './components/clients/register-page/register-page.component';
 import { RestaurantListComponent } from './components/clients/restaurant-list/restaurant-list.component';
 import { BasketPageComponent } from './components/basket-page/basket-page.component';
+import { OrderPreviewComponent } from './components/restaurants/order-preview/order-preview.component';
 
 const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
 	{ path: 'create-article', component: CreateArticleComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
+	{ path: 'order-preview', component: OrderPreviewComponent },
 ];
 
 @NgModule({
