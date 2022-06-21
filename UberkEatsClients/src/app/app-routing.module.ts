@@ -10,6 +10,7 @@ import { RestaurantListComponent } from './components/clients/restaurant-list/re
 import { BasketPageComponent } from './components/basket-page/basket-page.component';
 import { OrderPreviewComponent } from './components/restaurants/order-preview/order-preview.component';
 import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
@@ -23,6 +24,8 @@ const routes: Routes = [
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
 	{ path: 'order-preview', component: OrderPreviewComponent },
+	{ path: 'order-history', component: OrderHistoryComponent },
+
 ];
 
 @NgModule({
