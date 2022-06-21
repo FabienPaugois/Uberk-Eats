@@ -44,67 +44,67 @@ export class OrderStore extends Store<OrderState> {
 					deliveredAt: new Date(date),
 					readyAt: new Date(date)
 				}
-      },
-      {
-        id: 2,
-        articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-        menus: [{ id: 1, qty: 2 }],
-        clientId: 1,
-        deliveryAddress: '16 rue de la Libération',
-        restaurantId: 1,
-        status: 2,
-        timestamp: {
-          createdAt: new Date(date),
-          pickepUpAt: new Date(date),
-          deliveredAt: new Date(date),
-          readyAt: new Date(date)
-        }
-      },
-      {
-        id: 3,
-        articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-        menus: [{ id: 1, qty: 2 }],
-        clientId: 1,
-        deliveryAddress: '16 rue de la Libération',
-        restaurantId: 1,
-        status: 3,
-        timestamp: {
-          createdAt: new Date(date),
-          pickepUpAt: new Date(date),
-          deliveredAt: new Date(date),
-          readyAt: new Date(date)
-        }
-      },
-      {
-        id: 4,
-        articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-        menus: [{ id: 1, qty: 2 }],
-        clientId: 1,
-        deliveryAddress: '16 rue de la Libération',
-        restaurantId: 1,
-        status: 4,
-        timestamp: {
-          createdAt: new Date(date),
-          pickepUpAt: new Date(date),
-          deliveredAt: new Date(date),
-          readyAt: new Date(date)
-        }
-      },
-      {
-        id: 5,
-        articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-        menus: [{ id: 1, qty: 2 }],
-        clientId: 1,
-        deliveryAddress: '16 rue de la Libération',
-        restaurantId: 1,
-        status: 5,
-        timestamp: {
-          createdAt: new Date(date),
-          pickepUpAt: new Date(date),
-          deliveredAt: new Date(date),
-          readyAt: new Date(date)
-        }
-      },
+			},
+			{
+				id: 2,
+				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
+				menus: [{ id: 1, qty: 2 }],
+				clientId: 1,
+				deliveryAddress: '16 rue de la Libération',
+				restaurantId: 1,
+				status: 2,
+				timestamp: {
+					createdAt: new Date(date),
+					pickepUpAt: new Date(date),
+					deliveredAt: new Date(date),
+					readyAt: new Date(date)
+				}
+			},
+			{
+				id: 3,
+				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
+				menus: [{ id: 1, qty: 2 }],
+				clientId: 1,
+				deliveryAddress: '16 rue de la Libération',
+				restaurantId: 1,
+				status: 3,
+				timestamp: {
+					createdAt: new Date(date),
+					pickepUpAt: new Date(date),
+					deliveredAt: new Date(date),
+					readyAt: new Date(date)
+				}
+			},
+			{
+				id: 4,
+				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
+				menus: [{ id: 1, qty: 2 }],
+				clientId: 1,
+				deliveryAddress: '16 rue de la Libération',
+				restaurantId: 1,
+				status: 4,
+				timestamp: {
+					createdAt: new Date(date),
+					pickepUpAt: new Date(date),
+					deliveredAt: new Date(date),
+					readyAt: new Date(date)
+				}
+			},
+			{
+				id: 5,
+				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
+				menus: [{ id: 1, qty: 2 }],
+				clientId: 1,
+				deliveryAddress: '16 rue de la Libération',
+				restaurantId: 1,
+				status: 5,
+				timestamp: {
+					createdAt: new Date(date),
+					pickepUpAt: new Date(date),
+					deliveredAt: new Date(date),
+					readyAt: new Date(date)
+				}
+			},
 		];
 		this.setState({
 			...this.state,
