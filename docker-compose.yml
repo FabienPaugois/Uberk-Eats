@@ -39,7 +39,8 @@ services:
       - 3002:3002
     depends_on:
       - mongo
-    restart: always  article_ms:
+    restart: always
+  article_ms:
     build: .\Microservices\articles
     ports:
       - 3001:3001
