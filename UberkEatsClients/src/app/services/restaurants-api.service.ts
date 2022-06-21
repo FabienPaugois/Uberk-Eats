@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { retry, catchError,throwError } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Articles } from '../model/articles';
-import { Orders } from '../model/order';
+import { OrdersObject } from '../model/order';
 import { Menus } from '../model/menus';
 
 @Injectable({
@@ -44,8 +44,8 @@ export class RestaurantsApiService {
 	}
 
 	// HttpClient API post() method => getOrders
-	getOrders(): Observable<Orders> {
-		return this.http.get<Orders>(
+	getOrders(): Observable<OrdersObject> {
+		return this.http.get<OrdersObject>(
 			this.apiNoSQLURL + '/orders',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
