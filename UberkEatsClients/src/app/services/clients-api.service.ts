@@ -13,6 +13,7 @@ import { AuthToken } from '../model/authToken';
 export class ClientsApiService {
 	// Define API
 	apiURL = 'http://localhost:8080';
+	//apiURL = 'https://localhost:44310';
 	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {
@@ -37,12 +38,13 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any, roleName: any): Observable<AuthToken> {
+	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
+		console.log(affiliateMail);
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
-			JSON.stringify({ user: employee, roleName }),
+			JSON.stringify({ user: employee, roleName, affiliateMail }),
 			this.httpOptions
-		).pipe(retry(1), catchError(this.handleError));
+		).pipe(retry(0), catchError(this.handleError));
 	}
 
 	getRestaurants(): Observable<Restaurants> {
@@ -68,13 +70,14 @@ export class ClientsApiService {
 
 	// Error handling
 	handleError(error: any) {
+		console.log(error);
 		let errorMessage = '';
 		if (error.error instanceof ErrorEvent) {
 			// Get client-side error
 			errorMessage = error.error.message;
 		} else {
 			// Get server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+			errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
 		}
 		window.alert(errorMessage);
 		return throwError(() => errorMessage);
