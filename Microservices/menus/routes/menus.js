@@ -1,6 +1,10 @@
 const express = require("express")
 var router = express.Router({ mergeParams: true });
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+router.use(bodyParser.json());
+const accessTokenSecret = 'a23f5zddoznJFGZBiGbIg895FZK';
 
 var menuSchema = mongoose.Schema({
 	name: String,
@@ -11,6 +15,26 @@ var menuSchema = mongoose.Schema({
 });
 
 var Menu = mongoose.model('Menus', menuSchema);
+
+
+const authenticateJWT = (req, res, next) => {
+	const authHeader = req.headers.authorization;
+
+	if (authHeader) {
+		const token = authHeader.split(' ')[1];
+
+		jwt.verify(token, accessTokenSecret, (err, user) => {
+			if (err) {
+				return res.sendStatus(403);
+			}
+
+			req.user = user;
+			next();
+		});
+	} else {
+		res.sendStatus(401);
+	}
+}
 
 //#region GetAllMenus
 
@@ -59,7 +83,7 @@ var Menu = mongoose.model('Menus', menuSchema);
 /* GET Menus. */
 router.route('/menus')
 
-	.get(function (req, res, next) {
+	.get(authenticateJWT, function (req, res, next) {
 		Menu.find(function (err, menus) {
 			if (err) {
 				res.send(err);
@@ -86,7 +110,6 @@ router.route('/menus')
 */
 
 /* POST Menus. */
-router.route('/menu').post(function (req, res, next) {
 	// Nous utilisons le schéma Menu
 	var menu = new Menu();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Menu
@@ -145,7 +168,6 @@ router.route('/menu').post(function (req, res, next) {
  */
 
 router.route('/menu/:menu_ids')
-	.get(function (req, res) {
 		const ids = req.params.menu_ids.split(',');
 		Menu.find().where('_id').in(ids).exec((err, menus) => {
 			if (err)
@@ -172,7 +194,6 @@ router.route('/menu/:menu_ids')
 * @apiError MenuNotUpdated Menu couldn't be updated.
 */
 
-router.route('/menu/:menu_id').put(function (req, res) {
 	Menu.findById(req.params.menu_id, function (err, menu) {
 		if (err) {
 			res.send(err);
@@ -207,7 +228,6 @@ router.route('/menu/:menu_id').put(function (req, res) {
 	*
 	* @apiError MenuNotDeleted Menu couldn't be deleted.
 	*/
-	.delete(function (req, res) {
 
 		Menu.remove({ _id: req.params.menu_id }, function (err, menu) {
 			if (err) {

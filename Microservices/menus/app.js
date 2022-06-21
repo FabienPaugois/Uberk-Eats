@@ -40,7 +40,7 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 //URL de notre base
-var urlmongo = "mongodb://root:root@mongo:27117";
+var urlmongo = "mongodb://root:root@mongo:27117/Uberk-Eats";
 
 // Nous connectons l'API à notre base de données
 mongoose.connect(urlmongo);

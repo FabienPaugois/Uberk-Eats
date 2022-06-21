@@ -107,4 +107,5 @@ dist
 .tern-port
 
 
-.vs/
+.angular
+/.vs
