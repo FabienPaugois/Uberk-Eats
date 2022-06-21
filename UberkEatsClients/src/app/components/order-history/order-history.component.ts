@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { Order, OrdersObject } from '../../model/order';
 import { ClientsApiService } from '../../services/clients-api.service';
+import { OrderStore } from '../../store/restaurantStore/order-store';
 
 @Component({
 	selector: 'app-order-history',
@@ -8,49 +11,34 @@ import { ClientsApiService } from '../../services/clients-api.service';
 	styleUrls: ['./order-history.component.scss']
 })
 export class OrderHistoryComponent implements OnInit {
-	orderHistory: OrdersObject = {orders : []};
-	date = '2017-11-27T09:10:00';
-	orders: Order[] = [
-		{
-			id: 0,
-			articles: [{ id: 1, qty: 2 }, { id: 7, qty: 1 }, { id: 8, qty: 2 }],
-			menus: [{ id: 1, qty: 1 }, { id: 2, qty: 3 }],
-			clientId: 1,
-			deliveryAddress: '4 rue de la Libération',
-			restaurantId: 1,
-			status: 0,
-			timestamp: {
-				createdAt: new Date(this.date),
-				pickepUpAt: new Date(this.date),
-				deliveredAt: new Date(this.date),
-				readyAt: new Date(this.date)
-			}
-		},
-		{
-			id: 1,
-			articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-			menus: [{ id: 1, qty: 2 }],
-			clientId: 1,
-			deliveryAddress: '16 rue de la Libération',
-			restaurantId: 1,
-			status: 0,
-			timestamp: {
-				createdAt: new Date(this.date),
-				pickepUpAt: new Date(this.date),
-				deliveredAt: new Date(this.date),
-				readyAt: new Date(this.date)
-			}
-		},
-	];
+	orderHistory: OrdersObject;
+	ngUnsubscribe = new Subject();
 
 	constructor(
-    public clientApi: ClientsApiService
+    private clientApi: ClientsApiService,
+    public router: Router,
+    private store: OrderStore
 	) { }
 
+	// for cleaning up subscriptions
+	OnDestroy(): void {
+		this.ngUnsubscribe.next(true);
+		this.ngUnsubscribe.complete();
+	}
+
 	ngOnInit(): void {
-		/*this.clientApi.getOrdersHistory().subscribe(orders => {
-      this.orderHistory = orders
-    });*/
-		this.orderHistory.orders = this.orders;
+		// subscription to the store
+		this.store.state$
+			.pipe(
+				takeUntil(this.ngUnsubscribe))
+			.subscribe(data => {
+				this.orderHistory = data;
+			});
+		this.store.getOrdersFromDb();
+		console.log(this.orderHistory);
+	}
+
+	btnClickOrder(orderId: number) {
+		this.router.navigate(['/order-preview', {orderId}]);
 	}
 }

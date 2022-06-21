@@ -15,9 +15,11 @@ import { RestaurantListComponent } from './components/clients/restaurant-list/re
 import { MenuPickPageComponent } from './components/clients/menu-pick-page/menu-pick-page.component';
 import { ProductPageComponent } from './components/clients/product-page/product-page.component';
 import { CreateArticleComponent } from './components/restaurants/create-article/create-article.component';
-import { OrderPreviewComponent } from './components/restaurants/order-preview/order-preview.component';
+import { OrdersPreviewComponent } from './components/restaurants/orders-preview/orders-preview.component';
 import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
+
 
 @NgModule({
 	declarations: [
@@ -32,8 +34,9 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 		CreateMenuComponent,
 		ProductPageComponent,
 		BasketPageComponent,
-		OrderPreviewComponent,
-		OrderHistoryComponent
+		OrdersPreviewComponent,
+		OrderHistoryComponent,
+		OrderPreviewComponent
 	],
 	imports: [
 		BrowserModule,

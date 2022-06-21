@@ -8,9 +8,10 @@ import { ProfilePageComponent } from './components/clients/profile-page/profile-
 import { RegisterPageComponent } from './components/clients/register-page/register-page.component';
 import { RestaurantListComponent } from './components/clients/restaurant-list/restaurant-list.component';
 import { BasketPageComponent } from './components/basket-page/basket-page.component';
-import { OrderPreviewComponent } from './components/restaurants/order-preview/order-preview.component';
+import { OrdersPreviewComponent } from './components/restaurants/orders-preview/orders-preview.component';
 import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 
 const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
@@ -23,9 +24,9 @@ const routes: Routes = [
 	{ path: 'create-menu', component: CreateMenuComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
-	{ path: 'order-preview', component: OrderPreviewComponent },
+	{ path: 'orders-preview', component: OrdersPreviewComponent },
 	{ path: 'order-history', component: OrderHistoryComponent },
-
+	{ path: 'order-preview', component: OrderPreviewComponent },
 ];
 
 @NgModule({
