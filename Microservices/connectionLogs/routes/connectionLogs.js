@@ -80,10 +80,10 @@ router.route('/connectionLogs')
 * @apiVersion 1.0.0
 * @apiName PostConnectionLog
 * @apiGroup ConnectionLogs
- *
+*
  * @apiSuccess {String} userId Id of the User ConnectionLog.
  * @apiSuccess {String} date Date of the ConnectionLog.
- * @apiSuccess {String} description Description of the ConnectionLog.
+* @apiSuccess {String} description Description of the ConnectionLog.
 *
 * @apiError ConnectionLogNotCreated ConnectionLog couldn't be created.
 */
