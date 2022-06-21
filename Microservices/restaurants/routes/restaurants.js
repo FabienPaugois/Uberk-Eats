@@ -8,14 +8,16 @@ const accessTokenSecret = 'a23f5zddoznJFGZBiGbIg895FZK';
 
 var restaurantSchema = mongoose.Schema({
 	name: String,
-	price: String,
+	types: Array,
+	address: String,
+	ownerId: Number,
 	description: String,
-	imgUrl: String,
-	articles: Array
+	url: String,
+	products: Object,
+	imgUrl: String
 });
 
 var Restaurant = mongoose.model('Restaurants', restaurantSchema);
-
 
 const authenticateJWT = (req, res, next) => {
 	const authHeader = req.headers.authorization;
@@ -44,37 +46,62 @@ const authenticateJWT = (req, res, next) => {
  * @apiGroup Restaurants
  *
  * @apiSuccess {String} name Name of the Restaurant.
- * @apiSuccess {String} price Price of the Restaurant.
+ * @apiSuccess {Array}  types Types of the Restaurant.
+ * @apiSuccess {String} address Address of the Restaurant.
+ * @apiSuccess {Number} ownerId userId of the Restaurant Owner.
  * @apiSuccess {String} description Description of the Restaurant.
- * @apiSuccess {String} imgUrl ImgUrl of the Restaurant.
- * @apiSuccess {Array} articles Articles array of the Restaurant.
+ * @apiSuccess {String} url Url of the Restaurant website.
+ * @apiSuccess {String} imgUrl imgUrl of the Restaurant.
+ * @apiSuccess {Object} products Products Object of the Restaurant.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *		 "_id": "62b02a1a13dcbfe08b8db704",
- *		 "articles": [
- *		     0,
- *		     0,
- *		     0
+ *		"name": "BeurkMacRestaurant",
+ *		 "types": [
+ *		     "Indian",
+ *		     "Burger"
  *		],
- *		"name": "BigMacRestaurant",
- *		"price": "12",
- *		"description": "Good restaurant",
- *		"imgUrl": "/img/bigmac/13"
- *      },
- *      {
- *		 "_id": "62b02a1a13dcbfe08casb704",
- *		 "articles": [
- *		     5,
- *		     754,
- *		     1
+ *		"address": "1 Rotten Street",
+ *		"ownerId": 23,
+ *		"description": "Bad restaurant",
+ *		"url": "http://badrestaurant/img/beurkmac/13"
+ *		"imgUrl": "/img/bigmac/13",
+ *		"products": {
+ *			"articles": [
+ *				12,
+ *				3
+ *			],
+ *			"menus": [
+ *				56,
+ *				8
+ *			]
+ *		}
+ *     },
+ *     {
+ *		 "_id": "62b02a1a13dcbfe08b8db704",
+ *		"name": "BeurkMacRestaurant2",
+ *		 "types": [
+ *		     "Chinese",
+ *		     "Gastronomic"
  *		],
- *		"name": "CheeseBBQRestaurant",
- *		"price": "15",
- *		"description": "Best restaurant",
- *		"imgUrl": "/img/Cheese/BBQ/13"
- *      }
+ *		"address": "2 Rotten Street",
+ *		"ownerId": 28,
+ *		"description": "Bad restaurant",
+ *		"url": "http://badrestaurant/img/beurkmac/15"
+ *		"imgUrl": "/img/bigmac/12",
+ *		"products": {
+ *			"articles": [
+ *				5856,
+ *				125
+ *			],
+ *			"menus": [
+ *				41876,
+ *				14
+ *			]
+ *		}
+ *     }
  *      
  * @apiError RestaurantsNotAccessible Restaurants were unaccessible.
  *
@@ -99,10 +126,14 @@ router.route('/restaurants')
 * @apiGroup Restaurants
 *
 * @apiSuccess {String} name Name of the Restaurant.
-* @apiSuccess {String} price Price of the Restaurant.
+* @apiSuccess {Array}  types Types of the Restaurant.
+* @apiSuccess {String} address Address of the Restaurant.
+* @apiSuccess {Number} ownerId userId of the Restaurant Owner.
 * @apiSuccess {String} description Description of the Restaurant.
-* @apiSuccess {String} imgUrl ImgUrl of the Restaurant.
-* @apiSuccess {Array} articles Articles array of the Restaurant.
+* @apiSuccess {String} url Url of the Restaurant website.
+* @apiSuccess {String} imgUrl imgUrl of the Restaurant.
+* @apiSuccess {Object} products Products Object of the Restaurant.
+*
 *
 * @apiError RestaurantNotCreated Restaurant couldn't be created.
 */
@@ -134,28 +165,43 @@ router.route('/restaurant').post(authenticateJWT, function (req, res, next) {
  * @apiName GetRestaurant
  * @apiGroup Restaurant
  *
-* @apiParam {string} restaurant_ids List of Restaurant unique IDs, separated by commas.
+ * @apiParam {string} restaurant_ids List of Restaurant unique IDs, separated by commas.
+ *
  *
  * @apiSuccess {String} name Name of the Restaurant.
- * @apiSuccess {String} price Price of the Restaurant.
+ * @apiSuccess {Array}  types Types of the Restaurant.
+ * @apiSuccess {String} address Address of the Restaurant.
+ * @apiSuccess {Number} ownerId userId of the Restaurant Owner.
  * @apiSuccess {String} description Description of the Restaurant.
- * @apiSuccess {String} imgUrl ImgUrl of the Restaurant.
- * @apiSuccess {Array} articles Articles array of the Restaurant.
+ * @apiSuccess {String} url Url of the Restaurant website.
+ * @apiSuccess {String} imgUrl imgUrl of the Restaurant.
+ * @apiSuccess {Object} products Products Object of the Restaurant.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *		 "_id": "62b02a1a13dcbfe08b8db704",
- *		 "articles": [
- *		     0,
- *		     0,
- *		     0
+ *		"name": "BeurkMacRestaurant",
+ *		 "types": [
+ *		     "Indian",
+ *		     "Burger"
  *		],
- *		"name": "BigMacRestaurant",
- *		"price": "12",
- *		"description": "Good restaurant",
- *		"imgUrl": "/img/bigmac/13"
- *      }
+ *		"address": "1 Rotten Street",
+ *		"ownerId": 23,
+ *		"description": "Bad restaurant",
+ *		"url": "http://badrestaurant/img/beurkmac/13"
+ *		"imgUrl": "/img/bigmac/13",
+ *		"products": {
+ *			"articles": [
+ *				12,
+ *				3
+ *			],
+ *			"menus": [
+ *				56,
+ *				8
+ *			]
+ *		}
+ *     }
  * @apiError RestaurantNotFound The id of one or more Restaurants were not found.
  *
  * @apiErrorExample Error-Response:
@@ -182,13 +228,29 @@ router.route('/restaurant/:restaurant_ids')
 * @apiVersion 1.0.0
 * @apiName PutRestaurants
 * @apiGroup Restaurants
-*
-* @apiSuccess {String} name Name of the Restaurant.
-* @apiSuccess {String} price Price of the Restaurant.
-* @apiSuccess {String} description Description of the Restaurant.
-* @apiSuccess {String} imgUrl ImgUrl of the Restaurant.
-* @apiSuccess {Array} articles Articles array of the Restaurant
-*
+*	{
+*		 "_id": "62b02a1a13dcbfe08b8db704",
+*		"name": "BeurkMacRestaurant",
+*		 "types": [
+*		     "Indian",
+*		     "Burger"
+*		],
+*		"address": "1 Rotten Street",
+*		"ownerId": 23,
+*		"description": "Bad restaurant",
+*		"url": "http://badrestaurant/img/beurkmac/13"
+*		"imgUrl": "/img/bigmac/13",
+*		"products": {
+*			"articles": [
+*				12,
+*				3
+*			],
+*			"menus": [
+*				56,
+*				8
+*			]
+*		}
+*     }
 * @apiError RestaurantNotUpdated Restaurant couldn't be updated.
 */
 
@@ -217,12 +279,29 @@ router.route('/restaurant/:restaurant_id').put(authenticateJWT, function (req, r
 	* @apiVersion 1.0.0
 	* @apiName DeleteRestaurants
 	* @apiGroup Restaurants
-	*
-	* @apiSuccess {String} name Name of the Restaurant.
-	* @apiSuccess {String} price Price of the Restaurant.
-	* @apiSuccess {String} description Description of the Restaurant.
-	* @apiSuccess {String} imgUrl ImgUrl of the Restaurant.
-	* @apiSuccess {Array} articles Articles array of the Restaurant
+	*{
+	*		 "_id": "62b02a1a13dcbfe08b8db704",
+	*		"name": "BeurkMacRestaurant",
+	*		 "types": [
+	*		     "Indian",
+	*		     "Burger"
+	*		],
+	*		"address": "1 Rotten Street",
+	*		"ownerId": 23,
+	*		"description": "Bad restaurant",
+	*		"url": "http://badrestaurant/img/beurkmac/13"
+	*		"imgUrl": "/img/bigmac/13",
+	*		"products": {
+	*			"articles": [
+	*				12,
+	*				3
+	*			],
+	*			"menus": [
+	*				56,
+	*				8
+	*			]
+	*		}
+	*     }
 	*
 	* @apiError RestaurantNotDeleted Restaurant couldn't be deleted.
 	*/
