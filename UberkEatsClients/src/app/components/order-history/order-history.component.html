@@ -1,0 +1,15 @@
+<div>
+  <h1>Historique des commandes</h1>
+  <div *ngFor="let order of orderHistory.orders">
+    <mat-card *ngIf="order.status === 0">
+      <mat-card-header>
+        <mat-card-title>Commande numéro : {{ order.id + 1 }}</mat-card-title>
+        <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Commande passée le : {{ order.timestamp.createdAt }}</p>
+        <p>Commande livrée le : {{ order.timestamp.deliveredAt }}</p>
+      </mat-card-content> 
+    </mat-card>
+  </div>
+</div>

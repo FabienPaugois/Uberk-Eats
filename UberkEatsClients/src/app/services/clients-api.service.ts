@@ -7,6 +7,7 @@ import { Restaurants } from '../model/restaurants';
 import { Articles } from '../model/articles';
 import { Menus } from '../model/menus';
 import { AuthToken } from '../model/authToken';
+import { OrdersObject } from '../model/order';
 @Injectable({
 	providedIn: 'root',
 })
@@ -50,6 +51,13 @@ export class ClientsApiService {
 	getRestaurants(): Observable<Restaurants> {
 		return this.http.get<Restaurants>(
 			this.apiNoSQLURL + '/restaurants',
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	getOrdersHistory(): Observable<OrdersObject> {
+		return this.http.get<OrdersObject>(
+			this.apiNoSQLURL + '/ordersHistory',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
