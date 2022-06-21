@@ -12,33 +12,33 @@ import { OrderStore } from '../../store/restaurantStore/order-store';
 })
 export class OrderHistoryComponent implements OnInit {
 	orderHistory: OrdersObject;
-  ngUnsubscribe = new Subject();
+	ngUnsubscribe = new Subject();
 
 	constructor(
     private clientApi: ClientsApiService,
     public router: Router,
     private store: OrderStore
-  ) { }
+	) { }
 
-  // for cleaning up subscriptions
-  OnDestroy(): void {
-    this.ngUnsubscribe.next(true);
-    this.ngUnsubscribe.complete();
-  }
+	// for cleaning up subscriptions
+	OnDestroy(): void {
+		this.ngUnsubscribe.next(true);
+		this.ngUnsubscribe.complete();
+	}
 
 	ngOnInit(): void {
-    // subscription to the store
-    this.store.state$
-      .pipe(
-        takeUntil(this.ngUnsubscribe))
-      .subscribe(data => {
-        this.orderHistory = data;
-      });
-    this.store.getOrdersFromDb();
-    console.log(this.orderHistory)
-  }
+		// subscription to the store
+		this.store.state$
+			.pipe(
+				takeUntil(this.ngUnsubscribe))
+			.subscribe(data => {
+				this.orderHistory = data;
+			});
+		this.store.getOrdersFromDb();
+		console.log(this.orderHistory);
+	}
 
-  btnClickOrder(orderId: number) {
-    this.router.navigate(['/order-preview', {orderId}]);
-  }
+	btnClickOrder(orderId: number) {
+		this.router.navigate(['/order-preview', {orderId}]);
+	}
 }

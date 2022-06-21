@@ -24,9 +24,9 @@ const routes: Routes = [
 	{ path: 'create-menu', component: CreateMenuComponent },
 	{ path: 'product-page', component: ProductPageComponent },
 	{ path: 'basket-page', component: BasketPageComponent },
-  { path: 'orders-preview', component: OrdersPreviewComponent },
-  { path: 'order-history', component: OrderHistoryComponent },
-  { path: 'order-preview', component: OrderPreviewComponent },
+	{ path: 'orders-preview', component: OrdersPreviewComponent },
+	{ path: 'order-history', component: OrderHistoryComponent },
+	{ path: 'order-preview', component: OrderPreviewComponent },
 ];
 
 @NgModule({
