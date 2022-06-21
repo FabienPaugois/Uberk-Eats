@@ -86,16 +86,16 @@ export class OrderPreviewComponent implements OnInit {
 			name: 'Menu Whooper',
 			description: 'Lorem ipsum',
 			price: 9,
-      articles: [1, 7, 8],
-      imageUrl:''
+			articles: [1, 7, 8],
+			imageUrl:''
 		},
 		{
 			id: 2,
 			name: 'Menu Steakhouse',
 			description: 'Lorem ipsum',
 			price: 10,
-      articles: [2, 7, 9],
-      imageUrl: ''
+			articles: [2, 7, 9],
+			imageUrl: ''
 		},
 	];
 	ngUnsubscribe = new Subject();
