@@ -33,3 +33,10 @@ services:
     depends_on:
       - mongo
     restart: always
+  connectionlogs_ms:
+    build: .\Microservices\connectionLogs
+    ports:
+      - 3002:3002
+    depends_on:
+      - mongo
+    restart: always
