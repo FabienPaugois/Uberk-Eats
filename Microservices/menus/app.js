@@ -22,12 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -40,13 +40,17 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 //URL de notre base
-var urlmongo = "mongodb://root:root@mongo:27117/Uberk-Eats";
+var urlmongo = "mongodb://root:root@mongo:27017/Uberk-Eats";
 
-// Nous connectons l'API à notre base de données
-mongoose.connect(urlmongo);
+// Nous connectons l'API ï¿½ notre base de donnï¿½es
+try {
+  mongoose.connect(urlmongo, { authSource: "admin" });
+} catch (err) {
+  console.lor(err)
+}
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
 db.once('open', function () {
-    console.log("Connexion à la base OK");
+  console.log("Connexion ï¿½ la base OK");
 });
