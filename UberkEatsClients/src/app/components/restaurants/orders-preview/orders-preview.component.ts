@@ -7,11 +7,11 @@ import { RestaurantsApiService } from '../../../services/restaurants-api.service
 import { OrderStore } from '../../../store/restaurantStore/order-store';
 
 @Component({
-	selector: 'app-order-preview',
-	templateUrl: './order-preview.component.html',
-	styleUrls: ['./order-preview.component.scss']
+	selector: 'app-orders-preview',
+	templateUrl: './orders-preview.component.html',
+	styleUrls: ['./orders-preview.component.scss']
 })
-export class OrderPreviewComponent implements OnInit {
+export class OrdersPreviewComponent implements OnInit {
 	panelOpenState = false;
 	date = '2017-11-27T09:10:00';
 	orderData: OrdersObject;
