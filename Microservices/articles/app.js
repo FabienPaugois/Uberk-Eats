@@ -40,10 +40,14 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 //URL de notre base
-var urlmongo = "mongodb://root:root@localhost:27117";
+var urlmongo = "mongodb://root:root@mongo:27017/Uberk-Eats";
 
 // Nous connectons l'API à notre base de données
-mongoose.connect(urlmongo);
+try {
+    mongoose.connect(urlmongo, { authSource: "admin" });
+} catch (err) {
+    console.lor(err)
+}
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
