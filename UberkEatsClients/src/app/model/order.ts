@@ -1,6 +1,8 @@
-import { BasketObjects } from './basket';
+export interface OrdersObject {
+  orders: Order[];
+}
 
-export interface Orders {
+export interface Order {
   id: number;
   menus: OrderProducts[];
   articles: OrderProducts[];
