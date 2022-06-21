@@ -26,3 +26,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+  menu_ms:
+    build: .\Microservices\menus
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    restart: always

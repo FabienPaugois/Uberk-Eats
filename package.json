@@ -3,7 +3,7 @@
 	"version": "0.0.0-development",
 	"description": "",
 	"scripts": {
-		"lint": "eslint --ignore-path .gitignore .",
+		"lint": "eslint --ignore-path .eslintignore .",
 		"lint:fix": "eslint --ignore-path .gitignore . --fix"
 	},
 	"devDependencies": {

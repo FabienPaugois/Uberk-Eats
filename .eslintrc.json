@@ -3,6 +3,9 @@
 	"ignorePatterns": [
 		"projects/**/*"
 	],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
 	"overrides": [
 		{
 			"files": [
@@ -47,7 +50,7 @@
 						],
 						"filter": {
 							// you can expand this regex to add more allowed names
-							"regex": "^(Content-Type)$",
+							"regex": "^(Content-Type)|(Authorization)$",
 							"match": false
 						}
 					}
