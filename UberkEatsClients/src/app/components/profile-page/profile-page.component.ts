@@ -16,7 +16,7 @@ export class ProfilePageComponent implements OnInit {
 		surname: 'Duleu',
 		mail: 'lucas.duleu@hotmail.fr',
 		password: '***',
-		role: this.roles.technicalService
+		role: this.roles.client
 	};
 
 	constructor() { }
