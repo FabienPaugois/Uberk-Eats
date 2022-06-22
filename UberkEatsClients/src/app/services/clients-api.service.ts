@@ -13,8 +13,8 @@ import { OrdersObject } from '../model/order';
 })
 export class ClientsApiService {
 	// Define API
-	//apiURL = 'http://localhost:8080';
-	apiURL = 'https://localhost:44310';
+	apiURL = 'http://localhost:8080';
+	//apiURL = 'https://localhost:44310';
 	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {
@@ -40,7 +40,7 @@ export class ClientsApiService {
 			.pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
+  register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
 			JSON.stringify({ user: employee, roleName, affiliateMail }),
