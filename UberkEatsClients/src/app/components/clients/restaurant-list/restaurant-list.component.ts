@@ -16,15 +16,17 @@ export class RestaurantListComponent implements OnInit {
 	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
   ngOnInit(): void {
-    this.clientsApi.getRestaurants().subscribe((data: unknown) => {
 
-    });
 	}
 
 	btnClick() {
 		localStorage.clear();
 		localStorage.setItem('basket', JSON.stringify(this.basket));
 		this.router.navigateByUrl('/menu-pick-page');
-	}
+  }
 
+  getRestaurants() {
+    this.clientsApi.getRestaurants().subscribe((data: unknown) => {
+    });
+  }
 }
