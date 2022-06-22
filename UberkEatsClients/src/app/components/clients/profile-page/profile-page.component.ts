@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthToken } from '../../../model/authToken';
 import { Clients } from '../../../model/clients';
 import { Roles } from '../../../model/roles';
 import { ClientsApiService } from '../../../services/clients-api.service';
@@ -12,21 +11,12 @@ import { ClientsApiService } from '../../../services/clients-api.service';
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  @Input() modifyUserInfo = { mail: '', password: '', phone: '', name: '', surname: '', affiliateMail: '', role: '' };
   public roles = Roles;
   public userModificationForm: FormGroup; // variable of type FormGroup is created
-  userInfo: Clients = {
-    id: '',
-    phone: localStorage.getItem('phone'),
-    name: localStorage.getItem('name'),
-    surname: localStorage.getItem('surname'),
-    mail: '',
-    password: '',
-    role: this.roles.client
-  };
 
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
     // Form element defined below
+
     this.userModificationForm = this.fb.group({
       name: '',
       surname: '',
@@ -40,9 +30,6 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userInfo.name = localStorage.getItem('name');
-    this.userInfo.phone = localStorage.getItem('phone');
-    this.userInfo.surname = localStorage.getItem('surname');
   }
 
   modify(dataclient: any) {
