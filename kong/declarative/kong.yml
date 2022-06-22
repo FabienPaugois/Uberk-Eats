@@ -1,0 +1,10 @@
+_format_version: "2.1"
+
+services:
+- name: articles-service
+  url: http://menuapi:3000
+  routes:
+  - name: menus
+    path_handling: "v1"
+    paths:
+    - /menus
