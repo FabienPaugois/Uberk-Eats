@@ -87,3 +87,9 @@ services:
       - 9445:8445
       - 9003:8003
       - 9004:8004
+    depends_on:
+      - menu_ms
+      - article_ms
+      - connectionlogs_ms
+      - restaurant_ms
+      - order_ms
