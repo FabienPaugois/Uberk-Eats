@@ -21,7 +21,7 @@ services:
   - name: connectionlogs
     path_handling: "v1"
     paths:
-    - /connectionlogs
+    - /connectionLogs
 - name: restaurants-service
   url: http://restaurantsapi:3003
   routes:

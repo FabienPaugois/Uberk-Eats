@@ -108,7 +108,7 @@ const authenticateJWT = (req, res, next) => {
  *
  */
 /* GET Restaurants. */
-router.route('/restaurants')
+router.route('/')
 
 	.get(authenticateJWT, function (req, res, next) {
 		Restaurant.find(function (err, restaurants) {
@@ -140,7 +140,7 @@ router.route('/restaurants')
 */
 
 /* POST Restaurants. */
-router.route('/restaurant').post(authenticateJWT, function (req, res, next) {
+router.route('/').post(authenticateJWT, function (req, res, next) {
 	// Nous utilisons le schéma Restaurant
 	var restaurant = new Restaurant();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Restaurant
@@ -212,7 +212,7 @@ router.route('/restaurant').post(authenticateJWT, function (req, res, next) {
  *     }
  */
 
-router.route('/restaurant/:restaurant_ids')
+router.route('/:restaurant_ids')
 	.get(authenticateJWT, function (req, res) {
 		const ids = req.params.restaurant_ids.split(',');
 		Restaurant.find().where('_id').in(ids).exec((err, restaurants) => {
@@ -255,7 +255,7 @@ router.route('/restaurant/:restaurant_ids')
 * @apiError RestaurantNotUpdated Restaurant couldn't be updated.
 */
 
-router.route('/restaurant/:restaurant_id').put(authenticateJWT, function (req, res) {
+router.route('/:restaurant_id').put(authenticateJWT, function (req, res) {
 	Restaurant.findById(req.params.restaurant_id, function (err, restaurant) {
 		if (err) {
 			res.send(err);
