@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthToken } from '../../../model/authToken';
 import { Clients } from '../../../model/clients';
 import { Roles } from '../../../model/roles';
 import { ClientsApiService } from '../../../services/clients-api.service';
@@ -28,7 +29,6 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
     // Form element defined below
-
     this.userModificationForm = this.fb.group({
       name: '',
       surname: '',
@@ -42,6 +42,9 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userInfo.name = localStorage.getItem('name');
+    this.userInfo.phone = localStorage.getItem('phone');
+    this.userInfo.surname = localStorage.getItem('surname');
   }
 
   modify(dataclient: any) {
