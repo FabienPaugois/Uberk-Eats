@@ -79,7 +79,7 @@ const authenticateJWT = (req, res, next) => {
  *
  */
 /* GET Orders. */
-router.route('/orders')
+router.route('/')
 
 	.get(authenticateJWT, function (req, res, next) {
 		Order.find(function (err, orders) {
@@ -110,7 +110,7 @@ router.route('/orders')
 */
 
 /* POST Orders. */
-router.route('/order').post(authenticateJWT, function (req, res, next) {
+router.route('/').post(authenticateJWT, function (req, res, next) {
 	// Nous utilisons le schéma Order
 	var order = new Order();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Order
@@ -156,7 +156,7 @@ router.route('/order').post(authenticateJWT, function (req, res, next) {
  *     }
  */
 
-router.route('/order/:order_ids')
+router.route('/:order_ids')
 	.get(authenticateJWT, function (req, res) {
 		const ids = req.params.order_ids.split(',');
 		Order.find().where('_id').in(ids).exec((err, orders) => {
@@ -185,7 +185,7 @@ router.route('/order/:order_ids')
 * @apiError OrderNotUpdated Order couldn't be updated.
 */
 
-router.route('/order/:order_id').put(authenticateJWT, function (req, res) {
+router.route('/:order_id').put(authenticateJWT, function (req, res) {
 	Order.findById(req.params.order_id, function (err, order) {
 		if (err) {
 			res.send(err);
