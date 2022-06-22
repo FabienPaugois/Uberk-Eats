@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Md5 } from 'ts-md5';
 import { AuthToken } from '../../../model/authToken';
 import { Clients } from '../../../model/clients';
 import { Roles } from '../../../model/roles';
@@ -15,15 +16,6 @@ export class ProfilePageComponent implements OnInit {
   @Input() modifyUserInfo = { mail: '', password: '', phone: '', name: '', surname: '', affiliateMail: '', role: '' };
   public roles = Roles;
   public userModificationForm: FormGroup; // variable of type FormGroup is created
-  userInfo: Clients = {
-    id: '',
-    phone: localStorage.getItem('phone'),
-    name: localStorage.getItem('name'),
-    surname: localStorage.getItem('surname'),
-    mail: '',
-    password: '',
-    role: this.roles.client
-  };
 
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
     // Form element defined below
@@ -31,24 +23,28 @@ export class ProfilePageComponent implements OnInit {
       name: '',
       surname: '',
       phone: '',
-      password: '',
-      mail: '',
-      affiliateMail: '',
-      role: ''
+      mail:'',
+      password: ''
     });
 
   }
 
   ngOnInit(): void {
-    this.userInfo.name = localStorage.getItem('name');
-    this.userInfo.phone = localStorage.getItem('phone');
-    this.userInfo.surname = localStorage.getItem('surname');
+    this.userModificationForm.setValue({
+      name: localStorage.getItem('name') ? localStorage.getItem('name') : '',
+      phone: '' + localStorage.getItem('phone') ? localStorage.getItem('phone') : '',
+      surname: '' + localStorage.getItem('surname') ? localStorage.getItem('surname') : '',
+      mail: this.userModificationForm.get('mail')?.value,
+      password: ''
+    });
   }
 
   modify(dataclient: any) {
-    this.userInfo.name = this.userModificationForm.get('name')?.value;
-    this.userInfo.surname = this.userModificationForm.get('surname')?.value;
-    this.userInfo.phone = this.userModificationForm.get('phone')?.value;
+    this.modifyUserInfo.name = this.userModificationForm.get('name')?.value;
+    this.modifyUserInfo.surname = this.userModificationForm.get('surname')?.value;
+    this.modifyUserInfo.phone = this.userModificationForm.get('phone')?.value;
+    this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
+    this.modifyUserInfo.password = Md5.hashStr(this.userModificationForm.get('password')?.value);
     this.clientsApi.modify(this.modifyUserInfo)
       .subscribe((data: Clients) => {
         // Send the login request
