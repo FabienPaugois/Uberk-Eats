@@ -40,6 +40,13 @@ services:
     depends_on:
       - mongo
     restart: always
+  restaurant_ms:
+    build: .\Microservices\restaurants
+    ports:
+      - 3003:3003
+    depends_on:
+      - mongo
+    restart: always
   order_ms:
     build: .\Microservices\orders
     ports:
