@@ -73,7 +73,7 @@ const authenticateJWT = (req, res, next) => {
  *
  */
 /* GET Articles. */
-router.route('/articles')
+router.route('/')
 
 	.get(authenticateJWT, function (req, res, next) {
 		Article.find(function (err, articles) {
@@ -100,7 +100,7 @@ router.route('/articles')
 */
 
 /* POST Articles. */
-router.route('/article').post(authenticateJWT, function (req, res, next) {
+router.route('/').post(authenticateJWT, function (req, res, next) {
 	// Nous utilisons le schéma Article
 	var article = new Article();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Article
@@ -151,7 +151,7 @@ router.route('/article').post(authenticateJWT, function (req, res, next) {
  *     }
  */
 
-router.route('/article/:article_ids')
+router.route('/:article_ids')
 	.get(authenticateJWT, function (req, res) {
 		const ids = req.params.article_ids.split(',');
 		Article.find().where('_id').in(ids).exec((err, articles) => {
@@ -177,7 +177,7 @@ router.route('/article/:article_ids')
 * @apiError ArticleNotUpdated Article couldn't be updated.
 */
 
-router.route('/article/:article_id').put(authenticateJWT, function (req, res) {
+router.route('/:article_id').put(authenticateJWT, function (req, res) {
 	Article.findById(req.params.article_id, function (err, article) {
 		if (err) {
 			res.send(err);

@@ -4,5 +4,7 @@ export interface Restaurants {
   address: string;
   phone: string;
   description: string;
+  ownerId: number;
   types: string[];
+  imageUrl: string;
 }

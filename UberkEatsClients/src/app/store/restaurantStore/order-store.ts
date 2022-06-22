@@ -22,6 +22,7 @@ export class OrderStore extends Store<OrderState> {
 				clientId: 1,
 				deliveryAddress: '4 rue de la Libération',
 				restaurantId: 1,
+				deliverymanId: NaN,
 				status: 0,
 				timestamp: {
 					createdAt: new Date(date),
@@ -37,6 +38,7 @@ export class OrderStore extends Store<OrderState> {
 				clientId: 1,
 				deliveryAddress: '16 rue de la Libération',
 				restaurantId: 1,
+				deliverymanId: NaN,
 				status: 1,
 				timestamp: {
 					createdAt: new Date(date),
@@ -52,6 +54,7 @@ export class OrderStore extends Store<OrderState> {
 				clientId: 1,
 				deliveryAddress: '16 rue de la Libération',
 				restaurantId: 1,
+				deliverymanId: NaN,
 				status: 2,
 				timestamp: {
 					createdAt: new Date(date),
@@ -67,6 +70,7 @@ export class OrderStore extends Store<OrderState> {
 				clientId: 1,
 				deliveryAddress: '16 rue de la Libération',
 				restaurantId: 1,
+				deliverymanId: NaN,
 				status: 3,
 				timestamp: {
 					createdAt: new Date(date),
@@ -82,6 +86,7 @@ export class OrderStore extends Store<OrderState> {
 				clientId: 1,
 				deliveryAddress: '16 rue de la Libération',
 				restaurantId: 1,
+				deliverymanId: NaN,
 				status: 4,
 				timestamp: {
 					createdAt: new Date(date),
@@ -97,6 +102,7 @@ export class OrderStore extends Store<OrderState> {
 				clientId: 1,
 				deliveryAddress: '16 rue de la Libération',
 				restaurantId: 1,
+				deliverymanId: NaN,
 				status: 5,
 				timestamp: {
 					createdAt: new Date(date),
@@ -112,16 +118,17 @@ export class OrderStore extends Store<OrderState> {
 		});
 	}
 
-	editOrderStatus(orderId: number, status: boolean) {
+	editOrderStatus(orderId: number, status: boolean, deliverymanId: number = NaN) {
 		const foundOrderInState = this.state.orders.find(entry => entry.id === orderId);
-		if (foundOrderInState) { status ? foundOrderInState.status += 1 :  foundOrderInState.status = -1; }
+		if (foundOrderInState) {
+			status ? foundOrderInState.status += 1 : foundOrderInState.status = -1;
+			if (status && !isNaN(deliverymanId)) {
+				foundOrderInState.deliverymanId = deliverymanId;
+			}
+		}
 		this.setState({
 			...this.state, // Spread state object
 			orders: [...this.state.orders] // Add to product.type property (articles or menus) the product
 		});
-		this.state.orders.forEach(order => {
-			console.log(order.status);
-		});
-
 	}
 }

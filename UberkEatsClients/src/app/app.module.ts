@@ -19,6 +19,7 @@ import { OrdersPreviewComponent } from './components/restaurants/orders-preview/
 import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
+import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { OrderPreviewComponent } from './components/order-preview/order-preview.
 		BasketPageComponent,
 		OrdersPreviewComponent,
 		OrderHistoryComponent,
-		OrderPreviewComponent
+		OrderPreviewComponent,
+		DeliveryOrdersPreviewComponent
 	],
 	imports: [
 		BrowserModule,

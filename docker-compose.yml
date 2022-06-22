@@ -27,20 +27,15 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
   menu_ms:
+    hostname: menusapi
     build: .\Microservices\menus
     ports:
       - 3000:3000
     depends_on:
       - mongo
     restart: always
-  connectionlogs_ms:
-    build: .\Microservices\connectionLogs
-    ports:
-      - 3002:3002
-    depends_on:
-      - mongo
-    restart: always
   article_ms:
+    hostname: articlesapi
     build: .\Microservices\articles
     ports:
       - 3001:3001
@@ -48,6 +43,7 @@ services:
       - mongo
     restart: always
   connectionlogs_ms:
+    hostname: connectionlogsapi
     build: .\Microservices\connectionLogs
     ports:
       - 3002:3002
@@ -55,6 +51,7 @@ services:
       - mongo
     restart: always  
   restaurant_ms:
+    hostname: restaurantsapi
     build: .\Microservices\restaurants
     ports:
       - 3003:3003
@@ -62,9 +59,37 @@ services:
       - mongo
     restart: always
   order_ms:
+    hostname: ordersapi
     build: .\Microservices\orders
     ports:
       - 3004:3004
     depends_on:
       - mongo
     restart: always
+  kong-dbless:
+    image: kong/kong-gateway:2.8.1.1-alpine
+    volumes:
+      - "./kong/declarative/:/kong/declarative/"
+    environment:
+      - "KONG_DATABASE=off"
+      - "KONG_DECLARATIVE_CONFIG=/kong/declarative/kong.yml"
+      - "KONG_PROXY_ACCESS_LOG=/dev/stdout"
+      - "KONG_ADMIN_ACCESS_LOG=/dev/stdout"
+      - "KONG_PROXY_ERROR_LOG=/dev/stderr"
+      - "KONG_ADMIN_ERROR_LOG=/dev/stderr"
+      - "KONG_ADMIN_LISTEN=0.0.0.0:8001"
+    ports:
+      - 9000:8000
+      - 9443:8443
+      - 9001:8001
+      - 9444:8444
+      - 9002:8002
+      - 9445:8445
+      - 9003:8003
+      - 9004:8004
+    depends_on:
+      - menu_ms
+      - article_ms
+      - connectionlogs_ms
+      - restaurant_ms
+      - order_ms
