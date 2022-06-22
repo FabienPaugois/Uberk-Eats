@@ -149,7 +149,7 @@ namespace Authentification.Controllers
             // Get the roleId to assign
             Role roleToAssign = await db.Role.FirstOrDefaultAsync(b => b.Name == registerForm.RoleName);
 
-            if (registerForm.AffiliateMail != null) // If the user asks for an affiliate account
+            if (registerForm.AffiliateMail != "") // If the user asks for an affiliate account
             {
                 User getAffiliate = await db.User
                     .Include(a => a.UserRole)
