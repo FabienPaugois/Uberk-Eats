@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 router.use(bodyParser.json());
+
 const accessTokenSecret = 'a23f5zddoznJFGZBiGbIg895FZK';
 
 var restaurantSchema = mongoose.Schema({
@@ -145,10 +146,14 @@ router.route('/restaurant').post(authenticateJWT, function (req, res, next) {
 	var restaurant = new Restaurant();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Restaurant
 	restaurant.name = req.body.name;
-	restaurant.price = req.body.price;
+	restaurant.types = req.body.types;
+	restaurant.address = req.body.address;
+	restaurant.ownerId = req.body.ownerId;
 	restaurant.description = req.body.description;
-	restaurant.imgUrl = req.body.imgUrl;
-	restaurant.articles = req.body.articles;
+	restaurant.phone = req.body.phone;
+	restaurant.url = req.body.url;
+	restaurant.products = req.body.products;
+	restaurant.imageUrl = req.body.imageUrl;
 	//Nous stockons l'objet en base
 	restaurant.save(function (err) {
 		if (err) {

@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~14.0.1",
     "@angular/platform-browser-dynamic": "~14.0.1",
     "@angular/router": "~14.0.1",
+    "@types/axios": "^0.14.0",
+    "axios": "^0.27.2",
     "rxjs": "~7.5.5",
     "rxjs-observable-store": "^3.1.0",
     "ts-md5": "^1.2.11",
