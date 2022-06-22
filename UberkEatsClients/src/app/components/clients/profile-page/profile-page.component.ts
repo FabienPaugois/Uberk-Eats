@@ -1,8 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Md5 } from 'ts-md5';
-import { AuthToken } from '../../../model/authToken';
 import { Clients } from '../../../model/clients';
 import { Roles } from '../../../model/roles';
 import { ClientsApiService } from '../../../services/clients-api.service';
@@ -13,33 +11,25 @@ import { ClientsApiService } from '../../../services/clients-api.service';
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  @Input() modifyUserInfo = { mail: '', password: '', phone: '', name: '', surname: '', affiliateMail: '', role: '' };
   public roles = Roles;
   public userModificationForm: FormGroup; // variable of type FormGroup is created
 
   constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
     // Form element defined below
+
     this.userModificationForm = this.fb.group({
       name: '',
       surname: '',
       phone: '',
-      mail:'',
-      password: ''
+      password: '',
+      mail: '',
+      affiliateMail: '',
+      role: ''
     });
 
   }
 
   ngOnInit(): void {
-    var user = JSON.parse('' + localStorage.getItem('User'));
-    console.log(user);
-    this.userModificationForm.setValue({
-      name: user.Name,
-      phone: user.Phone,
-      surname: user.Surname,
-      mail: user.Mail,
-      password: ''
-    });
-    this.userModificationForm.controls['mail'].disable();
   }
 
   modify(dataclient: any) {
