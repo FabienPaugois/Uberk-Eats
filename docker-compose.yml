@@ -27,7 +27,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
   menu_ms:
-    hostname: menuapi
+    hostname: menusapi
     build: .\Microservices\menus
     ports:
       - 3000:3000
@@ -35,6 +35,7 @@ services:
       - mongo
     restart: always
   article_ms:
+    hostname: articlesapi
     build: .\Microservices\articles
     ports:
       - 3001:3001
@@ -42,6 +43,7 @@ services:
       - mongo
     restart: always
   connectionlogs_ms:
+    hostname: connectionlogsapi
     build: .\Microservices\connectionLogs
     ports:
       - 3002:3002
@@ -49,6 +51,7 @@ services:
       - mongo
     restart: always  
   restaurant_ms:
+    hostname: restaurantsapi
     build: .\Microservices\restaurants
     ports:
       - 3003:3003
@@ -56,6 +59,7 @@ services:
       - mongo
     restart: always
   order_ms:
+    hostname: ordersapi
     build: .\Microservices\orders
     ports:
       - 3004:3004
