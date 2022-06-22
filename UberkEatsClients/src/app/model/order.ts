@@ -9,6 +9,7 @@ export interface Order {
   clientId: number;
   deliveryAddress: string;
   restaurantId: number;
+  deliverymanId: number;
   status: number;
   timestamp: CustomTimeStamp;
 }
