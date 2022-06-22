@@ -51,7 +51,7 @@ export class ClientsApiService {
 
 	getRestaurants(): Observable<Restaurants> {
 		return this.http.get<Restaurants>(
-			this.apiNoSQLURL + '/restaurants',
+			this.apiNoSQLURL + 'http://localhost:3003/restaurants',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
