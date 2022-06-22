@@ -121,11 +121,11 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 		this.store.getOrdersFromDb();
 	}
 
-	EditAndAssignOrder(order: Order, status: boolean, deliverymanId: number) {
+	editAndAssignOrder(order: Order, status: boolean, deliverymanId: number) {
 		this.store.editOrderStatus(order.id, status, deliverymanId);
 	}
 
-	MarkAsPickedUp(order: Order, status: boolean) {
+	markAsPickedUp(order: Order, status: boolean) {
 		this.store.editOrderStatus(order.id, status);
 	}
 }
