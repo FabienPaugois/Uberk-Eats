@@ -4,7 +4,7 @@ INSERT INTO [ROLE] VALUES ('Admin'),
 					     ('Client'),
 						 ('Restaurant Owner'),
 						 ('Deliveryman'),
-						 ('Dev'),
+						 ('Developer'),
 						 ('Commercial Service'),
 						 ('Technical Service')
 GO
