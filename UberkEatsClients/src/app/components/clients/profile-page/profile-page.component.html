@@ -6,16 +6,19 @@
     <form class="example-form" [formGroup]="userModificationForm">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput value={{userInfo.name}} placeholder="Name" formControlName="name">
+          <input matInput placeholder="Mail" formControlName="mail" >
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput value={{userInfo.surname}} placeholder="Surname" formControlName="surname">
+          <input matInput placeholder="Name" formControlName="name" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput value={{userInfo.phone}} placeholder="Phone" formControlName="phone">
+          <input matInput placeholder="Surname" formControlName="surname" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" formControlName="password" type="password">
+          <input matInput placeholder="Phone" formControlName="phone" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" formControlName="password" type="password" required>
         </mat-form-field>
       </mat-card-content>
       <button mat-raised-button color="primary" class="btn-block">Back</button>
