@@ -12,9 +12,10 @@ var restaurantSchema = mongoose.Schema({
 	address: String,
 	ownerId: Number,
 	description: String,
+	phone: String,
 	url: String,
 	products: Object,
-	imgUrl: String
+	imageUrl: String
 });
 
 var Restaurant = mongoose.model('Restaurants', restaurantSchema);
@@ -51,7 +52,7 @@ const authenticateJWT = (req, res, next) => {
  * @apiSuccess {Number} ownerId userId of the Restaurant Owner.
  * @apiSuccess {String} description Description of the Restaurant.
  * @apiSuccess {String} url Url of the Restaurant website.
- * @apiSuccess {String} imgUrl imgUrl of the Restaurant.
+ * @apiSuccess {String} imageUrl imageUrl of the Restaurant.
  * @apiSuccess {Object} products Products Object of the Restaurant.
  *
  * @apiSuccessExample Success-Response:
