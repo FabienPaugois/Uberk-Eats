@@ -18,6 +18,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'MacDonald\'s',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl:'',
 			types: ['Fast food']
 		},
 		{
@@ -26,6 +28,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'Burger King',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Fast food']
 		},
 		{
@@ -34,6 +38,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'KFC',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Fast food']
 		},
 		{
@@ -42,6 +48,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'Friterie Sensas',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Friterie', 'Fast food']
 		},
 		{
@@ -50,6 +58,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'La pate al\'dente',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Italien']
 		},
 		{
@@ -58,6 +68,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'Le dragon lotus',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Chinois']
 		},
 		{
@@ -66,6 +78,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'Le Mykonos',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Grec']
 		},
 		{
@@ -74,6 +88,8 @@ export class RestaurantListComponent implements OnInit {
 			name: 'Tapas ta carte',
 			address: '4 rue de la Libération',
 			description: 'Texte de description',
+			ownerId: 1,
+			imageUrl: '',
 			types: ['Tapas']
 		}
 	];

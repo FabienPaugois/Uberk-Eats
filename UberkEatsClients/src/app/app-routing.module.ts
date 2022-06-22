@@ -12,6 +12,7 @@ import { OrdersPreviewComponent } from './components/restaurants/orders-preview/
 import { CreateMenuComponent } from './components/restaurants/create-menu/create-menu.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
+import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 
 const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
 	{ path: 'orders-preview', component: OrdersPreviewComponent },
 	{ path: 'order-history', component: OrderHistoryComponent },
 	{ path: 'order-preview', component: OrderPreviewComponent },
+	{ path: 'delivery-orders-preview', component: DeliveryOrdersPreviewComponent },
 ];
 
 @NgModule({
