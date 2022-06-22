@@ -20,7 +20,7 @@ namespace Authentification.Services
             _expDate = config.GetSection("JwtConfig").GetSection("expirationInMinutes").Value;
         }
 
-        public string GenerateSecurityToken(string userMail, List<Role> Roles)
+        public string GenerateSecurityToken(User user, List<Role> Roles)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.ASCII.GetBytes(_secret);
@@ -28,7 +28,11 @@ namespace Authentification.Services
             // Create the token payload
             ClaimsIdentity Subject = new ClaimsIdentity(new[]
             {
-                    new Claim(ClaimTypes.Email, userMail),
+                    new Claim("name", user.Name),
+                    new Claim("surname", user.Surname),
+                    new Claim("email", user.Mail),
+                    new Claim("phone", user.Phone),
+                    //new Claim("IdAffiliate", user.UserAffiliate)
                 });
             Roles.ForEach(delegate (Role Role) { Subject.AddClaim( new Claim(ClaimTypes.Role, Role.Name)); });
 
@@ -36,7 +40,8 @@ namespace Authentification.Services
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Expires = DateTime.UtcNow.AddMinutes(double.Parse(_expDate)),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Subject = Subject
             };
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);

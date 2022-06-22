@@ -54,7 +54,7 @@ namespace Authentification.Controllers
 
                 // Token generation
                 JwtService jwt = new JwtService(_config);
-                string token = jwt.GenerateSecurityToken(userAuth.Mail, roles);
+                string token = jwt.GenerateSecurityToken(userAuth, roles);
                 // Remove userRole to avoid json looping & remove password from the returned object
                 userAuth.UserRole = null;
                 userAuth.Password = null;
@@ -211,7 +211,7 @@ namespace Authentification.Controllers
 
                 // Token generation
                 JwtService jwt = new JwtService(_config);
-                string token = jwt.GenerateSecurityToken(registerForm.User.Mail, new List<Role>() { roleToAssign });
+                string token = jwt.GenerateSecurityToken(registerForm.User, new List<Role>() { roleToAssign });
 
                 // Remove userRole to avoid json looping & remove password from the returned object
                 registerForm.User.UserRole = null;
