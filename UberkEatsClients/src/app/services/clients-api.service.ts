@@ -13,8 +13,8 @@ import { OrdersObject } from '../model/order';
 })
 export class ClientsApiService {
 	// Define API
-	apiURL = 'http://localhost:8080';
-	//apiURL = 'https://localhost:44310';
+	//apiURL = 'http://localhost:8080';
+	apiURL = 'https://localhost:44310';
 	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {
