@@ -1,0 +1,38 @@
+_format_version: "2.1"
+
+services:
+- name: menus-service
+  url: http://menusapi:3000
+  routes:
+  - name: menus
+    path_handling: "v1"
+    paths:
+    - /menus
+- name: articles-service
+  url: http://articlesapi:3001
+  routes:
+  - name: articles
+    path_handling: "v1"
+    paths:
+    - /articles
+- name: connections-service
+  url: http://connectionlogsapi:3002
+  routes:
+  - name: connectionlogs
+    path_handling: "v1"
+    paths:
+    - /connectionLogs
+- name: restaurants-service
+  url: http://restaurantsapi:3003
+  routes:
+  - name: restaurants
+    path_handling: "v1"
+    paths:
+    - /restaurants
+- name: orders-service
+  url: http://ordersapi:3004
+  routes:
+  - name: orders
+    path_handling: "v1"
+    paths:
+    - /orders

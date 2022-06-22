@@ -64,7 +64,7 @@ const authenticateJWT = (req, res, next) => {
  *
  */
 /* GET ConnectionLogs. */
-router.route('/connectionLogs')
+router.route('/')
 	.get(authenticateJWT, function (req, res, next) {
 		ConnectionLog.find(function (err, connectionLogs) {
 			if (err) {
@@ -89,7 +89,7 @@ router.route('/connectionLogs')
 */
 
 /* POST ConnectionLogs. */
-router.route('/connectionLog')
+router.route('/')
 	.post(authenticateJWT, function (req, res, next) {
 		// Nous utilisons le schéma ConnectionLog
 		var connectionLog = new ConnectionLog();

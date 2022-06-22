@@ -80,7 +80,7 @@ const authenticateJWT = (req, res, next) => {
  *
  */
 /* GET Menus. */
-router.route('/menus')
+router.route('/')
 
 	.get(authenticateJWT, function (req, res, next) {
 		Menu.find(function (err, menus) {
@@ -108,7 +108,7 @@ router.route('/menus')
 */
 
 /* POST Menus. */
-router.route('/menu').post(authenticateJWT, function (req, res, next) {
+router.route('/').post(authenticateJWT, function (req, res, next) {
 	// Nous utilisons le schéma Menu
 	var menu = new Menu();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Menu
@@ -165,7 +165,7 @@ router.route('/menu').post(authenticateJWT, function (req, res, next) {
  *     }
  */
 
-router.route('/menu/:menu_ids')
+router.route('/:menu_ids')
 	.get(authenticateJWT, function (req, res) {
 		const ids = req.params.menu_ids.split(',');
 		Menu.find().where('_id').in(ids).exec((err, menus) => {
@@ -192,7 +192,7 @@ router.route('/menu/:menu_ids')
 * @apiError MenuNotUpdated Menu couldn't be updated.
 */
 
-router.route('/menu/:menu_id').put(authenticateJWT, function (req, res) {
+router.route('/:menu_id').put(authenticateJWT, function (req, res) {
 	Menu.findById(req.params.menu_id, function (err, menu) {
 		if (err) {
 			res.send(err);
