@@ -8,12 +8,13 @@ const accessTokenSecret = 'a23f5zddoznJFGZBiGbIg895FZK';
 
 var orderSchema = mongoose.Schema({
 	clientId: Number,
-	deliverAdress: String,
+	deliveryAddress: String,
 	deliverymanId: Number,
 	restaurantId: Number,
 	status: Number,
 	timestamp: Object,
-	products: Object
+	menus: Object,
+	articles: Object
 });
 
 var Order = mongoose.model('Orders', orderSchema);
@@ -46,12 +47,13 @@ const authenticateJWT = (req, res, next) => {
  * @apiGroup Orders
  *
  * @apiSuccess {Number} clientId Id of the User who ordered.
- * @apiSuccess {String} deliverAdress DeliverAdress of the Order.
+ * @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
  * @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
  * @apiSuccess {Number} restaurantId RestaurantId of the Order.
  * @apiSuccess {Number} status Status of the Order.
  * @apiSuccess {Object} timestamp Timestamp object of the Order.
- * @apiSuccess {Object} products Products object of the Order.
+ * @apiSuccess {Object} menus Menus object of the Order.
+ * @apiSuccess {Object} articles Articles object of the Order.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -96,12 +98,13 @@ router.route('/orders')
 * @apiGroup Orders
 *
 * @apiSuccess {Number} clientId Id of the User who ordered.
-* @apiSuccess {String} deliverAdress DeliverAdress of the Order.
+* @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
 * @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
 * @apiSuccess {Number} restaurantId RestaurantId of the Order.
 * @apiSuccess {Number} status Status of the Order.
 * @apiSuccess {Object} timestamp Timestamp object of the Order.
-* @apiSuccess {Object} products Products object of the Order.
+* @apiSuccess {Object} menus Menus object of the Order.
+* @apiSuccess {Object} articles Articles object of the Order.
 *
 * @apiError OrderNotCreated Order couldn't be created.
 */
@@ -136,12 +139,13 @@ router.route('/order').post(authenticateJWT, function (req, res, next) {
  * @apiParam {string} order_ids List of Order unique IDs, separated by commas.
  *
  * @apiSuccess {Number} clientId Id of the User who ordered.
- * @apiSuccess {String} deliverAdress DeliverAdress of the Order.
+ * @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
  * @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
  * @apiSuccess {Number} restaurantId RestaurantId of the Order.
  * @apiSuccess {Number} status Status of the Order.
  * @apiSuccess {Object} timestamp Timestamp object of the Order.
- * @apiSuccess {Object} products Products object of the Order.
+ * @apiSuccess {Object} menus Menus object of the Order.
+ * @apiSuccess {Object} articles Articles object of the Order.
  *
  * @apiError OrderNotFound The id of one or more Orders were not found.
  *
@@ -169,12 +173,14 @@ router.route('/order/:order_ids')
 * @apiVersion 1.0.0
 * @apiName PutOrders
 * @apiGroup Orders
-*
-* @apiSuccess {String} name Name of the Order.
-* @apiSuccess {String} price Price of the Order.
-* @apiSuccess {String} description Description of the Order.
-* @apiSuccess {String} imgUrl ImgUrl of the Order.
-* @apiSuccess {Array} articles Articles array of the Order
+* @apiSuccess {Number} clientId Id of the User who ordered.
+* @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
+* @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
+* @apiSuccess {Number} restaurantId RestaurantId of the Order.
+* @apiSuccess {Number} status Status of the Order.
+* @apiSuccess {Object} timestamp Timestamp object of the Order.
+* @apiSuccess {Object} menus Menus object of the Order.
+* @apiSuccess {Object} articles Articles object of the Order.
 *
 * @apiError OrderNotUpdated Order couldn't be updated.
 */
@@ -211,7 +217,8 @@ router.route('/order/:order_id').put(authenticateJWT, function (req, res) {
 	* @apiSuccess {Number} restaurantId RestaurantId of the Order.
 	* @apiSuccess {Number} status Status of the Order.
 	* @apiSuccess {Object} timestamp Timestamp object of the Order.
-	* @apiSuccess {Object} products Products object of the Order.
+	* @apiSuccess {Object} menus Menus object of the Order.
+ 	* @apiSuccess {Object} articles Articles object of the Order.
 	*
 	* @apiError OrderNotDeleted Order couldn't be deleted.
 	*/
