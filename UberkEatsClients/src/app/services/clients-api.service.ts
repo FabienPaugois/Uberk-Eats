@@ -13,6 +13,8 @@ import { ConnectionLogs } from '../model/connectionLogs';
 	providedIn: 'root',
 })
 export class ClientsApiService {
+  	// Controller url
+  	controllerUrl = 'http://localhost:9000';
 	// Define API
 	apiURL = 'http://localhost:8080';
 	//apiURL = 'https://localhost:44310';
@@ -21,7 +23,6 @@ export class ClientsApiService {
 	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + localStorage.getItem('JWT')
 		}),
 	};
 
@@ -30,15 +31,13 @@ export class ClientsApiService {
     CRUD Methods for consuming RESTful API
   =========================================*/
 
-
 	// HttpClient API post() method => Authenticate
 	authenticate(employee: any): Observable<AuthToken> {
 		return this.http.post<AuthToken>(
 			this.apiURL + '/authenticate',
 			JSON.stringify(employee),
 			this.httpOptions
-		)
-			.pipe(retry(1), catchError(this.handleError));
+		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
@@ -87,22 +86,22 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	getOrdersHistory(): Observable<OrdersObject> {
-		return this.http.get<OrdersObject>(
+	getOrdersHistory(): Observable<OrdersObject[]> {
+    	return this.http.get<OrdersObject[]>(
 			this.apiNoSQLURL + '/ordersHistory',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	FetchArticleData(id: number): Observable<Articles> {
-		return this.http.get<Articles>(
+  	FetchArticleData(id: number): Observable<Articles[]> {
+    	return this.http.get<Articles[]>(
 			this.apiNoSQLURL + '/article/' + id,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	FetchMenuData(id: number): Observable<Menus> {
-		return this.http.get<Menus>(
+  	FetchMenuData(id: number): Observable<Menus[]> {
+    	return this.http.get<Menus[]>(
 			this.apiNoSQLURL + '/menus/' + id,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
