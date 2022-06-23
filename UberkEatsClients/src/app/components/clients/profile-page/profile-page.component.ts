@@ -37,7 +37,7 @@ export class ProfilePageComponent implements OnInit {
   		phone: user.Phone,
   		surname: user.Surname,
   		mail: user.Mail,
-  		password: ''
+  		password: null
   	});
   	this.userModificationForm.controls.mail.disable();
   }
@@ -54,5 +54,21 @@ export class ProfilePageComponent implements OnInit {
   			localStorage.setItem('User', JSON.stringify(data));
   			this.router.navigate(['/']);
   		});
+  }
+  delete(dataclient: any) {
+    console.log(this.userModificationForm.get('password')?.value);
+    if (this.userModificationForm.get('mail')?.value != '' && this.userModificationForm.get('password')?.value != '') {
+      this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
+      this.modifyUserInfo.password = Md5.hashStr(this.userModificationForm.get('password')?.value); 
+      this.clientsApi.delete(this.modifyUserInfo)
+        .subscribe((data: Clients) => {
+          // Send the login request
+          localStorage.setItem('User', '');
+          this.router.navigate(['/']);
+        });
+    }
+    else {
+      window.alert("Veuillez remplir tous les champs obligatoires avant de valider.")
+    }
   }
 }
