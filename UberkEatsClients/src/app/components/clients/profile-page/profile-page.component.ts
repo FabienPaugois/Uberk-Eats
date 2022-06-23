@@ -56,19 +56,19 @@ export class ProfilePageComponent implements OnInit {
   		});
   }
   delete(dataclient: any) {
-    console.log(this.userModificationForm.get('password')?.value);
-    if (this.userModificationForm.get('mail')?.value != '' && this.userModificationForm.get('password')?.value != '') {
-      this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
-      this.modifyUserInfo.password = Md5.hashStr(this.userModificationForm.get('password')?.value); 
-      this.clientsApi.delete(this.modifyUserInfo)
-        .subscribe((data: Clients) => {
-          // Send the login request
-          localStorage.setItem('User', '');
-          this.router.navigate(['/']);
-        });
-    }
-    else {
-      window.alert("Veuillez remplir tous les champs obligatoires avant de valider.")
-    }
+  	console.log(this.userModificationForm.get('password')?.value);
+  	if (this.userModificationForm.get('mail')?.value !== '' && this.userModificationForm.get('password')?.value !== '') {
+  		this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
+  		this.modifyUserInfo.password = Md5.hashStr(this.userModificationForm.get('password')?.value);
+  		this.clientsApi.delete(this.modifyUserInfo)
+  			.subscribe((data: Clients) => {
+  				// Send the login request
+  				localStorage.setItem('User', '');
+  				this.router.navigate(['/']);
+  			});
+  	}
+  	else {
+  		window.alert('Veuillez remplir tous les champs obligatoires avant de valider.');
+  	}
   }
 }
