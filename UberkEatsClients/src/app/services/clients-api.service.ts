@@ -8,6 +8,7 @@ import { Menus } from '../model/menus';
 import { AuthToken } from '../model/authToken';
 import { ConnectionLogs } from '../model/connectionLogs';
 import { Order, OrdersObject } from '../model/order';
+import { Clients } from 'app/model/clients';
 @Injectable({
 	providedIn: 'root',
 })
@@ -63,13 +64,6 @@ export class ClientsApiService {
 		).pipe(retry(0), catchError(this.handleError));
 	}
 
-	getRestaurants(): Observable<Restaurants> {
-		return this.http.get<Restaurants>(
-			this.apiNoSQLURL + '/restaurants',
-			this.httpOptions
-		).pipe(retry(1), catchError(this.handleError));
-	}
-
 	postConnectionLogs(connectionLog: any): Observable<ConnectionLogs> {
 		return this.http.post<ConnectionLogs>(
 			this.apiNoSQLURL + '/connectionLogs',
@@ -81,6 +75,13 @@ export class ClientsApiService {
 	getConnectionLogs(): Observable<ConnectionLogs[]> {
 		return this.http.get<ConnectionLogs[]>(
 			this.apiNoSQLURL + '/connectionLogs',
+			this.httpOptions
+			).pipe(retry(1), catchError(this.handleError));
+		}
+
+	getRestaurants(): Observable<Restaurants[]> {
+    	return this.http.get<Restaurants[]>(
+      	this.controllerUrl + '/restaurants',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
@@ -103,8 +104,8 @@ export class ClientsApiService {
     	return this.http.get<Menus[]>(
 			this.controllerUrl + '/menus/' + id,
 			this.httpOptions
-		).pipe(retry(1), catchError(this.handleError));
-	}
+			).pipe(retry(1), catchError(this.handleError));
+		}
 
 	sendCreatedOrder(order: Order){
 		return this.http.post<Order>(
