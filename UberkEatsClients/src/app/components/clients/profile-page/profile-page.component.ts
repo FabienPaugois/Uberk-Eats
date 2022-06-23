@@ -30,11 +30,13 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var user = JSON.parse('' + localStorage.getItem('User'));
+    console.log(user);
     this.userModificationForm.setValue({
-      name: localStorage.getItem('name') ? localStorage.getItem('name') : '',
-      phone: '' + localStorage.getItem('phone') ? localStorage.getItem('phone') : '',
-      surname: '' + localStorage.getItem('surname') ? localStorage.getItem('surname') : '',
-      mail: this.userModificationForm.get('mail')?.value,
+      name: user.Name,
+      phone: user.Phone,
+      surname: user.Surname,
+      mail: user.Mail,
       password: ''
     });
   }
