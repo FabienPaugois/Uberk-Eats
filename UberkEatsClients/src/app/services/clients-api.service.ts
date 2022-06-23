@@ -41,10 +41,17 @@ export class ClientsApiService {
 	}
 
 	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
-		console.log(affiliateMail);
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
 			JSON.stringify({ user: employee, roleName, affiliateMail }),
+			this.httpOptions
+		).pipe(retry(0), catchError(this.handleError));
+	}
+
+	modify(employee: any): Observable<Clients> {
+		return this.http.post<Clients>(
+			this.apiURL + '/update',
+			JSON.stringify({ user: employee }),
 			this.httpOptions
 		).pipe(retry(0), catchError(this.handleError));
 	}

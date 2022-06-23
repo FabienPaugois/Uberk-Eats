@@ -112,17 +112,17 @@ namespace Authentification.Controllers
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("/Update")]
-        public ContentResult Update(User user)
+        public ContentResult Update(RegisterForm registerForm)
         {
-            User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
+            User authenticated = db.User.FirstOrDefault(a => a.Mail == registerForm.User.Mail && a.Password == registerForm.User.Password);
             if (authenticated != null)
             {
-                user.Id = authenticated.Id;
-                db.Entry(authenticated).CurrentValues.SetValues(user);
+                registerForm.User.Id = authenticated.Id;
+                db.Entry(authenticated).CurrentValues.SetValues(registerForm.User);
                 db.SaveChanges();
                 return new ContentResult()
                 {
-                    Content = JsonConvert.SerializeObject("Account created"),
+                    Content = JsonConvert.SerializeObject(registerForm.User),
                     ContentType = "application/json",
                     StatusCode = 201
                 };
@@ -149,7 +149,7 @@ namespace Authentification.Controllers
             // Get the roleId to assign
             Role roleToAssign = await db.Role.FirstOrDefaultAsync(b => b.Name == registerForm.RoleName);
 
-            if (registerForm.AffiliateMail != null) // If the user asks for an affiliate account
+            if (registerForm.AffiliateMail != "") // If the user asks for an affiliate account
             {
                 User getAffiliate = await db.User
                     .Include(a => a.UserRole)
