@@ -50,6 +50,7 @@ export class ProfilePageComponent implements OnInit {
     this.clientsApi.modify(this.modifyUserInfo)
       .subscribe((data: Clients) => {
         // Send the login request
+        localStorage.setItem('User', JSON.stringify(data));
         this.router.navigate(['/']);
       });
   }
