@@ -81,10 +81,10 @@ namespace Authentification.Controllers
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("/Delete")]
-        public ContentResult Delete(User user)
+        public ContentResult Delete(RegisterForm userToDelete)
         {
             // Authenticate the user before authorizing him to delete his account
-            User authenticated = db.User.FirstOrDefault(a => a.Mail == user.Mail && a.Password == user.Password);
+            User authenticated = db.User.FirstOrDefault(a => a.Mail == userToDelete.User.Mail && a.Password == userToDelete.User.Password);
             if (authenticated != null)
             {
                 db.User.Remove(authenticated);
