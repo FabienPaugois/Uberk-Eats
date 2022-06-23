@@ -1,5 +1,5 @@
 export interface ConnectionLogs {
-  userId: Number,
-  date: Date,
-  description: String
+  userId: number;
+  date: Date;
+  description: string;
 }

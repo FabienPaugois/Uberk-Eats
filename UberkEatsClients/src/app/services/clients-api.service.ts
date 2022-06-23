@@ -16,7 +16,7 @@ export class ClientsApiService {
 	// Define API
 	apiURL = 'http://localhost:8080';
 	//apiURL = 'https://localhost:44310';
-  apiNoSQLURL = 'http://localhost:9000';
+	apiNoSQLURL = 'http://localhost:9000';
 	// Http Options
 	httpOptions = {
 		headers: new HttpHeaders({
@@ -62,15 +62,15 @@ export class ClientsApiService {
 			this.apiNoSQLURL + 'http://localhost:3003/restaurants',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
-  }
+	}
 
-  postConnectionLogs(connectionLog: any): Observable<ConnectionLogs> {
-    return this.http.post<ConnectionLogs>(
-      this.apiNoSQLURL + '/connectionLogs',
-      JSON.stringify(connectionLog),
-      this.httpOptions
-    ).pipe(retry(0), catchError(this.handleError));
-  }
+	postConnectionLogs(connectionLog: any): Observable<ConnectionLogs> {
+		return this.http.post<ConnectionLogs>(
+			this.apiNoSQLURL + '/connectionLogs',
+			JSON.stringify(connectionLog),
+			this.httpOptions
+		).pipe(retry(0), catchError(this.handleError));
+	}
 
 	getOrdersHistory(): Observable<OrdersObject> {
 		return this.http.get<OrdersObject>(

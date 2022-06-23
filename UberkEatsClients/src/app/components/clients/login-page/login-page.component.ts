@@ -26,28 +26,24 @@ export class LoginPageComponent implements OnInit {
 	ngOnInit(): void { }
 	authenticate(dataclient: any) {
 		this.loginInfo.mail = this.loginForm.get('mail')?.value;
-    this.loginInfo.password = Md5.hashStr(this.loginForm.get('password')?.value);
-    const co: ConnectionLogs = { userId: NaN, date: new Date(), description:''};
-    this.clientsApi.authenticate(this.loginInfo).subscribe((data: AuthToken) => { // Send the login request
-      localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
-      localStorage.setItem('User', JSON.stringify(data.user));
+		this.loginInfo.password = Md5.hashStr(this.loginForm.get('password')?.value);
+		const co: ConnectionLogs = { userId: NaN, date: new Date(), description:''};
+		this.clientsApi.authenticate(this.loginInfo).subscribe((data: AuthToken) => { // Send the login request
+			localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
+			localStorage.setItem('User', JSON.stringify(data.user));
 
-      console.log('logged in');
-      co.userId = JSON.parse('' + localStorage.getItem('User')).Id;
-      co.date = new Date();
-      co.description = 'User logged in succesfully';
-      this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
+			co.userId = JSON.parse('' + localStorage.getItem('User')).Id;
+			co.date = new Date();
+			co.description = 'User logged in succesfully';
+			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
 
-    }, (error: any) => {
+		}, (error: any) => {
 
-      console.log('error');
-      co.userId = NaN;
-      co.date = new Date();
-      co.description = 'User with login mail \'' + JSON.parse('' + localStorage.getItem('User')).Mail + '\' could not login. Error : ' + error;
-      this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
-
-    });
-
-    
+			co.userId = NaN;
+			co.date = new Date();
+			co.description = 'User with login mail \'' + JSON.parse('' + localStorage.getItem('User')).Mail + '\' could not login. Error : '
+        + error;
+			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
+		});
 	}
 }
