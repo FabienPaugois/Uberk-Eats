@@ -54,16 +54,16 @@ export class ClientsApiService {
 			JSON.stringify({ user: employee }),
 			this.httpOptions
 		).pipe(retry(0), catchError(this.handleError));
-  }
+	}
 
-  delete(employee: any): Observable<Clients> {
-    console.log(employee);
-    return this.http.post<Clients>(
-      this.apiURL + '/delete',
-      JSON.stringify({ user: employee }),
-      this.httpOptions
-    ).pipe(retry(0), catchError(this.handleError));
-  }
+	delete(employee: any): Observable<Clients> {
+		console.log(employee);
+		return this.http.post<Clients>(
+			this.apiURL + '/delete',
+			JSON.stringify({ user: employee }),
+			this.httpOptions
+		).pipe(retry(0), catchError(this.handleError));
+	}
 
 	getRestaurants(): Observable<Restaurants> {
 		return this.http.get<Restaurants>(
