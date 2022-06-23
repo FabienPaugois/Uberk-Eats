@@ -16,7 +16,7 @@ export class RestaurantListComponent implements OnInit {
 	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
 	ngOnInit(): void {
-
+		this.getRestaurants();
 	}
 
 	btnClick() {
@@ -26,7 +26,8 @@ export class RestaurantListComponent implements OnInit {
 	}
 
 	getRestaurants() {
-		this.clientsApi.getRestaurants().subscribe((data: unknown) => {
+		this.clientsApi.getRestaurants().subscribe((restaurants: Restaurants[]) => {
+			this.restaurants = restaurants;
 		});
 	}
 }

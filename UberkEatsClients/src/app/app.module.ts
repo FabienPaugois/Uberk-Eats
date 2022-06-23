@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './components/clients/login-page/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BasketPageComponent } from './components/basket-page/basket-page.component';
 import { RegisterPageComponent } from './components/clients/register-page/register-page.component';
 import { ProfilePageComponent } from './components/clients/profile-page/profile-page.component';
@@ -20,6 +20,7 @@ import { CreateMenuComponent } from './components/restaurants/create-menu/create
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-o
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [],
+	providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
