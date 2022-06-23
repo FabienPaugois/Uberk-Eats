@@ -122,7 +122,7 @@ namespace Authentification.Controllers
                 db.SaveChanges();
                 return new ContentResult()
                 {
-                    Content = JsonConvert.SerializeObject("Account created"),
+                    Content = JsonConvert.SerializeObject(registerForm.User),
                     ContentType = "application/json",
                     StatusCode = 201
                 };
