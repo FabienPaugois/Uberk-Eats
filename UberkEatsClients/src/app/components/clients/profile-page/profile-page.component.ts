@@ -39,6 +39,7 @@ export class ProfilePageComponent implements OnInit {
       mail: user.Mail,
       password: ''
     });
+    this.userModificationForm.controls['mail'].disable();
   }
 
   modify(dataclient: any) {
