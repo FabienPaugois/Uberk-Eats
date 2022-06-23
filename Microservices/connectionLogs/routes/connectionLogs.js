@@ -103,7 +103,7 @@ router.route('/')
 				res.send(err);
 			}
 			else {
-				res.send("Created");
+				res.send(connectionLog);
 			}
 		});
 	});

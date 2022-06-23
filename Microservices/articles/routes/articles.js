@@ -115,7 +115,7 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 			res.send(err);
 		}
 		else {
-			res.send("Created");
+			res.send(article);
 		}
 	});
 });

@@ -114,10 +114,13 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 	// Nous utilisons le schéma Order
 	var order = new Order();
 	// Nous récupérons les données reçues pour les ajouter à l'objet Order
-	order.name = req.body.name;
-	order.price = req.body.price;
-	order.description = req.body.description;
-	order.imgUrl = req.body.imgUrl;
+	order.clientId = req.body.clientId;
+	order.deliveryAddress = req.body.deliveryAddress;
+	order.deliverymanId = req.body.deliverymanId;
+	order.restaurantId = req.body.restaurantId;
+	order.status = req.body.status;
+	order.timestamp = req.body.timestamp;
+	order.menus = req.body.menus;
 	order.articles = req.body.articles;
 	//Nous stockons l'objet en base
 	order.save(function (err) {
@@ -125,7 +128,7 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 			res.send(err);
 		}
 		else {
-			res.send("Created");
+			res.send(order);
 		}
 	});
 });
