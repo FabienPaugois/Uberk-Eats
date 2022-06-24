@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Clients } from '../model/clients';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Restaurants } from '../model/restaurants';
@@ -17,7 +16,7 @@ export class ClientsApiService {
 	// Define API
 	apiURL = 'http://localhost:8080';
 	//apiURL = 'https://localhost:44310';
-  	apiNoSQLURL = '';	
+  	apiNoSQLURL = '';
 	// Http Options
 	httpOptions = {
 		headers: new HttpHeaders({
@@ -62,16 +61,16 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-  	FetchArticleData(id: number): Observable<Articles[]> {
+  	FetchArticleData(id: string): Observable<Articles[]> {
     	return this.http.get<Articles[]>(
-			this.apiNoSQLURL + '/article/' + id,
+			this.controllerUrl + '/articles/' + id,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-  	FetchMenuData(id: number): Observable<Menus[]> {
+  	FetchMenusData(id: string): Observable<Menus[]> {
     	return this.http.get<Menus[]>(
-			this.apiNoSQLURL + '/menus/' + id,
+			this.controllerUrl + '/menus/' + id,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}

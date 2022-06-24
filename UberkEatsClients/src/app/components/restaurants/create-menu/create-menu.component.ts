@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Roles } from '../../../model/roles';
 import { Articles } from '../../..//model/articles';
-import { ClientsApiService } from '../../../services/clients-api.service';
 import { Menus } from '../../../model/menus';
 import { Products } from '../../../model/products';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductsStore } from '../../../store/restaurantStore/products-store';
 import { BasketObjectsType } from '../../../model/basket';
+import { RestaurantsApiService } from 'app/services/restaurants-api.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-create-menu',
@@ -88,7 +88,7 @@ export class CreateMenuComponent implements OnInit {
   ngUnsubscribe = new Subject();
 
   constructor(
-    public clientsApi: ClientsApiService,
+    public restaurantsApi: RestaurantsApiService,
     public router: Router,
     private fb: FormBuilder,
     private store: ProductsStore
@@ -125,12 +125,14 @@ export class CreateMenuComponent implements OnInit {
   	this.menuInfo.price = this.menuForm.get('price')?.value;
   	this.menuInfo.imageUrl = this.menuForm.get('imageUrl')?.value;
   	this.menuInfo.articles = this.menuForm.get('articles')?.value;
-  	this.store.addMenusObject({
-  		type: BasketObjectsType.menu,
-  		id: this.store.state.articles.length + 1,
-  		product: { ...this.menuInfo }
+  	this.restaurantsApi.createMenu(this.menuInfo).subscribe((response: HttpResponse<Menus>) => {
+  		if(response.status === 200){
+  			this.store.addMenusObject({
+  				type: BasketObjectsType.menu,
+  				id: this.store.state.articles.length + 1,
+  				product: { ...this.menuInfo }
+  			});
+  		}
   	});
-  	console.log(this.productsContent);
   }
-
 }

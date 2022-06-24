@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Articles } from '../../../model/articles';
 import { Menus } from '../../../model/menus';
 import { ClientsApiService } from '../../../services/clients-api.service';
@@ -10,94 +11,34 @@ import { ClientsApiService } from '../../../services/clients-api.service';
 	styleUrls: ['./menu-pick-page.component.scss']
 })
 export class MenuPickPageComponent implements OnInit {
+	@Input() id: string;
+	routeSub: Subscription;
+	restaurantId: string;
+	articles: Articles[];
+	articlesIdArr: string;
+	menus: Menus[];
+	menusIdArr: string;
 
-	articles: Articles[] = [
-		{
-			id: 1,
-			name: 'Whooper',
-			description: 'Lorem ipsum',
-			price: 4,
-			imageUrl: '',
-		},
-		{
-			id: 2,
-			name: 'Triple Cheese',
-			description: 'Lorem ipsum',
-			price: 5,
-			imageUrl: '',
-		},
-		{
-			id: 3,
-			name: 'Double Steakhouse',
-			description: 'Lorem ipsum',
-			price: 4,
-			imageUrl: '',
-		},
-		{
-			id: 4,
-			name: 'Chicken Alabama',
-			description: 'Lorem ipsum',
-			price: 6,
-			imageUrl: '',
-		},
-		{
-			id: 5,
-			name: 'Double Cheese Bacon Vegan',
-			description: 'Lorem ipsum',
-			price: 10,
-			imageUrl: '',
-		},
-		{
-			id: 6,
-			name: 'Potatoes',
-			description: 'Lorem ipsum',
-			price: 2,
-			imageUrl: '',
-		},
-		{
-			id: 7,
-			name: 'Fries',
-			description: 'Lorem ipsum',
-			price: 2,
-			imageUrl: '',
-		},
-		{
-			id: 8,
-			name: 'Coke',
-			description: 'Lorem ipsum',
-			price: 2.5,
-			imageUrl: '',
-		},
-		{
-			id: 9,
-			name: 'Pepsi',
-			description: 'Lorem ipsum',
-			price: 2.5,
-			imageUrl: '',
-		},
-	];
-	menus: Menus[] = [
-		{
-			id: 1,
-			name: 'Menu Whooper',
-			description: 'Lorem ipsum',
-			price: 9,
-			articles: [1, 7, 8],
-			imageUrl: ''
-		},
-		{
-			id: 2,
-			name: 'Menu Steakhouse',
-			description: 'Lorem ipsum',
-			price: 10,
-			articles: [2, 7, 9],
-			imageUrl: ''
-		},
-	];
-
-	constructor(public clientsApi: ClientsApiService, public router: Router) { }
+	constructor(
+		public clientsApi: ClientsApiService,
+		public router: Router,
+		private activatedRoute: ActivatedRoute,
+	) { }
 
 	ngOnInit(): void {
+		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+			this.restaurantId = params.restaurantId.split(',');
+			this.articlesIdArr = params.articlesArr;
+			this.menusIdArr = params.menusArr;
+		});
+		this.clientsApi.FetchArticleData(this.articlesIdArr).subscribe((articles: Articles[]) => {
+			this.articles = articles;
+			console.log(this.articles);
+		});
+		this.clientsApi.FetchMenusData(this.menusIdArr).subscribe((menus: Menus[]) => {
+			this.menus = menus;
+			console.log(this.menus);
+		});
 	}
 
 	btnClickMenu(menu: Menus) {
