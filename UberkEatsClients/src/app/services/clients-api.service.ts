@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Clients } from '../model/clients';
+import { ConnectionLogs } from '../model/connectionLogs';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Restaurants } from '../model/restaurants';
@@ -79,6 +80,13 @@ export class ClientsApiService {
 			this.httpOptions
 		).pipe(retry(0), catchError(this.handleError));
 	}
+
+  getConnectionLogs(): Observable<ConnectionLogs> {
+    return this.http.get<ConnectionLogs>(
+      this.apiNoSQLURL + 'http://localhost:3003/restaurants',
+      this.httpOptions
+    ).pipe(retry(1), catchError(this.handleError));
+  }
 
 	getOrdersHistory(): Observable<OrdersObject> {
 		return this.http.get<OrdersObject>(
