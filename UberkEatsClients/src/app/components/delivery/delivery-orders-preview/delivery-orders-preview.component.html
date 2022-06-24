@@ -9,10 +9,10 @@
             <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <h1>Menus</h1>
+            <!--<h1>Menus</h1>
             <p *ngFor="let menu of order.menus">Menu {{menu.id}} : {{ menus[menu.id - 1].name }} Quantité : {{ menu.qty }}</p>
             <h1>Articles</h1>
-            <p *ngFor="let article of order.articles">Article {{article.id}} : {{ articles[article.id - 1].name }} Quantité : {{ article.qty }}</p>
+            <p *ngFor="let article of order.articles">Article {{article.id}} : {{ articles[article.id - 1].name }} Quantité : {{ article.qty }}</p>-->
           </mat-card-content>
           <mat-card-actions>
             <button type="button" (click)="editAndAssignOrder(order, true, loggedDeliveryManId);">Accepter la commande</button>
@@ -42,9 +42,9 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <h1>Menus</h1>
-              <p *ngFor="let menu of order.menus">Menu {{menu.id}} : {{ menus[menu.id - 1].name }} Quantité : {{ menu.qty }}</p>
+              <!--<p *ngFor="let menu of order.menus">Menu {{menu.id}} : {{ menus[menu.id - 1].name }} Quantité : {{ menu.qty }}</p>
               <h1>Articles</h1>
-              <p *ngFor="let article of order.articles">Article {{article.id}} : {{ articles[article.id - 1].name }} Quantité : {{ article.qty }}</p>
+              <p *ngFor="let article of order.articles">Article {{article.id}} : {{ articles[article.id - 1].name }} Quantité : {{ article.qty }}</p>-->
             </mat-expansion-panel>
 
           </mat-card-content>

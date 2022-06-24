@@ -16,68 +16,68 @@ import { HttpResponse } from '@angular/common/http';
 	styleUrls: ['./create-menu.component.scss']
 })
 export class CreateMenuComponent implements OnInit {
-  @Input() menuInfo: Menus = {id: NaN, name:'', description:'', price:0, imageUrl: '', articles: []};
+  @Input() menuInfo: Menus = {_id: '', name:'', description:'', price:0, imageUrl: '', articles: []};
   public menuForm: FormGroup; // variable of type FormGroup is created
 
   articles: Articles[] = [
   	{
-  		id: 1,
+  		_id: '1',
   		name: 'Whooper',
   		description: 'Lorem ipsum',
   		price: 4,
   		imageUrl: '',
   	},
   	{
-  		id: 2,
+  		_id: '2',
   		name: 'Triple Cheese',
   		description: 'Lorem ipsum',
   		price: 5,
   		imageUrl: '',
   	},
   	{
-  		id: 3,
+  		_id: '3',
   		name: 'Double Steakhouse',
   		description: 'Lorem ipsum',
   		price: 4,
   		imageUrl: '',
   	},
   	{
-  		id: 4,
+  		_id: '4',
   		name: 'Chicken Alabama',
   		description: 'Lorem ipsum',
   		price: 6,
   		imageUrl: '',
   	},
   	{
-  		id: 5,
+  		_id: '5',
   		name: 'Double Cheese Bacon Vegan',
   		description: 'Lorem ipsum',
   		price: 10,
   		imageUrl: '',
   	},
   	{
-  		id: 6,
+  		_id: '6',
   		name: 'Potatoes',
   		description: 'Lorem ipsum',
   		price: 2,
   		imageUrl: '',
   	},
   	{
-  		id: 7,
+  		_id: '7',
   		name: 'Fries',
   		description: 'Lorem ipsum',
   		price: 2,
   		imageUrl: '',
   	},
   	{
-  		id: 8,
+  		_id: '8',
   		name: 'Coke',
   		description: 'Lorem ipsum',
   		price: 2.5,
   		imageUrl: '',
   	},
   	{
-  		id: 9,
+  		_id: '9',
   		name: 'Pepsi',
   		description: 'Lorem ipsum',
   		price: 2.5,
