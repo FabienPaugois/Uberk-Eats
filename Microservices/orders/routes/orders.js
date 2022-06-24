@@ -197,7 +197,6 @@ router.route('/orderids/:order_ids')
 
 router.route('/freeOrders')
 	.get(authenticateJWT, function (req, res) {
-		console.log('patate');
 		Order.find({ 'status': { $eq: 2 } }).exec((err, orders) => {
 			if (err)
 				res.status(404).json({ message: "Orders were not found" });
@@ -235,7 +234,7 @@ router.route('/freeOrders')
 
 router.route('/deliveryman/:deliveryManId')
 	.get(authenticateJWT, function (req, res) {
-		Order.find().where('deliverymanId').equals(req.params.deliverymanId).exec((err, orders) => {
+		Order.find({ 'deliverymanId': { $eq: req.params.deliveryManId } }).exec((err, orders) => {
 			if (err)
 				res.status(404).json({ message: "Orders were not found" });
 			else
