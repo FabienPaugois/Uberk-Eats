@@ -20,6 +20,8 @@ import { CreateMenuComponent } from './components/restaurants/create-menu/create
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
+import { MatTableModule } from '@angular/material/table';
+import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-o
 		RegisterPageComponent,
 		ProfilePageComponent,
 		RestaurantListComponent,
+		ConnectionLogsListComponent,
 		MenuPickPageComponent,
 		ProductPageComponent,
 		CreateArticleComponent,
@@ -47,7 +50,8 @@ import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-o
 		HttpClientModule,
 		AngularMaterialModule,
 		FormsModule,
-		ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
