@@ -80,12 +80,12 @@ export class ClientsApiService {
 		).pipe(retry(0), catchError(this.handleError));
 	}
 
-  getConnectionLogs(): Observable<ConnectionLogs[]> {
-    return this.http.get<ConnectionLogs[]>(
-      this.apiNoSQLURL + '/connectionLogs',
-      this.httpOptions
-    ).pipe(retry(1), catchError(this.handleError));
-  }
+	getConnectionLogs(): Observable<ConnectionLogs[]> {
+		return this.http.get<ConnectionLogs[]>(
+			this.apiNoSQLURL + '/connectionLogs',
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
 	getOrdersHistory(): Observable<OrdersObject> {
 		return this.http.get<OrdersObject>(

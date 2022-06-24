@@ -50,8 +50,8 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 		HttpClientModule,
 		AngularMaterialModule,
 		FormsModule,
-    ReactiveFormsModule,
-    MatTableModule
+		ReactiveFormsModule,
+		MatTableModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

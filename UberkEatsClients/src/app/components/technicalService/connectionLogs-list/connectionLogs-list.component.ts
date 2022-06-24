@@ -11,50 +11,46 @@ import { ViewChildren } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-	selector: 'app-connectionLogs-list',
-  templateUrl: './connectionLogs-list.component.html',
-  styleUrls: ['./connectionLogs-list.component.scss']
+	selector: 'app-connectionlogs-list',
+	templateUrl: './connectionLogs-list.component.html',
+	styleUrls: ['./connectionLogs-list.component.scss']
 })
 export class ConnectionLogsListComponent implements OnInit {
+
+	dataSource = new MatTableDataSource<ConnectionLogs>([]);
+	displayedColumns: string[] = ['userId', 'date', 'description'];
+
+	constructor(public clientsApi: ClientsApiService, public router: Router, private liveAnnouncer: LiveAnnouncer) { }
+
   @ViewChild(MatSort, { static: false })
-  set sort(v: MatSort) {
-    this.dataSource.sort = v;
-  }
+	set sort(v: MatSort) {
+		this.dataSource.sort = v;
+	}
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(v: MatPaginator) {
-    this.dataSource.paginator = v;
+  	this.dataSource.paginator = v;
   }
 
-  dataSource = new MatTableDataSource<ConnectionLogs>([]);
-
-  connectionLogs = new MatTableDataSource <ConnectionLogs>();
-  displayedColumns: string[] = ['userId', 'date', 'description'];
-
-  constructor(public clientsApi: ClientsApiService, public router: Router, private _liveAnnouncer: LiveAnnouncer) { }
-
   announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-
-    this.connectionLogs.sort = this.sort;
+  	if (sortState.direction) {
+  		this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+  	} else {
+  		this.liveAnnouncer.announce('Sorting cleared');
+  	}
   }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.getConnectionLogs();
-	}
+  	this.dataSource.paginator = this.paginator;
+  	this.getConnectionLogs();
+  }
 
-	btnClick() {
-	}
+  btnClick() {
+  }
 
-	getConnectionLogs() {
-    this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
-      this.dataSource.data = connectionLogs;
-      this.connectionLogs = new MatTableDataSource(connectionLogs);
-    });
-	}
+  getConnectionLogs() {
+  	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
+  		this.dataSource.data = connectionLogs;
+  	});
+  }
 }
