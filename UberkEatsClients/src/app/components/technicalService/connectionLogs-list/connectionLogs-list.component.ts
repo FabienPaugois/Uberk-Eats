@@ -40,10 +40,10 @@ export class ConnectionLogsListComponent implements OnInit {
   	}
   }
 
-	ngOnInit(): void {
+  ngOnInit(): void {
   	this.dataSource.paginator = this.paginator;
   	this.getConnectionLogs();
-	}
+  }
 
   hideHeader() {
   	const loader = document.getElementById('loader');
@@ -52,7 +52,7 @@ export class ConnectionLogsListComponent implements OnInit {
   	}
   }
 
-	getConnectionLogs() {
+  getConnectionLogs() {
   	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
   		this.dataSource.data = connectionLogs;
   		this.hideHeader();
