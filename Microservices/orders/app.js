@@ -42,8 +42,8 @@ app.use(function (err, req, res, next) {
 module.exports = app;
 
 //URL de notre base
-//var urlmongo = "mongodb://root:root@localhost:27117/Uberk-Eats";
-var urlmongo = "mongodb://root:root@mongo:27017/Uberk-Eats";
+var urlmongo = "mongodb://root:root@localhost:27117/Uberk-Eats";
+//var urlmongo = "mongodb://root:root@mongo:27017/Uberk-Eats";
 
 // Nous connectons l'API � notre base de donn�es
 try {
