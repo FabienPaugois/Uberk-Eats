@@ -1,10 +1,16 @@
 export interface Restaurants {
-  id: string;
+  _id: string;
   name: string;
   address: string;
   phone: string;
   description: string;
-  ownerId: number;
+  ownerId: string;
   types: string[];
+  products: ProductsIds;
   imageUrl: string;
+}
+
+export interface ProductsIds {
+  articles: string[];
+  menus: string[];
 }

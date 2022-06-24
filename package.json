@@ -17,6 +17,7 @@
 		"eslint-plugin-prefer-arrow": "^1.2.3"
 	},
 	"dependencies": {
-		"@angular-eslint/eslint-plugin": "^13.5.0"
+		"@angular-eslint/eslint-plugin": "^13.5.0",
+		"axios": "^0.27.2"
 	}
 }
