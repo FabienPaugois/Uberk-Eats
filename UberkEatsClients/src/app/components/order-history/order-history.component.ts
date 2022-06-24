@@ -38,7 +38,7 @@ export class OrderHistoryComponent implements OnInit {
 		console.log(this.orderHistory);
 	}
 
-	btnClickOrder(orderId: number) {
+	btnClickOrder(orderId: string) {
 		this.router.navigate(['/order-preview', {orderId}]);
 	}
 }

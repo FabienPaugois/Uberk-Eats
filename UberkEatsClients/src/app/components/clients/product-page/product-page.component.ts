@@ -14,8 +14,8 @@ import { BasketStore } from '../../../store/articleStore/basket-store';
 })
 export class ProductPageComponent implements OnInit {
   @Input() registerInfo: Basket = {
-  	menus: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjectsType.menu }],
-  	articles: [{ id: Number.NaN, qty: Number.NaN, type: BasketObjectsType.article }]
+  	menus: [{ id: '', qty: Number.NaN, type: BasketObjectsType.menu }],
+  	articles: [{ id: '', qty: Number.NaN, type: BasketObjectsType.article }]
   };
   count = 1;
   articleId: string;
@@ -57,7 +57,7 @@ export class ProductPageComponent implements OnInit {
   	this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
   		if (params.articles != null) {
   			this.menu = {
-  				id: parseInt(params.id, 10),
+  				_id: params._id,
   				description: params.description,
   				name: params.name,
   				price: params.price,
@@ -67,7 +67,7 @@ export class ProductPageComponent implements OnInit {
   		}
   		else {
   			this.article = {
-  				id: parseInt(params.id, 10),
+  				_id: params._id,
   				description: params.description,
   				name: params.name,
   				price: params.price,
@@ -87,16 +87,16 @@ export class ProductPageComponent implements OnInit {
 
   addToBasket() {
   	if (this.store.state[this.article ? BasketObjectsType.article : BasketObjectsType.menu].find(
-  		entry => entry.id === (this.article ? this.article.id : this.menu.id)
+  		entry => entry.id === (this.article ? this.article._id : this.menu._id)
   	)) {
   		this.store.editbasketQty({
-  			id: this.article ? this.article.id : this.menu.id,
+  			id: this.article ? this.article._id : this.menu._id,
   			qty: this.count,
   			type: this.article ? BasketObjectsType.article : BasketObjectsType.menu
   		});
   	} else {
   		this.store.addBasketObject({
-  			id: this.article ? this.article.id : this.menu.id,
+  			id: this.article ? this.article._id : this.menu._id,
   			qty: this.count,
   			type: this.article ? BasketObjectsType.article : BasketObjectsType.menu
   		});

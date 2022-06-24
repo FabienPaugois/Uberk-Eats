@@ -16,13 +16,13 @@ export class OrderStore extends Store<OrderState> {
 		const date = '2017-11-27T09:10:00';
 		const orders: Order[] = [
 			{
-				id: 0,
-				articles: [{ id: 1, qty: 2 }, { id: 7, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 1 }, { id: 2, qty: 3 }],
-				clientId: 1,
+				id: '0',
+				articles: [{ id: '1', qty: 2 }, { id: '7', qty: 1 }, { id: '8', qty: 2 }],
+				menus: [{ id: '1', qty: 1 }, { id: '2', qty: 3 }],
+				clientId: '1',
 				deliveryAddress: '4 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
+				restaurantId: '1',
+				deliverymanId: '',
 				status: 0,
 				timestamp: {
 					createdAt: new Date(date),
@@ -32,13 +32,13 @@ export class OrderStore extends Store<OrderState> {
 				}
 			},
 			{
-				id: 1,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
+				id: '1',
+				articles: [{ id: '1', qty: 2 }, { id: '4', qty: 1 }, { id: '8', qty: 2 }],
+				menus: [{ id: '1', qty: 2 }],
+				clientId: '1',
 				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
+				restaurantId: '1',
+				deliverymanId: '',
 				status: 1,
 				timestamp: {
 					createdAt: new Date(date),
@@ -48,13 +48,13 @@ export class OrderStore extends Store<OrderState> {
 				}
 			},
 			{
-				id: 2,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
+				id: '2',
+				articles: [{ id: '1', qty: 2 }, { id: '4', qty: 1 }, { id: '8', qty: 2 }],
+				menus: [{ id: '1', qty: 2 }],
+				clientId: '1',
 				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
+				restaurantId: '1',
+				deliverymanId: '',
 				status: 2,
 				timestamp: {
 					createdAt: new Date(date),
@@ -64,13 +64,13 @@ export class OrderStore extends Store<OrderState> {
 				}
 			},
 			{
-				id: 3,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
+				id: '3',
+				articles: [{ id: '1', qty: 2 }, { id: '4', qty: 1 }, { id: '8', qty: 2 }],
+				menus: [{ id: '1', qty: 2 }],
+				clientId: '1',
 				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
+				restaurantId: '1',
+				deliverymanId: '',
 				status: 3,
 				timestamp: {
 					createdAt: new Date(date),
@@ -80,13 +80,13 @@ export class OrderStore extends Store<OrderState> {
 				}
 			},
 			{
-				id: 4,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
+				id: '4',
+				articles: [{ id: '1', qty: 2 }, { id: '4', qty: 1 }, { id: '8', qty: 2 }],
+				menus: [{ id: '1', qty: 2 }],
+				clientId: '1',
 				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
+				restaurantId: '1',
+				deliverymanId: '',
 				status: 4,
 				timestamp: {
 					createdAt: new Date(date),
@@ -96,13 +96,13 @@ export class OrderStore extends Store<OrderState> {
 				}
 			},
 			{
-				id: 5,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
+				id: '5',
+				articles: [{ id: '1', qty: 2 }, { id: '4', qty: 1 }, { id: '8', qty: 2 }],
+				menus: [{ id: '1', qty: 2 }],
+				clientId: '1',
 				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
+				restaurantId: '1',
+				deliverymanId: '',
 				status: 5,
 				timestamp: {
 					createdAt: new Date(date),
@@ -118,11 +118,11 @@ export class OrderStore extends Store<OrderState> {
 		});
 	}
 
-	editOrderStatus(orderId: number, status: boolean, deliverymanId: number = NaN) {
+	editOrderStatus(orderId: string, status: boolean, deliverymanId: string = '') {
 		const foundOrderInState = this.state.orders.find(entry => entry.id === orderId);
 		if (foundOrderInState) {
 			status ? foundOrderInState.status += 1 : foundOrderInState.status = -1;
-			if (status && !isNaN(deliverymanId)) {
+			if (status && deliverymanId !== '') {
 				foundOrderInState.deliverymanId = deliverymanId;
 			}
 		}

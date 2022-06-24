@@ -27,17 +27,15 @@ export class MenuPickPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-			this.restaurantId = params.restaurantId.split(',');
+			this.restaurantId = params.restaurantId;
 			this.articlesIdArr = params.articlesArr;
 			this.menusIdArr = params.menusArr;
 		});
 		this.clientsApi.FetchArticleData(this.articlesIdArr).subscribe((articles: Articles[]) => {
 			this.articles = articles;
-			console.log(this.articles);
 		});
 		this.clientsApi.FetchMenusData(this.menusIdArr).subscribe((menus: Menus[]) => {
 			this.menus = menus;
-			console.log(this.menus);
 		});
 	}
 
