@@ -8,7 +8,7 @@ const accessTokenSecret = 'a23f5zddoznJFGZBiGbIg895FZK';
 
 var connectionLogSchema = mongoose.Schema({
 	userId: Number,
-	date: String,
+	date: Date,
 	description: String
 });
 
@@ -103,7 +103,7 @@ router.route('/')
 				res.send(err);
 			}
 			else {
-				res.send("Created");
+				res.send(connectionLog);
 			}
 		});
 	});
