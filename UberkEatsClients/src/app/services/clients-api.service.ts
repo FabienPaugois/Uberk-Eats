@@ -6,8 +6,8 @@ import { Restaurants } from '../model/restaurants';
 import { Articles } from '../model/articles';
 import { Menus } from '../model/menus';
 import { AuthToken } from '../model/authToken';
-import { OrdersObject } from '../model/order';
 import { ConnectionLogs } from '../model/connectionLogs';
+import { Order, OrdersObject } from '../model/order';
 @Injectable({
 	providedIn: 'root',
 })
@@ -102,6 +102,14 @@ export class ClientsApiService {
   	FetchMenusData(id: string): Observable<Menus[]> {
     	return this.http.get<Menus[]>(
 			this.controllerUrl + '/menus/' + id,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	sendCreatedOrder(order: Order){
+		return this.http.post<Order>(
+			this.controllerUrl + '/orders',
+			JSON.stringify(order),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}

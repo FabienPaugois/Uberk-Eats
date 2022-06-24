@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientsApiService } from 'app/services/clients-api.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Articles } from '../../../model/articles';
 import { Menus } from '../../../model/menus';
@@ -13,67 +14,67 @@ import { OrderStore } from '../../../store/restaurantStore/order-store';
 })
 export class DeliveryOrdersPreviewComponent implements OnInit {
 	panelOpenState = false;
-	loggedDeliveryManId = 1;
+	loggedDeliveryManId = '';
 	orderData: OrdersObject;
 	articles: Articles[] = [
 		{
-			id: 1,
+			_id: '1',
 			name: 'Whooper',
 			description: 'Lorem ipsum',
 			price: 4,
 			imageUrl: '',
 		},
 		{
-			id: 2,
+			_id: '2',
 			name: 'Triple Cheese',
 			description: 'Lorem ipsum',
 			price: 5,
 			imageUrl: '',
 		},
 		{
-			id: 3,
+			_id: '3',
 			name: 'Double Steakhouse',
 			description: 'Lorem ipsum',
 			price: 4,
 			imageUrl: '',
 		},
 		{
-			id: 4,
+			_id: '4',
 			name: 'Chicken Alabama',
 			description: 'Lorem ipsum',
 			price: 6,
 			imageUrl: '',
 		},
 		{
-			id: 5,
+			_id: '5',
 			name: 'Double Cheese Bacon Vegan',
 			description: 'Lorem ipsum',
 			price: 10,
 			imageUrl: '',
 		},
 		{
-			id: 6,
+			_id: '6',
 			name: 'Potatoes',
 			description: 'Lorem ipsum',
 			price: 2,
 			imageUrl: '',
 		},
 		{
-			id: 7,
+			_id: '7',
 			name: 'Fries',
 			description: 'Lorem ipsum',
 			price: 2,
 			imageUrl: '',
 		},
 		{
-			id: 8,
+			_id: '8',
 			name: 'Coke',
 			description: 'Lorem ipsum',
 			price: 2.5,
 			imageUrl: '',
 		},
 		{
-			id: 9,
+			_id: '9',
 			name: 'Pepsi',
 			description: 'Lorem ipsum',
 			price: 2.5,
@@ -82,7 +83,7 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 	];
 	menus: Menus[] = [
 		{
-			id: 1,
+			_id: '1',
 			name: 'Menu Whooper',
 			description: 'Lorem ipsum',
 			price: 9,
@@ -90,7 +91,7 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 			imageUrl: ''
 		},
 		{
-			id: 2,
+			_id: '2',
 			name: 'Menu Steakhouse',
 			description: 'Lorem ipsum',
 			price: 10,
@@ -98,9 +99,12 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 			imageUrl: ''
 		},
 	];
+	menuIds: string;
+	articleIds: string;
 	ngUnsubscribe = new Subject();
 	constructor(
     public restaurantsApi: DeliveryApiService,
+	private clientsApi : ClientsApiService,
     private store: OrderStore
 	) { }
 
@@ -119,9 +123,30 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 				this.orderData = data;
 			});
 		this.store.getOrdersFromDb();
+		this.store.state.orders.forEach(order => {
+			order.menus.forEach(menu => {
+				order.menus.length !== 1 ? this.menuIds += menu.id + ',' : this.menuIds = menu.id;
+			});
+			order.articles.forEach(article => {
+				order.articles.length !== 1 ? this.articleIds += article.id + ',' : this.articleIds = article.id
+			})
+		})
+		console.log(this.articleIds +  '----' + this.menuIds)
+		if(this.articleIds){
+			this.clientsApi.FetchArticleData(this.articleIds).subscribe((articles: Articles[]) => {
+				this.articles = articles;
+				console.log(this.articles)
+			});
+		}
+		if(this.menuIds){
+			this.clientsApi.FetchMenusData(this.menuIds).subscribe((menus: Menus[]) => {
+				this.menus = menus;
+				console.log(this.menus)
+			});
+		}
 	}
 
-	editAndAssignOrder(order: Order, status: boolean, deliverymanId: number) {
+	editAndAssignOrder(order: Order, status: boolean, deliverymanId: string) {
 		this.store.editOrderStatus(order.id, status, deliverymanId);
 	}
 

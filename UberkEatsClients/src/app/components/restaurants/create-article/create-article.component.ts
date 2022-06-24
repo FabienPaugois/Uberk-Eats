@@ -17,7 +17,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 
 export class CreateArticleComponent implements OnInit {
-  @Input() articleInfo: Articles = { id: NaN, name:'', description: '', price: 0, imageUrl:''};
+  @Input() articleInfo: Articles = { _id: '', name:'', description: '', price: 0, imageUrl:''};
   roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
   productsContent: Products;
   ngUnsubscribe = new Subject();

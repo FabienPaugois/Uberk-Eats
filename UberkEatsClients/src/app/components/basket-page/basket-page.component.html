@@ -1,7 +1,7 @@
 <!-- two line list -->
 <mat-list>
   <h1>Menus</h1>
-  <mat-list-item *ngFor="let menu of displayedMenus">
+  <mat-list-item *ngFor="let menu of menus">
     <h3 matLine> {{menu.name}} </h3>
     <p matLine>
       <span> {{menu.price}} </span>
@@ -12,7 +12,7 @@
 
 <mat-list>
   <h1>Articles</h1>
-  <mat-list-item *ngFor="let article of displayedArticles">
+  <mat-list-item *ngFor="let article of articles">
     <h3 matLine> {{article.name}} </h3>
     <p matLine>
       <span> {{article.price}} </span>

@@ -28,7 +28,6 @@ export class RestaurantListComponent implements OnInit {
 	getRestaurants() {
 		this.clientsApi.getRestaurants().subscribe((restaurants: Restaurants[]) => {
 			this.restaurants = restaurants;
-			console.log(this.restaurants);
 		});
 	}
 }
