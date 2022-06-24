@@ -1,17 +1,35 @@
-<mat-accordion multi="true">
-  <mat-card *ngFor="let connectionLog of connectionLogs">
-    <!--
-  <mat-card-header>
-    <mat-card-title> {{ restaurant.name }}</mat-card-title>
-    <mat-card-subtitle *ngFor="let type of restaurant.types"> {{ type }}</mat-card-subtitle>
-    <mat-card-subtitle> {{ restaurant.address }}</mat-card-subtitle>
-  </mat-card-header>
 
-  <mat-card-content>
-    <p>{{ restaurant.description }}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button type="button" (click)="btnClick();">Voir les articles</button>
-  </mat-card-actions>-->
-  </mat-card>
-</mat-accordion>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+
+  <!-- userId Column -->
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by userId">
+      UserId
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+  </ng-container>
+
+  <!-- date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date">
+      Date
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <!-- description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+      Description
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[10, 5, 3]" showFirstLastButtons></mat-paginator>
+

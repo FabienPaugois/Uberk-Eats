@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatTableModule } from '@angular/material/table';
 import { ConnectionLogsListComponent } from './connectionLogs-list.component';
 
-describe('RestaurantListComponent', () => {
+describe('ConnectionLogsListComponent', () => {
   let component: ConnectionLogsListComponent;
   let fixture: ComponentFixture<ConnectionLogsListComponent>;
 
