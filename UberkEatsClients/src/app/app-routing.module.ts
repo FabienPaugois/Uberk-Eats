@@ -14,12 +14,14 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
 	{ path: 'register-page', component: RegisterPageComponent },
 	{ path: 'profile-page', component: ProfilePageComponent },
 	{ path: 'restaurant-list', component: RestaurantListComponent },
+  { path: 'statistics', component: StatisticsComponent },
 	{ path: 'connectionLogs-list', component: ConnectionLogsListComponent },
 	{ path: 'menu-pick-page', component: MenuPickPageComponent },
 	{ path: 'product-page', component: ProductPageComponent },
