@@ -87,13 +87,6 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-  getConnectionLogs(): Observable<ConnectionLogs> {
-    return this.http.get<ConnectionLogs>(
-      this.apiNoSQLURL + 'http://localhost:3003/restaurants',
-      this.httpOptions
-    ).pipe(retry(1), catchError(this.handleError));
-  }
-
 	getOrdersHistory(): Observable<OrdersObject> {
 		return this.http.get<OrdersObject>(
 			this.apiNoSQLURL + '/ordersHistory',

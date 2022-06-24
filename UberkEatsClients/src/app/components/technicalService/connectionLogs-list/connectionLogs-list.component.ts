@@ -16,14 +16,20 @@ import { MatPaginator } from '@angular/material/paginator';
 	styleUrls: ['./connectionLogs-list.component.scss']
 })
 export class ConnectionLogsListComponent implements OnInit {
+
+	dataSource = new MatTableDataSource<ConnectionLogs>([]);
+	displayedColumns: string[] = ['userId', 'date', 'description'];
+
+	constructor(public clientsApi: ClientsApiService, public router: Router, private liveAnnouncer: LiveAnnouncer) { }
+
   @ViewChild(MatSort, { static: false })
-  set sort(v: MatSort) {
-    this.dataSource.sort = v;
-  }
+	set sort(v: MatSort) {
+		this.dataSource.sort = v;
+	}
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(v: MatPaginator) {
-    this.dataSource.paginator = v;
+  	this.dataSource.paginator = v;
   }
 
 	dataSource = new MatTableDataSource<ConnectionLogs>([]);
@@ -54,8 +60,8 @@ export class ConnectionLogsListComponent implements OnInit {
   	this.getConnectionLogs();
 	}
 
-	btnClick() {
-	}
+  btnClick() {
+  }
 
 	getConnectionLogs() {
   	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
