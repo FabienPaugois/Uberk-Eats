@@ -45,7 +45,7 @@ export class ConnectionLogsListComponent implements OnInit {
   	this.getConnectionLogs();
   }
 
-  hideHeader() {
+  hideLoader() {
   	const loader = document.getElementById('loader');
   	if (loader !== null) {
   		loader.hidden = true;
@@ -55,7 +55,7 @@ export class ConnectionLogsListComponent implements OnInit {
   getConnectionLogs() {
   	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
   		this.dataSource.data = connectionLogs;
-  		this.hideHeader();
+  		this.hideLoader();
   	});
   }
 }
