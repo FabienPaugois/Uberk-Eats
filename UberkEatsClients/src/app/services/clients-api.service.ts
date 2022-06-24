@@ -57,7 +57,6 @@ export class ClientsApiService {
 	}
 
 	delete(employee: any): Observable<Clients> {
-		console.log(employee);
 		return this.http.post<Clients>(
 			this.apiURL + '/delete',
 			JSON.stringify({ user: employee }),
