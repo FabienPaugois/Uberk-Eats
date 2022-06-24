@@ -29,7 +29,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
 	declarations: [
 		AppComponent,
 		LoginPageComponent,
-		RegisterPageComponent,
+    RegisterPageComponent,
+    StatisticsComponent,
 		ProfilePageComponent,
 		RestaurantListComponent,
 		ConnectionLogsListComponent,
