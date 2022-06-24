@@ -28,7 +28,8 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 	declarations: [
 		AppComponent,
 		LoginPageComponent,
-		RegisterPageComponent,
+    RegisterPageComponent,
+    StatisticsComponent,
 		ProfilePageComponent,
 		RestaurantListComponent,
 		ConnectionLogsListComponent,
