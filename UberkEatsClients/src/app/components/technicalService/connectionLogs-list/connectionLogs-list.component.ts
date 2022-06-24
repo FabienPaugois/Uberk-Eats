@@ -32,21 +32,6 @@ export class ConnectionLogsListComponent implements OnInit {
   	this.dataSource.paginator = v;
   }
 
-	dataSource = new MatTableDataSource<ConnectionLogs>([]);
-	displayedColumns: string[] = ['userId', 'date', 'description'];
-
-	constructor(public clientsApi: ClientsApiService, public router: Router, private liveAnnouncer: LiveAnnouncer) { }
-
-  @ViewChild(MatSort, { static: false })
-	set sort(v: MatSort) {
-		this.dataSource.sort = v;
-	}
-
-  @ViewChild(MatPaginator, { static: false })
-  set paginator(v: MatPaginator) {
-  	this.dataSource.paginator = v;
-  }
-
   announceSortChange(sortState: Sort) {
   	if (sortState.direction) {
   		this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -60,12 +45,17 @@ export class ConnectionLogsListComponent implements OnInit {
   	this.getConnectionLogs();
 	}
 
-  btnClick() {
+  hideHeader() {
+  	const loader = document.getElementById('loader');
+  	if (loader !== null) {
+  		loader.hidden = true;
+  	}
   }
 
 	getConnectionLogs() {
   	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
   		this.dataSource.data = connectionLogs;
-		});
-	}
+  		this.hideHeader();
+  	});
+  }
 }
