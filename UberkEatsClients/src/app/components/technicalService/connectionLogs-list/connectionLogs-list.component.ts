@@ -40,17 +40,17 @@ export class ConnectionLogsListComponent implements OnInit {
   	}
   }
 
-  ngOnInit(): void {
+	ngOnInit(): void {
   	this.dataSource.paginator = this.paginator;
   	this.getConnectionLogs();
-  }
+	}
 
-  btnClick() {
-  }
+	btnClick() {
+	}
 
-  getConnectionLogs() {
+	getConnectionLogs() {
   	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
   		this.dataSource.data = connectionLogs;
-  	});
-  }
+		});
+	}
 }
