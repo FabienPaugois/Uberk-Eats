@@ -71,7 +71,7 @@ namespace Authentification.Controllers
                 {
                     Content = JsonConvert.SerializeObject("Password or mail error"),
                     ContentType = "application/json",
-                    StatusCode = 400
+                    StatusCode = 401
                 };
             }
         }
