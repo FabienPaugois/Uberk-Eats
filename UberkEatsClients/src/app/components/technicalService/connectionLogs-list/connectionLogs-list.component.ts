@@ -45,12 +45,17 @@ export class ConnectionLogsListComponent implements OnInit {
   	this.getConnectionLogs();
   }
 
-  btnClick() {
+  hideHeader() {
+  	const loader = document.getElementById('loader');
+  	if (loader !== null) {
+  		loader.hidden = true;
+  	}
   }
 
   getConnectionLogs() {
   	this.clientsApi.getConnectionLogs().subscribe((connectionLogs: ConnectionLogs[]) => {
   		this.dataSource.data = connectionLogs;
+  		this.hideHeader();
   	});
   }
 }
