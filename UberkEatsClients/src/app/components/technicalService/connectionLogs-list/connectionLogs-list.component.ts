@@ -16,6 +16,15 @@ import { MatPaginator } from '@angular/material/paginator';
 	styleUrls: ['./connectionLogs-list.component.scss']
 })
 export class ConnectionLogsListComponent implements OnInit {
+  @ViewChild(MatSort, { static: false })
+  set sort(v: MatSort) {
+    this.dataSource.sort = v;
+  }
+
+  @ViewChild(MatPaginator, { static: false })
+  set paginator(v: MatPaginator) {
+    this.dataSource.paginator = v;
+  }
 
 	dataSource = new MatTableDataSource<ConnectionLogs>([]);
 	displayedColumns: string[] = ['userId', 'date', 'description'];

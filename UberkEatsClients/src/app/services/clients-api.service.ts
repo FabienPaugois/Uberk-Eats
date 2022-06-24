@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Clients } from '../model/clients';
-import { ConnectionLogs } from '../model/connectionLogs';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Restaurants } from '../model/restaurants';
