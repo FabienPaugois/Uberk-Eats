@@ -31,7 +31,6 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
   	const user = JSON.parse('' + localStorage.getItem('User'));
-  	console.log(user);
   	this.userModificationForm.setValue({
   		name: user.Name,
   		phone: user.Phone,
@@ -56,7 +55,6 @@ export class ProfilePageComponent implements OnInit {
   		});
   }
   delete(dataclient: any) {
-  	console.log(this.userModificationForm.get('password')?.value);
   	if (this.userModificationForm.get('mail')?.value !== '' && this.userModificationForm.get('password')?.value !== '') {
   		this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
   		this.modifyUserInfo.password = Md5.hashStr(this.userModificationForm.get('password')?.value);
