@@ -56,6 +56,14 @@ export class ClientsApiService {
 		).pipe(retry(0), catchError(this.handleError));
 	}
 
+	delete(employee: any): Observable<Clients> {
+		return this.http.post<Clients>(
+			this.apiURL + '/delete',
+			JSON.stringify({ user: employee }),
+			this.httpOptions
+		).pipe(retry(0), catchError(this.handleError));
+	}
+
 	getRestaurants(): Observable<Restaurants> {
 		return this.http.get<Restaurants>(
 			this.apiNoSQLURL + 'http://localhost:3003/restaurants',
