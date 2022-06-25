@@ -13,6 +13,7 @@
         </mat-form-field>
       </mat-card-content>
       <button mat-raised-button color="primary" [disabled]="loading" class="btn-block">Login</button>
+      <div *ngIf="error.isError" class="alert alert-danger mt-3 mb-0">{{error.errorMsg}}</div>
     </form>
   </mat-card>
 </div>
