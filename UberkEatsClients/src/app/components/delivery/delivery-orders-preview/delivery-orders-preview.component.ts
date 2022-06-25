@@ -19,11 +19,11 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 	orderData: OrdersObject;
 	articles: Articles[];
 	menus: Menus[];
-	productsIds : ProductsIds = {articlesIds : '', menusIds:''}
+	productsIds: ProductsIds = {articlesIds : '', menusIds:''};
 	ngUnsubscribe = new Subject();
 	constructor(
     public restaurantsApi: DeliveryApiService,
-	private clientsApi : ClientsApiService,
+	private clientsApi: ClientsApiService,
     private store: OrderStore
 	) { }
 

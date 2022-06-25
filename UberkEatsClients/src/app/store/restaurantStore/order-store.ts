@@ -10,7 +10,7 @@ import { OrderState } from './order-state';
 @Injectable({ providedIn: 'root' })
 export class OrderStore extends Store<OrderState> {
 	orders: Order[];
-	productsIds : ProductsIds = {articlesIds : '', menusIds:''}
+	productsIds: ProductsIds = {articlesIds : '', menusIds:''};
 	constructor(
 		private restaurantsApi: RestaurantsApiService,
 	) {
@@ -22,10 +22,10 @@ export class OrderStore extends Store<OrderState> {
 
 	//Get the orders to be pickep by delivery man and returns the concerned products ids
 	async getOrdersToBePicked(): Promise<ProductsIds>{
-		var response = await this.restaurantsApi.getOrdersToBePicked().toPromise();
+		const response = await this.restaurantsApi.getOrdersToBePicked().toPromise();
 		if(response){
 			this.orders = response;
-			const orders = this.orders
+			const orders = this.orders;
 			this.setState({
 				...this.state,
 				orders
@@ -35,9 +35,11 @@ export class OrderStore extends Store<OrderState> {
 					order.menus.length !== 1 ? this.productsIds.menusIds += menu.id + ',' : this.productsIds.menusIds = menu.id;
 				});
 				order.articles.forEach(article => {
-					order.articles.length !== 1 ? this.productsIds.articlesIds += article.id + ',' : this.productsIds.articlesIds = article.id
-				})
-			})
+					order.articles.length !== 1 ?
+						this.productsIds.articlesIds += article.id + ',' :
+						this.productsIds.articlesIds = article.id;
+				});
+			});
 		}
 		return this.productsIds;
 	}
