@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { retry, catchError,throwError, subscribeOn } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Articles } from '../model/articles';
-import { OrdersObject } from '../model/order';
+import { Order, OrdersObject } from '../model/order';
 import { Menus } from '../model/menus';
 import { Axios } from 'axios';
 
@@ -45,11 +45,11 @@ export class RestaurantsApiService {
 	}
 
 	// HttpClient API post() method => getOrders
-	getOrders(): Observable<OrdersObject> {
-		return this.http.get<OrdersObject>(
-			this.controllerUrl + '/orders',
+	getOrdersToBePicked(): Observable<Order[]> {
+		return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/freeorders',
 			this.httpOptions
-		).pipe(retry(1), this.handleError);
+		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	// Error handling
