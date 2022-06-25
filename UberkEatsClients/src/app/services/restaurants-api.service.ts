@@ -49,7 +49,7 @@ export class RestaurantsApiService {
 		return this.http.get<Order[]>(
 			this.controllerUrl + '/orders/freeorders',
 			this.httpOptions
-		).pipe(retry(1), this.handleError);
+		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	// Error handling
