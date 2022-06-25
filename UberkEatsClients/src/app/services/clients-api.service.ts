@@ -32,6 +32,14 @@ export class ClientsApiService {
 	CRUD Methods for consuming RESTful API
   =========================================*/
 
+
+	public get userAuth(): AuthToken {
+		return {
+			user: JSON.parse(localStorage.getItem('User') as string),
+			jwtoken: localStorage.getItem('JWT') as string
+		} as AuthToken
+	}
+
 	// HttpClient API post() method => Authenticate
 	authenticate(user: any): Observable<AuthToken> {
 		user.password = Md5.hashStr(user.password)
