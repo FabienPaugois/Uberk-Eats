@@ -14,21 +14,23 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 
+import { AuthGuard } from './auth.guard';
+import { Roles } from './model/roles';
+
 const routes: Routes = [
-	{ path: 'login-page', component: LoginPageComponent },
-	{ path: 'register-page', component: RegisterPageComponent },
-	{ path: 'profile-page', component: ProfilePageComponent },
-	{ path: 'restaurant-list', component: RestaurantListComponent },
-	{ path: 'menu-pick-page', component: MenuPickPageComponent },
-	{ path: 'product-page', component: ProductPageComponent },
-	{ path: 'create-article', component: CreateArticleComponent },
-	{ path: 'create-menu', component: CreateMenuComponent },
-	{ path: 'product-page', component: ProductPageComponent },
-	{ path: 'basket-page', component: BasketPageComponent },
-	{ path: 'orders-preview', component: OrdersPreviewComponent },
-	{ path: 'order-history', component: OrderHistoryComponent },
-	{ path: 'order-preview', component: OrderPreviewComponent },
-	{ path: 'delivery-orders-preview', component: DeliveryOrdersPreviewComponent },
+	{ path: 'login-page', component: LoginPageComponent},
+	{ path: 'register-page', component: RegisterPageComponent},
+	{ path: 'profile-page', component: ProfilePageComponent},
+	{ path: 'restaurant-list', component: RestaurantListComponent, data: {roles: [Roles.client]}, canActivate: [AuthGuard]},
+	{ path: 'menu-pick-page', component: MenuPickPageComponent, data: {roles: [Roles.client]}, canActivate: [AuthGuard]},
+	{ path: 'product-page', component: ProductPageComponent, data: {roles: [Roles.client]}, canActivate: [AuthGuard]},
+	{ path: 'create-article', component: CreateArticleComponent, data: {roles: [Roles.restaurantOwner]}, canActivate: [AuthGuard]},
+	{ path: 'create-menu', component: CreateMenuComponent, data: {roles: [Roles.restaurantOwner]}, canActivate: [AuthGuard]},
+	{ path: 'basket-page', component: BasketPageComponent, data: {roles: [Roles.client]}, canActivate: [AuthGuard]},
+	{ path: 'orders-preview', component: OrdersPreviewComponent, data: {roles: [Roles.restaurantOwner, Roles.deliveryMan]}, canActivate: [AuthGuard]},
+	{ path: 'order-history', component: OrderHistoryComponent, data: {roles: [Roles.client]}, canActivate: [AuthGuard]},
+	{ path: 'order-preview', component: OrderPreviewComponent, data: {roles: []}, canActivate: [AuthGuard]},
+	{ path: 'delivery-orders-preview', component: DeliveryOrdersPreviewComponent, data: {roles: [Roles.deliveryMan]}, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
