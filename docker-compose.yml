@@ -66,6 +66,14 @@ services:
     depends_on:
       - mongo
     restart: always
+  notification_ms:
+    hostname: notificationsapi
+    build: .\Microservices\notifications
+    ports:
+      - 3005:3005
+    depends_on:
+      - mongo
+    restart: always
   kong-dbless:
     image: kong/kong-gateway:2.8.1.1-alpine
     volumes:
@@ -92,4 +100,4 @@ services:
       - article_ms
       - connectionlogs_ms
       - restaurant_ms
-      - order_ms
+      - notification_ms

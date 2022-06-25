@@ -36,3 +36,10 @@ services:
     path_handling: "v1"
     paths:
     - /orders
+- name: notifications-service
+  url: http://notificationsapi:3005
+  routes:
+  - name: notifications
+    path_handling: "v1"
+    paths:
+    - /notifications
