@@ -15,6 +15,6 @@ export interface ProductsObjects {
 
 export interface ProductsIds {
   articlesIds: string;
-  menusIds: string; 
+  menusIds: string;
 }
 

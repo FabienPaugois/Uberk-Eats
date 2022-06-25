@@ -14,7 +14,7 @@ import { Menus } from '../../model/menus';
 	styleUrls: ['./basket-page.component.scss']
 })
 export class BasketPageComponent implements OnInit {
-	@Input() deliveryAddress : string;
+	@Input() deliveryAddress: string;
 	basket: Basket;
 	totalBasketPrice: number;
 	menuQtyArr: [];
@@ -30,16 +30,16 @@ export class BasketPageComponent implements OnInit {
 	public addressForm: FormGroup; // variable of type FormGroup is created
 	constructor(
 		public store: BasketStore,
-		private clientsApi : ClientsApiService,
+		private clientsApi: ClientsApiService,
 		private fb: FormBuilder
-	) { 
+	) {
 		//Forms element defined below
-		this.addressForm = this.fb.group({deliveryAddress: ''})
+		this.addressForm = this.fb.group({deliveryAddress: ''});
 	}
 
 	ngOnInit(): void {
 		this.store.state.articles.forEach(article => {
-			this.store.state.articles.length !== 1 ? this.articleIds += article.id + ',' : this.articleIds = article.id
+			this.store.state.articles.length !== 1 ? this.articleIds += article.id + ',' : this.articleIds = article.id;
 		});
 		this.store.state.menus.forEach(menu => {
 			this.store.state.menus.length !== 1 ? this.menuIds += menu.id + ',' : this.menuIds = menu.id;
@@ -48,7 +48,7 @@ export class BasketPageComponent implements OnInit {
 			this.clientsApi.FetchArticleData(this.articleIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
 				this.store.state.articles.forEach((article) => {
-					const temp = this.articles.find(articleData => articleData._id === article.id)
+					const temp = this.articles.find(articleData => articleData._id === article.id);
 					if(temp){
 						this.basketTotalPrice += (temp.price * article.qty);
 					}
@@ -59,7 +59,7 @@ export class BasketPageComponent implements OnInit {
 			this.clientsApi.FetchMenusData(this.menuIds).subscribe((menus: Menus[]) => {
 				this.menus = menus;
 				this.store.state.menus.forEach( (menu) => {
-					const temp = this.menus.find(menuData => menuData._id === menu.id)
+					const temp = this.menus.find(menuData => menuData._id === menu.id);
 					if(temp){
 						this.basketTotalPrice += (temp.price * menu.qty);
 					}
@@ -89,14 +89,14 @@ export class BasketPageComponent implements OnInit {
 				deliveredAt: new Date(),
 				readyAt: new Date(),
 			}
-		}
-		const menus : OrderProducts[] = [];
-		const articles : OrderProducts[] = [];
+		};
+		const menus: OrderProducts[] = [];
+		const articles: OrderProducts[] = [];
 		this.store.state.menus.forEach(menu => {
-			menus.push({id: menu.id, qty: menu.qty})
+			menus.push({id: menu.id, qty: menu.qty});
 		});
 		this.store.state.articles.forEach(article => {
-			articles.push({id: article.id, qty: article.qty})
+			articles.push({id: article.id, qty: article.qty});
 		});
 		this.clientsApi.sendCreatedOrder(this.order).subscribe(() => {});
 	}

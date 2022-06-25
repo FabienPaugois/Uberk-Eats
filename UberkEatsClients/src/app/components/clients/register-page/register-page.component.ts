@@ -18,10 +18,10 @@ export class RegisterPageComponent implements OnInit {
 
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(
-	public clientsApi: ClientsApiService, 
-	public router: Router, 
+	public clientsApi: ClientsApiService,
+	public router: Router,
 	private fb: FormBuilder
-	) {
+  ) {
   	// Form element defined below
   	this.registerForm = this.fb.group({
   		name: '',
