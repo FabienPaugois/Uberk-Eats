@@ -8,6 +8,7 @@ import { Menus } from '../model/menus';
 import { AuthToken } from '../model/authToken';
 import { ConnectionLogs } from '../model/connectionLogs';
 import { Order, OrdersObject } from '../model/order';
+import { Clients } from 'app/model/clients';
 @Injectable({
 	providedIn: 'root',
 })
@@ -63,8 +64,8 @@ export class ClientsApiService {
 		).pipe(retry(0), catchError(this.handleError));
 	}
 
-	getRestaurants(): Observable<Restaurants> {
-		return this.http.get<Restaurants>(
+	getRestaurants(): Observable<Restaurants[]> {
+		return this.http.get<Restaurants[]>(
 			this.apiNoSQLURL + '/restaurants',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
