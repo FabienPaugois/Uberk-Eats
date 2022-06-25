@@ -17,11 +17,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const user = this.clientsApiService.userAuth.user;
-    const userRoles = this.parseJwt(this.clientsApiService.userAuth.jwtoken).role;
+    console.log(user)
     if (user) {
+      // Get user roles from jwt
+      const userRoles = this.parseJwt(this.clientsApiService.userAuth.jwtoken).role;
       // check if route is restricted by role
-      console.log(route.data.roles)
-      console.log(userRoles)
       if (route.data.roles && route.data.roles.indexOf(userRoles) === -1) {
         // role not authorised so redirect to home page
         //this.router.navigate(['/']);
@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
     }
 
     // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login-page']);
     return false;
   }
 
