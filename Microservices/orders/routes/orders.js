@@ -12,7 +12,12 @@ var orderSchema = mongoose.Schema({
 	deliverymanId: Number,
 	restaurantId: Number,
 	status: Number,
-	timestamp: Object,
+	timestamp: {
+		createdAt: Date,
+		pickedUpAt: Date,
+		deliveredAt: Date,
+		readyAt: Date
+	},
 	menus: Object,
 	articles: Object
 });
