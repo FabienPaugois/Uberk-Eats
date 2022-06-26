@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Clients } from '../model/clients';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Restaurants } from '../model/restaurants';
 import { Articles } from '../model/articles';
 import { Menus } from '../model/menus';
 import { AuthToken } from '../model/authToken';
-import { OrdersObject } from '../model/order';
 import { ConnectionLogs } from '../model/connectionLogs';
+import { Order, OrdersObject } from '../model/order';
+import { Clients } from 'app/model/clients';
 @Injectable({
 	providedIn: 'root',
 })
 export class ClientsApiService {
+  	// Controller url
+  	controllerUrl = 'http://localhost:9000';
 	// Define API
 	apiURL = 'http://localhost:8080';
 	//apiURL = 'https://localhost:44310';
@@ -21,7 +23,6 @@ export class ClientsApiService {
 	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + localStorage.getItem('JWT')
 		}),
 	};
 
@@ -30,15 +31,13 @@ export class ClientsApiService {
     CRUD Methods for consuming RESTful API
   =========================================*/
 
-
 	// HttpClient API post() method => Authenticate
 	authenticate(employee: any): Observable<AuthToken> {
 		return this.http.post<AuthToken>(
 			this.apiURL + '/authenticate',
 			JSON.stringify(employee),
 			this.httpOptions
-		)
-			.pipe(retry(1), catchError(this.handleError));
+		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
@@ -65,13 +64,6 @@ export class ClientsApiService {
 		).pipe(retry(0), catchError(this.handleError));
 	}
 
-	getRestaurants(): Observable<Restaurants> {
-		return this.http.get<Restaurants>(
-			this.apiNoSQLURL + '/restaurants',
-			this.httpOptions
-		).pipe(retry(1), catchError(this.handleError));
-	}
-
 	postConnectionLogs(connectionLog: any): Observable<ConnectionLogs> {
 		return this.http.post<ConnectionLogs>(
 			this.apiNoSQLURL + '/connectionLogs',
@@ -87,23 +79,38 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	getOrdersHistory(): Observable<OrdersObject> {
-		return this.http.get<OrdersObject>(
+	getRestaurants(): Observable<Restaurants[]> {
+    	return this.http.get<Restaurants[]>(
+      	this.controllerUrl + '/restaurants',
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	getOrdersHistory(): Observable<OrdersObject[]> {
+    	return this.http.get<OrdersObject[]>(
 			this.apiNoSQLURL + '/ordersHistory',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	FetchArticleData(id: number): Observable<Articles> {
-		return this.http.get<Articles>(
-			this.apiNoSQLURL + '/article/' + id,
+  	FetchArticleData(id: string): Observable<Articles[]> {
+    	return this.http.get<Articles[]>(
+			this.controllerUrl + '/articles/' + id,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	FetchMenuData(id: number): Observable<Menus> {
-		return this.http.get<Menus>(
-			this.apiNoSQLURL + '/menus/' + id,
+  	FetchMenusData(id: string): Observable<Menus[]> {
+    	return this.http.get<Menus[]>(
+			this.controllerUrl + '/menus/' + id,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	sendCreatedOrder(order: Order){
+		return this.http.post<Order>(
+			this.controllerUrl + '/orders',
+			JSON.stringify(order),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}

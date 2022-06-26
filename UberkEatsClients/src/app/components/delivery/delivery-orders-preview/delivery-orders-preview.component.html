@@ -5,14 +5,13 @@
       <div *ngFor="let order of orderData.orders">
         <mat-card *ngIf="order.status === 2">
           <mat-card-header>
-            <mat-card-title>Commande numéro : {{ order.id + 1 }}</mat-card-title>
-            <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
+            <mat-card-title>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <h1>Menus</h1>
-            <p *ngFor="let menu of order.menus">Menu {{menu.id}} : {{ menus[menu.id - 1].name }} Quantité : {{ menu.qty }}</p>
+            <p *ngFor="let menu of order.menus">Menu {{menus[order.menus.indexOf(menu)].name}} : Quantité : {{ menu.qty }}</p>
             <h1>Articles</h1>
-            <p *ngFor="let article of order.articles">Article {{article.id}} : {{ articles[article.id - 1].name }} Quantité : {{ article.qty }}</p>
+            <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} :  Quantité : {{ article.qty }}</p>
           </mat-card-content>
           <mat-card-actions>
             <button type="button" (click)="editAndAssignOrder(order, true, loggedDeliveryManId);">Accepter la commande</button>
@@ -27,8 +26,7 @@
       <div *ngFor="let order of orderData.orders">
         <mat-card *ngIf="order.status === 3 && order.deliverymanId === loggedDeliveryManId">
           <mat-card-header>
-            <mat-card-title>Commande numéro : {{ order.id + 1 }}</mat-card-title>
-            <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
+            <mat-card-title>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -42,11 +40,10 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <h1>Menus</h1>
-              <p *ngFor="let menu of order.menus">Menu {{menu.id}} : {{ menus[menu.id - 1].name }} Quantité : {{ menu.qty }}</p>
+              <p *ngFor="let menu of order.menus">Menu {{menus[order.menus.indexOf(menu)].name}} : Quantité : {{ menu.qty }}</p>
               <h1>Articles</h1>
-              <p *ngFor="let article of order.articles">Article {{article.id}} : {{ articles[article.id - 1].name }} Quantité : {{ article.qty }}</p>
+              <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} : Quantité : {{ article.qty }}</p>
             </mat-expansion-panel>
-
           </mat-card-content>
           <mat-card-actions>
             <button type="button" (click)="markAsPickedUp(order, true)">Commande livrée</button>

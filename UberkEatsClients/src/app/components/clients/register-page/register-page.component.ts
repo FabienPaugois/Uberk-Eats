@@ -17,9 +17,12 @@ export class RegisterPageComponent implements OnInit {
   roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
 
   public registerForm: FormGroup; // variable of type FormGroup is created
-  constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
+  constructor(
+	public clientsApi: ClientsApiService,
+	public router: Router,
+	private fb: FormBuilder
+  ) {
   	// Form element defined below
-
   	this.registerForm = this.fb.group({
   		name: '',
   		surname: '',

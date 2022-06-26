@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, Subscription, take, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { Roles } from '../../../model/roles';
 import { Articles } from '../../..//model/articles';
@@ -8,6 +8,7 @@ import { RestaurantsApiService } from '../../../services/restaurants-api.service
 import { ProductsStore } from '../../../store/restaurantStore/products-store';
 import { Products } from '../../../model/products';
 import { BasketObjectsType } from '../../../model/basket';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-create-article',
@@ -16,7 +17,7 @@ import { BasketObjectsType } from '../../../model/basket';
 })
 
 export class CreateArticleComponent implements OnInit {
-  @Input() articleInfo: Articles = { id: NaN, name:'', description: '', price: 0, imageUrl:''};
+  @Input() articleInfo: Articles = { _id: '', name:'', description: '', price: 0, imageUrl:''};
   roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
   productsContent: Products;
   ngUnsubscribe = new Subject();
@@ -26,7 +27,7 @@ export class CreateArticleComponent implements OnInit {
     public restaurantsApi: RestaurantsApiService,
     public router: Router,
     private fb: FormBuilder,
-    private store: ProductsStore
+    private store: ProductsStore,
   ) {
   	// Form element defined below
   	this.registerForm = this.fb.group({
@@ -58,11 +59,14 @@ export class CreateArticleComponent implements OnInit {
   	this.articleInfo.description = this.registerForm.get('description')?.value;
   	this.articleInfo.price = this.registerForm.get('price')?.value;
   	this.articleInfo.imageUrl = this.registerForm.get('imageUrl')?.value;
-  	this.store.addProductsObject({
-  		type: BasketObjectsType.article,
-  		id: this.store.state.articles.length + 1,
-  		product: { ...this.articleInfo }
+  	this.restaurantsApi.createArticle(this.articleInfo).subscribe((response: HttpResponse<Articles>) => {
+  		if(response.status === 200){
+  			this.store.addProductsObject({
+  				type: BasketObjectsType.article,
+  				id: this.store.state.articles.length + 1,
+  				product: { ...this.articleInfo }
+  			});
+  		}
   	});
-  	console.log(this.productsContent);
   }
 }

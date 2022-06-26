@@ -13,3 +13,8 @@ export interface ProductsObjects {
   product: Articles | Menus;
 }
 
+export interface ProductsIds {
+  articlesIds: string;
+  menusIds: string;
+}
+

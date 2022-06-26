@@ -10,7 +10,7 @@
       <p>{{ restaurant.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button type="button" (click)="btnClick();">Voir les articles</button>
+      <button type="button" (click)="btnClick(restaurant._id, restaurant.products);">Voir les articles</button>
     </mat-card-actions>
   </mat-card>
 </mat-accordion>

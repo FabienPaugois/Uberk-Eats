@@ -1,18 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { retry, catchError,throwError } from 'rxjs';
+import { retry, catchError,throwError, subscribeOn } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Articles } from '../model/articles';
-import { OrdersObject } from '../model/order';
+import { Order, OrdersObject } from '../model/order';
 import { Menus } from '../model/menus';
+import { Axios } from 'axios';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class RestaurantsApiService {
-	// Define API
-	apiURL = 'https://localhost:44310';
-	apiNoSQLURL = '';
+	// Controller url
+	controllerUrl = 'http://localhost:9000';
 	// Http Options
 	httpOptions = {
 		headers: new HttpHeaders({
@@ -20,46 +20,56 @@ export class RestaurantsApiService {
 		}),
 	};
 
+
 	constructor(private http: HttpClient) { }
 	/*========================================
     CRUD Methods for consuming RESTful API
   =========================================*/
 
 	// HttpClient API post() method => createArticle
-	createArticle(article: Articles): Observable<Articles> {
+	createArticle(article: Articles): Observable<HttpResponse<Articles>> {
 		return this.http.post<Articles>(
-			this.apiURL + '/articles',
+			this.controllerUrl + '/articles',
 			JSON.stringify(article),
-			this.httpOptions
+			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	// HttpClient API post() method => createMenu
-	createMenu(menu: Menus): Observable<Menus> {
+	createMenu(menu: Menus): Observable<HttpResponse<Menus>> {
 		return this.http.post<Menus>(
-			this.apiURL + '/menus',
+			this.controllerUrl + '/menus',
 			JSON.stringify(menu),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	// HttpClient API post() method => getOrders
+	getOrdersToAccept(restaurantId: string): Observable<Order[]> {
+		return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/ordersToAccept/' + restaurantId,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	// HttpClient API post() method => getOrders
-	getOrders(): Observable<OrdersObject> {
-		return this.http.get<OrdersObject>(
-			this.apiNoSQLURL + '/orders',
+	getOrdersToBePicked(): Observable<Order[]> {
+		return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/freeorders',
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
 	// Error handling
 	handleError(error: any) {
+		console.log(error);
 		let errorMessage = '';
 		if (error.error instanceof ErrorEvent) {
 			// Get client-side error
 			errorMessage = error.error.message;
 		} else {
 			// Get server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+			errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
 		}
 		window.alert(errorMessage);
 		return throwError(() => errorMessage);

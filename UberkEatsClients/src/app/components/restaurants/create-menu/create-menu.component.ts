@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Roles } from '../../../model/roles';
 import { Articles } from '../../..//model/articles';
-import { ClientsApiService } from '../../../services/clients-api.service';
 import { Menus } from '../../../model/menus';
 import { Products } from '../../../model/products';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductsStore } from '../../../store/restaurantStore/products-store';
 import { BasketObjectsType } from '../../../model/basket';
+import { RestaurantsApiService } from 'app/services/restaurants-api.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-create-menu',
@@ -16,68 +16,68 @@ import { BasketObjectsType } from '../../../model/basket';
 	styleUrls: ['./create-menu.component.scss']
 })
 export class CreateMenuComponent implements OnInit {
-  @Input() menuInfo: Menus = {id: NaN, name:'', description:'', price:0, imageUrl: '', articles: []};
+  @Input() menuInfo: Menus = {_id: '', name:'', description:'', price:0, imageUrl: '', articles: []};
   public menuForm: FormGroup; // variable of type FormGroup is created
 
   articles: Articles[] = [
   	{
-  		id: 1,
+  		_id: '1',
   		name: 'Whooper',
   		description: 'Lorem ipsum',
   		price: 4,
   		imageUrl: '',
   	},
   	{
-  		id: 2,
+  		_id: '2',
   		name: 'Triple Cheese',
   		description: 'Lorem ipsum',
   		price: 5,
   		imageUrl: '',
   	},
   	{
-  		id: 3,
+  		_id: '3',
   		name: 'Double Steakhouse',
   		description: 'Lorem ipsum',
   		price: 4,
   		imageUrl: '',
   	},
   	{
-  		id: 4,
+  		_id: '4',
   		name: 'Chicken Alabama',
   		description: 'Lorem ipsum',
   		price: 6,
   		imageUrl: '',
   	},
   	{
-  		id: 5,
+  		_id: '5',
   		name: 'Double Cheese Bacon Vegan',
   		description: 'Lorem ipsum',
   		price: 10,
   		imageUrl: '',
   	},
   	{
-  		id: 6,
+  		_id: '6',
   		name: 'Potatoes',
   		description: 'Lorem ipsum',
   		price: 2,
   		imageUrl: '',
   	},
   	{
-  		id: 7,
+  		_id: '7',
   		name: 'Fries',
   		description: 'Lorem ipsum',
   		price: 2,
   		imageUrl: '',
   	},
   	{
-  		id: 8,
+  		_id: '8',
   		name: 'Coke',
   		description: 'Lorem ipsum',
   		price: 2.5,
   		imageUrl: '',
   	},
   	{
-  		id: 9,
+  		_id: '9',
   		name: 'Pepsi',
   		description: 'Lorem ipsum',
   		price: 2.5,
@@ -88,7 +88,7 @@ export class CreateMenuComponent implements OnInit {
   ngUnsubscribe = new Subject();
 
   constructor(
-    public clientsApi: ClientsApiService,
+    public restaurantsApi: RestaurantsApiService,
     public router: Router,
     private fb: FormBuilder,
     private store: ProductsStore
@@ -125,12 +125,14 @@ export class CreateMenuComponent implements OnInit {
   	this.menuInfo.price = this.menuForm.get('price')?.value;
   	this.menuInfo.imageUrl = this.menuForm.get('imageUrl')?.value;
   	this.menuInfo.articles = this.menuForm.get('articles')?.value;
-  	this.store.addMenusObject({
-  		type: BasketObjectsType.menu,
-  		id: this.store.state.articles.length + 1,
-  		product: { ...this.menuInfo }
+  	this.restaurantsApi.createMenu(this.menuInfo).subscribe((response: HttpResponse<Menus>) => {
+  		if(response.status === 200){
+  			this.store.addMenusObject({
+  				type: BasketObjectsType.menu,
+  				id: this.store.state.articles.length + 1,
+  				product: { ...this.menuInfo }
+  			});
+  		}
   	});
-  	console.log(this.productsContent);
   }
-
 }

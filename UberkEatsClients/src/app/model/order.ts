@@ -3,13 +3,13 @@ export interface OrdersObject {
 }
 
 export interface Order {
-  id: number;
+  id: string;
   menus: OrderProducts[];
   articles: OrderProducts[];
-  clientId: number;
+  clientId: string;
   deliveryAddress: string;
-  restaurantId: number;
-  deliverymanId: number;
+  restaurantId: string;
+  deliverymanId: string;
   status: number;
   timestamp: CustomTimeStamp;
 }
@@ -22,6 +22,6 @@ export interface CustomTimeStamp {
 }
 
 export interface OrderProducts {
-  id: number;
+  id: string;
   qty: number;
 }

@@ -1,128 +1,87 @@
 import { Injectable } from '@angular/core';
 import { BasketObjects } from 'app/model/basket';
+import { ProductsIds } from 'app/model/products';
+import { RestaurantsApiService } from 'app/services/restaurants-api.service';
 import { Store } from 'rxjs-observable-store';
-import { Order } from '../../model/order';
+import { Order, OrdersObject } from '../../model/order';
 
 import { OrderState } from './order-state';
 
 @Injectable({ providedIn: 'root' })
 export class OrderStore extends Store<OrderState> {
-
-	constructor() {
+	orders: Order[];
+	productsIds: ProductsIds = {articlesIds : '', menusIds:''};
+	constructor(
+		private restaurantsApi: RestaurantsApiService,
+	) {
 		super(new OrderState());
 	}
 
 	getOrdersFromDb() {
-		const date = '2017-11-27T09:10:00';
-		const orders: Order[] = [
-			{
-				id: 0,
-				articles: [{ id: 1, qty: 2 }, { id: 7, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 1 }, { id: 2, qty: 3 }],
-				clientId: 1,
-				deliveryAddress: '4 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
-				status: 0,
-				timestamp: {
-					createdAt: new Date(date),
-					pickepUpAt: new Date(date),
-					deliveredAt: new Date(date),
-					readyAt: new Date(date)
-				}
-			},
-			{
-				id: 1,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
-				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
-				status: 1,
-				timestamp: {
-					createdAt: new Date(date),
-					pickepUpAt: new Date(date),
-					deliveredAt: new Date(date),
-					readyAt: new Date(date)
-				}
-			},
-			{
-				id: 2,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
-				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
-				status: 2,
-				timestamp: {
-					createdAt: new Date(date),
-					pickepUpAt: new Date(date),
-					deliveredAt: new Date(date),
-					readyAt: new Date(date)
-				}
-			},
-			{
-				id: 3,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
-				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
-				status: 3,
-				timestamp: {
-					createdAt: new Date(date),
-					pickepUpAt: new Date(date),
-					deliveredAt: new Date(date),
-					readyAt: new Date(date)
-				}
-			},
-			{
-				id: 4,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
-				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
-				status: 4,
-				timestamp: {
-					createdAt: new Date(date),
-					pickepUpAt: new Date(date),
-					deliveredAt: new Date(date),
-					readyAt: new Date(date)
-				}
-			},
-			{
-				id: 5,
-				articles: [{ id: 1, qty: 2 }, { id: 4, qty: 1 }, { id: 8, qty: 2 }],
-				menus: [{ id: 1, qty: 2 }],
-				clientId: 1,
-				deliveryAddress: '16 rue de la Libération',
-				restaurantId: 1,
-				deliverymanId: NaN,
-				status: 5,
-				timestamp: {
-					createdAt: new Date(date),
-					pickepUpAt: new Date(date),
-					deliveredAt: new Date(date),
-					readyAt: new Date(date)
-				}
-			},
-		];
-		this.setState({
-			...this.state,
-			orders
-		});
 	}
 
-	editOrderStatus(orderId: number, status: boolean, deliverymanId: number = NaN) {
+	//Get the orders to be prepared by the restaurant and returns the concerned products ids
+	// /!\ We have to handle the restaurantId
+	async getOrdersToAccept(): Promise<ProductsIds>{
+		const response = await this.restaurantsApi.getOrdersToAccept('233').toPromise();
+		if(response){
+			this.orders = response;
+			const orders = this.orders;
+			this.setState({
+				...this.state,
+				orders
+			});
+			const concernedOrdersData = this.state.orders.filter(order => order.status === 0 || order.status === 1);
+			if(concernedOrdersData){
+				const concernedOrders: Order[] = concernedOrdersData;
+				concernedOrders.forEach(order => {
+					order.menus.forEach(menu => {
+						order.menus.length !== 1 ? this.productsIds.menusIds += menu.id + ',' : this.productsIds.menusIds = menu.id;
+					});
+					order.articles.forEach(article => {
+						order.articles.length !== 1 ?
+							this.productsIds.articlesIds += article.id + ',' :
+							this.productsIds.articlesIds = article.id;
+					});
+				});
+			}
+		}
+		return this.productsIds;
+	}
+
+	//Get the orders to be pickep by delivery man and returns the concerned products ids
+	async getOrdersToBePicked(): Promise<ProductsIds>{
+		const response = await this.restaurantsApi.getOrdersToBePicked().toPromise();
+		if(response){
+			this.orders = response;
+			const orders = this.orders;
+			this.setState({
+				...this.state,
+				orders
+			});
+			const concernedOrdersData = this.state.orders.filter(order => order.status === 2 || order.status === 3);
+			if(concernedOrdersData){
+				const concernedOrders: Order[] = concernedOrdersData;
+				concernedOrders.forEach(order => {
+					order.menus.forEach(menu => {
+						order.menus.length !== 1 ? this.productsIds.menusIds += menu.id + ',' : this.productsIds.menusIds = menu.id;
+					});
+					order.articles.forEach(article => {
+						order.articles.length !== 1 ?
+							this.productsIds.articlesIds += article.id + ',' :
+							this.productsIds.articlesIds = article.id;
+					});
+				});
+			}
+		}
+		return this.productsIds;
+	}
+
+	editOrderStatus(orderId: string, status: boolean, deliverymanId: string = '') {
 		const foundOrderInState = this.state.orders.find(entry => entry.id === orderId);
 		if (foundOrderInState) {
 			status ? foundOrderInState.status += 1 : foundOrderInState.status = -1;
-			if (status && !isNaN(deliverymanId)) {
+			if (status && deliverymanId !== '') {
 				foundOrderInState.deliverymanId = deliverymanId;
 			}
 		}

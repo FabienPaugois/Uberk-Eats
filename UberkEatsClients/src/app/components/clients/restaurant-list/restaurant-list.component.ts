@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Basket } from '../../../model/basket';
-import { Restaurants } from '../../../model/restaurants';
+import { ProductsIds, Restaurants } from '../../../model/restaurants';
 import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
@@ -16,17 +16,20 @@ export class RestaurantListComponent implements OnInit {
 	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
 	ngOnInit(): void {
-
+		this.getRestaurants();
 	}
 
-	btnClick() {
-		localStorage.clear();
-		localStorage.setItem('basket', JSON.stringify(this.basket));
-		this.router.navigateByUrl('/menu-pick-page');
+	btnClick(restaurantId: string, products: ProductsIds) {
+		const articlesArr = products.articles;
+		const menusArr = products.menus;
+
+		localStorage.setItem('restaurantId', restaurantId);
+		this.router.navigate(['/menu-pick-page', {restaurantId, articlesArr, menusArr}]);
 	}
 
 	getRestaurants() {
-		this.clientsApi.getRestaurants().subscribe((data: unknown) => {
+		this.clientsApi.getRestaurants().subscribe((restaurants: Restaurants[]) => {
+			this.restaurants = restaurants;
 		});
 	}
 }
