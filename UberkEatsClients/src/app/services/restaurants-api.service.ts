@@ -45,6 +45,14 @@ export class RestaurantsApiService {
 	}
 
 	// HttpClient API post() method => getOrders
+	getOrdersToAccept(restaurantId: string): Observable<Order[]> {
+		return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/ordersToAccept/' + restaurantId,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	// HttpClient API post() method => getOrders
 	getOrdersToBePicked(): Observable<Order[]> {
 		return this.http.get<Order[]>(
 			this.controllerUrl + '/orders/freeorders',
