@@ -23,6 +23,7 @@ import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-o
 import { MatTableModule } from '@angular/material/table';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 
 @NgModule({
