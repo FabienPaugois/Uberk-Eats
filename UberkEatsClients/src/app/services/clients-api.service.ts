@@ -76,8 +76,8 @@ export class ClientsApiService {
 		return this.http.get<ConnectionLogs[]>(
 			this.apiNoSQLURL + '/connectionLogs',
 			this.httpOptions
-			).pipe(retry(1), catchError(this.handleError));
-		}
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
 	getRestaurants(): Observable<Restaurants[]> {
     	return this.http.get<Restaurants[]>(
@@ -104,8 +104,8 @@ export class ClientsApiService {
     	return this.http.get<Menus[]>(
 			this.controllerUrl + '/menus/' + id,
 			this.httpOptions
-			).pipe(retry(1), catchError(this.handleError));
-		}
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
 	sendCreatedOrder(order: Order){
 		return this.http.post<Order>(

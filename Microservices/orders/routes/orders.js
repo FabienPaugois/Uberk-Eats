@@ -10,7 +10,7 @@ var orderSchema = mongoose.Schema({
 	clientId: Number,
 	deliveryAddress: String,
 	deliverymanId: Number,
-	restaurantId: Number,
+	restaurantId: String,
 	status: Number,
 	timestamp: Object,
 	menus: Object,

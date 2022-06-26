@@ -21,4 +21,9 @@
   </mat-list-item>
 </mat-list>
 <h1>Prix total : {{basketTotalPrice}}</h1>
-<button type="button">Passer la commande</button>
+<form class="example-form" [formGroup]="addressForm">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Adresse de livraison" formControlName="deliveryAddress" required>
+  </mat-form-field>
+</form>
+<button type="button" (click)="createOrderFromBasket();">Passer la commande</button>

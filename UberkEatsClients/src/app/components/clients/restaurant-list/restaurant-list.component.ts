@@ -22,6 +22,8 @@ export class RestaurantListComponent implements OnInit {
 	btnClick(restaurantId: string, products: ProductsIds) {
 		const articlesArr = products.articles;
 		const menusArr = products.menus;
+
+		localStorage.setItem('restaurantId', restaurantId);
 		this.router.navigate(['/menu-pick-page', {restaurantId, articlesArr, menusArr}]);
 	}
 

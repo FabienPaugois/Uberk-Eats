@@ -25,7 +25,7 @@ export class BasketPageComponent implements OnInit {
 	menus: Menus[];
 	order: Order;
 	basketTotalPrice = 0;
-	client: Clients;
+	client: any;
 
 	public addressForm: FormGroup; // variable of type FormGroup is created
 	constructor(
@@ -71,33 +71,27 @@ export class BasketPageComponent implements OnInit {
 	createOrderFromBasket(){
 		this.deliveryAddress = this.addressForm.get('deliveryAddress')?.value;
 		const clientData = localStorage.getItem('User');
-		if(clientData){
+		const restaurantId = localStorage.getItem('restaurantId');
+		if(clientData && restaurantId){
 			this.client = JSON.parse(clientData);
+			this.order = {
+				id: '',
+				menus: this.store.state.menus,
+				articles: this.store.state.articles,
+				clientId: this.client.Id,
+				deliveryAddress: this.deliveryAddress,
+				restaurantId,
+				deliverymanId: '',
+				status: 0,
+				timestamp : {
+					createdAt: new Date(),
+					pickepUpAt: new Date(0),
+					deliveredAt: new Date(0),
+					readyAt: new Date(0),
+				}
+			};
 		}
-		this.order = {
-			id: '',
-			menus: [],
-			articles: [],
-			clientId: this.client.id,
-			deliveryAddress: this.deliveryAddress,
-			restaurantId: '',
-			deliverymanId: '',
-			status: 0,
-			timestamp : {
-				createdAt: new Date(Date.now()),
-				pickepUpAt: new Date(),
-				deliveredAt: new Date(),
-				readyAt: new Date(),
-			}
-		};
-		const menus: OrderProducts[] = [];
-		const articles: OrderProducts[] = [];
-		this.store.state.menus.forEach(menu => {
-			menus.push({id: menu.id, qty: menu.qty});
-		});
-		this.store.state.articles.forEach(article => {
-			articles.push({id: article.id, qty: article.qty});
-		});
+		console.log(this.order);
 		this.clientsApi.sendCreatedOrder(this.order).subscribe(() => {});
 	}
 }
