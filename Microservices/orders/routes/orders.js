@@ -308,7 +308,7 @@ router.route('/restaurant/:restaurantId')
  *     }
  */
 
-router.route('/restaurant/ordersToAccept/:restaurantId')
+router.route('/ordersToAccept/:restaurantId')
 	.get(authenticateJWT, function (req, res) {
 		Order.find({ 'restaurantId': { $eq: req.params.restaurantId }, 'status': { $eq: 0 }  }).exec((err, orders) => {
 			if (err)

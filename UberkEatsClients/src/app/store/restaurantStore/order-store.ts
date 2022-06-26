@@ -20,6 +20,35 @@ export class OrderStore extends Store<OrderState> {
 	getOrdersFromDb() {
 	}
 
+	//Get the orders to be prepared by the restaurant and returns the concerned products ids
+	// /!\ We have to handle the restaurantId
+	async getOrdersToAccept(): Promise<ProductsIds>{
+		const response = await this.restaurantsApi.getOrdersToAccept('233').toPromise();
+		if(response){
+			this.orders = response;
+			const orders = this.orders;
+			this.setState({
+				...this.state,
+				orders
+			});
+			const concernedOrdersData = this.state.orders.filter(order => order.status === 0 || order.status === 1);
+			if(concernedOrdersData){
+				const concernedOrders: Order[] = concernedOrdersData;
+				concernedOrders.forEach(order => {
+					order.menus.forEach(menu => {
+						order.menus.length !== 1 ? this.productsIds.menusIds += menu.id + ',' : this.productsIds.menusIds = menu.id;
+					});
+					order.articles.forEach(article => {
+						order.articles.length !== 1 ?
+							this.productsIds.articlesIds += article.id + ',' :
+							this.productsIds.articlesIds = article.id;
+					});
+				});
+			}
+		}
+		return this.productsIds;
+	}
+
 	//Get the orders to be pickep by delivery man and returns the concerned products ids
 	async getOrdersToBePicked(): Promise<ProductsIds>{
 		const response = await this.restaurantsApi.getOrdersToBePicked().toPromise();
@@ -30,16 +59,20 @@ export class OrderStore extends Store<OrderState> {
 				...this.state,
 				orders
 			});
-			this.state.orders.forEach(order => {
-				order.menus.forEach(menu => {
-					order.menus.length !== 1 ? this.productsIds.menusIds += menu.id + ',' : this.productsIds.menusIds = menu.id;
+			const concernedOrdersData = this.state.orders.filter(order => order.status === 2 || order.status === 3);
+			if(concernedOrdersData){
+				const concernedOrders: Order[] = concernedOrdersData;
+				concernedOrders.forEach(order => {
+					order.menus.forEach(menu => {
+						order.menus.length !== 1 ? this.productsIds.menusIds += menu.id + ',' : this.productsIds.menusIds = menu.id;
+					});
+					order.articles.forEach(article => {
+						order.articles.length !== 1 ?
+							this.productsIds.articlesIds += article.id + ',' :
+							this.productsIds.articlesIds = article.id;
+					});
 				});
-				order.articles.forEach(article => {
-					order.articles.length !== 1 ?
-						this.productsIds.articlesIds += article.id + ',' :
-						this.productsIds.articlesIds = article.id;
-				});
-			});
+			}
 		}
 		return this.productsIds;
 	}
