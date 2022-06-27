@@ -1,29 +1,30 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>Profile information</mat-card-title>
-    </mat-card-header>
-    <form class="example-form" [formGroup]="userModificationForm">
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail" formControlName="mail" >
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" formControlName="name" required>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Surname" formControlName="surname" required>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Phone" formControlName="phone" required>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" formControlName="password" type="password" required>
-        </mat-form-field>
-      </mat-card-content>
-      <button mat-raised-button color="primary" class="btn-block">Back</button>
-      <button mat-raised-button color="primary" (click)="modify(modifyUserInfo)" class="btn-block">Confirm</button>
-      <button mat-raised-button color="warn" (click)="delete(modifyUserInfo)" class="btn-block">Delete</button>
-    </form>
-  </mat-card>
+
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Profile information</mat-card-title>
+      </mat-card-header>
+      <form class="example-form" [formGroup]="userModificationForm">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Mail" formControlName="mail">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name" formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Surname" formControlName="surname" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Phone" formControlName="phone" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" formControlName="password" type="password" required>
+          </mat-form-field>
+        </mat-card-content>
+        <button mat-raised-button color="primary" class="btn-block">Back</button>
+        <button mat-raised-button color="primary" (click)="modify(modifyUserInfo)" class="btn-block">Confirm</button>
+        <button mat-raised-button color="warn" (click)="delete(modifyUserInfo)" class="btn-block">Delete</button>
+      </form>
+    </mat-card>
 </div>
