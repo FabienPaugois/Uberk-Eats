@@ -26,26 +26,26 @@ export class NotificationsApiService {
   =========================================*/
 
 	getUserUnreadNotifications(userId: number): Observable<Notifications[]> {
-    return this.http.get<Notifications[]>(
-      this.apiNoSQLURL + '/notifications/unread/' + userId,
+		return this.http.get<Notifications[]>(
+			this.apiNoSQLURL + '/notifications/unread/' + userId,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-  markNotificationsAsRead(userId: number): Observable<unknown> {
-    return this.http.put<unknown>(
-      this.apiNoSQLURL + '/notifications/markAsRead/' + userId,
-      { userId: NaN, content: '', title: '', createdAt: new Date(), hasBeenRead: true },
-      this.httpOptions
-    ).pipe(retry(1), catchError(this.handleError));
-  }
+	markNotificationsAsRead(userId: number): Observable<unknown> {
+		return this.http.put<unknown>(
+			this.apiNoSQLURL + '/notifications/markAsRead/' + userId,
+			{ userId: NaN, content: '', title: '', createdAt: new Date(), hasBeenRead: true },
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
-  getUserNotifications(userId: number): Observable<Notifications[]> {
-    return this.http.get<Notifications[]>(
-      this.apiNoSQLURL + '/notifications/' + userId,
-      this.httpOptions
-    ).pipe(retry(1), catchError(this.handleError));
-  }
+	getUserNotifications(userId: number): Observable<Notifications[]> {
+		return this.http.get<Notifications[]>(
+			this.apiNoSQLURL + '/notifications/' + userId,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
 	// Error handling
 	handleError(error: any) {
