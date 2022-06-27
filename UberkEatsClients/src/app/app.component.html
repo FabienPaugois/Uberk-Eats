@@ -1,21 +1,16 @@
 <!-- Toolbar -->
 <mat-toolbar color="primary" class="app-header">
-  <span class="nav-tool-items">
+  <span class="nav-tool-items" *ngIf="!this.clientsApiService.userAuth.user">
     <a mat-button routerLink="login-page" routerLinkActive="active">Log in</a>
     <a mat-button routerLink="register-page" routerLinkActive="active">Register</a>
-    <a mat-button routerLink="restaurant-list" routerLinkActive="active">Restaurants</a>
-    <a mat-button routerLink="connectionLogs-list" routerLinkActive="active">ConnectionLogs</a>
-    <a mat-button routerLink="profile-page" routerLinkActive="active">Profile</a>
-    <a mat-button routerLink="menu-pick-page" routerLinkActive="active">Choisir ce restaurant</a>
-    <a mat-button routerLink="product-page" routerLinkActive="active">Choisir cet article</a>
-    <a mat-button routerLink="basket-page" routerLinkActive="active">Panier</a>
-    <a mat-button routerLink="create-article" routerLinkActive="active">Créer un article</a>
-    <a mat-button routerLink="orders-preview" routerLinkActive="active">Visualiser les commandes</a>
-    <a mat-button routerLink="create-menu" routerLinkActive="active">Créer un menu</a>
-    <a mat-button routerLink="order-history" routerLinkActive="active">Historique des commandes</a>
-    <a mat-button routerLink="order-preview" routerLinkActive="active">Visualiser commande</a>
-    <a mat-button routerLink="delivery-orders-preview" routerLinkActive="active">Visualiser commandes livreur</a>
+  </span>
+  <span class="nav-tool-items" *ngIf="this.clientsApiService.userAuth.user">
+    <div style="float: left;" *ngFor="let route of authGuard.getAccessibleRoutes(
+          this.router.config,
+          authGuard.parseJwt(this.clientsApiService.userAuth.jwtoken).role
+        )">
+      <a mat-button routerLink={{route.path}} routerLinkActive="active">{{route.data?.name}}</a>
+    </div>
   </span>
 </mat-toolbar>
 <router-outlet></router-outlet>
-
