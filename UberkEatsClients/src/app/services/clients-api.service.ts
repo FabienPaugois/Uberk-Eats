@@ -118,7 +118,7 @@ export class ClientsApiService {
 			errorObj.errorMsg = error.error.message;
 		} else {
 			// Get server-side error
-			errorObj = { errorCode: error.error, errorMsg: error.error };
+			errorObj = { errorCode: error.status, errorMsg: error.error };
 		}
 		//window.alert(errorMessage);
 		return throwError(() => errorObj);
