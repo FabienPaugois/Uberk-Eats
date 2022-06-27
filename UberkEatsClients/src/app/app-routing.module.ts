@@ -90,10 +90,10 @@ const routes: Routes = [
 		data: { roles: [], name: 'Connexions' }, canActivate: [AuthGuard]
 	},
 
-  {
-    path: 'notifications-page', component: NotificationsPageComponent,
-    data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'notifications-page', component: NotificationsPageComponent,
+		data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
+	},
 
 ];
 
