@@ -1,8 +1,9 @@
 
 <div class="center">
   <div class="center-wrapper" fxLayout="line">
+    <h1>Faites votre choix :</h1>
     <mat-accordion multi="true">
-      <h1>Menus</h1>
+      <h2>Menus</h2>
       <mat-card *ngFor="let menu of menus" class="example-card">
         <mat-card-header>
           <mat-card-title> {{ menu.name }}</mat-card-title>
@@ -10,24 +11,26 @@
         </mat-card-header>
 
         <mat-card-content>
+          <img src="{{menu.imageUrl}}"/>
           <p>{{ menu.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" class="btn-block" (click)="btnClickMenu(menu);">Choisir ce menu</button>
+          <button mat-raised-button style="background-color: #454647;color: #5FB709" (click)="btnClickMenu(menu);">Choisir ce menu</button>
         </mat-card-actions>
       </mat-card>
 
-      <h1>Articles</h1>
-      <mat-card *ngFor="let article of articles" class="example-card">
+      <h2>Articles</h2>
+      <mat-card *ngFor="let article of articles" style="display:inline-block;" class="example-card">
         <mat-card-header>
           <mat-card-title> {{ article.name }}</mat-card-title>
           <mat-card-subtitle> {{ article.price }}€</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
+          <img src="{{article.imageUrl}}" />
           <p>{{ article.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" class="btn-block" (click)="btnClickArticle(article);">Choisir cet article</button>
+          <button mat-raised-button style="background-color: #454647;color: #5FB709" (click)="btnClickArticle(article);">Choisir cet article</button>
         </mat-card-actions>
       </mat-card>
     </mat-accordion>

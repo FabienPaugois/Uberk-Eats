@@ -23,7 +23,12 @@ export class LoginPageComponent implements OnInit {
 			password: ''
 		});
 	}
-	ngOnInit(): void { }
+  ngOnInit(): void { }
+
+  redirectToRegister() {
+    this.router.navigate(['register-page']);
+  }
+
 	authenticate(dataclient: any) {
 		this.loginInfo.mail = this.loginForm.get('mail')?.value;
 		this.loginInfo.password = Md5.hashStr(this.loginForm.get('password')?.value);
