@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, OnInit, AfterViewInit, ViewChild, QueryList } from '@angular/core';
+import { Router } from '@angular/router';
+import { Notifications } from './model/notifications';
+import { NotificationsApiService } from './services/notifications-api.service';
 
 @Component({
 	selector: 'app-root',
@@ -6,5 +9,23 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'UberkEatsClients';
+  title = 'UberkEatsClients';
+  hidden = true;
+  notificationsNumber = 0;
+  constructor(public notificationsApi: NotificationsApiService, public router: Router) { }
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.getUserUnreadNotifications()
+    },5000);
+  }
+
+  getUserUnreadNotifications() {
+      this.notificationsApi.getUserUnreadNotifications(JSON.parse(localStorage.getItem('User') as string).Id).subscribe((notifications: Notifications[]) => {
+        if (notifications.length > 0) {
+          this.hidden = false;
+          this.notificationsNumber = notifications.length;
+        }
+      });
+  }
 }

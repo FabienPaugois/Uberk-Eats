@@ -108,9 +108,9 @@ router.route('/:userId')
  *
  */
 /* GET Notifications. */
-router.route('/:userId')
+router.route('/unread/:userId')
 	.get(authenticateJWT, function (req, res, next) {
-		Notification.find(({ 'userId': { $eq: req.params.userId } }, { 'hasBeenRead': { $eq: false } })).exec((err, notifications) => {
+		Notification.find(({ 'userId': { $eq: req.params.userId }, 'hasBeenRead': { $eq: false } })).exec((err, notifications) => {
 			if (err)
 				res.send(err);
 			else
@@ -156,4 +156,40 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 	});
 });
 //#endregion
+
+
+//#region PutNotifications
+/**
+* @api {post} /notification/markAsRead 
+* @apiVersion 1.0.0
+* @apiName PutNotification
+* @apiGroup Notifications
+*
+* @apiSuccess {Number} userId Id of the User.
+* @apiSuccess {String}  content Content of the Notification.
+* @apiSuccess {String} title Title of the Notification.
+* @apiSuccess {Date} createdAt Date of the Notification Creation.
+* @apiSuccess {Boolean} hasBeenRead ReadState of the Notification.
+*
+* @apiError NotificationNotUpdated Notification couldn't be updated.
+*/
+
+/* PUT Notifications. */
+router.route('/markAsRead/:userId').put(authenticateJWT, function (req, res, next) {
+	console.log(req.params.userId);
+	Notification.updateMany(
+		{ 'userId': { $eq: req.params.userId } },
+		{ $set: { 'hasBeenRead': true } },
+		{ "multi": true },
+		(err, writeResult) => {
+			if (err)
+				res.send(err);
+			else
+				res.json(writeResult)
+		}
+	)
+	
+});
+//#endregion
+
 module.exports = router;
