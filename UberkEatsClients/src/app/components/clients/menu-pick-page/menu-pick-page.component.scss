@@ -1,0 +1,31 @@
+.example-card {
+    max-width: 400px;
+    margin: 20px;
+}
+  
+.center{
+    display: flex;
+    justify-content: center;
+    height: 900px;
+    background-color: RGB(245,245,245);
+    padding: 30px;
+}
+
+.center-wrapper {
+    height: 100%;
+    flex: auto;
+    align-items: center;
+    justify-content: center;
+    width: 420px;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+.types{
+    flex-grow: 1;
+    bottom:4px;
+}

@@ -25,6 +25,7 @@ export class BasketPageComponent implements OnInit {
 	menus: Menus[];
 	order: Order;
 	basketTotalPrice = 0;
+	displayedColumns: string[] = ['name', 'price', 'qty'];
 	client: any;
 
 	public addressForm: FormGroup; // variable of type FormGroup is created
@@ -38,12 +39,8 @@ export class BasketPageComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.store.state.articles.forEach(article => {
-			this.store.state.articles.length !== 1 ? this.articleIds += article.id + ',' : this.articleIds = article.id;
-		});
-		this.store.state.menus.forEach(menu => {
-			this.store.state.menus.length !== 1 ? this.menuIds += menu.id + ',' : this.menuIds = menu.id;
-		});
+		this.menuIds = this.store.state.menus.map(menu => menu.id).join(',');
+		this.articleIds = this.store.state.articles.map(menu => menu.id).join(',');
 		if(this.articleIds.length !== 0){
 			this.clientsApi.FetchArticleData(this.articleIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
@@ -93,5 +90,15 @@ export class BasketPageComponent implements OnInit {
 		}
 		console.log(this.order);
 		this.clientsApi.sendCreatedOrder(this.order).subscribe(() => {});
+	}
+
+	removeArticlesData(){
+		this.store.state.articles = [];
+		this.articles = [];
+	}
+
+	removeMenusData(){
+		this.store.state.menus = [];
+		this.menus = [];
 	}
 }

@@ -1,31 +1,35 @@
-<mat-accordion multi="true">
-  <h1>Menus</h1>
-  <mat-card *ngFor="let menu of menus">
-    <mat-card-header>
-      <mat-card-title> {{ menu.name }}</mat-card-title>
-      <mat-card-subtitle> {{ menu.price }}€</mat-card-subtitle>
-    </mat-card-header>
 
-    <mat-card-content>
-      <p>{{ menu.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button type="button" (click)="btnClickMenu(menu);">Choisir ce menu</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="center">
+  <div class="center-wrapper" fxLayout="line">
+    <mat-accordion multi="true">
+      <h1>Menus</h1>
+      <mat-card *ngFor="let menu of menus" class="example-card">
+        <mat-card-header>
+          <mat-card-title> {{ menu.name }}</mat-card-title>
+          <mat-card-subtitle> {{ menu.price }}€</mat-card-subtitle>
+        </mat-card-header>
 
-  <h1>Articles</h1>
-  <mat-card *ngFor="let article of articles">
-    <mat-card-header>
-      <mat-card-title> {{ article.name }}</mat-card-title>
-      <mat-card-subtitle> {{ article.price }}€</mat-card-subtitle>
-    </mat-card-header>
+        <mat-card-content>
+          <p>{{ menu.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="btn-block" (click)="btnClickMenu(menu);">Choisir ce menu</button>
+        </mat-card-actions>
+      </mat-card>
 
-    <mat-card-content>
-      <p>{{ article.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button type="button" (click)="btnClickArticle(article);">Choisir cet article</button>
-    </mat-card-actions>
-  </mat-card>
-</mat-accordion>
+      <h1>Articles</h1>
+      <mat-card *ngFor="let article of articles" class="example-card">
+        <mat-card-header>
+          <mat-card-title> {{ article.name }}</mat-card-title>
+          <mat-card-subtitle> {{ article.price }}€</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ article.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="btn-block" (click)="btnClickArticle(article);">Choisir cet article</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-accordion>
+  </div>
+</div>

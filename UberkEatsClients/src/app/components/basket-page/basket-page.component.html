@@ -1,29 +1,77 @@
-<!-- two line list -->
-<mat-list>
-  <h1>Menus</h1>
-  <mat-list-item *ngFor="let menu of menus">
-    <h3 matLine> {{menu.name}} </h3>
-    <p matLine>
-      <span> {{menu.price}} </span>
-      <!--<span class="demo-2"> -- {{}} </span>-->
-    </p>
-  </mat-list-item>
-</mat-list>
-
-<mat-list>
-  <h1>Articles</h1>
-  <mat-list-item *ngFor="let article of articles">
-    <h3 matLine> {{article.name}} </h3>
-    <p matLine>
-      <span> {{article.price}} </span>
-      <!--<span class="demo-2"> -- {{}} </span>-->
-    </p>
-  </mat-list-item>
-</mat-list>
-<h1>Prix total : {{basketTotalPrice}}</h1>
-<form class="example-form" [formGroup]="addressForm">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Adresse de livraison" formControlName="deliveryAddress" required>
-  </mat-form-field>
-</form>
-<button type="button" (click)="createOrderFromBasket();">Passer la commande</button>
+<div class="center">
+  <div class="center-wrapper" fxLayout="line">
+    <h1>Menus</h1>
+    <table mat-table [dataSource]="menus" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Prix </th>
+        <td mat-cell *matCellDef="let element"> {{element.price + '€'}}  </td>
+      </ng-container>
+      <!-- Qty Column -->
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef> Quantité </th>
+        <td mat-cell *matCellDef="let element"> {{store.state.menus[menus.indexOf(element)].qty}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+    <div class="demo-button-container">
+      <button
+          mat-raised-button
+          (click)="removeMenusData()"
+          class="demo-button">
+        Retirer les menus
+      </button>
+    </div>
+    <br>
+    <h1>Articles</h1>
+    <table mat-table [dataSource]="articles" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Prix </th>
+        <td mat-cell *matCellDef="let element"> {{element.price + '€'}}  </td>
+      </ng-container>
+    
+      <!-- Qty Column -->
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef> Quantité </th>
+        <td mat-cell *matCellDef="let element"> {{store.state.articles[articles.indexOf(element)].qty}} </td>
+      </ng-container>
+      <ng-container>
+        <button md-raised-button type="button"><mat-icon>delete</mat-icon></button>
+      </ng-container>
+      <tr><button md-raised-button type="button">Delete</button></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+    <div class="demo-button-container">
+      <button
+          mat-raised-button
+          (click)="removeArticlesData()"
+          class="demo-button">
+          Retirer les articles
+      </button>
+    </div>
+    <br>
+    <h1>Prix total : {{basketTotalPrice}} €</h1>
+    <form class="example-form" [formGroup]="addressForm">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Adresse de livraison" formControlName="deliveryAddress" required>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" class="btn-block" (click)="createOrderFromBasket();">Passer la commande</button>
+  </div>
+</div>
