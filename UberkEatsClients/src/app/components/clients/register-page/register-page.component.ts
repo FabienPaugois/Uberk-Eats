@@ -5,6 +5,7 @@ import { Roles } from '../../../model/roles';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Md5 } from 'ts-md5/dist/md5';
 import { AuthToken } from '../../../model/authToken';
+import { ErrorSheme } from 'app/model/error';
 
 @Component({
 	selector: 'app-register-page',
@@ -15,6 +16,8 @@ import { AuthToken } from '../../../model/authToken';
 export class RegisterPageComponent implements OnInit {
   @Input() registerInfo = { mail: '', password: '', phone: '', name: '', surname: '', affiliateMail:'', role: '' };
   roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
+
+  public error: ErrorSheme = {isError: false, errorMsg: ''};
 
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(
@@ -49,6 +52,8 @@ export class RegisterPageComponent implements OnInit {
   		localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
   		localStorage.setItem('User', JSON.stringify(data.user));
   		this.router.navigate(['/']);
-  	});
+  	}, (error: any) => {
+  			this.error = {isError: true, errorMsg: error.errorMsg};
+  		});
   }
 }
