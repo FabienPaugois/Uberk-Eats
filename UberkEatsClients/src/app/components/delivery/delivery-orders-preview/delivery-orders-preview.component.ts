@@ -15,7 +15,7 @@ import { OrderStore } from '../../../store/restaurantStore/order-store';
 })
 export class DeliveryOrdersPreviewComponent implements OnInit {
 	panelOpenState = false;
-	loggedDeliveryManId = '1256';
+	loggedDeliveryManId = '';
 	orderData: OrdersObject;
 	articles: Articles[];
 	menus: Menus[];
@@ -41,8 +41,13 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 			.subscribe(data => {
 				this.orderData = data;
 			});
+		const deliverymanId = localStorage.getItem('deliverymanId');
+		if(deliverymanId){
+			this.loggedDeliveryManId = deliverymanId;
+		}
 		//Get Ids of concerned products to retreive their data for display
 		this.productsIds = await this.store.getOrdersToBePicked();
+		console.log(this.orderData.orders)
 		if(this.productsIds.articlesIds){
 			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
@@ -55,11 +60,11 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 		}
 	}
 
-	editAndAssignOrder(order: Order, status: boolean, deliverymanId: string) {
-		this.store.editOrderStatus(order.id, status, deliverymanId);
+	editAndAssignOrder(order: any, status: boolean, deliverymanId: string) {
+		this.store.editOrderStatus(order._id, status, deliverymanId);
 	}
 
-	markAsPickedUp(order: Order, status: boolean) {
-		this.store.editOrderStatus(order.id, status);
+	markAsPickedUp(order: any, status: boolean) {
+		this.store.editOrderStatus(order._id, status);
 	}
 }

@@ -3,9 +3,10 @@
     <div class="left-panel">
       <h1>Commandes à approuver</h1>
       <div *ngFor="let order of orderData.orders">
-        <mat-card *ngIf="order.status === 2">
+        <mat-card *ngIf="order.status === 2 && articles && menus">
           <mat-card-header>
-            <mat-card-title>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-title>
+            <mat-card-title>Commande numéro : {{orderData.orders.indexOf(order)}}</mat-card-title>
+            <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <h1>Menus</h1>
@@ -24,9 +25,10 @@
     <div class="right-panel">
       <h1>Commande acceptée</h1>
       <div *ngFor="let order of orderData.orders">
-        <mat-card *ngIf="order.status === 3 && order.deliverymanId === loggedDeliveryManId">
+        <mat-card *ngIf="order.status === 3 && order.deliverymanId.toString() === loggedDeliveryManId && articles && menus">
           <mat-card-header>
-            <mat-card-title>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-title>
+            <mat-card-title>Commande numéro : {{orderData.orders.indexOf(order)}}</mat-card-title>
+            <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <mat-expansion-panel (opened)="panelOpenState = true"

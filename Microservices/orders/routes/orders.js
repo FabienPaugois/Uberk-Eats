@@ -196,15 +196,20 @@ router.route('/orderids/:order_ids')
  *     }
  */
 
-router.route('/freeOrders')
-	.get(authenticateJWT, function (req, res) {
-		Order.find({ 'status': { $eq: 2 } }).exec((err, orders) => {
-			if (err)
-				res.status(404).json({ message: "Orders were not found" });
-			else
-				res.json(orders);
-		});
-	})
+ router.route('/freeOrders')
+ .get(authenticateJWT, function (req, res) {
+	 Order.find({
+		 $or: [
+			 { 'status': { $eq: 2 } },
+			 { 'status': { $eq: 3 } }
+		 ]
+	 }).exec((err, orders) => {
+		 if (err)
+			 res.status(404).json({ message: "Orders were not found" });
+		 else
+			 res.json(orders);
+	 });
+ })
 //#endregion
 
 //#region GetOrders for a deliveryMan
@@ -308,15 +313,20 @@ router.route('/restaurant/:restaurantId')
  *     }
  */
 
-router.route('/ordersToAccept/:restaurantId')
-	.get(authenticateJWT, function (req, res) {
-		Order.find({ 'restaurantId': { $eq: req.params.restaurantId }, 'status': { $eq: 0 }  }).exec((err, orders) => {
-			if (err)
-				res.status(404).json({ message: "Orders were not found" });
-			else
-				res.json(orders);
-		});
-	})
+ router.route('/ordersToAccept/:restaurantId').get(authenticateJWT, function (req, res) {
+	Order.find({
+		'restaurantId': { $eq: req.params.restaurantId },
+		$or: [
+			{ 'status': { $eq: 0 } },
+			{ 'status': { $eq: 1 } }
+		]
+	}).exec((err, orders) => {
+		if (err)
+			res.status(404).json({ message: "Orders were not found" });
+		else
+			res.json(orders);
+	});
+})
 //#endregion
 
 //#region PutOrderById
@@ -342,11 +352,14 @@ router.route('/:order_id').put(authenticateJWT, function (req, res) {
 		if (err) {
 			res.send(err);
 		}
-		order.name = req.body.name;
-		order.price = req.body.price;
-		order.description = req.body.description;
-		order.imgUrl = req.body.imgUrl;
+		order.clientId = req.body.clientId;
 		order.articles = req.body.articles;
+		order.menus = req.body.menus;
+		order.status = req.body.status;
+		order.timestamp = req.body.timestamp;
+		order.restaurantId = req.body.restaurantId;
+		order.deliverymanId = req.body.deliverymanId;
+		order.clientId = req.body.clientId;
 		order.save(function (err) {
 			if (err)
 				res.status(404).json({ message: "Order couldn't be updated" });

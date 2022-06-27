@@ -43,23 +43,19 @@ export class OrdersPreviewComponent implements OnInit {
 				this.orderData = data;
 			});
 		this.productsIds = await this.store.getOrdersToAccept();
-		console.log(this.store);
-		console.log(this.productsIds);
 		if(this.productsIds.articlesIds){
 			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
-				console.log(this.articles);
 			});
 		}
 		if(this.productsIds.menusIds){
 			this.clientsApi.FetchMenusData(this.productsIds.menusIds).subscribe((menus: Menus[]) => {
 				this.menus = menus;
-				console.log(this.menus);
 			});
 		}
 	}
 
-	EditOrderStatus(order: Order, status: boolean) {
-		this.store.editOrderStatus(order.id, status);
+	EditOrderStatus(order: any, status: boolean) {
+		this.store.editOrderStatus(order._id, status);
 	}
 }

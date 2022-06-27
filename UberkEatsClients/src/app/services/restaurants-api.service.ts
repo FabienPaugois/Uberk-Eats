@@ -6,6 +6,7 @@ import { Articles } from '../model/articles';
 import { Order, OrdersObject } from '../model/order';
 import { Menus } from '../model/menus';
 import { Axios } from 'axios';
+import { Restaurants } from 'app/model/restaurants';
 
 @Injectable({
 	providedIn: 'root'
@@ -57,6 +58,21 @@ export class RestaurantsApiService {
 		return this.http.get<Order[]>(
 			this.controllerUrl + '/orders/freeorders',
 			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	getRestaurantOwnerId(ownerId : number): Observable<Restaurants>{
+		return this.http.get<Restaurants> (
+			this.controllerUrl + '/restaurants/owner/' + ownerId,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	editOrderStatus(order: any): Observable<HttpResponse<Order>>{
+		return this.http.put<Order>(
+			this.controllerUrl + '/orders/' + order._id,
+			JSON.stringify(order),
+			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
 

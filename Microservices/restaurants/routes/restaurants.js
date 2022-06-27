@@ -228,6 +228,68 @@ router.route('/:restaurant_ids')
 		});
 	})
 //#endregion
+//#region GetRestaurantsByOwnerId
+/**
+ * @api {get} /restaurant/:owner_id Request Restaurants information
+ * @apiName GetRestaurant
+ * @apiGroup Restaurant
+ *
+ * @apiParam {string} owner_id : Owner ID.
+ *
+ *
+ * @apiSuccess {String} name Name of the Restaurant.
+ * @apiSuccess {Array}  types Types of the Restaurant.
+ * @apiSuccess {String} address Address of the Restaurant.
+ * @apiSuccess {Number} ownerId userId of the Restaurant Owner.
+ * @apiSuccess {String} description Description of the Restaurant.
+ * @apiSuccess {String} url Url of the Restaurant website.
+ * @apiSuccess {String} imgUrl imgUrl of the Restaurant.
+ * @apiSuccess {Object} products Products Object of the Restaurant.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *		 "_id": "62b02a1a13dcbfe08b8db704",
+ *		"name": "BeurkMacRestaurant",
+ *		 "types": [
+ *		     "Indian",
+ *		     "Burger"
+ *		],
+ *		"address": "1 Rotten Street",
+ *		"ownerId": 23,
+ *		"description": "Bad restaurant",
+ *		"url": "http://badrestaurant/img/beurkmac/13"
+ *		"imgUrl": "/img/bigmac/13",
+ *		"products": {
+ *			"articles": [
+ *				12,
+ *				3
+ *			],
+ *			"menus": [
+ *				56,
+ *				8
+ *			]
+ *		}
+ *     }
+ * @apiError RestaurantNotFound The id of the restaurant was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Restaurant id was not found"
+ *     }
+ */
+
+ router.route('/owner/:owner_id')
+ .get(authenticateJWT, function (req, res) {
+	 Restaurant.findOne({'ownerId': req.params.owner_id}).exec((err, restaurants) => {
+		 if (err)
+			 res.status(404).json({ message: "Restaurant id was not found" });
+		 else
+			 res.json(restaurants);
+	 });
+ })
+//#endregion
 //#region PutRestaurantById
 /**
 * @api {put} /restaurant/:restaurant_id Update Restaurant Information

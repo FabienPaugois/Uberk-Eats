@@ -6,6 +6,8 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { AuthToken } from '../../../model/authToken';
 import { ConnectionLogs } from '../../../model/connectionLogs';
 import { DatePipe } from '@angular/common';
+import { RestaurantsApiService } from 'app/services/restaurants-api.service';
+import { Restaurants } from 'app/model/restaurants';
 
 @Component({
 	selector: 'app-login-page',
@@ -16,7 +18,12 @@ export class LoginPageComponent implements OnInit {
 	@Input() loginInfo = { mail: '', password: '' };
 
 	public loginForm: FormGroup; // variable of type FormGroup is created
-	constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
+	constructor(
+		public clientsApi: ClientsApiService, 
+		private restaurantsApi : RestaurantsApiService,
+		public router: Router, 
+		private fb: FormBuilder
+		) {
 		// Form element defined below
 		this.loginForm = this.fb.group({
 			mail: '',
@@ -36,7 +43,15 @@ export class LoginPageComponent implements OnInit {
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
 			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
-
+			//Replace with role check
+			if(co.userId === 10){
+				this.restaurantsApi.getRestaurantOwnerId(co.userId).subscribe((data: Restaurants) => {
+					localStorage.setItem('restaurantId', data._id);
+				})
+			}
+			if(co.userId === 10010){
+				localStorage.setItem('deliverymanId', co.userId.toString());
+			}
 		}, (error: any) => {
 
 			co.userId = NaN;
