@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     public router: Router,
 		public clientsApiService: ClientsApiService,
 		public authGuard: AuthGuard
-  ) { }
+	) { }
 
 	ngOnInit(): void {
 		this.getUserUnreadNotifications();
