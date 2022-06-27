@@ -6,6 +6,7 @@ import { AuthToken } from '../../../model/authToken';
 import { ConnectionLogs } from '../../../model/connectionLogs';
 import { DatePipe } from '@angular/common';
 import { Clients } from 'app/model/clients';
+import { DefaultRoute } from 'app/model/defaultRoute';
 import { ErrorSheme } from 'app/model/error';
 
 @Component({
@@ -49,6 +50,7 @@ export class LoginPageComponent implements OnInit {
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
 			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
+			this.router.navigate([DefaultRoute["Client"]])
 		}, (error: any) => {
 			this.loading = false
 			this.error = {isError: true, errorMsg: error.errorMsg}
