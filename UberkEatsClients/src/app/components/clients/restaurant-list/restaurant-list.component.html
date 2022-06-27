@@ -1,16 +1,24 @@
-<mat-accordion multi="true">
-  <mat-card *ngFor="let restaurant of restaurants">
-    <mat-card-header>
-      <mat-card-title> {{ restaurant.name }}</mat-card-title>
-      <mat-card-subtitle *ngFor="let type of restaurant.types"> {{ type }}</mat-card-subtitle>
-      <mat-card-subtitle> {{ restaurant.address }}</mat-card-subtitle>
-    </mat-card-header>
-    
-    <mat-card-content>
-      <p>{{ restaurant.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button type="button" (click)="btnClick(restaurant._id, restaurant.products);">Voir les articles</button>
-    </mat-card-actions>
-  </mat-card>
-</mat-accordion>
+<div class="center">
+  <div class="center-wrapper" fxLayout="line">
+    <mat-accordion multi="true">
+      <mat-card *ngFor="let restaurant of restaurants" class="example-card">
+        <mat-card-header>
+          <mat-card-title> {{ restaurant.name }}</mat-card-title>
+          <mat-card-subtitle>Adresse du restaurant : {{ restaurant.address }}</mat-card-subtitle>
+          <mat-card-subtitle class="horizontal" *ngIf="restaurant.types.length > 0">
+            <p>Catégories :</p>
+            <mat-chip-list *ngFor="let type of restaurant.types">
+              <mat-chip class="types"> {{ type }}</mat-chip>
+            </mat-chip-list>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ restaurant.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="btn-block" (click)="btnClick(restaurant._id, restaurant.products);">Voir les produits</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-accordion>
+  </div>
+</div>  
