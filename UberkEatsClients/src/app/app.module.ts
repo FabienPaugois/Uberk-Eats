@@ -22,6 +22,7 @@ import { OrderPreviewComponent } from './components/order-preview/order-preview.
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 import { MatTableModule } from '@angular/material/table';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
+import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 		LoginPageComponent,
 		RegisterPageComponent,
 		ProfilePageComponent,
+		NotificationsPageComponent,
 		RestaurantListComponent,
 		ConnectionLogsListComponent,
 		MenuPickPageComponent,

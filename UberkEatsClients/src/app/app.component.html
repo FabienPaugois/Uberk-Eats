@@ -5,7 +5,15 @@
     <a mat-button routerLink="register-page" routerLinkActive="active">Register</a>
     <a mat-button routerLink="restaurant-list" routerLinkActive="active">Restaurants</a>
     <a mat-button routerLink="connectionLogs-list" routerLinkActive="active">ConnectionLogs</a>
-    <a mat-button routerLink="profile-page" routerLinkActive="active">Profile</a>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Profile</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="profile-page" routerLinkActive="active">Modifier mon profil</button>
+      <button mat-menu-item routerLink="notifications-page" routerLinkActive="active">
+        <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Notifications</span>
+      </button>
+    </mat-menu>
     <a mat-button routerLink="menu-pick-page" routerLinkActive="active">Choisir ce restaurant</a>
     <a mat-button routerLink="product-page" routerLinkActive="active">Choisir cet article</a>
     <a mat-button routerLink="basket-page" routerLinkActive="active">Panier</a>
