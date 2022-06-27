@@ -42,6 +42,7 @@
         </mat-card-content>
         <button mat-stroked-button (click)="register(registerInfo)" color="primary" class="btn-block mat-raised-button">Register</button>
       </form>
+      <div *ngIf="error.isError" class="alert alert-danger mt-3 mb-0">{{error.errorMsg}}</div>
     </mat-card>
   </div>
 </div>
