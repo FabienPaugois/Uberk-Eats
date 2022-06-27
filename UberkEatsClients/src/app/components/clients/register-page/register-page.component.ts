@@ -17,6 +17,8 @@ export class RegisterPageComponent implements OnInit {
   @Input() registerInfo = { mail: '', password: '', phone: '', name: '', surname: '', affiliateMail:'', role: '' };
   roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
 
+  public error: ErrorSheme = {isError: false, errorMsg: ''}
+
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(
 	public clientsApi: ClientsApiService,
