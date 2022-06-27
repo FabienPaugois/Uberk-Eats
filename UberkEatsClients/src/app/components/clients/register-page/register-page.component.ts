@@ -38,7 +38,7 @@ export class RegisterPageComponent implements OnInit {
   }
 
   redirectToLogin() {
-    this.router.navigate(['login-page']);
+  	this.router.navigate(['login-page']);
   }
 
   register(dataclient: any) {

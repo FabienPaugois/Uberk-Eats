@@ -23,11 +23,11 @@ export class LoginPageComponent implements OnInit {
 			password: ''
 		});
 	}
-  ngOnInit(): void { }
+	ngOnInit(): void { }
 
-  redirectToRegister() {
-    this.router.navigate(['register-page']);
-  }
+	redirectToRegister() {
+		this.router.navigate(['register-page']);
+	}
 
 	authenticate(dataclient: any) {
 		this.loginInfo.mail = this.loginForm.get('mail')?.value;
