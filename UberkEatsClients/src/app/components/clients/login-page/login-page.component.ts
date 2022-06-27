@@ -6,6 +6,7 @@ import { AuthToken } from '../../../model/authToken';
 import { ConnectionLogs } from '../../../model/connectionLogs';
 import { DatePipe } from '@angular/common';
 import { Clients } from 'app/model/clients';
+import { ErrorSheme } from 'app/model/error';
 
 @Component({
 	selector: 'app-login-page',
@@ -16,7 +17,7 @@ export class LoginPageComponent implements OnInit {
 
 	public loginForm: FormGroup; // variable of type FormGroup is created
 	public loading = false
-	public error = {isError: false, errorMsg: ''}
+	public error: ErrorSheme = {isError: false, errorMsg: ''}
 
 	constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
 		// Form element defined below
@@ -48,10 +49,8 @@ export class LoginPageComponent implements OnInit {
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
 			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
-
 		}, (error: any) => {
 			this.loading = false
-			console.log(error)
 			this.error = {isError: true, errorMsg: error.errorMsg}
 			co.userId = NaN;
 			co.date = new Date();
