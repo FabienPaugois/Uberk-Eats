@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthGuard } from './auth.guard'
+import { ClientsApiService } from './services/clients-api.service';
 
 @Component({
 	selector: 'app-root',
@@ -7,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'UberkEatsClients';
+	
+	constructor(
+		public router: Router,
+		public clientsApiService: ClientsApiService,
+		public authGuard: AuthGuard
+	) { }
 }
