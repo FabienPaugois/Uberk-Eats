@@ -11,56 +11,57 @@ import { NotificationsApiService } from '../../../services/notifications-api.ser
 
 @Component({
 	selector: 'app-notifications-page',
-  templateUrl: './notifications-page.component.html',
-  styleUrls: ['./notifications-page.component.scss']
+	templateUrl: './notifications-page.component.html',
+	styleUrls: ['./notifications-page.component.scss']
 })
 export class NotificationsPageComponent implements OnInit {
-  dataSource = new MatTableDataSource<Notifications>([]);
-  displayedColumns: string[] = ['title', 'createdAt', 'content'];
+	dataSource = new MatTableDataSource<Notifications>([]);
+	displayedColumns: string[] = ['title', 'createdAt', 'content'];
 
-  constructor(public notifsApi: NotificationsApiService, public router: Router, private liveAnnouncer: LiveAnnouncer) { }
+	constructor(public notifsApi: NotificationsApiService, public router: Router, private liveAnnouncer: LiveAnnouncer) { }
 
   @ViewChild(MatSort, { static: false })
-  set sort(v: MatSort) {
-    this.dataSource.sort = v;
-  }
+	set sort(v: MatSort) {
+		this.dataSource.sort = v;
+	}
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(v: MatPaginator) {
-    this.dataSource.paginator = v;
+  	this.dataSource.paginator = v;
   }
 
   announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this.liveAnnouncer.announce('Sorting cleared');
-    }
+  	if (sortState.direction) {
+  		this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+  	} else {
+  		this.liveAnnouncer.announce('Sorting cleared');
+  	}
   }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.markNotificationsAsRead();
-    this.getAllNotifications();
+  	this.dataSource.paginator = this.paginator;
+  	this.markNotificationsAsRead();
+  	this.getAllNotifications();
   }
 
   hideLoader() {
-    const loader = document.getElementById('loader');
-    if (loader !== null) {
-      loader.hidden = true;
-    }
+  	const loader = document.getElementById('loader');
+  	if (loader !== null) {
+  		loader.hidden = true;
+  	}
   }
 
   markNotificationsAsRead() {
-    this.notifsApi.markNotificationsAsRead(JSON.parse(localStorage.getItem('User') as string).Id).subscribe((data: unknown) => {
-      });
+  	this.notifsApi.markNotificationsAsRead(JSON.parse(localStorage.getItem('User') as string).Id).subscribe((data: unknown) => {
+  	});
   }
 
   getAllNotifications() {
-    this.notifsApi.getUserNotifications(JSON.parse(localStorage.getItem('User') as string).Id).subscribe((userNotifications: Notifications[]) => {
-      this.dataSource.data = userNotifications;
-      this.hideLoader();
-      console.log(userNotifications)
-    });
+  	this.notifsApi.getUserNotifications(JSON.parse(localStorage.getItem('User') as string).Id)
+  		.subscribe((userNotifications: Notifications[]) => {
+  		this.dataSource.data = userNotifications;
+  		this.hideLoader();
+  		console.log(userNotifications);
+  	});
   }
 }

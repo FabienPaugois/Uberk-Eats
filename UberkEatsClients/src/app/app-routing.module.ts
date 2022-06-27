@@ -20,7 +20,7 @@ const routes: Routes = [
 	{ path: 'login-page', component: LoginPageComponent },
 	{ path: 'register-page', component: RegisterPageComponent },
 	{ path: 'profile-page', component: ProfilePageComponent },
-  { path: 'notifications-page', component: NotificationsPageComponent },
+	{ path: 'notifications-page', component: NotificationsPageComponent },
 	{ path: 'restaurant-list', component: RestaurantListComponent },
 	{ path: 'connectionLogs-list', component: ConnectionLogsListComponent },
 	{ path: 'menu-pick-page', component: MenuPickPageComponent },
