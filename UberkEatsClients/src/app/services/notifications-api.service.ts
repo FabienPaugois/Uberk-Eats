@@ -40,6 +40,13 @@ export class NotificationsApiService {
     ).pipe(retry(1), catchError(this.handleError));
   }
 
+  getUserNotifications(userId: number): Observable<Notifications[]> {
+    return this.http.get<Notifications[]>(
+      this.apiNoSQLURL + '/notifications/' + userId,
+      this.httpOptions
+    ).pipe(retry(1), catchError(this.handleError));
+  }
+
 	// Error handling
 	handleError(error: any) {
 		console.log(error);
