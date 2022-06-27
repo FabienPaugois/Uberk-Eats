@@ -11,6 +11,15 @@
         )">
       <a mat-button routerLink={{route.path}} routerLinkActive="active">{{route.data?.name}}</a>
     </div>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Profile</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="profile-page" routerLinkActive="active">Modifier mon profil</button>
+      <button mat-menu-item routerLink="notifications-page" routerLinkActive="active">
+        <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Notifications</span>
+      </button>
+    </mat-menu>
   </span>
 </mat-toolbar>
 <router-outlet></router-outlet>

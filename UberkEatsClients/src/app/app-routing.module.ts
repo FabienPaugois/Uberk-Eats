@@ -14,6 +14,7 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
+import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 
 import { AuthGuard } from './auth.guard';
 import { Roles } from './model/roles';
@@ -88,6 +89,12 @@ const routes: Routes = [
 		path: 'connectionLogs-list', component: ConnectionLogsListComponent,
 		data: { roles: [], name: 'Connexions' }, canActivate: [AuthGuard]
 	},
+
+	{
+		path: 'notifications-page', component: NotificationsPageComponent,
+		data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
+	},
+
 ];
 
 @NgModule({

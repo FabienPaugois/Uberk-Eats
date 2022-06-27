@@ -23,6 +23,7 @@ import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-o
 import { MatTableModule } from '@angular/material/table';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 		LoginPageComponent,
 		RegisterPageComponent,
 		ProfilePageComponent,
+		NotificationsPageComponent,
 		RestaurantListComponent,
 		ConnectionLogsListComponent,
 		MenuPickPageComponent,
