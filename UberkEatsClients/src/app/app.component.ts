@@ -15,6 +15,7 @@ export class AppComponent {
   constructor(public notificationsApi: NotificationsApiService, public router: Router) { }
 
   ngOnInit(): void {
+    this.getUserUnreadNotifications();
     setInterval(() => {
       this.getUserUnreadNotifications()
     },5000);
@@ -24,8 +25,11 @@ export class AppComponent {
       this.notificationsApi.getUserUnreadNotifications(JSON.parse(localStorage.getItem('User') as string).Id).subscribe((notifications: Notifications[]) => {
         if (notifications.length > 0) {
           this.hidden = false;
-          this.notificationsNumber = notifications.length;
         }
+        else {
+          this.hidden = true;
+        }
+        this.notificationsNumber = notifications.length;
       });
   }
 }
