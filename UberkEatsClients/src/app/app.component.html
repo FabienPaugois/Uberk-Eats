@@ -1,6 +1,7 @@
 <!-- Toolbar -->
-<mat-toolbar color="primary" class="app-header">
-  <span class="nav-tool-items" *ngIf="!this.clientsApiService.userAuth.user">
+<mat-toolbar style="background-color: #454647; ">
+  <img src="./assets/uberkeats.png" style="width:60px;"/>
+  <span class="nav-tool-items"  *ngIf="!this.clientsApiService.userAuth.user">>
     <a mat-button routerLink="login-page" routerLinkActive="active">Log in</a>
     <a mat-button routerLink="register-page" routerLinkActive="active">Register</a>
   </span>

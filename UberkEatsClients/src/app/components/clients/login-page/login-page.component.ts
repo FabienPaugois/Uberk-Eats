@@ -28,6 +28,16 @@ export class LoginPageComponent implements OnInit {
 		});
 	}
 
+  redirectToRegister() {
+    this.router.navigate(['register-page']);
+  }
+
+	authenticate(dataclient: any) {
+		this.loginInfo.mail = this.loginForm.get('mail')?.value;
+		this.loginInfo.password = Md5.hashStr(this.loginForm.get('password')?.value);
+		const co: ConnectionLogs = { userId: NaN, date: new Date(), description:''};
+		this.clientsApi.authenticate(this.loginInfo).subscribe((data: AuthToken) => { // Send the login request
+
 	get form() { return this.loginForm.controls; }
 
 	ngOnInit(): void {
@@ -49,7 +59,7 @@ export class LoginPageComponent implements OnInit {
 			this.error.isError = false;
 			localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
 			localStorage.setItem('User', JSON.stringify(data.user));
-			this.loading = false;
+
 			co.userId = JSON.parse('' + localStorage.getItem('User')).Id;
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
