@@ -3,4 +3,3 @@ export enum DefaultRoute {
     RestaurantOwner = '/create-menu',
     DeliveryMan = '/delivery-orders-preview',
   }
-  

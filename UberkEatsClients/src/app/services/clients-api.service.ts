@@ -37,12 +37,12 @@ export class ClientsApiService {
 		return {
 			user: JSON.parse(localStorage.getItem('User') as string),
 			jwtoken: localStorage.getItem('JWT') as string
-		} as AuthToken
+		} as AuthToken;
 	}
 
 	// HttpClient API post() method => Authenticate
 	authenticate(user: any): Observable<AuthToken> {
-		user.password = Md5.hashStr(user.password)
+		user.password = Md5.hashStr(user.password);
 		return this.http.post<AuthToken>(
 			this.apiURL + '/authenticate',
 			JSON.stringify(user),
@@ -53,7 +53,7 @@ export class ClientsApiService {
 	register(user: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
-			JSON.stringify({ user: user, roleName, affiliateMail }),
+			JSON.stringify({ user, roleName, affiliateMail }),
 			this.httpOptions
 		).pipe(retry(0), catchError(this.handleError));
 	}

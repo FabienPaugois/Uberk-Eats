@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthGuard } from './auth.guard'
+import { AuthGuard } from './auth.guard';
 import { ClientsApiService } from './services/clients-api.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ClientsApiService } from './services/clients-api.service';
 })
 export class AppComponent {
 	title = 'UberkEatsClients';
-	
+
 	constructor(
 		public router: Router,
 		public clientsApiService: ClientsApiService,
