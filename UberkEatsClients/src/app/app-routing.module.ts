@@ -89,7 +89,7 @@ const routes: Routes = [
 		path: 'connectionLogs-list', component: ConnectionLogsListComponent,
 		data: { roles: [], name: 'Connexions' }, canActivate: [AuthGuard]
 	},
-  
+
   {
     path: 'notifications-page', component: NotificationsPageComponent,
     data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
