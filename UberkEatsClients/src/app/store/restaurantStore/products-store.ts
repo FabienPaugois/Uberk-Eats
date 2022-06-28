@@ -12,13 +12,13 @@ import { ProductsState } from './products-state';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsStore extends Store<ProductsState> {
-	concernedRestaurant : Restaurants;
+	concernedRestaurant: Restaurants;
 	productsIds: ProductsIds = {articlesIds : '', menusIds:''};
-	
+
 	constructor(
-		private clientsApi : ClientsApiService,
-		private restaurantsApi : RestaurantsApiService
-		) {
+		private clientsApi: ClientsApiService,
+		private restaurantsApi: RestaurantsApiService
+	) {
 		super(new ProductsState());
 	}
 

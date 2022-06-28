@@ -73,7 +73,8 @@ const routes: Routes = [
 
 	{
 		path: 'order-history', component: OrderHistoryComponent,
-		data: { roles: [Roles.client, Roles.deliveryMan, Roles.restaurantOwner], name: 'Historique des commandes' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.client, Roles.deliveryMan, Roles.restaurantOwner],
+			name: 'Historique des commandes' }, canActivate: [AuthGuard]
 	},
 
 	{

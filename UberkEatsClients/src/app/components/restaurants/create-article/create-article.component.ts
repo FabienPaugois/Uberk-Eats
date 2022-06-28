@@ -56,13 +56,13 @@ export class CreateArticleComponent implements OnInit {
   		.subscribe(data => {
   			this.productsContent = data;
   		});
-		this.productsIds = await this.store.getProductsByRestaurant(BasketObjectsType.article);
-		if(this.productsIds.articlesIds){
-			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
-				this.productsContent.articles = articles;
-			});
-		}
-	}
+  	this.productsIds = await this.store.getProductsByRestaurant(BasketObjectsType.article);
+  	if(this.productsIds.articlesIds){
+  		this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
+  			this.productsContent.articles = articles;
+  		});
+  	}
+  }
 
   addArticle() {
   	this.articleInfo.name = this.registerForm.get('name')?.value;

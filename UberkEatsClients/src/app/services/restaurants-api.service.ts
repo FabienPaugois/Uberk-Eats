@@ -44,8 +44,8 @@ export class RestaurantsApiService {
 			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
-	
-	addArticleToRestaurant(article : Articles, restaurantId : string): Observable<HttpResponse<Articles>>{
+
+	addArticleToRestaurant(article: Articles, restaurantId: string): Observable<HttpResponse<Articles>>{
 		return this.http.put<Articles>(
 			this.controllerUrl + '/restaurants/addArticle/' + restaurantId,
 			JSON.stringify(article),
@@ -53,10 +53,10 @@ export class RestaurantsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	addMenuToRestaurant(menuId: string, restaurantId : string): Observable<HttpResponse<Menus>>{
+	addMenuToRestaurant(menuId: string, restaurantId: string): Observable<HttpResponse<Menus>>{
 		return this.http.put<Menus>(
 			this.controllerUrl + '/restaurants/addMenu/' + restaurantId,
-			JSON.stringify({'menu' : menuId}),
+			JSON.stringify({menu : menuId}),
 			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
@@ -84,7 +84,7 @@ export class RestaurantsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	getRestaurantById(restaurantId : string): Observable<Restaurants>{
+	getRestaurantById(restaurantId: string): Observable<Restaurants>{
 		return this.http.get<Restaurants> (
 			this.controllerUrl + '/restaurants/' + restaurantId,
 			this.httpOptions

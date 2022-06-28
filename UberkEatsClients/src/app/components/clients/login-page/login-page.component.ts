@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit {
 	public loading = false;
 	public error: ErrorSheme = { isError: false, errorMsg: '' };
 
-		constructor(
+	constructor(
 		public clientsApi: ClientsApiService,
 		private restaurantsApi: RestaurantsApiService,
 		public router: Router,
