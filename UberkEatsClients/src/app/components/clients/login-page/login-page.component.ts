@@ -5,6 +5,8 @@ import { ClientsApiService } from '../../../services/clients-api.service';
 import { AuthToken } from '../../../model/authToken';
 import { ConnectionLogs } from '../../../model/connectionLogs';
 import { DatePipe } from '@angular/common';
+import { RestaurantsApiService } from 'app/services/restaurants-api.service';
+import { Restaurants } from 'app/model/restaurants';
 import { Clients } from 'app/model/clients';
 import { DefaultRoute } from 'app/model/defaultRoute';
 import { ErrorSheme } from 'app/model/error';
@@ -20,7 +22,12 @@ export class LoginPageComponent implements OnInit {
 	public loading = false;
 	public error: ErrorSheme = { isError: false, errorMsg: '' };
 
-	constructor(public clientsApi: ClientsApiService, public router: Router, private fb: FormBuilder) {
+		constructor(
+		public clientsApi: ClientsApiService,
+		private restaurantsApi: RestaurantsApiService,
+		public router: Router,
+		private fb: FormBuilder
+	) {
 		// Form element defined below
 		this.loginForm = this.fb.group({
 			mail: ['', Validators.required],
@@ -54,6 +61,15 @@ export class LoginPageComponent implements OnInit {
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
 			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
+			//Replace with role check
+			if(co.userId === 10){
+				this.restaurantsApi.getRestaurantOwnerId(co.userId).subscribe((data: Restaurants) => {
+					localStorage.setItem('restaurantId', data._id);
+				});
+			}
+			if(co.userId === 10010){
+				localStorage.setItem('deliverymanId', co.userId.toString());
+			}
 			this.router.navigate([DefaultRoute.Client]);
 		}, (error: any) => {
 			this.loading = false;
