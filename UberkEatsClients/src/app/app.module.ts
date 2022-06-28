@@ -31,7 +31,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 	declarations: [
 		AppComponent,
 		LoginPageComponent,
-		RegisterPageComponent,
+    RegisterPageComponent,
+    StatisticsComponent,
 		ProfilePageComponent,
 		NotificationsPageComponent,
 		RestaurantListComponent,

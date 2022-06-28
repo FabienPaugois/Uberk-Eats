@@ -15,6 +15,7 @@ import { OrderPreviewComponent } from './components/order-preview/order-preview.
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
 import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 import { AuthGuard } from './auth.guard';
 import { Roles } from './model/roles';
