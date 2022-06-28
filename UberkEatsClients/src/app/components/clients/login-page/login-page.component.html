@@ -2,10 +2,10 @@
   <div class="login-wrapper">
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title>Connexion</mat-card-title>
         <mat-card-subtitle><br><br>Rentrez les informations nécessaires.</mat-card-subtitle>
       </mat-card-header>
-      <form class="example-form" [formGroup]="loginForm">
+      <form class="example-form" [formGroup]="loginForm" (ngSubmit)="authenticate()">
         <mat-card-content>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Mail" formControlName="mail" required>
@@ -14,8 +14,11 @@
             <input matInput placeholder="Password" formControlName="password" type="password" required>
           </mat-form-field>
         </mat-card-content>
-        <button mat-raised-button color="primary" class="btn-block" (click)="authenticate(loginInfo)">Login</button>
+        <button mat-raised-button style="background-color: #454647;color: #5FB709" [disabled]="loading" class="btn-block">Login</button>
+        <div *ngIf="error.isError" class="alert alert-danger mt-3 mb-0">{{error.errorMsg}}</div>
       </form>
+      <br />
+      <button (click)="redirectToRegister()" class="button">Pas encore de compte ? Créez-en un !</button>
     </mat-card>
   </div>
 </div>

@@ -9,6 +9,7 @@ import { AuthToken } from '../model/authToken';
 import { ConnectionLogs } from '../model/connectionLogs';
 import { Order, OrdersObject } from '../model/order';
 import { Clients } from 'app/model/clients';
+import { Md5 } from 'ts-md5';
 @Injectable({
 	providedIn: 'root',
 })
@@ -28,22 +29,31 @@ export class ClientsApiService {
 
 	constructor(private http: HttpClient) { }
 	/*========================================
-    CRUD Methods for consuming RESTful API
+	CRUD Methods for consuming RESTful API
   =========================================*/
 
+
+	public get userAuth(): AuthToken {
+		return {
+			user: JSON.parse(localStorage.getItem('User') as string),
+			jwtoken: localStorage.getItem('JWT') as string
+		} as AuthToken;
+	}
+
 	// HttpClient API post() method => Authenticate
-	authenticate(employee: any): Observable<AuthToken> {
+	authenticate(user: any): Observable<AuthToken> {
+		user.password = Md5.hashStr(user.password);
 		return this.http.post<AuthToken>(
 			this.apiURL + '/authenticate',
-			JSON.stringify(employee),
+			JSON.stringify(user),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	register(employee: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
+	register(user: any, roleName: any, affiliateMail: any): Observable<AuthToken> {
 		return this.http.post<AuthToken>(
 			this.apiURL + '/create',
-			JSON.stringify({ user: employee, roleName, affiliateMail }),
+			JSON.stringify({ user, roleName, affiliateMail }),
 			this.httpOptions
 		).pipe(retry(0), catchError(this.handleError));
 	}
@@ -118,16 +128,16 @@ export class ClientsApiService {
 	// Error handling
 	handleError(error: any) {
 		console.log(error);
-		let errorMessage = '';
+		let errorObj = { errorCode: Number, errorMsg: '' };
 		if (error.error instanceof ErrorEvent) {
 			// Get client-side error
-			errorMessage = error.error.message;
+			errorObj.errorMsg = error.error.message;
 		} else {
 			// Get server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
+			errorObj = { errorCode: error.status, errorMsg: error.error };
 		}
-		window.alert(errorMessage);
-		return throwError(() => errorMessage);
+		//window.alert(errorMessage);
+		return throwError(() => errorObj);
 	}
 }
 

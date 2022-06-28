@@ -50,7 +50,7 @@
 						],
 						"filter": {
 							// you can expand this regex to add more allowed names
-							"regex": "^(Content-Type)|(Authorization)$",
+							"regex": "^(Content-Type)|(Authorization)|(_id)$",
 							"match": false
 						}
 					}
@@ -74,7 +74,8 @@
 					{
 						"allowTernary": true
 					}
-				]
+				],
+				"no-underscore-dangle": "off"
 			}
 		},
 		{

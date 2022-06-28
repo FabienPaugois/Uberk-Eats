@@ -15,8 +15,8 @@
             <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} : Quantité : {{ article.qty }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button type="button" (click)="EditOrderStatus(order, true);">Accepter la commande</button>
-            <button type="button" (click)="EditOrderStatus(order, false);">Refuser la commande</button>
+            <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, true);">Accepter la commande</button>
+            <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, false);">Refuser la commande</button>
           </mat-card-actions>
           <p>----------------------------------------------------------------------------------</p>
         </mat-card>
@@ -49,8 +49,8 @@
             
           </mat-card-content>
           <mat-card-actions>
-            <button type="button" (click)="EditOrderStatus(order, true);">Commande prête</button>
-            <button type="button" (click)="EditOrderStatus(order, false);">Annuler la commande</button>
+            <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, true);">Commande prête</button>
+            <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, false);">Annuler la commande</button>
           </mat-card-actions>
           <p>----------------------------------------------------------------------------------</p>
         </mat-card>

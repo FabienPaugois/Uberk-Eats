@@ -14,23 +14,93 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { OrderPreviewComponent } from './components/order-preview/order-preview.component';
 import { DeliveryOrdersPreviewComponent } from './components/delivery/delivery-orders-preview/delivery-orders-preview.component';
 import { ConnectionLogsListComponent } from './components/technicalService/connectionLogs-list/connectionLogs-list.component';
+import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+
+import { AuthGuard } from './auth.guard';
+import { Roles } from './model/roles';
 
 const routes: Routes = [
-	{ path: 'login-page', component: LoginPageComponent },
-	{ path: 'register-page', component: RegisterPageComponent },
-	{ path: 'profile-page', component: ProfilePageComponent },
-	{ path: 'restaurant-list', component: RestaurantListComponent },
-	{ path: 'connectionLogs-list', component: ConnectionLogsListComponent },
-	{ path: 'menu-pick-page', component: MenuPickPageComponent },
-	{ path: 'product-page', component: ProductPageComponent },
-	{ path: 'create-article', component: CreateArticleComponent },
-	{ path: 'create-menu', component: CreateMenuComponent },
-	{ path: 'product-page', component: ProductPageComponent },
-	{ path: 'basket-page', component: BasketPageComponent },
-	{ path: 'orders-preview', component: OrdersPreviewComponent },
-	{ path: 'order-history', component: OrderHistoryComponent },
-	{ path: 'order-preview', component: OrderPreviewComponent },
-	{ path: 'delivery-orders-preview', component: DeliveryOrdersPreviewComponent },
+	{
+		path: 'login-page', component: LoginPageComponent,
+		data: { name: 'Log In' }
+	},
+
+	{
+		path: 'register-page', component: RegisterPageComponent,
+		data: { name: 'Register' }
+	},
+
+	{
+		path: 'profile-page', component: ProfilePageComponent,
+		data: { name: 'Profile' }
+	},
+
+	{
+		path: 'restaurant-list', component: RestaurantListComponent,
+		data: { roles: [Roles.client], name: 'Restaurants' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'menu-pick-page', component: MenuPickPageComponent,
+		data: { roles: [Roles.client], name: 'Choisir ce restaurant' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'product-page', component: ProductPageComponent,
+		data: { roles: [Roles.client], name: 'Choisir cet article' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'create-article', component: CreateArticleComponent,
+		data: { roles: [Roles.restaurantOwner], name: 'Créer un article' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'create-menu', component: CreateMenuComponent,
+		data: { roles: [Roles.restaurantOwner], name: 'Créer un menu' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'basket-page', component: BasketPageComponent,
+		data: { roles: [Roles.client], name: 'Panier' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'orders-preview', component: OrdersPreviewComponent,
+		data: { roles: [Roles.restaurantOwner, Roles.deliveryMan], name: 'Visualiser les commandes' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'order-history', component: OrderHistoryComponent,
+		data: { roles: [Roles.client], name: 'Historique des commandes' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'order-preview', component: OrderPreviewComponent,
+		data: { name: 'Visualiser commande' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'delivery-orders-preview', component: DeliveryOrdersPreviewComponent,
+		data: { roles: [Roles.deliveryMan], name: 'Visualiser commandes livreur' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'connectionLogs-list', component: ConnectionLogsListComponent,
+		data: { roles: [], name: 'Connexions' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'notifications-page', component: NotificationsPageComponent,
+		data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'statistics-page', component: StatisticsComponent,
+		data: { roles: [Roles.restaurantOwner, Roles.commercialService], name: 'Statistiques' }, canActivate: [AuthGuard]
+	},
+
 ];
 
 @NgModule({
