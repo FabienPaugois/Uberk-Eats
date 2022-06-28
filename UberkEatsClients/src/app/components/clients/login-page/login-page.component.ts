@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit {
 			this.error.isError = false;
 			localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
 			localStorage.setItem('User', JSON.stringify(data.user));
-			this.loading = false;
+
 			co.userId = JSON.parse('' + localStorage.getItem('User')).Id;
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
@@ -61,9 +61,13 @@ export class LoginPageComponent implements OnInit {
 			co.userId = NaN;
 			co.date = new Date();
 			co.description = 'User with login mail \'' + (
-				JSON.parse(localStorage.getItem('User') as string) as Clients
+        JSON.parse(localStorage.getItem('User') as string) as Clients
 			).mail + '\' could not login. Error : ' + error.errorMsg;
 			this.clientsApi.postConnectionLogs(co).subscribe();
 		});
+	}
+
+	redirectToRegister() {
+		this.router.navigate(['register-page']);
 	}
 }

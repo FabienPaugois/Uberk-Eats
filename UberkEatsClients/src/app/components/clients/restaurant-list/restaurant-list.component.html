@@ -1,7 +1,8 @@
 <div class="center">
   <div class="center-wrapper" fxLayout="line">
+    <h1 style="text-align:center"> Choisissez le restaurant dans lequel vous souhaitez commander</h1>
     <mat-accordion multi="true">
-      <mat-card *ngFor="let restaurant of restaurants" class="example-card">
+      <mat-card *ngFor="let restaurant of restaurants" style="display:inline-block;" class="example-card" >
         <mat-card-header>
           <mat-card-title> {{ restaurant.name }}</mat-card-title>
           <mat-card-subtitle>Adresse du restaurant : {{ restaurant.address }}</mat-card-subtitle>
@@ -13,10 +14,11 @@
           </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
+          <img src="{{restaurant.imageUrl}}"/>
           <p>{{ restaurant.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" class="btn-block" (click)="btnClick(restaurant._id, restaurant.products);">Voir les produits</button>
+          <button mat-raised-button style="background-color: #454647;color: #5FB709" (click)="btnClick(restaurant._id, restaurant.products);">Voir les produits</button>
         </mat-card-actions>
       </mat-card>
     </mat-accordion>

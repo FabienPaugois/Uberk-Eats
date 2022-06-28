@@ -40,6 +40,10 @@ export class RegisterPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  redirectToLogin() {
+  	this.router.navigate(['login-page']);
+  }
+
   register(dataclient: any) {
   	this.registerInfo.name = this.registerForm.get('name')?.value;
   	this.registerInfo.surname = this.registerForm.get('surname')?.value;
