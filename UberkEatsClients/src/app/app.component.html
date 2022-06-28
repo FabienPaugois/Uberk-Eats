@@ -22,12 +22,12 @@
       </button>
       <mat-menu #notifs="matMenu">
         <div mat-menu-item *ngFor="let notif of notifications">
-          <div *ngIf="notif.hasBeenRead == false" style="color:red;">
+          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead == false" style="color:red;">
             {{ notif.title }}
-          </div>
-          <div *ngIf="notif.hasBeenRead == true" style="color:grey;">
+          </button>
+          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead == true" style="color:grey;">
             {{ notif.title }}
-          </div>
+          </button>
         </div>
       </mat-menu>
       <button mat-menu-item (click)="logout()" style="color:red">Déconnexion</button>
