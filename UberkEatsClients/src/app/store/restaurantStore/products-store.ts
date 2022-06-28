@@ -62,4 +62,19 @@ export class ProductsStore extends Store<ProductsState> {
 			});
 		}
 	}
+
+	deleteArticle(articleId: string){
+		this.setState({
+			...this.state,
+			articles : this.state.articles.filter(menu => articleId != menu._id),
+		});
+
+	}
+
+	deleteMenu(menuId: string){
+		this.setState({
+			...this.state,
+			menus : this.state.menus.filter(menu => menuId != menu._id),
+		})
+	}
 }

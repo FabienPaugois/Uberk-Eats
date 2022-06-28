@@ -45,10 +45,10 @@ export class RestaurantsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	addArticleToRestaurant(article: Articles, restaurantId: string): Observable<HttpResponse<Articles>>{
+	addArticleToRestaurant(articleId: string, restaurantId: string): Observable<HttpResponse<Articles>>{
 		return this.http.put<Articles>(
 			this.controllerUrl + '/restaurants/addArticle/' + restaurantId,
-			JSON.stringify(article),
+			JSON.stringify({article : articleId}),
 			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
@@ -60,6 +60,23 @@ export class RestaurantsApiService {
 			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
+
+	removeArticleFromRestaurant(articleId: string, restaurantId: string): Observable<HttpResponse<Articles>>{
+		return this.http.put<Articles>(
+			this.controllerUrl + '/restaurants/removeArticle/' + restaurantId,
+			JSON.stringify({article : articleId}),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	removeMenuFromRestaurant(menuId: string, restaurantId: string): Observable<HttpResponse<Menus>>{
+		return this.http.put<Menus>(
+			this.controllerUrl + '/restaurants/removeMenu/' + restaurantId,
+			JSON.stringify({menu : menuId}),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
 
 	// HttpClient API post() method => getOrders
 	getOrdersToAccept(restaurantId: string): Observable<Order[]> {

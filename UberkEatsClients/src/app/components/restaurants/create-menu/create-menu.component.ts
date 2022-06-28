@@ -92,4 +92,16 @@ export class CreateMenuComponent implements OnInit {
   			}
   		});}
   }
+
+  deleteMenu(menuId: string){
+	const restdata = localStorage.getItem('restaurantId');
+	if(restdata){
+		const restaurantId = restdata;
+		this.restaurantsApi.removeMenuFromRestaurant(menuId, restaurantId).subscribe((response2: HttpResponse<Menus>) => {
+			if(response2.status === 200){
+				this.store.deleteMenu(menuId);
+			}
+		});
+	}
+  }
 }

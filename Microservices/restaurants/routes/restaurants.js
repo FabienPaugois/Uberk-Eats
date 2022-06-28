@@ -346,6 +346,111 @@ router.route('/addArticle/:restaurant_id').put(authenticateJWT, function (req, r
 })
 //#endregion
 
+//#region RemoveArticleToRestaurant
+/**
+* @api {put} removeArticle/:restaurant_id Update Restaurant Information
+* @apiVersion 1.0.0
+* @apiName PutRestaurants
+* @apiGroup Restaurants
+*	{
+*		 "_id": "62b02a1a13dcbfe08b8db704",
+*		"name": "BeurkMacRestaurant",
+*		 "types": [
+*		     "Indian",
+*		     "Burger"
+*		],
+*		"address": "1 Rotten Street",
+*		"ownerId": 23,
+*		"description": "Bad restaurant",
+*		"url": "http://badrestaurant/img/beurkmac/13"
+*		"imgUrl": "/img/bigmac/13",
+*		"products": {
+*			"articles": [
+*				12,
+*				3
+*			],
+*			"menus": [
+*				56,
+*				8
+*			]
+*		}
+*     }
+* @apiError RestaurantNotUpdated Restaurant couldn't be updated.
+*/
+
+router.route('/removeArticle/:restaurant_id').put(authenticateJWT, function (req, res) {
+	Restaurant.findById(req.params.restaurant_id, function (err, restaurant) {
+		if (err) {
+			res.send(err);
+		}
+		restaurant.name = req.body.name;
+		restaurant.price = req.body.price;
+		restaurant.description = req.body.description;
+		restaurant.imgUrl = req.body.imgUrl;
+		restaurant.products.articles.pop(req.body.article);
+		restaurant.save(function (err) {
+			if (err)
+				res.status(404).json({ message: "Restaurant couldn't be updated" });
+			else
+				res.json({ message: 'Updated restaurant' });
+		});
+	});
+})
+//#endregion
+
+//#region RemoveMenuToRestaurant
+/**
+* @api {put} removeArticle/:restaurant_id Update Restaurant Information
+* @apiVersion 1.0.0
+* @apiName PutRestaurants
+* @apiGroup Restaurants
+*	{
+*		 "_id": "62b02a1a13dcbfe08b8db704",
+*		"name": "BeurkMacRestaurant",
+*		 "types": [
+*		     "Indian",
+*		     "Burger"
+*		],
+*		"address": "1 Rotten Street",
+*		"ownerId": 23,
+*		"description": "Bad restaurant",
+*		"url": "http://badrestaurant/img/beurkmac/13"
+*		"imgUrl": "/img/bigmac/13",
+*		"products": {
+*			"articles": [
+*				12,
+*				3
+*			],
+*			"menus": [
+*				56,
+*				8
+*			]
+*		}
+*     }
+* @apiError RestaurantNotUpdated Restaurant couldn't be updated.
+*/
+
+router.route('/removeMenu/:restaurant_id').put(authenticateJWT, function (req, res) {
+	Restaurant.findById(req.params.restaurant_id, function (err, restaurant) {
+		if (err) {
+			res.send(err);
+		}
+		restaurant.name = req.body.name;
+		restaurant.price = req.body.price;
+		restaurant.description = req.body.description;
+		restaurant.imgUrl = req.body.imgUrl;
+		restaurant.products.menus = restaurant.products.menus.filter(menu => menu._id !== req.body.menu);
+		console.log(restaurant);
+		restaurant.save(function (err) {
+			if (err)
+				res.status(404).json({ message: "Restaurant couldn't be updated" });
+			else
+				res.json({ message: 'Updated restaurant' });
+		});
+	});
+})
+//#endregion
+
 //#region AddArticleToRestaurant
 /**
 * @api {put} addArticle/:restaurant_id Update Restaurant Information
