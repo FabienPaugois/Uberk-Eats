@@ -94,7 +94,7 @@ const routes: Routes = [
 
 	{
 		path: 'notifications-page', component: NotificationsPageComponent,
-		data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
+		data: { name: 'Notifications' }, canActivate: [AuthGuard]
 	},
 
 	{

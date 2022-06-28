@@ -62,7 +62,6 @@ export class NotificationsPageComponent implements OnInit {
         .subscribe((userNotifications: Notifications[]) => {
           this.dataSource.data = userNotifications;
           this.hideLoader();
-          console.log(userNotifications);
         });
     }
   }

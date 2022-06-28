@@ -13,7 +13,8 @@ import { ClientsApiService } from './services/clients-api.service';
 export class AppComponent implements OnInit {
 	title = 'UberkEatsClients';
 	hidden = true;
-	notificationsNumber = 0;
+  notificationsNumber = 0;
+  notifications: Notifications[] = [];
 	constructor(
     public notificationsApi: NotificationsApiService,
     public router: Router,
@@ -22,9 +23,10 @@ export class AppComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		this.getUserUnreadNotifications();
+    this.getUserUnreadNotifications();
+    this.getAllNotifications();
 		setInterval(() => {
-			this.getUserUnreadNotifications();
+      this.getUserUnreadNotifications();
 		}, 5000);
 	}
 
@@ -32,17 +34,28 @@ export class AppComponent implements OnInit {
 		this.notificationsApi.getUserUnreadNotifications(JSON.parse(localStorage.getItem('User') as string).Id)
 			.subscribe((notifications: Notifications[]) => {
 				if (notifications.length > 0) {
-					this.hidden = false;
+          this.hidden = false;
+          this.getAllNotifications();
 				}
 				else {
 					this.hidden = true;
 				}
-				this.notificationsNumber = notifications.length;
+        this.notificationsNumber = notifications.length;
 			});
-	}
+  }
+
+  getAllNotifications() {
+    if (localStorage.getItem('User') != null) {
+      this.notificationsApi.getUserNotifications(JSON.parse(localStorage.getItem('User') as string).Id)
+        .subscribe((userNotifications: Notifications[]) => {
+          this.notifications = userNotifications;
+        });
+    }
+  }
 
 	logout() {
 		localStorage.clear();
 		this.router.navigate(['/login-page']);
-	}
+  }
+
 }
