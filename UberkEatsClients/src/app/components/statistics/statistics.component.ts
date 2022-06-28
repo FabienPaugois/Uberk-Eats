@@ -12,14 +12,14 @@ import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
 	selector: 'app-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+	templateUrl: './statistics.component.html',
+	styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
 
 	constructor(public clientsApi: ClientsApiService, public router: Router) { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
 
 }

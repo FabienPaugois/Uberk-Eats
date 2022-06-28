@@ -3,18 +3,18 @@ import { MatTableModule } from '@angular/material/table';
 import { StatisticsComponent } from './statistics.component';
 
 describe('ConnectionLogsListComponent', () => {
-  let component: StatisticsComponent;
-  let fixture: ComponentFixture<StatisticsComponent>;
+	let component: StatisticsComponent;
+	let fixture: ComponentFixture<StatisticsComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-      declarations: [StatisticsComponent ]
+			declarations: [StatisticsComponent ]
 		})
 			.compileComponents();
 	});
 
 	beforeEach(() => {
-    fixture = TestBed.createComponent(StatisticsComponent);
+		fixture = TestBed.createComponent(StatisticsComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

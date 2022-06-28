@@ -96,10 +96,10 @@ const routes: Routes = [
 		data: { roles: [], name: 'Notifications' }, canActivate: [AuthGuard]
 	},
 
-  {
-    path: 'statistics-page', component: StatisticsComponent,
-    data: { roles: [Roles.restaurantOwner, Roles.commercialService], name: 'Statistiques' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'statistics-page', component: StatisticsComponent,
+		data: { roles: [Roles.restaurantOwner, Roles.commercialService], name: 'Statistiques' }, canActivate: [AuthGuard]
+	},
 
 ];
 
