@@ -44,6 +44,22 @@ export class RestaurantsApiService {
 			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
 	}
+	
+	addArticleToRestaurant(article : Articles, restaurantId : string): Observable<HttpResponse<Articles>>{
+		return this.http.put<Articles>(
+			this.controllerUrl + '/restaurants/addArticle/' + restaurantId,
+			JSON.stringify(article),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	addMenuToRestaurant(menuId: string, restaurantId : string): Observable<HttpResponse<Menus>>{
+		return this.http.put<Menus>(
+			this.controllerUrl + '/restaurants/addMenu/' + restaurantId,
+			JSON.stringify({'menu' : menuId}),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
 
 	// HttpClient API post() method => getOrders
 	getOrdersToAccept(restaurantId: string): Observable<Order[]> {
@@ -68,6 +84,13 @@ export class RestaurantsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
+	getRestaurantById(restaurantId : string): Observable<Restaurants>{
+		return this.http.get<Restaurants> (
+			this.controllerUrl + '/restaurants/' + restaurantId,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
 	editOrderStatus(order: any): Observable<HttpResponse<Order>>{
 		return this.http.put<Order>(
 			this.controllerUrl + '/orders/' + order._id,
@@ -76,7 +99,7 @@ export class RestaurantsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	getRestaurantOrdersHistory(restaurantId: number): Observable<Order[]> {
+	getRestaurantOrdersHistory(restaurantId: string): Observable<Order[]> {
     	return this.http.get<Order[]>(
 			this.controllerUrl + '/orders/restaurantOwner/' + restaurantId,
 			this.httpOptions

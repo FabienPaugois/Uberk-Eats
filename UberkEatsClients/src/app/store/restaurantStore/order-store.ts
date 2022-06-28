@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BasketObjects } from 'app/model/basket';
+import { parseJwt } from '../../helpers/jwthelpers';
 import { Clients } from 'app/model/clients';
 import { ProductsIds } from 'app/model/products';
 import { ClientsApiService } from 'app/services/clients-api.service';
@@ -9,6 +9,7 @@ import { Store } from 'rxjs-observable-store';
 import { Order, OrdersObject } from '../../model/order';
 
 import { OrderState } from './order-state';
+import { Roles } from 'app/model/roles';
 
 @Injectable({ providedIn: 'root' })
 export class OrderStore extends Store<OrderState> {
@@ -26,8 +27,8 @@ export class OrderStore extends Store<OrderState> {
 
 	async getOrdersFromDb() {
 		//Don't forget to check role to adapt request
-		const role = 'Client';
-		if(role === 'Client'){
+		const role = parseJwt(this.clientsApi.userAuth.jwtoken).role;
+		if(role === Roles.client){
 			const clientData = localStorage.getItem('User');
 			if(clientData){
 				const clientId = JSON.parse(clientData).Id;
@@ -42,10 +43,10 @@ export class OrderStore extends Store<OrderState> {
 				}
 			}
 		}
-		else if(role === 'restaurantOwner'){
+		else if(role === Roles.restaurantOwner){
 			const clientData = localStorage.getItem('restaurantId');
 			if(clientData){
-				const restaurantId = parseInt(clientData, 10);
+				const restaurantId = clientData;
 				const response = await this.restaurantsApi.getRestaurantOrdersHistory(restaurantId).toPromise();
 				if(response){
 					this.orders = response;
@@ -57,11 +58,11 @@ export class OrderStore extends Store<OrderState> {
 				}
 			}
 		}
-		else if(role === 'deliveryman'){
+		else if(role === Roles.deliveryMan){
 			const clientData = localStorage.getItem('deliverymanId');
 			if(clientData){
 				const deliverymanId = parseInt(clientData, 10);
-				const response = await this.restaurantsApi.getRestaurantOrdersHistory(deliverymanId).toPromise();
+				const response = await this.restaurantsApi.getDeliveryManOrdersHistory(deliverymanId).toPromise();
 				if(response){
 					this.orders = response;
 					const orders = this.orders;

@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { ClientsApiService } from '../../../services/clients-api.service';
 import { AuthToken } from '../../../model/authToken';
 import { ConnectionLogs } from '../../../model/connectionLogs';
-import { DatePipe } from '@angular/common';
+import { parseJwt } from '../../../helpers/jwthelpers';
 import { RestaurantsApiService } from 'app/services/restaurants-api.service';
 import { Restaurants } from 'app/model/restaurants';
 import { Clients } from 'app/model/clients';
 import { DefaultRoute } from 'app/model/defaultRoute';
 import { ErrorSheme } from 'app/model/error';
+import { Roles } from 'app/model/roles';
 
 @Component({
 	selector: 'app-login-page',
@@ -61,13 +62,15 @@ export class LoginPageComponent implements OnInit {
 			co.date = new Date();
 			co.description = 'User logged in succesfully';
 			this.clientsApi.postConnectionLogs(co).subscribe((log: ConnectionLogs) => { });
+
+			const role = parseJwt(data.jwtoken).role;
 			//Replace with role check
-			if(co.userId === 10){
+			if(role === Roles.restaurantOwner){
 				this.restaurantsApi.getRestaurantOwnerId(co.userId).subscribe((data: Restaurants) => {
 					localStorage.setItem('restaurantId', data._id);
 				});
 			}
-			if(co.userId === 10010){
+			if(role === Roles.deliveryMan){
 				localStorage.setItem('deliverymanId', co.userId.toString());
 			}
 			this.router.navigate([DefaultRoute.Client]);
@@ -77,7 +80,7 @@ export class LoginPageComponent implements OnInit {
 			co.userId = NaN;
 			co.date = new Date();
 			co.description = 'User with login mail \'' + (
-        JSON.parse(localStorage.getItem('User') as string) as Clients
+        	JSON.parse(localStorage.getItem('User') as string) as Clients
 			).mail + '\' could not login. Error : ' + error.errorMsg;
 			this.clientsApi.postConnectionLogs(co).subscribe();
 		});

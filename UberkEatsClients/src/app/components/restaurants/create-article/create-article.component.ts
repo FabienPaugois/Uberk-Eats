@@ -6,9 +6,11 @@ import { Roles } from '../../../model/roles';
 import { Articles } from '../../..//model/articles';
 import { RestaurantsApiService } from '../../../services/restaurants-api.service';
 import { ProductsStore } from '../../../store/restaurantStore/products-store';
-import { Products } from '../../../model/products';
+import { Products, ProductsIds } from '../../../model/products';
 import { BasketObjectsType } from '../../../model/basket';
 import { HttpResponse } from '@angular/common/http';
+import { ClientsApiService } from 'app/services/clients-api.service';
+import { Menus } from 'app/model/menus';
 
 @Component({
 	selector: 'app-create-article',
@@ -20,11 +22,13 @@ export class CreateArticleComponent implements OnInit {
   @Input() articleInfo: Articles = { _id: '', name:'', description: '', price: 0, imageUrl:''};
   roles: any[] = Object.values(Roles).filter(role => role.toString().length > 2);
   productsContent: Products;
+  productsIds: ProductsIds;
   ngUnsubscribe = new Subject();
 
   public registerForm: FormGroup; // variable of type FormGroup is created
   constructor(
     public restaurantsApi: RestaurantsApiService,
+	private clientsApi: ClientsApiService,
     public router: Router,
     private fb: FormBuilder,
     private store: ProductsStore,
@@ -44,7 +48,7 @@ export class CreateArticleComponent implements OnInit {
   	this.ngUnsubscribe.complete();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
   	// subscription to the store
   	this.store.state$
   		.pipe(
@@ -52,7 +56,13 @@ export class CreateArticleComponent implements OnInit {
   		.subscribe(data => {
   			this.productsContent = data;
   		});
-  }
+		this.productsIds = await this.store.getProductsByRestaurant(BasketObjectsType.article);
+		if(this.productsIds.articlesIds){
+			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
+				this.productsContent.articles = articles;
+			});
+		}
+	}
 
   addArticle() {
   	this.articleInfo.name = this.registerForm.get('name')?.value;
@@ -68,5 +78,9 @@ export class CreateArticleComponent implements OnInit {
   			});
   		}
   	});
+  }
+
+  deleteArticle(){
+
   }
 }

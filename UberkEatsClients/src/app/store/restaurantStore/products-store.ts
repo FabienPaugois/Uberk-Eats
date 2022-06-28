@@ -1,16 +1,44 @@
 import { Injectable } from '@angular/core';
+import { Restaurants } from 'app/model/restaurants';
+import { ClientsApiService } from 'app/services/clients-api.service';
+import { RestaurantsApiService } from 'app/services/restaurants-api.service';
 import { Store } from 'rxjs-observable-store';
 import { Articles } from '../../model/articles';
 import { BasketObjectsType } from '../../model/basket';
 import { Menus } from '../../model/menus';
-import { ProductsObjects } from '../../model/products';
+import { ProductsIds, ProductsObjects } from '../../model/products';
 
 import { ProductsState } from './products-state';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsStore extends Store<ProductsState> {
-	constructor() {
+	concernedRestaurant : Restaurants;
+	productsIds: ProductsIds = {articlesIds : '', menusIds:''};
+	
+	constructor(
+		private clientsApi : ClientsApiService,
+		private restaurantsApi : RestaurantsApiService
+		) {
 		super(new ProductsState());
+	}
+
+	async getProductsByRestaurant(type: BasketObjectsType): Promise<ProductsIds>{
+		const restId = localStorage.getItem('restaurantId');
+		if(restId){
+			const response = await this.restaurantsApi.getRestaurantById(restId).toPromise();
+			if(response){
+				this.concernedRestaurant = response;
+				console.log(this.concernedRestaurant.products.articles);
+				if(type === 'menus'){
+					this.productsIds.menusIds = this.concernedRestaurant.products.menus.join(',');
+					this.productsIds.articlesIds = this.concernedRestaurant.products.articles.join(',');
+				} else {
+					this.productsIds.articlesIds = this.concernedRestaurant.products.articles.join(',');
+				}
+			}
+		}
+		console.log(this.productsIds);
+		return this.productsIds;
 	}
 
 	addProductsObject(product: ProductsObjects): void {
