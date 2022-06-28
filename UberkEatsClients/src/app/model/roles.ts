@@ -3,5 +3,6 @@ export enum Roles {
   restaurantOwner = 'Restaurant Owner',
   deliveryMan = 'Deliveryman',
   developer = 'Developer',
-  technicalService = 'Technical Service'
+  technicalService = 'Technical Service',
+  commercialService = 'Commercial Service'
 }
