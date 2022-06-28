@@ -1,9 +1,9 @@
 <div>
   <div class="vertical-align">
-    <div class="left-panel">
+    <div class="panel">
       <h1>Commandes à approuver</h1>
-      <div *ngFor="let order of orderData.orders">
-        <mat-card *ngIf="order.status === 0 && articles && menus">
+      <div *ngFor="let order of orderData.orders" class="vertical">
+        <mat-card *ngIf="order.status === 0 && articles && menus" class="example-card">
           <mat-card-header>
             <mat-card-title>Commande numéro : {{orderData.orders.indexOf(order)}}</mat-card-title>
             <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
@@ -18,14 +18,13 @@
             <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, true);">Accepter la commande</button>
             <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, false);">Refuser la commande</button>
           </mat-card-actions>
-          <p>----------------------------------------------------------------------------------</p>
         </mat-card>
       </div>
     </div>
-    <div class="right-panel">
+    <div class="panel">
       <h1>Commandes en préparation</h1>
-      <div *ngFor="let order of orderData.orders">
-        <mat-card *ngIf="order.status === 1 && articles && menus">
+      <div *ngFor="let order of orderData.orders" class="vertical">
+        <mat-card *ngIf="order.status === 1 && articles && menus" class="example-card">
           <mat-card-header>
             <mat-card-title>Commande numéro : {{orderData.orders.indexOf(order)}}</mat-card-title>
             <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
@@ -46,13 +45,11 @@
               <h1>Articles</h1>
               <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} : Quantité : {{ article.qty }}</p>
             </mat-expansion-panel>
-            
           </mat-card-content>
           <mat-card-actions>
             <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, true);">Commande prête</button>
             <button type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, false);">Annuler la commande</button>
           </mat-card-actions>
-          <p>----------------------------------------------------------------------------------</p>
         </mat-card>
       </div>
     </div>
