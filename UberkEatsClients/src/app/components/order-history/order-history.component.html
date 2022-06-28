@@ -1,9 +1,10 @@
-<div>
+<div class="center">
+  <div class="center-wrapper" fxLayout="line">
   <h1>Historique des commandes</h1>
-  <div *ngFor="let order of orderHistory.orders">
+  <div class="margin" *ngFor="let order of orderHistory.orders">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Commande numéro : {{ order.id + 1 }}</mat-card-title>
+        <mat-card-title>Commande numéro : {{ orderHistory.orders.indexOf(order) + 1}}</mat-card-title>
         <mat-card-subtitle>Adresse de livraison : {{ order.deliveryAddress }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
@@ -11,7 +12,7 @@
         <p>Commande livrée le : {{ order.timestamp.deliveredAt }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button type="button" (click)="btnClickOrder(order.id);">Afficher les détails</button>
+        <button mat-raised-button color="primary" (click)="btnClickOrder(order);">Afficher les détails</button>
       </mat-card-actions>
     </mat-card>
   </div>

@@ -172,6 +172,117 @@ router.route('/orderids/:order_ids')
 	})
 //#endregion
 
+//#region GetOrdersHistory for deliverymens
+/**
+ * @api {get} /deliveryman/:id Request Orders information
+ * @apiName GetOrdersHistoryDeliveryMan
+ * @apiGroup Order[]
+ *
+ * @apiSuccess {Number} clientId Id of the User who ordered.
+ * @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
+ * @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
+ * @apiSuccess {Number} restaurantId RestaurantId of the Order.
+ * @apiSuccess {Number} status Status of the Order.
+ * @apiSuccess {Object} timestamp Timestamp object of the Order.
+ * @apiSuccess {Object} menus Menus object of the Order.
+ * @apiSuccess {Object} articles Articles object of the Order.
+ *
+ * @apiError OrderNotFound The id of one or more Orders were not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Orders were not found"
+ *     }
+ */
+
+ router.route('/deliveryman/:id')
+ 	.get(authenticateJWT, function (req, res) {
+		Order.find({
+			'deliverymanId' : {$eq: req.params.id}
+		}).exec((err, orders) => {
+			if (err)
+				res.status(404).json({ message: "Orders were not found" });
+			else
+				res.json(orders);
+		});
+ 	})
+//#endregion
+
+//#region GetOrdersHistory for restaurantOwners
+/**
+ * @api {get} /restaurantOwner/:id Request Orders information
+ * @apiName GetOrdersHistoryRestaurantOwner
+ * @apiGroup Order[]
+ *
+ * @apiSuccess {Number} clientId Id of the User who ordered.
+ * @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
+ * @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
+ * @apiSuccess {Number} restaurantId RestaurantId of the Order.
+ * @apiSuccess {Number} status Status of the Order.
+ * @apiSuccess {Object} timestamp Timestamp object of the Order.
+ * @apiSuccess {Object} menus Menus object of the Order.
+ * @apiSuccess {Object} articles Articles object of the Order.
+ *
+ * @apiError OrderNotFound The id of one or more Orders were not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Orders were not found"
+ *     }
+ */
+
+ router.route('/restaurantOwner/:id')
+ 	.get(authenticateJWT, function (req, res) {
+		Order.find({
+			'restaurantId' : {$eq: req.params.id}
+		}).exec((err, orders) => {
+			if (err)
+				res.status(404).json({ message: "Orders were not found" });
+			else
+				res.json(orders);
+		});
+ 	})
+//#endregion
+
+//#region GetOrdersHistory for clients
+/**
+ * @api {get} /clients/:id Request Orders information
+ * @apiName GetOrdersHistoryClients
+ * @apiGroup Order[]
+ *
+ * @apiSuccess {Number} clientId Id of the User who ordered.
+ * @apiSuccess {String} deliveryAddress DeliverAdress of the Order.
+ * @apiSuccess {Number} deliverymanId DeliverymanId of the Order.
+ * @apiSuccess {Number} restaurantId RestaurantId of the Order.
+ * @apiSuccess {Number} status Status of the Order.
+ * @apiSuccess {Object} timestamp Timestamp object of the Order.
+ * @apiSuccess {Object} menus Menus object of the Order.
+ * @apiSuccess {Object} articles Articles object of the Order.
+ *
+ * @apiError OrderNotFound The id of one or more Orders were not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "Orders were not found"
+ *     }
+ */
+
+ router.route('/clients/:id')
+ 	.get(authenticateJWT, function (req, res) {
+		Order.find({
+			'clientId' : {$eq: req.params.id}
+		}).exec((err, orders) => {
+			if (err)
+				res.status(404).json({ message: "Orders were not found" });
+			else
+				res.json(orders);
+		});
+ 	})
+//#endregion
+
 //#region GetFreeOrders for deliverymens
 /**
  * @api {get} /freeOrders Request Orders information

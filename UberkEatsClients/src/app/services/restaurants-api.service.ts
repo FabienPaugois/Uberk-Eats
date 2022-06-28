@@ -61,7 +61,7 @@ export class RestaurantsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	getRestaurantOwnerId(ownerId : number): Observable<Restaurants>{
+	getRestaurantOwnerId(ownerId: number): Observable<Restaurants>{
 		return this.http.get<Restaurants> (
 			this.controllerUrl + '/restaurants/owner/' + ownerId,
 			this.httpOptions
@@ -73,6 +73,20 @@ export class RestaurantsApiService {
 			this.controllerUrl + '/orders/' + order._id,
 			JSON.stringify(order),
 			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	getRestaurantOrdersHistory(restaurantId: number): Observable<Order[]> {
+    	return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/restaurantOwner/' + restaurantId,
+			this.httpOptions
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	getDeliveryManOrdersHistory(deliverymanId: number): Observable<Order[]> {
+    	return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/deliveryman/' + deliverymanId,
+			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
 

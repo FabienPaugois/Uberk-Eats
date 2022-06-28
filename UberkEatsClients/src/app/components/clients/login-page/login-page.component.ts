@@ -19,11 +19,11 @@ export class LoginPageComponent implements OnInit {
 
 	public loginForm: FormGroup; // variable of type FormGroup is created
 	constructor(
-		public clientsApi: ClientsApiService, 
-		private restaurantsApi : RestaurantsApiService,
-		public router: Router, 
+		public clientsApi: ClientsApiService,
+		private restaurantsApi: RestaurantsApiService,
+		public router: Router,
 		private fb: FormBuilder
-		) {
+	) {
 		// Form element defined below
 		this.loginForm = this.fb.group({
 			mail: '',
@@ -47,7 +47,7 @@ export class LoginPageComponent implements OnInit {
 			if(co.userId === 10){
 				this.restaurantsApi.getRestaurantOwnerId(co.userId).subscribe((data: Restaurants) => {
 					localStorage.setItem('restaurantId', data._id);
-				})
+				});
 			}
 			if(co.userId === 10010){
 				localStorage.setItem('deliverymanId', co.userId.toString());

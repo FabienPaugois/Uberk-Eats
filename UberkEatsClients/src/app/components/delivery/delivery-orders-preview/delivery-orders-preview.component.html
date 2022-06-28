@@ -15,8 +15,8 @@
             <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} :  Quantité : {{ article.qty }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button type="button" (click)="editAndAssignOrder(order, true, loggedDeliveryManId);">Accepter la commande</button>
-            <button type="button" (click)="editAndAssignOrder(order, false, loggedDeliveryManId);">Refuser la commande</button>
+            <button mat-raised-button color="primary" (click)="editAndAssignOrder(order, true, loggedDeliveryManId);">Accepter la commande</button>
+            <button mat-raised-button color="primary" (click)="editAndAssignOrder(order, false, loggedDeliveryManId);">Refuser la commande</button>
           </mat-card-actions>
           <p>----------------------------------------------------------------------------------</p>
         </mat-card>
@@ -48,8 +48,8 @@
             </mat-expansion-panel>
           </mat-card-content>
           <mat-card-actions>
-            <button type="button" (click)="markAsPickedUp(order, true)">Commande livrée</button>
-            <button type="button" (click)="markAsPickedUp(order, false)">Annuler la commande</button>
+            <button mat-raised-button color="primary" (click)="markAsPickedUp(order, true)">Commande livrée</button>
+            <button mat-raised-button color="primary" (click)="markAsPickedUp(order, false)">Annuler la commande</button>
           </mat-card-actions>
         </mat-card>
       </div>

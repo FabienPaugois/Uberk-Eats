@@ -86,9 +86,9 @@ export class ClientsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-	getOrdersHistory(): Observable<OrdersObject[]> {
-    	return this.http.get<OrdersObject[]>(
-			this.apiNoSQLURL + '/ordersHistory',
+	getOrdersHistory(clientId: number): Observable<Order[]> {
+    	return this.http.get<Order[]>(
+			this.controllerUrl + '/orders/clients/' + clientId,
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}

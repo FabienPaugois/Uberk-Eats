@@ -1,25 +1,29 @@
-<h1>Etat de la commande</h1>
-<div>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Commande numéro : {{ orderData.id + 1 }}</mat-card-title>
-      <mat-card-subtitle>Adresse de livraison : {{ orderData.deliveryAddress }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Commande passée le : {{ orderData.timestamp.createdAt }}</p>
-      <p>Commande livrée le : {{ orderData.timestamp.deliveredAt }}</p>
-    </mat-card-content>
-    <mat-card>
-      <mat-card-content>
-        <h2 class="example-h2">Avancée de la commande</h2>
+<div class="center">
+  <div class="center-wrapper" fxLayout="line">
+    <h1>Etat de la commande</h1>
+    <div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Commande numéro : {{ pos }}</mat-card-title>
+          <mat-card-subtitle>Adresse de livraison : {{ orderData.deliveryAddress }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Commande passée le : {{ orderData.timestamp.createdAt }}</p>
+          <p>Commande livrée le : {{ orderData.timestamp.deliveredAt }}</p>
+        </mat-card-content>
+        <mat-card>
+          <mat-card-content>
+            <h2 class="example-h2">Avancée de la commande</h2>
 
-        <mat-progress-spinner class="example-margin"
-                              [color]="color"
-                              [mode]="mode"
-                              [value]="value">
-        </mat-progress-spinner>
-        <p>{{statusMessage}}</p>
-      </mat-card-content>
-    </mat-card>
-  </mat-card>
+            <mat-progress-spinner class="example-margin"
+                                  [color]="color"
+                                  [mode]="mode"
+                                  [value]="value">
+            </mat-progress-spinner>
+            <p>{{statusMessage}}</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-card>
+    </div>
+  </div>
 </div>

@@ -19,6 +19,7 @@ export class OrderPreviewComponent implements OnInit {
 	articleSub: Subscription;
 	menuSub: Subscription;
 	orderId: number;
+	pos: number;
 	ngUnsubscribe = new Subject();
 	color: ThemePalette = 'primary';
 	mode: ProgressSpinnerMode = 'determinate';
@@ -32,7 +33,8 @@ export class OrderPreviewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-			this.orderId = params.orderId;
+			this.orderId = params.id;
+			this.pos = parseInt(params.pos,10) + 1;
 		});
 		console.log(this.orderId);
 		// subscription to the store
@@ -43,7 +45,11 @@ export class OrderPreviewComponent implements OnInit {
 				this.orders = data;
 			});
 		this.store.getOrdersFromDb();
-		this.orderData = this.store.state.orders[this.orderId];
+
+		const foundOrder = this.store.state.orders.find((order: any) => order._id === this.orderId);
+		if(foundOrder){
+			this.orderData = foundOrder;
+		}
 		if (this.orderData) {
 			switch (this.orderData.status) {
 			case 0:

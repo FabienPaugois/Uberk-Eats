@@ -47,7 +47,6 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 		}
 		//Get Ids of concerned products to retreive their data for display
 		this.productsIds = await this.store.getOrdersToBePicked();
-		console.log(this.orderData.orders)
 		if(this.productsIds.articlesIds){
 			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
