@@ -17,15 +17,15 @@ export class AppComponent implements OnInit {
 	constructor(
     public notificationsApi: NotificationsApiService,
     public router: Router,
-		public clientsApiService: ClientsApiService,
-		public authGuard: AuthGuard
+    public clientsApiService: ClientsApiService,
+    public authGuard: AuthGuard
 	) { }
 
 	ngOnInit(): void {
 		this.getUserUnreadNotifications();
 		setInterval(() => {
 			this.getUserUnreadNotifications();
-		},5000);
+		}, 5000);
 	}
 
 	getUserUnreadNotifications() {
@@ -39,5 +39,10 @@ export class AppComponent implements OnInit {
 				}
 				this.notificationsNumber = notifications.length;
 			});
+	}
+
+	logout() {
+		localStorage.clear();
+		this.router.navigate(['/login-page']);
 	}
 }

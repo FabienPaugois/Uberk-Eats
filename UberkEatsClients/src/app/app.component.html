@@ -20,6 +20,7 @@
       <button mat-menu-item routerLink="notifications-page" routerLinkActive="active">
         <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Notifications</span>
       </button>
+      <button mat-menu-item (click)="logout()" style="color:red">Déconnexion</button>
     </mat-menu>
   </span>
 </mat-toolbar>
