@@ -22,10 +22,10 @@
       </button>
       <mat-menu #notifs="matMenu">
         <div mat-menu-item *ngFor="let notif of notifications">
-          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead == false" style="color:red;">
+          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead === false" style="color:red;">
             {{ notif.title }}
           </button>
-          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead == true" style="color:grey;">
+          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead === true" style="color:grey;">
             {{ notif.title }}
           </button>
         </div>
