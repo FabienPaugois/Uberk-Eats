@@ -102,10 +102,10 @@ const routes: Routes = [
 		data: { roles: [Roles.restaurantOwner, Roles.commercialService], name: 'Statistiques' }, canActivate: [AuthGuard]
 	},
 
-  {
-    path: 'orderTracking-dashboard', component: OrderTrackingDashboardComponent,
-    data: { roles: [Roles.commercialService], name: 'Suivi de commandes' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'orderTracking-dashboard', component: OrderTrackingDashboardComponent,
+		data: { roles: [Roles.commercialService], name: 'Suivi de commandes' }, canActivate: [AuthGuard]
+	},
 ];
 
 @NgModule({

@@ -3,18 +3,18 @@ import { MatTableModule } from '@angular/material/table';
 import { OrderTrackingDashboardComponent } from './orderTracking-dashboard.component';
 
 describe('OrderTrackingDashboardComponent', () => {
-  let component: OrderTrackingDashboardComponent;
-  let fixture: ComponentFixture<OrderTrackingDashboardComponent>;
+	let component: OrderTrackingDashboardComponent;
+	let fixture: ComponentFixture<OrderTrackingDashboardComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-      declarations: [OrderTrackingDashboardComponent ]
+			declarations: [OrderTrackingDashboardComponent ]
 		})
 			.compileComponents();
 	});
 
 	beforeEach(() => {
-    fixture = TestBed.createComponent(OrderTrackingDashboardComponent);
+		fixture = TestBed.createComponent(OrderTrackingDashboardComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
