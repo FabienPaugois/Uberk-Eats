@@ -73,7 +73,8 @@ export class LoginPageComponent implements OnInit {
 			if(role === Roles.deliveryMan){
 				localStorage.setItem('deliverymanId', co.userId.toString());
 			}
-			this.router.navigate([DefaultRoute.Client]);
+			type defaultRouteType = keyof typeof DefaultRoute
+			this.router.navigate([DefaultRoute[role as defaultRouteType]])
 		}, (error: any) => {
 			this.loading = false;
 			this.error = { isError: true, errorMsg: error.errorMsg };
