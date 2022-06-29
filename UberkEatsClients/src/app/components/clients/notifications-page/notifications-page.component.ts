@@ -57,11 +57,12 @@ export class NotificationsPageComponent implements OnInit {
   }
 
   getAllNotifications() {
-  	this.notifsApi.getUserNotifications(JSON.parse(localStorage.getItem('User') as string).Id)
-  		.subscribe((userNotifications: Notifications[]) => {
-  		this.dataSource.data = userNotifications;
-  		this.hideLoader();
-  		console.log(userNotifications);
-  	});
+  	if (localStorage.getItem('User') != null) {
+  		this.notifsApi.getUserNotifications(JSON.parse(localStorage.getItem('User') as string).Id)
+  			.subscribe((userNotifications: Notifications[]) => {
+  				this.dataSource.data = userNotifications;
+  				this.hideLoader();
+  			});
+  	}
   }
 }

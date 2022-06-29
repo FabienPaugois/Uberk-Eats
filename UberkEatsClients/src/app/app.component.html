@@ -1,7 +1,7 @@
 <!-- Toolbar -->
 <mat-toolbar style="background-color: #454647; ">
-  <img src="./assets/uberkeats.png" style="width:60px;"/>
-  <span class="nav-tool-items"  *ngIf="!this.clientsApiService.userAuth.user">>
+  <img src="./assets/uberkeats.png" style="width:60px;" />
+  <span class="nav-tool-items" *ngIf="!this.clientsApiService.userAuth.user">
     <a mat-button routerLink="login-page" routerLinkActive="active">Log in</a>
     <a mat-button routerLink="register-page" routerLinkActive="active">Register</a>
   </span>
@@ -17,9 +17,19 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="profile-page" routerLinkActive="active">Modifier mon profil</button>
-      <button mat-menu-item routerLink="notifications-page" routerLinkActive="active">
+      <button mat-menu-item [matMenuTriggerFor]="notifs">
         <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Notifications</span>
       </button>
+      <mat-menu #notifs="matMenu">
+        <div mat-menu-item *ngFor="let notif of notifications">
+          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead === false" style="color:red;">
+            {{ notif.title }}
+          </button>
+          <button mat-menu-item (click)="readNotif()" *ngIf="notif.hasBeenRead === true" style="color:grey;">
+            {{ notif.title }}
+          </button>
+        </div>
+      </mat-menu>
       <button mat-menu-item (click)="logout()" style="color:red">Déconnexion</button>
     </mat-menu>
   </span>

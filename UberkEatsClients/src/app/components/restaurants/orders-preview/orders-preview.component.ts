@@ -4,8 +4,10 @@ import { ClientsApiService } from 'app/services/clients-api.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Articles } from '../../../model/articles';
 import { Menus } from '../../../model/menus';
+import { Notifications } from '../../../model/notifications';
 import { Order, OrdersObject } from '../../../model/order';
 import { RestaurantsApiService } from '../../../services/restaurants-api.service';
+import { NotificationsApiService } from '../../../services/notifications-api.service';
 import { OrderStore } from '../../../store/restaurantStore/order-store';
 
 @Component({
@@ -19,13 +21,14 @@ export class OrdersPreviewComponent implements OnInit {
 	orderData: OrdersObject;
 	articles: Articles[];
 	menus: Menus[];
-	productsIds: ProductsIds = {articlesIds : '', menusIds:''};
+	productsIds: ProductsIds = { articlesIds: '', menusIds: '' };
 	ngUnsubscribe = new Subject();
 
 	constructor(
     public restaurantsApi: RestaurantsApiService,
-	private clientsApi: ClientsApiService,
-    private store: OrderStore
+    private clientsApi: ClientsApiService,
+    private store: OrderStore,
+    private notifsApi: NotificationsApiService,
 	) { }
 
 	// for cleaning up subscriptions
@@ -43,12 +46,12 @@ export class OrdersPreviewComponent implements OnInit {
 				this.orderData = data;
 			});
 		this.productsIds = await this.store.getOrdersToAccept();
-		if(this.productsIds.articlesIds){
+		if (this.productsIds.articlesIds) {
 			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
 			});
 		}
-		if(this.productsIds.menusIds){
+		if (this.productsIds.menusIds) {
 			this.clientsApi.FetchMenusData(this.productsIds.menusIds).subscribe((menus: Menus[]) => {
 				this.menus = menus;
 			});
@@ -57,5 +60,13 @@ export class OrdersPreviewComponent implements OnInit {
 
 	EditOrderStatus(order: any, status: boolean) {
 		this.store.editOrderStatus(order._id, status);
+		const notif: Notifications = {
+			userId: JSON.parse(localStorage.getItem('User') as string).Id,
+			title: status ? 'Votre commande a été acceptée.' : 'Votre commande a été refusée.',
+			content: status ? 'Vous serez notifiés lorsque le livreur la prendra en charge' : 'Veuillez repasser une commande.',
+			createdAt: new Date(),
+			hasBeenRead: false
+		};
+		this.notifsApi.postNewNotification(notif);
 	}
 }
