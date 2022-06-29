@@ -69,34 +69,34 @@ export class CreateArticleComponent implements OnInit {
   	this.articleInfo.description = this.registerForm.get('description')?.value;
   	this.articleInfo.price = this.registerForm.get('price')?.value;
   	this.articleInfo.imageUrl = this.registerForm.get('imageUrl')?.value;
-	const restdata = localStorage.getItem('restaurantId');
+  	const restdata = localStorage.getItem('restaurantId');
   	if(restdata){
   		const restaurantId = restdata;
-		this.restaurantsApi.createArticle(this.articleInfo).subscribe((response: HttpResponse<Articles>) => {
-			const articleId = response.body?._id;
-			if(response.status === 200 && articleId){
-				this.restaurantsApi.addArticleToRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
-					if(response2.status === 200){
-						this.store.addProductsObject({
-							type: BasketObjectsType.article,
-							id: this.store.state.articles.length + 1,
-							product: { ...this.articleInfo }
-						});
-					}
-				});
-			}
-		});}
-	}
+  		this.restaurantsApi.createArticle(this.articleInfo).subscribe((response: HttpResponse<Articles>) => {
+  			const articleId = response.body?._id;
+  			if(response.status === 200 && articleId){
+  				this.restaurantsApi.addArticleToRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
+  					if(response2.status === 200){
+  						this.store.addProductsObject({
+  							type: BasketObjectsType.article,
+  							id: this.store.state.articles.length + 1,
+  							product: { ...this.articleInfo }
+  						});
+  					}
+  				});
+  			}
+  		});}
+  }
 
   deleteArticle(articleId: string){
-	const restdata = localStorage.getItem('restaurantId');
-	if(restdata){
-		const restaurantId = restdata;
-		this.restaurantsApi.removeArticleFromRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
-			if(response2.status === 200){
-				this.store.deleteMenu(articleId);
-			}
-		});
-	}
+  	const restdata = localStorage.getItem('restaurantId');
+  	if(restdata){
+  		const restaurantId = restdata;
+  		this.restaurantsApi.removeArticleFromRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
+  			if(response2.status === 200){
+  				this.store.deleteMenu(articleId);
+  			}
+  		});
+  	}
   }
 }

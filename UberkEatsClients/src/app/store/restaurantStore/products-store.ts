@@ -66,7 +66,7 @@ export class ProductsStore extends Store<ProductsState> {
 	deleteArticle(articleId: string){
 		this.setState({
 			...this.state,
-			articles : this.state.articles.filter(menu => articleId != menu._id),
+			articles : this.state.articles.filter(article => articleId !== article._id),
 		});
 
 	}
@@ -74,7 +74,7 @@ export class ProductsStore extends Store<ProductsState> {
 	deleteMenu(menuId: string){
 		this.setState({
 			...this.state,
-			menus : this.state.menus.filter(menu => menuId != menu._id),
-		})
+			menus : this.state.menus.filter(menu => menuId !== menu._id),
+		});
 	}
 }
