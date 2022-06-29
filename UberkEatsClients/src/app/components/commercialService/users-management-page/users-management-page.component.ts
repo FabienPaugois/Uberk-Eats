@@ -56,6 +56,7 @@ export class UsersManagementPageComponent implements OnInit {
   	this.clientsApi.delete(this.modifyUserInfo).subscribe((data: Clients) => {
   		if (data !== null) {
   			window.alert('Compte utilisateur supprimé avec succès !');
+  			this.getAllUsers();
   		}
   	});
   }
@@ -66,6 +67,7 @@ export class UsersManagementPageComponent implements OnInit {
   	}).subscribe((data: Clients) => {
   		if (data !== null) {
   			window.alert('Compte utilisateur supprimé avec succès !');
+  			this.getAllUsers();
   		}
   	});
   }
@@ -84,6 +86,8 @@ export class UsersManagementPageComponent implements OnInit {
 
   getAllUsers() {
   	this.clientsApi.getAllUsers().subscribe((data: any) => {
+  		this.allUsers = [];
+  		this.showProfile = false;
   		data.forEach((user: any) => {
   			const newUser: Clients = {
   				name: user.Name,
