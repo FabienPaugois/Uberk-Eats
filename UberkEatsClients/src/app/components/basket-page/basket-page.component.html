@@ -61,6 +61,7 @@
     </div>
     <br>
     <h1>Prix total : {{basketTotalPrice}} €</h1>
+    <h1 *ngIf="basketDiscountTotalPrice">Prix total en appliquant la réduction: {{basketDiscountTotalPrice}} €</h1>
     <form class="example-form" [formGroup]="addressForm">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Adresse de livraison" formControlName="deliveryAddress" required>
