@@ -25,6 +25,7 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 import { AuthInterceptor } from './services/auth.interceptor';
 import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ModifyArticleComponent } from './components/restaurants/modify-article/modify-article.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 		OrdersPreviewComponent,
 		OrderHistoryComponent,
 		OrderPreviewComponent,
-		DeliveryOrdersPreviewComponent
+		DeliveryOrdersPreviewComponent,
+  		ModifyArticleComponent
 	],
 	imports: [
 		BrowserModule,

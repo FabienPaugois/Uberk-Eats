@@ -20,7 +20,8 @@
               <input matInput placeholder="Url de l'image" formControlName="imageUrl">
             </mat-form-field>
           </mat-card-content>
-          <button mat-stroked-button (click)="addArticle()" style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button">Créer l'article</button>
+          <button mat-stroked-button (click)="addArticle()" style="background-color: #454647;color: #5FB709"
+            class="btn-block mat-raised-button">Créer l'article</button>
         </form>
       </mat-card>
       <br>
@@ -35,7 +36,10 @@
           <p>{{ article.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button (click)="deleteArticle(article._id)" style="background-color: #454647;color: #5FB709">Supprimer l'article</button>
+          <button mat-raised-button (click)="deleteArticle(article._id)"
+            style="background-color: #454647;color: #5FB709">Supprimer l'article</button>
+          <button mat-raised-button (click)="showModifyArticlePopUp(article)"
+            style="background-color: #454647;color: #5FB709">Modifier l'article</button>
         </mat-card-actions>
       </mat-card>
     </div>
