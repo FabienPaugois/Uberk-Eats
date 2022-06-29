@@ -7,9 +7,9 @@ import { Roles } from '../../../model/roles';
 import { ClientsApiService } from '../../../services/clients-api.service';
 
 @Component({
-  selector: 'app-users-management-page',
-  templateUrl: './users-management-page.component.html',
-  styleUrls: ['./users-management-page.component.scss']
+	selector: 'app-users-management-page',
+	templateUrl: './users-management-page.component.html',
+	styleUrls: ['./users-management-page.component.scss']
 })
 export class UsersManagementPageComponent implements OnInit {
   @Input() modifyUserInfo = { mail: '', password: '', phone: '', name: '', surname: '', affiliateMail: '', role: '' };
@@ -33,69 +33,69 @@ export class UsersManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
   	this.userModificationForm.controls.mail.disable();
-    this.getAllUsers();
+  	this.getAllUsers();
   }
 
   modifyUser() {
-    this.modifyUserInfo.name = this.userModificationForm.get('name')?.value;
-    this.modifyUserInfo.surname = this.userModificationForm.get('surname')?.value;
-    this.modifyUserInfo.phone = this.userModificationForm.get('phone')?.value;
-    this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
-    this.clientsApi.modify(this.modifyUserInfo).subscribe((data: Clients) => {
-      if (data !== null) {
-        window.alert('Compte utilisateur modifié avec succès !')
-      }
-      });
+  	this.modifyUserInfo.name = this.userModificationForm.get('name')?.value;
+  	this.modifyUserInfo.surname = this.userModificationForm.get('surname')?.value;
+  	this.modifyUserInfo.phone = this.userModificationForm.get('phone')?.value;
+  	this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
+  	this.clientsApi.modify(this.modifyUserInfo).subscribe((data: Clients) => {
+  		if (data !== null) {
+  			window.alert('Compte utilisateur modifié avec succès !');
+  		}
+  	});
   }
 
   deleteUser() {
-    this.modifyUserInfo.name = this.userModificationForm.get('name')?.value;
-    this.modifyUserInfo.surname = this.userModificationForm.get('surname')?.value;
-    this.modifyUserInfo.phone = this.userModificationForm.get('phone')?.value;
-    this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
-    this.clientsApi.delete(this.modifyUserInfo).subscribe((data: Clients) => {
-      if (data !== null) {
-        window.alert('Compte utilisateur supprimé avec succès !')
-      }
-    });
+  	this.modifyUserInfo.name = this.userModificationForm.get('name')?.value;
+  	this.modifyUserInfo.surname = this.userModificationForm.get('surname')?.value;
+  	this.modifyUserInfo.phone = this.userModificationForm.get('phone')?.value;
+  	this.modifyUserInfo.mail = this.userModificationForm.get('mail')?.value;
+  	this.clientsApi.delete(this.modifyUserInfo).subscribe((data: Clients) => {
+  		if (data !== null) {
+  			window.alert('Compte utilisateur supprimé avec succès !');
+  		}
+  	});
   }
   suspendUser() {
-    this.clientsApi.suspend({
-      'Mail': this.userModificationForm.get('mail')?.value,
-      'IsSuspended':true
-    }).subscribe((data: Clients) => {
-      if (data !== null) {
-        window.alert('Compte utilisateur supprimé avec succès !')
-      }
-    });
+  	this.clientsApi.suspend({
+  		mail: this.userModificationForm.get('mail')?.value,
+  		isSuspended:true
+  	}).subscribe((data: Clients) => {
+  		if (data !== null) {
+  			window.alert('Compte utilisateur supprimé avec succès !');
+  		}
+  	});
   }
 
   selectUser(user: any) {
-    this.selectedUser = user.value;
-    this.userModificationForm.setValue({
-      name: this.selectedUser.name,
-      phone: this.selectedUser.phone,
-      surname: this.selectedUser.surname,
-      mail: this.selectedUser.mail,
-      password: null
-    });
-    this.showProfile = true;
+  	this.selectedUser = user.value;
+  	this.userModificationForm.setValue({
+  		name: this.selectedUser.name,
+  		phone: this.selectedUser.phone,
+  		surname: this.selectedUser.surname,
+  		mail: this.selectedUser.mail,
+  		password: null
+  	});
+  	this.showProfile = true;
   }
 
   getAllUsers() {
-    this.clientsApi.getAllUsers().subscribe((data: any) => {
-      data.forEach((user: any) => {
-        const newUser: Clients = {
-          name: user.Name,
-          surname: user.Surname,
-          phone: user.Phone,
-          password: '',
-          mail: user.Mail,
-          id: user.Id,
-          role: Roles.client
-        };
-        this.allUsers.push(newUser);
-      })
-    });
+  	this.clientsApi.getAllUsers().subscribe((data: any) => {
+  		data.forEach((user: any) => {
+  			const newUser: Clients = {
+  				name: user.Name,
+  				surname: user.Surname,
+  				phone: user.Phone,
+  				password: '',
+  				mail: user.Mail,
+  				id: user.Id,
+  				role: Roles.client
+  			};
+  			this.allUsers.push(newUser);
+  		});
+  	});
   }
 }

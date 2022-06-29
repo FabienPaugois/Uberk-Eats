@@ -163,10 +163,10 @@ namespace Authentification.Controllers
         public ContentResult BanUser(UserBan userBan)
         {
             User authenticated = new User();
-            authenticated = db.User.FirstOrDefault(a => a.Mail == userBan.Mail);
+            authenticated = db.User.FirstOrDefault(a => a.Mail == userBan.mail);
             if (authenticated != null)
             {
-                authenticated.IsSuspended = userBan.IsSuspended;
+                authenticated.IsSuspended = userBan.isSuspended;
                 db.User.Attach(authenticated);
                 db.Entry(authenticated).Property(x => x.IsSuspended).IsModified = true;
                 db.SaveChanges();
