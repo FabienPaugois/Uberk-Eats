@@ -66,7 +66,7 @@ export class UsersManagementPageComponent implements OnInit {
   		isSuspended:true
   	}).subscribe((data: Clients) => {
   		if (data !== null) {
-  			window.alert('Compte utilisateur supprimé avec succès !');
+  			window.alert('Compte utilisateur suspendu avec succès !');
   			this.getAllUsers();
   		}
   	});

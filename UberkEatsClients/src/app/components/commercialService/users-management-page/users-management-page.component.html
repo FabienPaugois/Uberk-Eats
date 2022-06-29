@@ -1,37 +1,41 @@
-<h1>Gestion des comptes utilisateurs</h1>
-<mat-form-field appearance="fill">
-  <mat-label>Sélectionnez un compte utilisateur</mat-label>
-  <mat-select (selectionChange)="selectUser($event)">
-    <mat-option *ngFor="let user of allUsers" [value]="user">
-      {{user.mail}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="center">
+  <div class="center-wrapper" fxLayout="line">
+    <h1>Gestion des comptes utilisateurs</h1>
+    <mat-form-field appearance="fill">
+      <mat-label>Sélectionnez un compte utilisateur</mat-label>
+      <mat-select (selectionChange)="selectUser($event)">
+        <mat-option *ngFor="let user of allUsers" [value]="user">
+          {{user.mail}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<div *ngIf="showProfile === true" class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="showProfile === true" class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
-  <mat-card id="showProfile" class="box">
-    <mat-card-header>
-      <mat-card-title>Profile information</mat-card-title>
-    </mat-card-header>
-    <form class="example-form" [formGroup]="userModificationForm">
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail" formControlName="mail">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" formControlName="name" required>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Surname" formControlName="surname" required>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Phone" formControlName="phone" required>
-        </mat-form-field>
-      </mat-card-content>
-      <button mat-raised-button color="primary" (click)="modifyUser()" class="btn-block">Confirmer</button>
-      <button mat-raised-button color="warn" (click)="deleteUser()" class="btn-block">Supprimer</button>
-      <button mat-raised-button color="warn" (click)="suspendUser()" class="btn-block">Suspendre</button>
-    </form>
-  </mat-card>
-</div>
+      <mat-card id="showProfile" class="box">
+        <mat-card-header>
+          <mat-card-title>Profile information</mat-card-title>
+        </mat-card-header>
+        <form class="example-form" [formGroup]="userModificationForm">
+          <mat-card-content>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mail" formControlName="mail">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name" formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Surname" formControlName="surname" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Phone" formControlName="phone" required>
+            </mat-form-field>
+          </mat-card-content>
+          <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="modifyUser()">Confirmer</button>
+          <button mat-raised-button color="warn" (click)="deleteUser()" class="btn-block">Supprimer compte</button>
+          <button mat-raised-button color="warn" (click)="suspendUser()" class="btn-block">Suspendre compte</button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>  
