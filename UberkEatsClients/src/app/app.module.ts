@@ -25,6 +25,7 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 import { AuthInterceptor } from './services/auth.interceptor';
 import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { UsersManagementPageComponent } from './components/commercialService/users-management-page/users-management-page.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 		StatisticsComponent,
 		ProfilePageComponent,
 		NotificationsPageComponent,
+		UsersManagementPageComponent,
 		RestaurantListComponent,
 		ConnectionLogsListComponent,
 		MenuPickPageComponent,
@@ -46,7 +48,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 		OrdersPreviewComponent,
 		OrderHistoryComponent,
 		OrderPreviewComponent,
-		DeliveryOrdersPreviewComponent
+    DeliveryOrdersPreviewComponent
 	],
 	imports: [
 		BrowserModule,
@@ -56,7 +58,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 		AngularMaterialModule,
 		FormsModule,
 		ReactiveFormsModule,
-		MatTableModule
+    MatTableModule
 	],
 	providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
 	bootstrap: [AppComponent]
