@@ -1,5 +1,16 @@
 <div>
   <div class="vertical-align">
+    <div id="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="loading"></div>
+    </div>
     <div class="panel">
       <h1>Commandes à approuver</h1>
       <div *ngFor="let order of orderData.orders" class="vertical">
@@ -15,8 +26,8 @@
             <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} : Quantité : {{ article.qty }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button class="spaced" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, true);">Accepter la commande</button>
-            <button class="spaced" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, false);">Refuser la commande</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="EditOrderStatus(order, true);">Accepter la commande</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="EditOrderStatus(order, false);">Refuser la commande</button>
           </mat-card-actions>
         </mat-card>
       </div>
@@ -47,8 +58,8 @@
             </mat-expansion-panel>
           </mat-card-content>
           <mat-card-actions class="buttons">
-            <button class="spaced" type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, true);">Commande prête</button>
-            <button class="spaced" type="button" style="background-color: #454647;color: #5FB709" (click)="EditOrderStatus(order, false);">Annuler la commande</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="EditOrderStatus(order, true);">Commande prête</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="EditOrderStatus(order, false);">Annuler la commande</button>
           </mat-card-actions>
         </mat-card>
       </div>

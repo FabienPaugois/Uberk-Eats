@@ -58,20 +58,16 @@ export class OrderPreviewComponent implements OnInit {
 				this.statusMessage = 'Votre commande a été envoyée au restaurateur';
 				break;
 			case 1:
-				this.value = 20;
+				this.value = 25;
 				this.statusMessage = 'La commande a été acceptée par le restaurateur';
 				break;
 			case 2:
-				this.value = 40;
+				this.value = 50;
 				this.statusMessage = 'Votre commande a été préparée par le restaurateur et en attente d\'un livreur';
 				break;
 			case 3:
-				this.value = 60;
-				this.statusMessage = 'Le livreur est entrain de récupérer votre commande';
-				break;
-			case 4:
-				this.value = 80;
-				this.statusMessage = 'Le livreur est en route vers le point de livraison';
+				this.value = 75;
+				this.statusMessage = 'Le livreur vient récupérer votre commande';
 				break;
 			case 5:
 				this.value = 100;
@@ -82,7 +78,6 @@ export class OrderPreviewComponent implements OnInit {
 				this.statusMessage = 'La commande a été annulée';
 			}
 		}
-		console.log(this.orderData);
 	}
 
 	// for cleaning up subscriptions

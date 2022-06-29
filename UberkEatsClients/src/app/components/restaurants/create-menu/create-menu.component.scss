@@ -6,7 +6,7 @@
 .center{
     display: flex;
     justify-content: center;
-    height: 900px;
+    height: 87%;
     background-color: RGB(245,245,245);
     padding: 30px;
 }
@@ -17,4 +17,10 @@
     align-items: center;
     justify-content: center;
     width: 420px;
+}
+
+.button{
+    border: none;
+    color: #bd2d20;
+    background-color: white;    
 }

@@ -30,6 +30,14 @@ export class RestaurantListComponent implements OnInit {
 	getRestaurants() {
 		this.clientsApi.getRestaurants().subscribe((restaurants: Restaurants[]) => {
 			this.restaurants = restaurants;
+			this.hideLoader();
 		});
+	}
+
+	hideLoader() {
+		const loader = document.getElementById('loader');
+		if (loader !== null) {
+			loader.hidden = true;
+		}
 	}
 }
