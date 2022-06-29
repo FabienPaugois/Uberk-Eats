@@ -1,6 +1,6 @@
 <div>
   <div class="vertical-align">
-    <div class="left-panel">
+    <div class="panel">
       <h1>Commandes à approuver</h1>
       <div *ngFor="let order of orderData.orders">
         <mat-card *ngIf="order.status === 2 && articles && menus">
@@ -15,14 +15,14 @@
             <p *ngFor="let article of order.articles">Article {{articles[order.articles.indexOf(article)].name}} :  Quantité : {{ article.qty }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button type="button" style="background-color: #454647;color: #5FB709" (click)="editAndAssignOrder(order, true, loggedDeliveryManId);">Accepter la commande</button>
-            <button type="button" style="background-color: #454647;color: #5FB709" (click)="editAndAssignOrder(order, false, loggedDeliveryManId);">Refuser la commande</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="editAndAssignOrder(order, true, loggedDeliveryManId);">Accepter la commande</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="editAndAssignOrder(order, false, loggedDeliveryManId);">Refuser la commande</button>
           </mat-card-actions>
           <p>----------------------------------------------------------------------------------</p>
         </mat-card>
       </div>
     </div>
-    <div class="right-panel">
+    <div class="panel">
       <h1>Commande acceptée</h1>
       <div *ngFor="let order of orderData.orders">
         <mat-card *ngIf="order.status === 3 && order.deliverymanId.toString() === loggedDeliveryManId && articles && menus">
@@ -48,8 +48,8 @@
             </mat-expansion-panel>
           </mat-card-content>
           <mat-card-actions>
-            <button type="button" style="background-color: #454647;color: #5FB709" (click)="markAsPickedUp(order, true)">Commande livrée</button>
-            <button type="button" style="background-color: #454647;color: #5FB709" (click)="markAsPickedUp(order, false)">Annuler la commande</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="markAsPickedUp(order, true)">Commande livrée</button>
+            <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="markAsPickedUp(order, false)">Annuler la commande</button>
           </mat-card-actions>
         </mat-card>
       </div>

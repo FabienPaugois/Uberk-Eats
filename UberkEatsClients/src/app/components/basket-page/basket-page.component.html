@@ -23,9 +23,8 @@
     <br>
     <div class="demo-button-container">
       <button
-          mat-raised-button
-          (click)="removeMenusData()"
-          class="demo-button">
+          style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" 
+          (click)="removeMenusData()">
         Retirer les menus
       </button>
     </div>
@@ -49,19 +48,14 @@
         <th mat-header-cell *matHeaderCellDef> Quantité </th>
         <td mat-cell *matCellDef="let element"> {{store.state.articles[articles.indexOf(element)].qty}} </td>
       </ng-container>
-      <ng-container>
-        <button md-raised-button type="button"><mat-icon>delete</mat-icon></button>
-      </ng-container>
-      <tr><button md-raised-button type="button">Delete</button></tr>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <br>
     <div class="demo-button-container">
       <button
-          mat-raised-button
-          (click)="removeArticlesData()"
-          class="demo-button">
+          style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" 
+          (click)="removeArticlesData()">
           Retirer les articles
       </button>
     </div>
@@ -72,6 +66,6 @@
         <input matInput placeholder="Adresse de livraison" formControlName="deliveryAddress" required>
       </mat-form-field>
     </form>
-    <button mat-raised-button color="primary" class="btn-block" (click)="createOrderFromBasket();">Passer la commande</button>
+    <button style="background-color: #454647;color: #5FB709" class="btn-block mat-raised-button" (click)="createOrderFromBasket();">Passer la commande</button>
   </div>
 </div>

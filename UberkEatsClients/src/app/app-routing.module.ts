@@ -50,7 +50,7 @@ const routes: Routes = [
 
 	{
 		path: 'product-page', component: ProductPageComponent,
-		data: { roles: [Roles.client], name: 'Choisir cet article' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.client], name: 'Choisir cet article', hidden: true }, canActivate: [AuthGuard]
 	},
 
 	{
