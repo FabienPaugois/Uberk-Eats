@@ -81,11 +81,12 @@ export class CreateMenuComponent implements OnInit {
   			const menuId = response.body?._id;
   			if(response.status === 200 && menuId){
   				this.restaurantsApi.addMenuToRestaurant(menuId, restaurantId).subscribe((response2: HttpResponse<Menus>) => {
-  					if(response2.status === 200){
+  					if(response2.status === 200 && response.body){
+  						const articleData: Articles = response.body;
   						this.store.addMenusObject({
   							type: BasketObjectsType.menu,
   							id: this.store.state.articles.length + 1,
-  							product: { ...this.menuInfo }
+  							product: { ...articleData }
   						});
   					}
   				});
