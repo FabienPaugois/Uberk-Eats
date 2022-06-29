@@ -68,7 +68,6 @@ export class ProductsStore extends Store<ProductsState> {
 			...this.state,
 			articles : this.state.articles.filter(article => articleId !== article._id),
 		});
-
 	}
 
 	deleteMenu(menuId: string){

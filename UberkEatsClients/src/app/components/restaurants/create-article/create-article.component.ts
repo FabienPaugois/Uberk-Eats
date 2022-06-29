@@ -76,11 +76,12 @@ export class CreateArticleComponent implements OnInit {
   			const articleId = response.body?._id;
   			if(response.status === 200 && articleId){
   				this.restaurantsApi.addArticleToRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
-  					if(response2.status === 200){
+  					if(response2.status === 200 && response.body){
+  						const articleData: Articles = response.body;
   						this.store.addProductsObject({
   							type: BasketObjectsType.article,
   							id: this.store.state.articles.length + 1,
-  							product: { ...this.articleInfo }
+  							product: { ...articleData }
   						});
   					}
   				});
@@ -94,7 +95,7 @@ export class CreateArticleComponent implements OnInit {
   		const restaurantId = restdata;
   		this.restaurantsApi.removeArticleFromRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
   			if(response2.status === 200){
-  				this.store.deleteMenu(articleId);
+  				this.store.deleteArticle(articleId);
   			}
   		});
   	}
