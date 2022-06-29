@@ -106,12 +106,12 @@ const routes: Routes = [
 	{
 		path: 'orderTracking-dashboard', component: OrderTrackingDashboardComponent,
 		data: { roles: [Roles.commercialService], name: 'Suivi de commandes' }, canActivate: [AuthGuard]
-  },
+	},
 
-  {
-    path: 'users-management-page', component: UsersManagementPageComponent,
-    data: { roles: [Roles.commercialService], name: 'Gestion des comptes utilisateurs' }, canActivate: [AuthGuard]
-  }
+	{
+		path: 'users-management-page', component: UsersManagementPageComponent,
+		data: { roles: [Roles.commercialService], name: 'Gestion des comptes utilisateurs' }, canActivate: [AuthGuard]
+	}
 ];
 
 @NgModule({

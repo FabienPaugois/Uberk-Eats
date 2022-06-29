@@ -7,7 +7,7 @@ namespace Authentification.Models
 {
     public class UserBan
     {
-        public string Mail { get; set; }
-        public bool IsSuspended { get; set; }
+        public string mail { get; set; }
+        public bool isSuspended { get; set; }
     }
 }

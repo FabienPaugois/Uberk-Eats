@@ -48,7 +48,7 @@ import { UsersManagementPageComponent } from './components/commercialService/use
 		OrdersPreviewComponent,
 		OrderHistoryComponent,
 		OrderPreviewComponent,
-    DeliveryOrdersPreviewComponent
+		DeliveryOrdersPreviewComponent
 	],
 	imports: [
 		BrowserModule,
@@ -58,7 +58,7 @@ import { UsersManagementPageComponent } from './components/commercialService/use
 		AngularMaterialModule,
 		FormsModule,
 		ReactiveFormsModule,
-    MatTableModule
+		MatTableModule
 	],
 	providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
 	bootstrap: [AppComponent]
