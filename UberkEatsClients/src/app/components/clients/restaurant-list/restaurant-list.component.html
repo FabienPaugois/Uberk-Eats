@@ -1,5 +1,16 @@
 <div class="center">
   <div class="center-wrapper" fxLayout="line">
+    <div id="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="loading"></div>
+    </div>
     <h1 style="text-align:center"> Choisissez le restaurant dans lequel vous souhaitez commander</h1>
     <mat-accordion multi="true">
       <mat-card *ngFor="let restaurant of restaurants" style="display:inline-block;" class="example-card" >

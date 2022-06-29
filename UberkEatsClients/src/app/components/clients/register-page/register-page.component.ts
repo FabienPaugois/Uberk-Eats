@@ -53,9 +53,7 @@ export class RegisterPageComponent implements OnInit {
   	this.clientsApi.register(this.registerInfo, this.registerForm.get('role')?.value, this.registerForm.get('affiliateMail')?.value)
   		.subscribe((data: AuthToken) => {
   		// Send the login request
-  		localStorage.setItem('JWT', data.jwtoken); // Store the returned token into the localStorage
-  		localStorage.setItem('User', JSON.stringify(data.user));
-  		this.router.navigate(['/']);
+  		this.router.navigate(['/login-page']);
   	}, (error: any) => {
   			this.error = {isError: true, errorMsg: error.errorMsg};
   		});

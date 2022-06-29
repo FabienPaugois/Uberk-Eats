@@ -1,6 +1,17 @@
 <div>
   <div class="vertical-align">
     <div class="panel">
+      <div id="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="loading"></div>
+      </div>
       <h1>Commandes à approuver</h1>
       <div *ngFor="let order of orderData.orders">
         <mat-card *ngIf="order.status === 2 && articles && menus">

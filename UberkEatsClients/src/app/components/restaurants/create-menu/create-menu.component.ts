@@ -55,15 +55,24 @@ export class CreateMenuComponent implements OnInit {
   		.subscribe(data => {
   			this.productsContent = data;
   		});
+  	let receivedArticles = false; let receivedMenus = false;
   	this.productsIds = await this.store.getProductsByRestaurant(BasketObjectsType.menu);
   	if(this.productsIds.articlesIds){
   		this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
   			this.productsContent.articles = articles;
+  			receivedArticles = true;
+  			if(receivedArticles && receivedMenus){
+  				this.hideLoader();
+  			}
   		});
   	}
   	if(this.productsIds.menusIds){
   		this.clientsApi.FetchMenusData(this.productsIds.menusIds).subscribe((menus: Menus[]) => {
   			this.productsContent.menus = menus;
+  			receivedMenus = true;
+  			if(receivedArticles && receivedMenus){
+  				this.hideLoader();
+  			}
   		});
   	}
   }
@@ -103,6 +112,13 @@ export class CreateMenuComponent implements OnInit {
   				this.store.deleteMenu(menuId);
   			}
   		});
+  	}
+  }
+
+  hideLoader() {
+  	const loader = document.getElementById('loader');
+  	if (loader !== null) {
+  		loader.hidden = true;
   	}
   }
 }

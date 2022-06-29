@@ -26,7 +26,7 @@ export class OrderHistoryComponent implements OnInit {
 		this.ngUnsubscribe.complete();
 	}
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
 		// subscription to the store
 		this.store.state$
 			.pipe(
@@ -34,13 +34,20 @@ export class OrderHistoryComponent implements OnInit {
 			.subscribe(data => {
 				this.orderHistory = data;
 			});
-		this.store.getOrdersFromDb();
-		console.log(this.orderHistory);
+		await this.store.getOrdersFromDb();
+		this.hideLoader();
 	}
 
 	btnClickOrder(order: any) {
 		const id = order._id;
 		const pos = this.orderHistory.orders.indexOf(order);
 		this.router.navigate(['/order-preview', {id, pos}]);
+	}
+
+	hideLoader() {
+		const loader = document.getElementById('loader');
+		if (loader !== null) {
+			loader.hidden = true;
+		}
 	}
 }

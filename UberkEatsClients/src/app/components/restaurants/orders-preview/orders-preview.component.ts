@@ -45,15 +45,24 @@ export class OrdersPreviewComponent implements OnInit {
 			.subscribe(data => {
 				this.orderData = data;
 			});
+		let receivedArticles = false; let receivedMenus = false;
 		this.productsIds = await this.store.getOrdersToAccept();
 		if (this.productsIds.articlesIds) {
 			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
+				receivedArticles = true;
+				if(receivedArticles && receivedMenus){
+					this.hideLoader();
+				}
 			});
 		}
 		if (this.productsIds.menusIds) {
 			this.clientsApi.FetchMenusData(this.productsIds.menusIds).subscribe((menus: Menus[]) => {
 				this.menus = menus;
+				receivedMenus = true;
+				if(receivedArticles && receivedMenus){
+					this.hideLoader();
+				}
 			});
 		}
 	}
@@ -68,5 +77,12 @@ export class OrdersPreviewComponent implements OnInit {
 			hasBeenRead: false
 		};
 		this.notifsApi.postNewNotification(notif);
+	}
+
+	hideLoader() {
+		const loader = document.getElementById('loader');
+		if (loader !== null) {
+			loader.hidden = true;
+		}
 	}
 }
