@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Articles } from '../../..//model/articles';
 import { Menus } from '../../../model/menus';
-import { Products } from '../../../model/products';
+import { Products, ProductsIds } from '../../../model/products';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductsStore } from '../../../store/restaurantStore/products-store';
 import { BasketObjectsType } from '../../../model/basket';
 import { RestaurantsApiService } from 'app/services/restaurants-api.service';
 import { HttpResponse } from '@angular/common/http';
+import { ClientsApiService } from 'app/services/clients-api.service';
 
 @Component({
 	selector: 'app-create-menu',
@@ -18,77 +19,14 @@ import { HttpResponse } from '@angular/common/http';
 export class CreateMenuComponent implements OnInit {
   @Input() menuInfo: Menus = {_id: '', name:'', description:'', price:0, imageUrl: '', articles: []};
   public menuForm: FormGroup; // variable of type FormGroup is created
-
-  articles: Articles[] = [
-  	{
-  		_id: '1',
-  		name: 'Whooper',
-  		description: 'Lorem ipsum',
-  		price: 4,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '2',
-  		name: 'Triple Cheese',
-  		description: 'Lorem ipsum',
-  		price: 5,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '3',
-  		name: 'Double Steakhouse',
-  		description: 'Lorem ipsum',
-  		price: 4,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '4',
-  		name: 'Chicken Alabama',
-  		description: 'Lorem ipsum',
-  		price: 6,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '5',
-  		name: 'Double Cheese Bacon Vegan',
-  		description: 'Lorem ipsum',
-  		price: 10,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '6',
-  		name: 'Potatoes',
-  		description: 'Lorem ipsum',
-  		price: 2,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '7',
-  		name: 'Fries',
-  		description: 'Lorem ipsum',
-  		price: 2,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '8',
-  		name: 'Coke',
-  		description: 'Lorem ipsum',
-  		price: 2.5,
-  		imageUrl: '',
-  	},
-  	{
-  		_id: '9',
-  		name: 'Pepsi',
-  		description: 'Lorem ipsum',
-  		price: 2.5,
-  		imageUrl: '',
-  	},
-  ];
   productsContent: Products;
+  productsIds: ProductsIds;
   ngUnsubscribe = new Subject();
+  articles: Articles[];
 
   constructor(
     public restaurantsApi: RestaurantsApiService,
+	private clientsApi: ClientsApiService,
     public router: Router,
     private fb: FormBuilder,
     private store: ProductsStore
@@ -109,7 +47,7 @@ export class CreateMenuComponent implements OnInit {
   	this.ngUnsubscribe.complete();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
   	// subscription to the store
   	this.store.state$
   		.pipe(
@@ -117,6 +55,17 @@ export class CreateMenuComponent implements OnInit {
   		.subscribe(data => {
   			this.productsContent = data;
   		});
+  	this.productsIds = await this.store.getProductsByRestaurant(BasketObjectsType.menu);
+  	if(this.productsIds.articlesIds){
+  		this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
+  			this.productsContent.articles = articles;
+  		});
+  	}
+  	if(this.productsIds.menusIds){
+  		this.clientsApi.FetchMenusData(this.productsIds.menusIds).subscribe((menus: Menus[]) => {
+  			this.productsContent.menus = menus;
+  		});
+  	}
   }
 
   addMenu() {
@@ -125,14 +74,34 @@ export class CreateMenuComponent implements OnInit {
   	this.menuInfo.price = this.menuForm.get('price')?.value;
   	this.menuInfo.imageUrl = this.menuForm.get('imageUrl')?.value;
   	this.menuInfo.articles = this.menuForm.get('articles')?.value;
-  	this.restaurantsApi.createMenu(this.menuInfo).subscribe((response: HttpResponse<Menus>) => {
-  		if(response.status === 200){
-  			this.store.addMenusObject({
-  				type: BasketObjectsType.menu,
-  				id: this.store.state.articles.length + 1,
-  				product: { ...this.menuInfo }
-  			});
-  		}
-  	});
+  	const restdata = localStorage.getItem('restaurantId');
+  	if(restdata){
+  		const restaurantId = restdata;
+  		this.restaurantsApi.createMenu(this.menuInfo).subscribe((response: HttpResponse<Menus>) => {
+  			const menuId = response.body?._id;
+  			if(response.status === 200 && menuId){
+  				this.restaurantsApi.addMenuToRestaurant(menuId, restaurantId).subscribe((response2: HttpResponse<Menus>) => {
+  					if(response2.status === 200){
+  						this.store.addMenusObject({
+  							type: BasketObjectsType.menu,
+  							id: this.store.state.articles.length + 1,
+  							product: { ...this.menuInfo }
+  						});
+  					}
+  				});
+  			}
+  		});}
+  }
+
+  deleteMenu(menuId: string){
+  	const restdata = localStorage.getItem('restaurantId');
+  	if(restdata){
+  		const restaurantId = restdata;
+  		this.restaurantsApi.removeMenuFromRestaurant(menuId, restaurantId).subscribe((response2: HttpResponse<Menus>) => {
+  			if(response2.status === 200){
+  				this.store.deleteMenu(menuId);
+  			}
+  		});
+  	}
   }
 }

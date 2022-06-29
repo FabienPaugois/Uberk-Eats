@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ClientsApiService } from 'app/services/clients-api.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { Order, OrdersObject } from '../../model/order';
@@ -27,8 +28,8 @@ export class OrderPreviewComponent implements OnInit {
 	statusMessage = '';
 
 	constructor(
-    private activatedRoute: ActivatedRoute,
-    private store: OrderStore
+		private activatedRoute: ActivatedRoute,
+		private store: OrderStore,
 	) { }
 
 	ngOnInit(): void {

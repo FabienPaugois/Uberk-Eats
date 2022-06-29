@@ -69,17 +69,18 @@ const routes: Routes = [
 
 	{
 		path: 'orders-preview', component: OrdersPreviewComponent,
-		data: { roles: [Roles.restaurantOwner, Roles.deliveryMan], name: 'Visualiser les commandes' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.restaurantOwner], name: 'Visualiser les commandes' }, canActivate: [AuthGuard]
 	},
 
 	{
 		path: 'order-history', component: OrderHistoryComponent,
-		data: { roles: [Roles.client], name: 'Historique des commandes' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.client, Roles.deliveryMan, Roles.restaurantOwner],
+			name: 'Historique des commandes' }, canActivate: [AuthGuard]
 	},
 
 	{
 		path: 'order-preview', component: OrderPreviewComponent,
-		data: { name: 'Visualiser commande' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.client, Roles.restaurantOwner, Roles.deliveryMan], name: 'Visualiser commande' }, canActivate: [AuthGuard]
 	},
 
 	{
@@ -89,7 +90,7 @@ const routes: Routes = [
 
 	{
 		path: 'connectionLogs-list', component: ConnectionLogsListComponent,
-		data: { roles: [], name: 'Connexions' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.technicalService], name: 'Connexions' }, canActivate: [AuthGuard]
 	},
 
 	{
