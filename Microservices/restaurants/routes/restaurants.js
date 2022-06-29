@@ -16,8 +16,12 @@ var restaurantSchema = mongoose.Schema({
 	phone: String,
 	url: String,
 	products: {
-		articles: [String],
-		menus: [String]
+		articles: [{
+			type: String
+		}],
+		menus: [{
+			type: String
+		}]
 	},
 	imageUrl: String
 });
@@ -387,7 +391,7 @@ router.route('/removeArticle/:restaurant_id').put(authenticateJWT, function (req
 		restaurant.price = req.body.price;
 		restaurant.description = req.body.description;
 		restaurant.imgUrl = req.body.imgUrl;
-		restaurant.products.articles.pop(req.body.article);
+		restaurant.products.articles = restaurant.products.articles.filter(_id => _id !== req.body.article);
 		restaurant.save(function (err) {
 			if (err)
 				res.status(404).json({ message: "Restaurant couldn't be updated" });
@@ -439,8 +443,7 @@ router.route('/removeMenu/:restaurant_id').put(authenticateJWT, function (req, r
 		restaurant.price = req.body.price;
 		restaurant.description = req.body.description;
 		restaurant.imgUrl = req.body.imgUrl;
-		restaurant.products.menus = restaurant.products.menus.filter(menu => menu._id !== req.body.menu);
-		console.log(restaurant);
+		restaurant.products.menus = restaurant.products.menus.filter(_id => _id !== req.body.menu);
 		restaurant.save(function (err) {
 			if (err)
 				res.status(404).json({ message: "Restaurant couldn't be updated" });

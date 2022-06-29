@@ -35,7 +35,7 @@
           <p>{{ article.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button style="background-color: #454647;color: #5FB709">Supprimer l'article</button>
+          <button mat-raised-button (click)="deleteArticle(article._id)" style="background-color: #454647;color: #5FB709">Supprimer l'article</button>
         </mat-card-actions>
       </mat-card>
     </div>

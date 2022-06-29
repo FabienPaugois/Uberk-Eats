@@ -88,7 +88,15 @@ export class CreateArticleComponent implements OnInit {
 		});}
 	}
 
-  deleteArticle(){
-
+  deleteArticle(articleId: string){
+	const restdata = localStorage.getItem('restaurantId');
+	if(restdata){
+		const restaurantId = restdata;
+		this.restaurantsApi.removeArticleFromRestaurant(articleId, restaurantId).subscribe((response2: HttpResponse<Articles>) => {
+			if(response2.status === 200){
+				this.store.deleteMenu(articleId);
+			}
+		});
+	}
   }
 }
