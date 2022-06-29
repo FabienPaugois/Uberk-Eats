@@ -1,5 +1,7 @@
+
 <div class="center">
   <div class="center-wrapper" fxLayout="line">
+    <mat-icon style="margin-top:5px; margin-left:5px;" (click)="relocate()">keyboard_backspace</mat-icon>
     <mat-accordion multi="true">
       <mat-card *ngIf="article" class="example-card">
         <mat-card-header>
@@ -7,6 +9,7 @@
           <mat-card-subtitle>{{ article.price }}€</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
+          <img src="{{article.imageUrl}}" style=" max-width: 150px; max-height: 100px;" />
           <p>{{ article.description }}</p>
           <mat-card-actions>
             <div class="horizontal">

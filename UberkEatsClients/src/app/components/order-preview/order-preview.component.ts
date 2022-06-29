@@ -37,7 +37,6 @@ export class OrderPreviewComponent implements OnInit {
 			this.orderId = params.id;
 			this.pos = parseInt(params.pos,10) + 1;
 		});
-		console.log(this.orderId);
 		// subscription to the store
 		this.store.state$
 			.pipe(
