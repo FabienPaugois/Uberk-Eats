@@ -63,6 +63,7 @@ export class CreateArticleComponent implements OnInit {
   	if(this.productsIds.articlesIds){
   		this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
   			this.productsContent.articles = articles;
+  			this.hideLoader();
   		});
   	}
   }
@@ -109,6 +110,13 @@ export class CreateArticleComponent implements OnInit {
   				this.store.deleteArticle(articleId);
   			}
   		});
+  	}
+  }
+
+  hideLoader() {
+  	const loader = document.getElementById('loader');
+  	if (loader !== null) {
+  		loader.hidden = true;
   	}
   }
 }

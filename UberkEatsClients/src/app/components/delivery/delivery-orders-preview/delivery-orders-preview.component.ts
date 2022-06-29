@@ -46,15 +46,24 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 			this.loggedDeliveryManId = deliverymanId;
 		}
 		//Get Ids of concerned products to retreive their data for display
+		let receivedArticles = false; let receivedMenus = false;
 		this.productsIds = await this.store.getOrdersToBePicked();
 		if(this.productsIds.articlesIds){
 			this.clientsApi.FetchArticleData(this.productsIds.articlesIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
+				receivedArticles = true;
+				if(receivedArticles && receivedMenus){
+					this.hideLoader();
+				}
 			});
 		}
 		if(this.productsIds.menusIds){
 			this.clientsApi.FetchMenusData(this.productsIds.menusIds).subscribe((menus: Menus[]) => {
 				this.menus = menus;
+				receivedMenus = true;
+				if(receivedArticles && receivedMenus){
+					this.hideLoader();
+				}
 			});
 		}
 	}
@@ -65,5 +74,12 @@ export class DeliveryOrdersPreviewComponent implements OnInit {
 
 	markAsPickedUp(order: any, status: boolean) {
 		this.store.editOrderStatus(order._id, status);
+	}
+
+	hideLoader() {
+		const loader = document.getElementById('loader');
+		if (loader !== null) {
+			loader.hidden = true;
+		}
 	}
 }

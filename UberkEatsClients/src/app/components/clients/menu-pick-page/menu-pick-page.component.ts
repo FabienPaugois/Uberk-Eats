@@ -26,6 +26,7 @@ export class MenuPickPageComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+		let articleLoaded = false; let menuLoaded = false;
 		this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
 			this.restaurantId = params.restaurantId;
 			this.articlesIdArr = params.articlesArr;
@@ -33,9 +34,17 @@ export class MenuPickPageComponent implements OnInit {
 		});
 		this.clientsApi.FetchArticleData(this.articlesIdArr).subscribe((articles: Articles[]) => {
 			this.articles = articles;
+			articleLoaded = true;
+			if(articleLoaded && menuLoaded){
+				this.hideLoader();
+			}
 		});
 		this.clientsApi.FetchMenusData(this.menusIdArr).subscribe((menus: Menus[]) => {
 			this.menus = menus;
+			menuLoaded = true;
+			if(articleLoaded && menuLoaded){
+				this.hideLoader();
+			}
 		});
 	}
 
@@ -45,5 +54,12 @@ export class MenuPickPageComponent implements OnInit {
 
 	btnClickArticle(article: Articles) {
 		this.router.navigate(['/product-page', article]);
+	}
+
+	hideLoader() {
+		const loader = document.getElementById('loader');
+		if (loader !== null) {
+			loader.hidden = true;
+		}
 	}
 }

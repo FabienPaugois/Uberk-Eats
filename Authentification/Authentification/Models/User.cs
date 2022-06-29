@@ -20,6 +20,7 @@ namespace Authentification.Models
         public string Surname { get; set; }
         public string Mail { get; set; }
         public string Phone { get; set; }
+        public bool IsSuspended { get; set; }
         public string Password { get; set; }
         public long? UserAffiliate { get; set; }
         public virtual User UserAffiliateNavigation { get; set; }
