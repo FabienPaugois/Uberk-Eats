@@ -12,7 +12,9 @@
         )">
       <a mat-button routerLink={{route.path}} routerLinkActive="active">{{route.data?.name}}</a>
     </div>
-    <button mat-button [matMenuTriggerFor]="menu">
+  </span>
+  <span style="flex:1 1 auto"></span>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="this.clientsApiService.userAuth.user">
       <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Profile</span>
     </button>
     <mat-menu #menu="matMenu">
@@ -32,6 +34,5 @@
       </mat-menu>
       <button mat-menu-item (click)="logout()" style="color:red">Déconnexion</button>
     </mat-menu>
-  </span>
 </mat-toolbar>
 <router-outlet></router-outlet>

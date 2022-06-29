@@ -10,7 +10,7 @@ var menuSchema = mongoose.Schema({
 	name: String,
 	price: String,
 	description: String,
-	imgUrl: String,
+	imageUrl: String,
 	articles: Array
 });
 
@@ -46,7 +46,7 @@ const authenticateJWT = (req, res, next) => {
  * @apiSuccess {String} name Name of the Menu.
  * @apiSuccess {String} price Price of the Menu.
  * @apiSuccess {String} description Description of the Menu.
- * @apiSuccess {String} imgUrl ImgUrl of the Menu.
+ * @apiSuccess {String} imageUrl imageUrl of the Menu.
  * @apiSuccess {Array} articles Articles array of the Menu.
  *
  * @apiSuccessExample Success-Response:
@@ -61,7 +61,7 @@ const authenticateJWT = (req, res, next) => {
  *		"name": "BigMacMenu",
  *		"price": "12",
  *		"description": "Good menu",
- *		"imgUrl": "/img/bigmac/13"
+ *		"imageUrl": "/img/bigmac/13"
  *      },
  *      {
  *		 "_id": "62b02a1a13dcbfe08casb704",
@@ -73,7 +73,7 @@ const authenticateJWT = (req, res, next) => {
  *		"name": "CheeseBBQMenu",
  *		"price": "15",
  *		"description": "Best menu",
- *		"imgUrl": "/img/Cheese/BBQ/13"
+ *		"imageUrl": "/img/Cheese/BBQ/13"
  *      }
  *      
  * @apiError MenusNotAccessible Menus were unaccessible.
@@ -101,7 +101,7 @@ router.route('/')
 * @apiSuccess {String} name Name of the Menu.
 * @apiSuccess {String} price Price of the Menu.
 * @apiSuccess {String} description Description of the Menu.
-* @apiSuccess {String} imgUrl ImgUrl of the Menu.
+* @apiSuccess {String} imageUrl imageUrl of the Menu.
 * @apiSuccess {Array} articles Articles array of the Menu.
 *
 * @apiError MenuNotCreated Menu couldn't be created.
@@ -115,7 +115,7 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 	menu.name = req.body.name;
 	menu.price = req.body.price;
 	menu.description = req.body.description;
-	menu.imgUrl = req.body.imgUrl;
+	menu.imageUrl = req.body.imageUrl;
 	menu.articles = req.body.articles;
 	//Nous stockons l'objet en base
 	menu.save(function (err) {
@@ -139,7 +139,7 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
  * @apiSuccess {String} name Name of the Menu.
  * @apiSuccess {String} price Price of the Menu.
  * @apiSuccess {String} description Description of the Menu.
- * @apiSuccess {String} imgUrl ImgUrl of the Menu.
+ * @apiSuccess {String} imageUrl imageUrl of the Menu.
  * @apiSuccess {Array} articles Articles array of the Menu.
  *
  * @apiSuccessExample Success-Response:
@@ -154,7 +154,7 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
  *		"name": "BigMacMenu",
  *		"price": "12",
  *		"description": "Good menu",
- *		"imgUrl": "/img/bigmac/13"
+ *		"imageUrl": "/img/bigmac/13"
  *      }
  * @apiError MenuNotFound The id of one or more Menus were not found.
  *
@@ -186,7 +186,7 @@ router.route('/:menu_ids')
 * @apiSuccess {String} name Name of the Menu.
 * @apiSuccess {String} price Price of the Menu.
 * @apiSuccess {String} description Description of the Menu.
-* @apiSuccess {String} imgUrl ImgUrl of the Menu.
+* @apiSuccess {String} imageUrl imageUrl of the Menu.
 * @apiSuccess {Array} articles Articles array of the Menu
 *
 * @apiError MenuNotUpdated Menu couldn't be updated.
@@ -200,7 +200,7 @@ router.route('/:menu_id').put(authenticateJWT, function (req, res) {
 		menu.name = req.body.name;
 		menu.price = req.body.price;
 		menu.description = req.body.description;
-		menu.imgUrl = req.body.imgUrl;
+		menu.imageUrl = req.body.imageUrl;
 		menu.articles = req.body.articles;
 		menu.save(function (err) {
 			if (err)
@@ -221,7 +221,7 @@ router.route('/:menu_id').put(authenticateJWT, function (req, res) {
 	* @apiSuccess {String} name Name of the Menu.
 	* @apiSuccess {String} price Price of the Menu.
 	* @apiSuccess {String} description Description of the Menu.
-	* @apiSuccess {String} imgUrl ImgUrl of the Menu.
+	* @apiSuccess {String} imageUrl imageUrl of the Menu.
 	* @apiSuccess {Array} articles Articles array of the Menu
 	*
 	* @apiError MenuNotDeleted Menu couldn't be deleted.
