@@ -25,6 +25,7 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 import { AuthInterceptor } from './services/auth.interceptor';
 import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { UsersManagementPageComponent } from './components/commercialService/users-management-page/users-management-page.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 		StatisticsComponent,
 		ProfilePageComponent,
 		NotificationsPageComponent,
+		UsersManagementPageComponent,
 		RestaurantListComponent,
 		ConnectionLogsListComponent,
 		MenuPickPageComponent,

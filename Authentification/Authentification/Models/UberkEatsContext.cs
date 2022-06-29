@@ -60,6 +60,11 @@ namespace Authentification.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.IsSuspended)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Phone)
                     .IsRequired()
                     .HasMaxLength(20)
