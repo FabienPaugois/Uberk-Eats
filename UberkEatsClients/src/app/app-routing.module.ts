@@ -20,6 +20,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { AuthGuard } from './auth.guard';
 import { Roles } from './model/roles';
 import { OrderTrackingDashboardComponent } from './components/commercialService/orderTracking-dashboard/orderTracking-dashboard.component';
+import { UsersManagementPageComponent } from './components/commercialService/users-management-page/users-management-page.component';
 
 const routes: Routes = [
 	{
@@ -106,7 +107,12 @@ const routes: Routes = [
 	{
 		path: 'orderTracking-dashboard', component: OrderTrackingDashboardComponent,
 		data: { roles: [Roles.commercialService], name: 'Suivi de commandes' }, canActivate: [AuthGuard]
-	},
+  },
+
+  {
+    path: 'users-management-page', component: UsersManagementPageComponent,
+    data: { roles: [Roles.commercialService], name: 'Gestion des comptes utilisateurs' }, canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

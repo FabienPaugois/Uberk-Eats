@@ -66,6 +66,14 @@ export class ClientsApiService {
 		).pipe(retry(0), catchError(this.handleError));
 	}
 
+  suspend(employee: any): Observable<Clients> {
+    return this.http.post<Clients>(
+      this.apiURL + '/banuser',
+      JSON.stringify(employee),
+      this.httpOptions
+    ).pipe(retry(0), catchError(this.handleError));
+  }
+
 	delete(employee: any): Observable<Clients> {
 		return this.http.post<Clients>(
 			this.apiURL + '/delete',
@@ -88,6 +96,13 @@ export class ClientsApiService {
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
 	}
+
+  getAllUsers(): Observable<Clients[]> {
+    return this.http.get<Clients[]>(
+      this.apiURL + '/AllUsers',
+      this.httpOptions
+    ).pipe(retry(1), catchError(this.handleError));
+  }
 
 	getRestaurants(): Observable<Restaurants[]> {
     	return this.http.get<Restaurants[]>(
