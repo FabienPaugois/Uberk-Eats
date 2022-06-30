@@ -68,7 +68,7 @@ export class OrderPreviewComponent implements OnInit {
 				this.value = 75;
 				this.statusMessage = 'Le livreur vient récupérer votre commande';
 				break;
-			case 5:
+			case 4:
 				this.value = 100;
 				this.statusMessage = 'La commande a été livrée';
 				break;
