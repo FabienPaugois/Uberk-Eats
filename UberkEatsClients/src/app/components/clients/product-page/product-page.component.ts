@@ -6,6 +6,7 @@ import { Basket, BasketObjects, BasketObjectsType } from '../../../model/basket'
 import { Menus } from '../../../model/menus';
 import { ClientsApiService } from '../../../services/clients-api.service';
 import { BasketStore } from '../../../store/articleStore/basket-store';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-product-page',
@@ -36,8 +37,9 @@ export class ProductPageComponent implements OnInit {
     public clientsApi: ClientsApiService,
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    public store: BasketStore
-  ) { }
+    public store: BasketStore,
+    private location: Location
+  ) {}
 
   // for cleaning up subscriptions
   OnDestroy(): void {
@@ -77,6 +79,10 @@ export class ProductPageComponent implements OnInit {
   	});
   }
 
+  relocate() {
+    this.location.back();
+  }
+
   updateCount(increment: boolean): void {
   	if (this.count === 1 && increment) {
   		this.count++;
@@ -100,6 +106,7 @@ export class ProductPageComponent implements OnInit {
   			qty: this.count,
   			type: this.article ? BasketObjectsType.article : BasketObjectsType.menu
   		});
-  	}
+    }
+    this.location.back();
   }
 }
