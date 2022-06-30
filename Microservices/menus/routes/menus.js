@@ -206,7 +206,7 @@ router.route('/:menu_id').put(authenticateJWT, function (req, res) {
 			if (err)
 				res.status(404).json({ message: "Menu couldn't be updated" });
 			else
-				res.json({ message: 'Updated menu' });
+				res.json({ message: 'Updated menu', menu: menu });
 		});
 	});
 })

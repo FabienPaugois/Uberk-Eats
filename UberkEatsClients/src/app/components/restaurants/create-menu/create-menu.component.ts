@@ -108,6 +108,7 @@ export class CreateMenuComponent implements OnInit {
 	}
 
 	showModifyMenuPopUp(menu: Menus) {
+		if(!menu.articles) menu.articles = [];
 		const dialogConfig = new MatDialogConfig();
 		dialogConfig.width = '50%';
 		dialogConfig.height = '50%';

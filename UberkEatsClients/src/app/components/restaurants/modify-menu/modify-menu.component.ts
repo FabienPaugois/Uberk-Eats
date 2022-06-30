@@ -63,9 +63,9 @@ export class ModifyMenuComponent implements OnInit {
 				imageUrl: this.form.imageUrl.value,
 				articles: this.form.articles.value,
 			}).subscribe((response: HttpResponse<any>) => {
-				const articleId = response.body?.article?._id;
-				if (response.status === 200 && articleId) {
-					this.store.editMenu({type: BasketObjectsType.article, product: response.body?.article, id: 0});
+				const menuId = response.body?.menu?._id;
+				if (response.status === 200 && menuId) {
+					this.store.editMenu({type: BasketObjectsType.menu, product: response.body?.menu, id: 0});
 					this.loader = false;
 				}
 			});
