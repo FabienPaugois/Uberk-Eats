@@ -37,7 +37,6 @@ export class ProductsStore extends Store<ProductsState> {
 				}
 			}
 		}
-		console.log(this.productsIds);
 		return this.productsIds;
 	}
 
@@ -49,6 +48,22 @@ export class ProductsStore extends Store<ProductsState> {
 				// Add to product.type property (articles or menus) the product
 				[product.type]: [...this.state[product.type].concat(product.product as Articles)]
 			});
+		}
+	}
+
+	editProduct(product: ProductsObjects) {
+		if (product.type === BasketObjectsType.article) {
+			let productToChange = this.state[product.type].find(article => article._id === product.product._id)
+			if(productToChange) {
+				productToChange.description = product.product.description
+				productToChange.imageUrl = product.product.imageUrl
+				productToChange.name = product.product.name
+				productToChange.price = product.product.price
+				this.setState({
+					...this.state,
+					[product.type]: [...this.state[product.type]] 
+				})
+			}
 		}
 	}
 

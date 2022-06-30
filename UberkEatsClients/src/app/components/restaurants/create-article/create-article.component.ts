@@ -11,6 +11,8 @@ import { BasketObjectsType } from '../../../model/basket';
 import { HttpResponse } from '@angular/common/http';
 import { ClientsApiService } from 'app/services/clients-api.service';
 import { Menus } from 'app/model/menus';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModifyArticleComponent } from '../modify-article/modify-article.component';
 
 @Component({
 	selector: 'app-create-article',
@@ -32,6 +34,7 @@ export class CreateArticleComponent implements OnInit {
     public router: Router,
     private fb: FormBuilder,
     private store: ProductsStore,
+	private dialog: MatDialog
   ) {
   	// Form element defined below
   	this.registerForm = this.fb.group({
@@ -88,6 +91,14 @@ export class CreateArticleComponent implements OnInit {
   				});
   			}
   		});}
+  }
+
+  showModifyArticlePopUp(article: Articles) {
+	const dialogConfig = new MatDialogConfig();
+	dialogConfig.width = '50%'
+	dialogConfig.height = '50%'
+	dialogConfig.data = article
+	this.dialog.open(ModifyArticleComponent, dialogConfig)
   }
 
   deleteArticle(articleId: string){

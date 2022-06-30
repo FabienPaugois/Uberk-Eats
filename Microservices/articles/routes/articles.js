@@ -190,7 +190,7 @@ router.route('/:article_id').put(authenticateJWT, function (req, res) {
 			if (err)
 				res.status(404).json({ message: "Article couldn't be updated" });
 			else
-				res.json({ message: 'Updated article' });
+				res.status(200).json({ message: 'Updated article', article: article });
 		});
 	});
 })

@@ -25,6 +25,7 @@ import { ConnectionLogsListComponent } from './components/technicalService/conne
 import { AuthInterceptor } from './services/auth.interceptor';
 import { NotificationsPageComponent } from './components/clients/notifications-page/notifications-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ModifyArticleComponent } from './components/restaurants/modify-article/modify-article.component';
 import { UsersManagementPageComponent } from './components/commercialService/users-management-page/users-management-page.component';
 
 
@@ -48,7 +49,8 @@ import { UsersManagementPageComponent } from './components/commercialService/use
 		OrdersPreviewComponent,
 		OrderHistoryComponent,
 		OrderPreviewComponent,
-		DeliveryOrdersPreviewComponent
+		DeliveryOrdersPreviewComponent,
+  		ModifyArticleComponent
 	],
 	imports: [
 		BrowserModule,

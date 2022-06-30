@@ -30,7 +30,15 @@ export class RestaurantsApiService {
 	// HttpClient API post() method => createArticle
 	createArticle(article: Articles): Observable<HttpResponse<Articles>> {
 		return this.http.post<Articles>(
-			this.controllerUrl + '/articles',
+			this.controllerUrl + '/articles/',
+			JSON.stringify(article),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	editArticle(article: Articles): Observable<HttpResponse<Articles>> {
+		return this.http.put<Articles>(
+			this.controllerUrl + '/articles/' + article._id,
 			JSON.stringify(article),
 			{...this.httpOptions, observe: 'response'},
 		).pipe(retry(1), catchError(this.handleError));
@@ -39,6 +47,15 @@ export class RestaurantsApiService {
 	// HttpClient API post() method => createMenu
 	createMenu(menu: Menus): Observable<HttpResponse<Menus>> {
 		return this.http.post<Menus>(
+			this.controllerUrl + '/menus',
+			JSON.stringify(menu),
+			{...this.httpOptions, observe: 'response'},
+		).pipe(retry(1), catchError(this.handleError));
+	}
+
+	// HttpClient API post() method => createMenu
+	editMenu(menu: Menus): Observable<HttpResponse<Menus>> {
+		return this.http.put<Menus>(
 			this.controllerUrl + '/menus',
 			JSON.stringify(menu),
 			{...this.httpOptions, observe: 'response'},
