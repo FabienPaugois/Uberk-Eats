@@ -47,7 +47,7 @@ export class NotificationsApiService {
 		).pipe(retry(1), catchError(this.handleError));
 	}
 
-  postNewNotification(notification: any): Observable<Notifications> {
+	postNewNotification(notification: any): Observable<Notifications> {
 		return this.http.post<Notifications>(
 			this.apiNoSQLURL + '/notifications',
 			JSON.stringify(notification),
