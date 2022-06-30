@@ -46,7 +46,7 @@ export class RestaurantsApiService {
 
 	// HttpClient API post() method => createMenu
 	createMenu(menu: Menus): Observable<HttpResponse<Menus>> {
-		console.log(menu.articles)
+		console.log(menu.articles);
 		return this.http.post<Menus>(
 			this.controllerUrl + '/menus',
 			JSON.stringify(menu),

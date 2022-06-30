@@ -52,7 +52,7 @@ import { ModifyMenuComponent } from './components/restaurants/modify-menu/modify
 		OrderPreviewComponent,
 		DeliveryOrdersPreviewComponent,
   		ModifyArticleComponent,
-    ModifyMenuComponent
+		ModifyMenuComponent
 	],
 	imports: [
 		BrowserModule,

@@ -109,13 +109,13 @@ export class CreateMenuComponent implements OnInit {
 
 	showModifyMenuPopUp(menu: Menus) {
 		const dialogConfig = new MatDialogConfig();
-		dialogConfig.width = '50%'
-		dialogConfig.height = '50%'
+		dialogConfig.width = '50%';
+		dialogConfig.height = '50%';
 		dialogConfig.data = {
 			...menu,
 			articles: this.productsContent.articles.filter(article => menu.articles.includes(article.name))
-		}
-		this.dialog.open(ModifyMenuComponent, dialogConfig)
+		};
+		this.dialog.open(ModifyMenuComponent, dialogConfig);
 	}
 
 	deleteMenu(menuId: string) {

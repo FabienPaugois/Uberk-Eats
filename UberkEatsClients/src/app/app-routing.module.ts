@@ -115,7 +115,7 @@ const routes: Routes = [
 		path: 'product-page', component: ProductPageComponent,
 		data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
 	},
-	
+
 	{
 		path: 'order-preview', component: OrderPreviewComponent,
 		data: { roles: [Roles.client, Roles.restaurantOwner, Roles.deliveryMan], name: '' }, canActivate: [AuthGuard]

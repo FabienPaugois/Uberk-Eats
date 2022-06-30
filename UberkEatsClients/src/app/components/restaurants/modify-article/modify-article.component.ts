@@ -35,14 +35,14 @@ export class ModifyArticleComponent implements OnInit {
 	get form() { return this.modifyArticleForm.controls; }
 
 	ngOnInit(): void {
-		console.log(this.modalData)
+		console.log(this.modalData);
 	}
 
 	modifyArticle() {
 		const restdata = localStorage.getItem('restaurantId');
 		if (restdata) {
 			if (this.modifyArticleForm.invalid) { return; } // Return if form is invalid
-			this.loader = true
+			this.loader = true;
 			this.restoApiService.editArticle({
 				_id: this.form._id.value,
 				name: this.form.name.value,
@@ -52,10 +52,10 @@ export class ModifyArticleComponent implements OnInit {
 			}).subscribe((response: HttpResponse<any>) => {
 				const articleId = response.body?.article?._id;
 				if (response.status === 200 && articleId) {
-					this.store.editProduct({type: BasketObjectsType.article, product: response.body?.article, id: 0})
-					this.loader = false
+					this.store.editProduct({type: BasketObjectsType.article, product: response.body?.article, id: 0});
+					this.loader = false;
 				}
-			})
+			});
 		}
 	}
 
