@@ -53,16 +53,16 @@ export class ProductsStore extends Store<ProductsState> {
 
 	editProduct(product: ProductsObjects) {
 		if (product.type === BasketObjectsType.article) {
-			let productToChange = this.state[product.type].find(article => article._id === product.product._id)
+			const productToChange = this.state[product.type].find(article => article._id === product.product._id);
 			if(productToChange) {
-				productToChange.description = product.product.description
-				productToChange.imageUrl = product.product.imageUrl
-				productToChange.name = product.product.name
-				productToChange.price = product.product.price
+				productToChange.description = product.product.description;
+				productToChange.imageUrl = product.product.imageUrl;
+				productToChange.name = product.product.name;
+				productToChange.price = product.product.price;
 				this.setState({
 					...this.state,
-					[product.type]: [...this.state[product.type]] 
-				})
+					[product.type]: [...this.state[product.type]]
+				});
 			}
 		}
 	}

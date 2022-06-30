@@ -67,39 +67,39 @@ export class OrdersPreviewComponent implements OnInit {
 		}
 	}
 
-  EditOrderStatus(order: any, status: boolean) {
-    this.store.editOrderStatus(order._id, status);
-    var title = '';
-    var content = '';
-    console.log(order);
-    if (order.status == 1) {
-      if (status) {
-        title = 'Votre commande a été acceptée.';
-        content = 'Vous serez notifiés lorsqu\'elle sera prête.';
-      }
-      else {
-        title = 'Votre commande a été refusée.';
-        content = 'Veuillez repasser une commande.';
-      }
-    }
-    else if (order.status == 2) {
-      if (status) {
-        title = 'Votre commande est prête.';
-        content = 'Un livreur la prendra en charge sous peu.';
-      }
-      else {
-        title = 'Votre commande a été refusée.';
-        content = 'Veuillez repasser une commande.';
-      }
-    }
+	EditOrderStatus(order: any, status: boolean) {
+		this.store.editOrderStatus(order._id, status);
+		let title = '';
+		let content = '';
+		console.log(order);
+		if (order.status === 1) {
+			if (status) {
+				title = 'Votre commande a été acceptée.';
+				content = 'Vous serez notifiés lorsqu\'elle sera prête.';
+			}
+			else {
+				title = 'Votre commande a été refusée.';
+				content = 'Veuillez repasser une commande.';
+			}
+		}
+		else if (order.status === 2) {
+			if (status) {
+				title = 'Votre commande est prête.';
+				content = 'Un livreur la prendra en charge sous peu.';
+			}
+			else {
+				title = 'Votre commande a été refusée.';
+				content = 'Veuillez repasser une commande.';
+			}
+		}
 		const notif: Notifications = {
 			userId: order.clientId,
-      title: title,
-      content: content,
+			title,
+			content,
 			createdAt: new Date(),
 			hasBeenRead: false
-    };
-    this.notifsApi.postNewNotification(notif).subscribe((notifs: Notifications) => { });
+		};
+		this.notifsApi.postNewNotification(notif).subscribe((notifs: Notifications) => { });
 	}
 
 	hideLoader() {

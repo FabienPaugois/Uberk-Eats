@@ -41,27 +41,27 @@ const routes: Routes = [
 	{
 		path: 'restaurant-list', component: RestaurantListComponent,
 		data: { roles: [Roles.client], name: 'Restaurants' }, canActivate: [AuthGuard]
-  },
+	},
 
-  {
-    path: 'orders-preview', component: OrdersPreviewComponent,
-    data: { roles: [Roles.restaurantOwner], name: 'Visualiser les commandes' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'orders-preview', component: OrdersPreviewComponent,
+		data: { roles: [Roles.restaurantOwner], name: 'Visualiser les commandes' }, canActivate: [AuthGuard]
+	},
 
 	{
 		path: 'product-page', component: ProductPageComponent,
 		data: { roles: [Roles.client], name: 'Choisir cet article', hidden: true }, canActivate: [AuthGuard]
 	},
-  {
-    path: 'order-preview', component: OrderPreviewComponent,
-    data: { roles: [Roles.client, Roles.restaurantOwner, Roles.deliveryMan], name: 'Visualiser commande' }, canActivate: [AuthGuard]
-  },
-  
+	{
+		path: 'order-preview', component: OrderPreviewComponent,
+		data: { roles: [Roles.client, Roles.restaurantOwner, Roles.deliveryMan], name: 'Visualiser commande' }, canActivate: [AuthGuard]
+	},
+
 	{
 		path: 'order-history', component: OrderHistoryComponent,
 		data: { roles: [Roles.client, Roles.deliveryMan, Roles.restaurantOwner],
 			name: 'Historique des commandes' }, canActivate: [AuthGuard]
-  },
+	},
 
 	{
 		path: 'create-article', component: CreateArticleComponent,
@@ -106,17 +106,17 @@ const routes: Routes = [
 	{
 		path: 'users-management-page', component: UsersManagementPageComponent,
 		data: { roles: [Roles.commercialService], name: 'Gestion des comptes utilisateurs' }, canActivate: [AuthGuard]
-  },
-  
-	{
-    path: 'menu-pick-page', component: MenuPickPageComponent,
-    data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
-  },
+	},
 
-  {
-    path: 'product-page', component: ProductPageComponent,
-    data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'menu-pick-page', component: MenuPickPageComponent,
+		data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'product-page', component: ProductPageComponent,
+		data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
+	},
 
 ];
 

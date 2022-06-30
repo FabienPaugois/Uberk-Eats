@@ -80,7 +80,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   relocate() {
-    this.location.back();
+  	this.location.back();
   }
 
   updateCount(increment: boolean): void {
@@ -106,7 +106,7 @@ export class ProductPageComponent implements OnInit {
   			qty: this.count,
   			type: this.article ? BasketObjectsType.article : BasketObjectsType.menu
   		});
-    }
-    this.location.back();
+  	}
+  	this.location.back();
   }
 }
