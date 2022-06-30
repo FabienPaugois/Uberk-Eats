@@ -49,7 +49,7 @@ export class NotificationsApiService {
 
 	postNewNotification(notification: any): Observable<Notifications> {
 		return this.http.post<Notifications>(
-			this.apiNoSQLURL + '/notifications/',
+			this.apiNoSQLURL + '/notifications',
 			JSON.stringify(notification),
 			this.httpOptions
 		).pipe(retry(1), catchError(this.handleError));
