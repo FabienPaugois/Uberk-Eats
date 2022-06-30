@@ -9,7 +9,7 @@
         </mat-card-header>
         <mat-card-content>
           <p>Commande passée le : {{ orderData.timestamp.createdAt }}</p>
-          <p>Commande livrée le : {{ orderData.timestamp.deliveredAt }}</p>
+          <p *ngIf="orderData.status === 4">Commande livrée le : {{ orderData.timestamp.deliveredAt }}</p>
         </mat-card-content>
         <mat-card>
           <mat-card-content>
