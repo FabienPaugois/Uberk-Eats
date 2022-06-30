@@ -25,43 +25,41 @@ import { UsersManagementPageComponent } from './components/commercialService/use
 const routes: Routes = [
 	{
 		path: 'login-page', component: LoginPageComponent,
-		data: { name: 'Log In' }
+		data: { name: 'Connexion' }
 	},
 
 	{
 		path: 'register-page', component: RegisterPageComponent,
-		data: { name: 'Register' }
+		data: { name: 'Inscription' }
 	},
 
 	{
 		path: 'profile-page', component: ProfilePageComponent,
-		data: { name: 'Profile' }
+		data: { name: 'Mon profil' }
 	},
 
 	{
 		path: 'restaurant-list', component: RestaurantListComponent,
 		data: { roles: [Roles.client], name: 'Restaurants' }, canActivate: [AuthGuard]
-  },
+	},
 
-  {
-    path: 'orders-preview', component: OrdersPreviewComponent,
-    data: { roles: [Roles.restaurantOwner], name: 'Visualiser les commandes' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'orders-preview', component: OrdersPreviewComponent,
+		data: { roles: [Roles.restaurantOwner], name: 'Commandes reçues' }, canActivate: [AuthGuard]
+	},
 
 	{
 		path: 'product-page', component: ProductPageComponent,
 		data: { roles: [Roles.client], name: 'Choisir cet article', hidden: true }, canActivate: [AuthGuard]
 	},
-  {
-    path: 'order-preview', component: OrderPreviewComponent,
-    data: { roles: [Roles.client, Roles.restaurantOwner, Roles.deliveryMan], name: 'Visualiser commande' }, canActivate: [AuthGuard]
-  },
-  
+
 	{
 		path: 'order-history', component: OrderHistoryComponent,
-		data: { roles: [Roles.client, Roles.deliveryMan, Roles.restaurantOwner],
-			name: 'Historique des commandes' }, canActivate: [AuthGuard]
-  },
+		data: {
+			roles: [Roles.client, Roles.deliveryMan, Roles.restaurantOwner],
+			name: 'Historique des commandes'
+		}, canActivate: [AuthGuard]
+	},
 
 	{
 		path: 'create-article', component: CreateArticleComponent,
@@ -80,12 +78,12 @@ const routes: Routes = [
 
 	{
 		path: 'delivery-orders-preview', component: DeliveryOrdersPreviewComponent,
-		data: { roles: [Roles.deliveryMan], name: 'Visualiser commandes livreur' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.deliveryMan], name: 'Commandes en cours' }, canActivate: [AuthGuard]
 	},
 
 	{
 		path: 'connectionLogs-list', component: ConnectionLogsListComponent,
-		data: { roles: [Roles.technicalService], name: 'Connexions' }, canActivate: [AuthGuard]
+		data: { roles: [Roles.technicalService], name: 'Historique de connexions' }, canActivate: [AuthGuard]
 	},
 
 	{
@@ -106,17 +104,22 @@ const routes: Routes = [
 	{
 		path: 'users-management-page', component: UsersManagementPageComponent,
 		data: { roles: [Roles.commercialService], name: 'Gestion des comptes utilisateurs' }, canActivate: [AuthGuard]
-  },
-  
-	{
-    path: 'menu-pick-page', component: MenuPickPageComponent,
-    data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
-  },
+	},
 
-  {
-    path: 'product-page', component: ProductPageComponent,
-    data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
-  },
+	{
+		path: 'menu-pick-page', component: MenuPickPageComponent,
+		data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
+	},
+
+	{
+		path: 'product-page', component: ProductPageComponent,
+		data: { roles: [Roles.client], name: '' }, canActivate: [AuthGuard]
+	},
+	
+	{
+		path: 'order-preview', component: OrderPreviewComponent,
+		data: { roles: [Roles.client, Roles.restaurantOwner, Roles.deliveryMan], name: '' }, canActivate: [AuthGuard]
+	},
 
 ];
 

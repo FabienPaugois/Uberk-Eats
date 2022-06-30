@@ -15,7 +15,7 @@
   </span>
   <span style="flex:1 1 auto"></span>
     <button mat-button [matMenuTriggerFor]="menu" *ngIf="this.clientsApiService.userAuth.user">
-      <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Profile</span>
+      <span [matBadge]="notificationsNumber" [matBadgeHidden]="hidden" matBadgeColor="warn" matBadgeOverlap="false">Profil</span>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="profile-page" routerLinkActive="active">Modifier mon profil</button>
