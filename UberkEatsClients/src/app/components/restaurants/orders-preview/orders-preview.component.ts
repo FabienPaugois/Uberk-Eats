@@ -67,16 +67,39 @@ export class OrdersPreviewComponent implements OnInit {
 		}
 	}
 
-	EditOrderStatus(order: any, status: boolean) {
-		this.store.editOrderStatus(order._id, status);
+  EditOrderStatus(order: any, status: boolean) {
+    this.store.editOrderStatus(order._id, status);
+    var title = '';
+    var content = '';
+    console.log(order);
+    if (order.status == 1) {
+      if (status) {
+        title = 'Votre commande a été acceptée.';
+        content = 'Vous serez notifiés lorsqu\'elle sera prête.';
+      }
+      else {
+        title = 'Votre commande a été refusée.';
+        content = 'Veuillez repasser une commande.';
+      }
+    }
+    else if (order.status == 2) {
+      if (status) {
+        title = 'Votre commande est prête.';
+        content = 'Un livreur la prendra en charge sous peu.';
+      }
+      else {
+        title = 'Votre commande a été refusée.';
+        content = 'Veuillez repasser une commande.';
+      }
+    }
 		const notif: Notifications = {
-			userId: JSON.parse(localStorage.getItem('User') as string).Id,
-			title: status ? 'Votre commande a été acceptée.' : 'Votre commande a été refusée.',
-			content: status ? 'Vous serez notifiés lorsque le livreur la prendra en charge' : 'Veuillez repasser une commande.',
+			userId: order.clientId,
+      title: title,
+      content: content,
 			createdAt: new Date(),
 			hasBeenRead: false
-		};
-		this.notifsApi.postNewNotification(notif);
+    };
+    this.notifsApi.postNewNotification(notif).subscribe((notifs: Notifications) => { });
 	}
 
 	hideLoader() {
