@@ -21,10 +21,12 @@ export class BasketPageComponent implements OnInit {
 	menuIds = '';
 	articleQtyArr: [];
 	articleIds = '';
+	user: any;
 	articles: Articles[];
 	menus: Menus[];
 	order: Order;
 	basketTotalPrice = 0;
+	basketDiscountTotalPrice = 0;
 	displayedColumns: string[] = ['name', 'price', 'qty'];
 	client: any;
 
@@ -41,6 +43,10 @@ export class BasketPageComponent implements OnInit {
 	ngOnInit(): void {
 		this.menuIds = this.store.state.menus.map(menu => menu.id).join(',');
 		this.articleIds = this.store.state.articles.map(menu => menu.id).join(',');
+		const userData = localStorage.getItem('User');
+		if(userData){
+			this.user = JSON.parse(userData);
+		}
 		if(this.articleIds.length !== 0){
 			this.clientsApi.FetchArticleData(this.articleIds).subscribe((articles: Articles[]) => {
 				this.articles = articles;
@@ -48,6 +54,9 @@ export class BasketPageComponent implements OnInit {
 					const temp = this.articles.find(articleData => articleData._id === article.id);
 					if(temp){
 						this.basketTotalPrice += (temp.price * article.qty);
+						if(this.user.UserAffiliate){
+							this.basketDiscountTotalPrice = Math.round(this.basketTotalPrice * 0.95 * 100) / 100;
+						}
 					}
 				});
 			});
@@ -59,6 +68,9 @@ export class BasketPageComponent implements OnInit {
 					const temp = this.menus.find(menuData => menuData._id === menu.id);
 					if(temp){
 						this.basketTotalPrice += (temp.price * menu.qty);
+						if(this.user.UserAffiliate){
+							this.basketDiscountTotalPrice = Math.round(this.basketTotalPrice * 0.95 * 100) / 100;
+						}
 					}
 				});
 			});

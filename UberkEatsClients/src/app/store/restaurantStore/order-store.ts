@@ -122,6 +122,17 @@ export class OrderStore extends Store<OrderState> {
 		const foundOrderInState = this.state.orders.find((entry: any) => entry._id === orderId);
 		if (foundOrderInState) {
 			status ? foundOrderInState.status += 1 : foundOrderInState.status = -1;
+			switch(foundOrderInState.status){
+			case 1:
+				foundOrderInState.timestamp.readyAt = new Date();
+				break;
+			case 2:
+				foundOrderInState.timestamp.pickepUpAt = new Date();
+				break;
+			case 3:
+				foundOrderInState.timestamp.deliveredAt = new Date();
+				break;
+			}
 			if (status && deliverymanId !== '') {
 				foundOrderInState.deliverymanId = deliverymanId;
 			}
