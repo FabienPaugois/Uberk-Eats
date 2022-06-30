@@ -145,7 +145,6 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 	notification.title = req.body.title;
 	notification.createdAt = req.body.createdAt;
 	notification.hasBeenRead = req.body.hasBeenRead;
-	console.log(notification);
 	//Nous stockons l'objet en base
 	notification.save(function (err) {
 		if (err) {
