@@ -94,11 +94,11 @@ export class CreateArticleComponent implements OnInit {
   }
 
   showModifyArticlePopUp(article: Articles) {
-	const dialogConfig = new MatDialogConfig();
-	dialogConfig.width = '50%'
-	dialogConfig.height = '50%'
-	dialogConfig.data = article
-	this.dialog.open(ModifyArticleComponent, dialogConfig)
+  	const dialogConfig = new MatDialogConfig();
+  	dialogConfig.width = '50%';
+  	dialogConfig.height = '50%';
+  	dialogConfig.data = article;
+  	this.dialog.open(ModifyArticleComponent, dialogConfig);
   }
 
   deleteArticle(articleId: string){

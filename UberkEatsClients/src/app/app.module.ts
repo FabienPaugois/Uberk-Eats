@@ -27,6 +27,7 @@ import { NotificationsPageComponent } from './components/clients/notifications-p
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ModifyArticleComponent } from './components/restaurants/modify-article/modify-article.component';
 import { UsersManagementPageComponent } from './components/commercialService/users-management-page/users-management-page.component';
+import { ModifyMenuComponent } from './components/restaurants/modify-menu/modify-menu.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { UsersManagementPageComponent } from './components/commercialService/use
 		OrderHistoryComponent,
 		OrderPreviewComponent,
 		DeliveryOrdersPreviewComponent,
-  		ModifyArticleComponent
+  		ModifyArticleComponent,
+		ModifyMenuComponent
 	],
 	imports: [
 		BrowserModule,
