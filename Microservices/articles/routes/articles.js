@@ -10,7 +10,7 @@ var articleSchema = mongoose.Schema({
 	name: String,
 	price: String,
 	description: String,
-	imgUrl: String
+	imageUrl: String
 });
 
 var Article = mongoose.model('Articles', articleSchema);
@@ -107,7 +107,7 @@ router.route('/').post(authenticateJWT, function (req, res, next) {
 	article.name = req.body.name;
 	article.price = req.body.price;
 	article.description = req.body.description;
-	article.imgUrl = req.body.imgUrl;
+	article.imageUrl = req.body.imageUrl;
 	article.articles = req.body.articles;
 	//Nous stockons l'objet en base
 	article.save(function (err) {
@@ -185,7 +185,7 @@ router.route('/:article_id').put(authenticateJWT, function (req, res) {
 		article.name = req.body.name;
 		article.price = req.body.price;
 		article.description = req.body.description;
-		article.imgUrl = req.body.imgUrl;
+		article.imageUrl = req.body.imageUrl;
 		article.save(function (err) {
 			if (err)
 				res.status(404).json({ message: "Article couldn't be updated" });
